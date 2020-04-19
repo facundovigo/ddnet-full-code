@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+	<script type="text/javascript" src="../js/jquery.fileDownload.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" />
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css" />
+<script type="text/javascript">
+	window.addEventListener('resize',ajustes.abm);
+	$(document).ready(function(){
+		$('div#abmTabs').tabs({beforeLoad:function(){$('.ui-datepicker').remove()}})
+						.addClass('ui-tabs-vertical ui-helper-clearfix');
+	    $('div#abmTabs').find('li').removeClass('ui-corner-top').addClass('ui-corner-left');
+	    ajustes.abm();
+	    
+	    if(!userinfo.permissions.canManageUsers){
+	    	$('a[href="abm-estudios.html"]').click();
+	    	$('a[href="abm-usuarios.html"]').closest('li').remove();
+	    }
+	    if(!userinfo.permissions.canManageMails){
+	    	$('a[href="#correos"]').closest('li').remove();
+	    	$('div#correos').remove();
+	    }
+	    	
+	});
+</script>
+<style type="text/css">
+	div#abmTabs.ui-tabs-vertical{border:none;background:none;}
+	div#abmTabs.ui-tabs-vertical .ui-tabs-nav{padding:.2em .1em .2em .2em;float:left;width:11em;border-bottom-right-radius:0px;border-top-right-radius:0px;}
+	div#abmTabs.ui-tabs-vertical .ui-tabs-nav li{clear:left;width:100%;border-bottom-width:1px!important;border-right-width:0!important;margin:0 -1px .2em 0;}
+	div#abmTabs.ui-tabs-vertical .ui-tabs-nav li a{display:block;}
+	div#abmTabs.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active{padding-bottom:0;padding-right:.1em;border-right-width:1px;}
+	div#abmTabs.ui-tabs-vertical .ui-tabs-panel{padding:1em;float:right;width:40em;}
+	div#abmTabs .ui-widget-content{border:solid 1px #9a9a9a!important;border-left:none!important;border-bottom-left-radius:0px;border-top-left-radius:0px;}
+</style>
+</head>
+<body>
+	<div id="abmTabs">
+	<ul>
+		<li><a href="abm-usuarios.html">USUARIOS</a></li>
+		<li><a href="abm-estudios.html">ESTUDIOS</a></li>
+		<li><a href="#correos">CORREO</a></li>
+	</ul>
+	<div id="correos">correos</div>
+	</div>
+<!-- 	<script type="text/javascript">$(function(){$('div#page-loading').hide()})</script> -->
+</body>
+</html>

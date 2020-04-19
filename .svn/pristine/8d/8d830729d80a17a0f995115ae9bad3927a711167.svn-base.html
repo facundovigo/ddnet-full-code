@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DDnet - Web - Administrador de Estudio</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
+		
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/layout-default.css" />		
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../css/study.css" />
+		<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" />
+		<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css" />
+		<link rel="stylesheet" type="text/css" href="../css/styles/jqx.base.css" />
+		
+		<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui.js"></script>
+		<script type="text/javascript" src="../js/jquery.layout-1.3.0.js"></script>
+		<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+		<script type="text/javascript" src="../js/jquery.validate.js"></script>
+		<script type="text/javascript" src="../js/jquery.blockUI.js"></script>
+		<script type="text/javascript" src="../js/jquery.ui-contextmenu.js"></script>
+		<script type="text/javascript" src="../js/jquery.fileDownload.js"></script>		
+		<script type="text/javascript" src="../js/jquery.ui.dialog-clickoutside.js"></script>
+		<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="../js/ddweb.js"></script>
+		<script type="text/javascript" src="../js/ddweb-useragent.js"></script>
+		<script type="text/javascript" src="../js/shortcut.js"></script>		
+		<script type="text/javascript" src="../js/json2.js"></script>
+		<script type="text/javascript" src="../js/jquery.storageapi.js"></script>
+		<script type="text/javascript" src="../js/purl.js"></script>
+		<script type="text/javascript" src="../js/study-report.js"></script>
+		<script type="text/javascript" src="../js/study.js"></script>
+		<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+		<script type="text/javascript" src="../js/jqxcore.js"></script>
+		<script type="text/javascript" src="../js/jqxmenu.js"></script>
+		
+  		
+		<script type="text/javascript">
+			var seriesTable = null;
+			var attachmentsTable = null;
+			var studyID = null;
+			var study = null;
+			var ddConfig = null;
+			var clinfo = null;
+
+			function getConfig(name) {
+				var entry = $.grep(ddConfig, function(element, index){
+				      return element.name == name;
+				});
+				
+				if (entry && entry.length > 0)
+					return entry[0].value;
+				return null;
+			}
+			
+			function configureSeriesGrid() {
+				seriesTable = $('#series-table').dataTable({
+					"data": [],
+					"lengthMenu": [ 10, 15, 20, 25, 30, 50, 75, 100, 1000 ],
+					"pageLength": 1000,					
+					"dom": 'T<"clear">',
+					"tableTools": {
+						"sRowSelect": "os",
+						"aButtons": [{
+		                    "sExtends": "select_none",
+		                    "sButtonText": "Desmarcar todo"
+						}],
+						fnRowSelected: function(o) {
+							seriesSelectionChanged();
+						},
+						fnRowDeselected: function(o) {
+							seriesSelectionChanged();
+						}											
+					},
+					"columns": [
+						{ "title": "FECHA", "data": "serieDate", "class": "left", "width": "20px", "defaultContent": "" },
+						{ "title": "HORA", "data": "formattedTime", "class": "left", "width": "20px", "defaultContent": "" },
+						{ "title": "DESCRIPCION DE LA SERIE", "data": "description", "class": "left", 
+							"width": "15px", "defaultContent": "" },
+						{ "title": "IMAGENES", "data": "numberOfInstances", "class": "left", "width": "20px", "defaultContent": "" },
+						{ "title": "CALIDAD", "class": "left", "width": "30px"}
+					],
+					"columnDefs": [
+									{
+										"targets": 4,
+										"render": function ( data, type, row ) {					
+												
+											
+												studyID = $.url().param('s');
+												var serieID = row.serieID;
+												var href = $( location ).attr( 'href' ).replace( 'http://' , '' );
+									        	href = href.substring(0, href.indexOf(':'));
+									        	var url = getConfig('actions.study.simple-view.url').replace('${STUDYID}', studyID).replace('${SERIEID}', serieID).replace('${HOST}', href) ;
+											
+						            		   	return 	"<b><a href='javascript:retrieveSerie(\"" + serieID + "\", \"lossy\");'>LOSSY</a>&nbsp;&nbsp;&nbsp;<a href='javascript:retrieveSerie(\"" + serieID + "\", \"lossless\");'>LOSSLESS</a>" +
+						            		   			"&nbsp;&nbsp;&nbsp;"+
+						            		   			"<a href='javascript:openOviyam(\""+ url +"\" , \""+ row.description +"\");'>WADO</a></b>"
+						            	   }
+									}
+					],
+					"language": {
+			            "lengthMenu": "Mostrar _MENU_ series por página",
+			            "zeroRecords": "Sin series para mostrar",
+			            "info": "Mostrando página _PAGE_ de _PAGES_",
+			            "infoEmpty": "Sin series para mostrar",
+			            "infoFiltered": "(filtrados de un total de _MAX_ series)",
+					    "emptyTable":     "Sin series para mostrar",
+					    "infoPostFix":    "",
+					    "thousands":      ".",
+					    "loadingRecords": "Cargando...",
+					    "processing":     "Procesando...",
+					    "search":         "Buscar:",
+					    "paginate": {
+					        "first":      "Primera",
+					        "last":       "Última",
+					        "next":       "Siguiente",
+					        "previous":   "Anterior"
+					    },
+					    "aria": {
+					        "sortAscending":  ": Click para ordenar ascendentemente",
+					        "sortDescending": ": Click para ordenar descendentemente"
+					    }
+					}				
+				});				
+			}
+
+			function configureAttachmentsGrid() {
+				
+				var columnDefs = [
+           				       {  "targets": 0,
+        				              "render": function ( data, type, row ) {
+        				            	  
+        				            	  	 var url = 'rest/studies/'  + studyID + '/files/file?name=' + data;
+      				                         return "<a target='_blank' href='" + url + "'><span>" + data + "</span></a>";
+        				            	 
+      				                   }					                   
+        				           }					               
+        						 ];
+				
+				attachmentsTable = $('#attachments-table').dataTable({
+					"data": [],
+					"lengthMenu": [ 10, 15, 20, 25, 30, 50, 75, 100, 1000 ],
+					"pageLength": 1000,					
+					"dom": '<"clear">',
+					"tableTools": {
+						"sRowSelect": "os",
+						"aButtons": [{
+		                    "sExtends": "select_none",
+		                    "sButtonText": "Desmarcar todo"
+						}],
+						fnRowSelected: function(o) {
+							attachmentsSelectionChanged();
+						},
+						fnRowDeselected: function(o) {
+							attachmentsSelectionChanged();
+						}											
+					},
+					"columns": [
+						{ "title": "ARCHIVOS", "data": "filename", "class": "left", "defaultContent": "" }
+					],		
+					"columnDefs": columnDefs,
+					"language": {
+			            "lengthMenu": "Mostrar _MENU_ archivos por página",
+			            "zeroRecords": "Sin archivos para mostrar",
+			            "info": "Mostrando página _PAGE_ de _PAGES_",
+			            "infoEmpty": "Sin archivos para mostrar",
+			            "infoFiltered": "(filtrados de un total de _MAX_ archivos)",
+					    "emptyTable":     "Sin archivos para mostrar",
+					    "infoPostFix":    "",
+					    "thousands":      ".",
+					    "loadingRecords": "Cargando...",
+					    "processing":     "Procesando...",
+					    "search":         "Buscar:",
+					    "paginate": {
+					        "first":      "Primera",
+					        "last":       "Última",
+					        "next":       "Siguiente",
+					        "previous":   "Anterior"
+					    },
+					    "aria": {
+					        "sortAscending":  ": Click para ordenar ascendentemente",
+					        "sortDescending": ": Click para ordenar descendentemente"
+					    }
+					}				
+				});				
+			}
+			
+			function configureDatePickers() {
+				// Configuración de los calendarios para búsqueda de estudios.				
+				var dayNames = ["Domingo", "Lunes", "Martes", "Mi&eacute;rcoles", 
+					"Jueves", "Viernes", "S&aacute;bado"]; 
+				var dayNamesMin = ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"];
+				var monthNames = ["Enero", "Febrero", "Marzo", "Abril", 
+				                  "Mayo", "Junio", "Julio", "Agosto",
+				                  "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+				$("#study-message-incident-resolution-date").datepicker({ dateFormat: "dd/mm/yy", 
+					changeYear: true, yearRange: "-100:+0", changeMonth: true,
+					dayNames: dayNames, dayNamesMin: dayNamesMin, monthNames: monthNames });
+			}
+						
+			function seriesSelectionChanged() {
+			}								
+									
+			function attachmentsSelectionChanged() {
+				
+			}								
+			
+			function loadStudy() {
+				$("#study-header-patient-name").text(study.patientName);
+				if (study.accessionNumber)
+					$("#study-header-accession-number").text(study.accessionNumber);
+				$("#study-header-patient-id").text(study.patientID);
+				$("#study-header-modality").text(study.modality);
+				$("#study-header-patient-age").text(study.age);
+				$("#study-header-patient-sex").text(study.sex);
+				$("#study-header-study-date").text(study.formattedStudyDate);
+				if (study.reportBody){
+					$("#study-report-body").text(study.reportBody);
+				  	$('#study-report-body').css( 'height' , '140px' );
+					$('#study-report-body').css( 'height' , document.getElementById('study-report-body').scrollHeight + 'px' ); }
+				
+				setF(study.firmado);
+				
+				$('#study-report-topleft').css('margin-left', ($('#study-report-container').width()/1.8) + 'px');
+				
+				if (getF()) {var url = 'rest/reporting/reports/pdf/' + studyID;
+							 $('#study-report-topleft').append("<a href='" + url + "' class='repLink'>DESCARGAR INFORME</a>&nbsp;&nbsp;"
+							 								+	"<img src='../images/informado.png' />&nbsp;&nbsp;");
+				   			 $('#study-report :input').attr( 'disabled' , true );
+							 $('#btn-segunda-lectura').button('option', 'disabled', false);
+							 if(study.validateReport){ $('#btn-comprobar-caso').css('background','silver').css('color','black'); }
+							 else{$('#btn-comprobar-caso').button('option', 'disabled', true);}
+							 if(study.secondReading){ $('#btn-segunda-lectura').css('background','silver').css('color','black'); }	}
+				
+				$('#study-report-topleft').append('<button id="btnPrevReport">Informes Previos</button>');
+				$('#btnPrevReport').button({icons:{'secondary':'ui-icon-note'}}).on('click', function(){getPrevReports(studyID)});
+				
+				if(study.teachingFile){$("#study-report-is-teaching-file").prop('checked', true);}
+				if(study.emergency){$("#study-report-is-emergency").prop('checked', true);}
+				
+				$("#study-report-multiple").val(study.regionCount);
+				
+				if(!study.logger){ $('#btn-study-log').css('background','silver').css('color','black'); }
+				
+				if(study.user){	$('#study-assignment-bottom').append('<span class="ui-icon black ui-icon-circle-check"></span>&nbsp;'	+
+																	 '<span style="font-size: 1.1em;">El paciente ya tiene usuario</span>');
+								$('#btn-assign-patient').remove();	}
+				
+				seriesTable.api().clear();
+			  	if (study.series && study.series.length > 0)
+			  		seriesTable.api().rows.add(study.series).draw();
+			  	
+				attachmentsTable.api().clear();
+			  	if (study.attachments && study.attachments.length > 0){
+			  		attachmentsTable.api().rows.add(study.attachments).draw();
+			  		setAttachment(true,studyID);
+			  		}
+			  	else if (study.attachments.length == 0) setAttachment(false,studyID);
+			  	
+			  	$("#institution-logo").attr("src", "rest/institutions/" + study.institutionID + "/logo");
+			  	$("#institution-logo").attr("alt", study.institutionName);
+			  	$("#institution-logo").attr("title", study.institutionName);
+			}
+			
+			
+			$(document).ready(function() {				
+				ddUserAgent.initialize();
+				
+				studyID = $.url().param('s');
+			
+				readUserInfo();
+				configureSeriesGrid();
+				configureAttachmentsGrid();
+				configureDatePickers();
+				
+				$.getJSON("rest/studies/" + studyID + "/full")
+				  .done(function(studyinfo) {
+					  study = studyinfo;
+					  loadStudy();
+				  })
+				  .fail(function() {
+						alert("Error al cargar datos de estudio");
+				  });
+				
+				$.getJSON('rest/config/all')
+				  .done(function(result) {
+					  	ddConfig = result;
+				  })
+				  .fail(function() {
+					  window.location.href = '../authentication-servlet/logout';
+				  });
+				
+				$.getJSON('rest/user/medicos')
+				  .done(function(result) {
+				    	var medicoSelect = $("#cmb-study-assignment"); 
+				    	medicoSelect.find('option').remove().end();			    		
+			    		medicoSelect.append('<option value="" ></option>');				    						    			
+				    	if (result && result.length > 0) {
+					    	$.each(result, function(index, dr) {
+					    		medicoSelect.append('<option value="' + dr.login + '">' + dr.firstName + " " + dr.lastName + '</option>');
+					        });					    	
+				    	}						  	
+				    	medicoSelect.val('');
+				    	
+				  }).fail(function() { alert("ERROR AL CARGAR USUARIOS"); });
+				
+				getClinicalData(studyID);
+				getIncidences(studyID);
+				getAssignments(studyID);
+				
+					$("#study-message-incident-resolution-date").val('');
+					$("#study-clinical-data-save").on('click', function(){setClinicalData(studyID)});
+					$("#btnFile").on('click', function(){doAttachment(studyID)});
+					$("#btn-save-incidence").on( 'click' , function() {setIncidence(studyID)} );
+					$("#btn-save-message").on( 'click' , function() {saveMessage(studyID)} );
+					$("#btn-add-message").on( 'click' , function() {addMessage()} );
+					$("#study-message-is-incident").on( 'click' , function() {addIncidence(isIncidence)} );
+					$("#btn-assign-study").on( 'click' , function() {assignStudies( this, studyID )} );
+					$("#btn-assign-patient").on( 'click' , function() {assignPatient( studyID )} );
+					$("#btn-save-report").on( 'click' , function() {saveReport( studyID )} );
+					$("#btn-finish-report").on( 'click' , function() {finishReport( studyID )} );
+					$("#btn-study-log").on( 'click' , function() {openStudyLog(studyID)} );
+					$("#btn-segunda-lectura").on( 'click' , function() {openSegundaLectura(studyID, study.discrep)} );
+					$("#btn-comprobar-caso").on( 'click' , function() {openComprobarCaso(studyID, study.validateReportState)} );
+					
+					$('#series-table').on( 'click', 'tr', function () {
+				        if ( $(this).hasClass('selected') ) {
+				            $(this).removeClass('selected');
+				        }
+				        else {
+				        	seriesTable.$('tr.selected').removeClass('selected');
+				            $(this).addClass('selected');
+				        }
+				    } );
+				});
+			
+			
+			function openOviyam( url , desc ){
+				
+				window.open(url, 'Visualización simple para estudio: ', 800, 600);
+				
+				$.ajax({
+			    	  type: "POST",
+			    	  url: 'rest/studies/' + studyID + '/simpleView/' + desc,
+			    	  data: [],
+			    	  success: function() {}
+			    	});
+			}
+			
+			function openOviyamfull(){
+				
+				studyID = $.url().param('s');
+				var href = $( location ).attr( 'href' ).replace( 'http://' , '' );
+	        	href = href.substring(0, href.indexOf(':'));
+	        	url = getConfig('actions.study.simple-view.url').replace('${STUDYID}', studyID).replace('&seriesUID=${SERIEID}', '').replace('${HOST}', href) ;
+				
+	        	window.open(url, 'Visualización simple para estudio: ', 800, 600);
+	        	
+				$.ajax({
+			    	  type: "POST",
+			    	  url: 'rest/studies/' + studyID + '/simpleView',
+			    	  data: [],
+			    	  success: function() {}
+			    	});
+			}
+
+			function getSelectedSeries() {
+				var oTT = TableTools.fnGetInstance('series-table');				
+			    return oTT.fnGetSelectedData();								
+			}			
+
+			function retrieveSelectedSeries(quality) {
+			    var selectedSeries = getSelectedSeries();
+			    
+			    seriesID = [];
+		    	$.each(selectedSeries, function(index, s) {
+		    		seriesID.push(s.serieID);
+		        });					    	
+			    			    
+			    retrieveSeries(seriesID, quality);
+			}
+			
+			function retrieveSerie(serieID, quality) {
+				
+				var seriesID = [serieID];
+				retrieveSeries(seriesID, quality);
+			}
+			
+			function retrieveSeries(seriesID, quality) {
+		        if (seriesID.length > 0) {
+		        	if (ddUserAgent.isUserAgentActive()) {
+		        		getStudyImagesFor(study, quality, seriesID);
+		        	} else {
+	        			ddUserAgent.startUserAgent(
+	        					function() { getStudyImagesFor(study, quality, seriesID); }, 
+	        					function() { warnUserAgentNotStarted(); });
+		        	}		        	
+		        	
+	        	} else {
+		        	alert('Por favor, seleccione una o más series previo a realizar esta acción.');
+		        }									
+			}
+
+			function readUserInfo() {
+				$.getJSON("rest/user/info")
+				  .done(function(info) {
+					  	window.userinfo = info;
+					  	
+					  	var inst = info.institutions[0].institution.id;
+					  	
+					  	$('#study-clinical-data :input').attr( 'disabled' , !actionIsAllowed(info, inst, 'declare-clinical-data') );
+					  	$('#btnFile').attr('disabled', !actionIsAllowed(info, inst, 'upload-study-file'));
+					  	$('#study-assignment :input').attr('disabled', !actionIsAllowed(info, inst, 'assign-study-to'));
+					  	if(!actionIsAllowed(info, inst, 'edit-study-report')){
+					  			$('#study-report :input').attr('disabled', true);
+					  		
+					  		var interval = window.setInterval(function(){
+					  			
+					  			$('#jqxMenu').jqxMenu();
+					  			
+					  			$('#TemplatesMenu li').each(function(i, elem){
+					  				
+					  				$('#jqxMenu').jqxMenu('disable',elem.id,true);
+					  			});
+					  			
+					  			clearInterval(interval);
+					  		}, 1500);
+					  	}
+				  })
+				  .fail(function() {
+				    	window.location.href = '../authentication-servlet/logout';
+				  });
+			}		
+							
+		</script>
+	</head>
+	<body>
+		<div class="manage-study">
+			
+			
+			
+			<div id="study-header" class="manage-study-row">
+				<div id="study-header-institution-logo" class="manage-study-section">
+					<img id="institution-logo" />
+				</div>
+				<div id="study-header-items" class="manage-study-section">
+					<div>
+						<div id="study-header-first-column" class="study-header-item">Paciente: 
+							<span id="study-header-patient-name" class="study-header-item-value"></span></div>
+						<div class="study-header-item">ID Estudio: 
+							<span id="study-header-accession-number" class="study-header-item-value"></span></div>
+						<div class="study-header-item">ID Paciente: 
+							<span id="study-header-patient-id" class="study-header-item-value"></span></div>
+					</div>
+					<div>
+						<div id="study-header-first-column" class="study-header-item">Modalidad: 
+							<span id="study-header-modality" class="study-header-item-value"></span></div>
+						<div class="study-header-item">Edad: 
+							<span id="study-header-patient-age" class="study-header-item-value"></span></div>
+						<div class="study-header-item">Sexo: 
+							<span id="study-header-patient-sex" class="study-header-item-value"></span></div>
+					</div>
+					<div>
+						<div class="study-header-item">Fecha: 
+							<span id="study-header-study-date" class="study-header-item-value"></span></div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			<div id="study-series" class="manage-study-row">
+				<div id="study-series-items" class="manage-study-section">
+					<div>
+						<table id="series-table" class="display" border="1"></table>
+					</div>
+					<div>
+						Traer series marcadas como:&nbsp;&nbsp;
+						<a href='javascript:retrieveSelectedSeries("lossy");'>LOSSY</a>&nbsp;&nbsp;&nbsp;
+						<a href='javascript:retrieveSelectedSeries("loseless");'>LOSSLESS</a>&nbsp;&nbsp;&nbsp;
+						<a href="javascript:openOviyamfull();">WADO</a>
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<div id="study-clinical-data" class="manage-study-row">
+				<form id="study-clinical-data-form" name="study-clinical-data-form">
+					
+					<div>
+							<span>Petici&oacute;n - Datos Cl&iacute;nicos - Antecedentes</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<span>
+								<input type="radio" id="study-clinical-data-normal" 
+									name="study-clinical-data-urgency"
+									value="0" checked="checked"><span>NORMAL</span>
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<input type="radio" id="study-clinical-data-urgent" 
+									name="study-clinical-data-urgency"
+									value="2"><span class="study-urgency-2">URGENTE</span>
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<input type="radio" id="study-clinical-data-preferential" 
+									name="study-clinical-data-urgency"
+									value="1"><span class="study-urgency-1">PRIORIDAD</span>
+							</span>
+						
+						<div style="float:right;">
+							<!-- <div>
+								<input type="checkbox" id="study-clinical-data-contrast-oral" 
+									name="study-clinical-data-contrast-oral"
+									value="cteoral">CTE ORAL
+							</div>
+							<div>
+								<input type="checkbox" id="study-clinical-data-contrast-ev" 
+									name="study-clinical-data-contrast-ev"
+									value="cteev">CTE EV
+							</div> -->
+							<div>
+								<input type="button" id="study-clinical-data-save" 
+									value="Guardar">						
+							</div>
+								
+								<!-- <input type="hidden" id="study-clinical-data-urgency-h" 
+											name="study-clinical-data-urgency-h" value="0" />
+								<input type="hidden" id="cte_ev" name="cte_ev" value="0" />
+								<input type="hidden" id="cte_oral" name="cte_oral" value="0" /> -->
+						</div>
+						
+						</div>
+						
+						<div>
+							<textarea id="study-clinical-data-other" name="study-clinical-data-other"
+								class="study-textarea"></textarea>
+						</div>
+						
+						
+						
+				</form>
+			</div>			
+
+
+
+
+			<div id="study-attachments" class="manage-study-row">
+				<div id="study-attachments-files" class="manage-study-section">
+					<div>
+						<table id="attachments-table" class="display" border="1"></table>
+					</div>
+					<div style="padding-top: 5px;padding-left: 10px;">
+						Adjuntar archivo: <!--<input type="file" value="Examinar...">-->
+						<input type="button" id="btnFile" value="Adjuntar" />
+					</div>
+				</div>
+			</div>			
+
+
+
+
+
+			<div id="study-assignment" class="manage-study-row">
+				<div id="study-assignment-function" class="manage-study-section">
+					<div id="study-assignment-top">
+						ASIGNAR ESTUDIO
+					</div>
+					<div id="study-assignment-bottom">
+					
+						<label id="lbl-assignments">Asignar a:</label>
+						 <select id="cmb-study-assignment">
+							
+						</select>
+						<input type="button" id="btn-assign-study" value="Asignar y Avisar" />&nbsp;&nbsp;&nbsp;
+						<input type="button" id="btn-assign-patient" value="Asignar al Paciente" />
+					</div>
+				</div>
+			</div>			
+
+
+
+
+
+			<div id="study-messages" class="manage-study-row">
+				<div id="study-messages-container" class="manage-study-section">
+					<form name="study-incidences">
+					<div id="study-messages-top">
+						MENSAJE:
+					</div>
+					<div id="study-messages-bottom">
+						<div>
+							<textarea id="study-message-or-incident" name="study-message-or-incident"
+								class="study-textarea"></textarea>
+								
+						</div>
+						<div>
+							<input type="checkbox" id="study-message-is-incident" name="study-message-is-incident" />
+								Incidencia
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<label class="study-message-incident-resolution-date-label" 
+								for="study-message-incident-resolution-date">Fecha de Incidencia</label>
+							<input type="text" id="study-message-incident-resolution-date" name="study-message-incident-resolution-date" 
+								readonly="readonly" />
+								
+								<input type="hidden" id="has-incidence" name="has-incidence" value="0" />
+								<input type="hidden" id="message-date" name="message-date" value="" />
+								
+								<input type="button" id="btn-save-incidence" value="Guardar" />
+							
+							
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							
+							<div style="float: right;">
+							
+								<input type="button" id="btn-add-message" value="Agregar Mensaje" />
+								
+								<input type="button" id="btn-save-message" value="Guardar Mensaje" />
+								
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>			
+			
+			
+			
+			<div id="study-report" class="manage-study-row">
+				
+				<div class="study-report-top-left">INFORME</div>
+				
+				<div id="study-report-container" class="manage-study-section">
+					
+				<div id="TemplatesContainer" class="navigation">
+					<span class="study-report-templates-label">Plantillas:</span>
+					<div id="jqxMenu">
+					<ul id="TemplatesMenu" class="nav"></ul>
+					</div>
+				</div>
+				<div id="study-report-topleft"></div>		
+					<div id="study-report-bottom">
+						
+						<form name="report-data">
+						<textarea id="study-report-body" name="study-report-body"
+							class="study-textarea"></textarea>
+						<input type="hidden" id="finished-flag" name="finished" />
+						<input type="hidden" id="check-case-flag" name="check-case" value="0" />
+						<input type="hidden" id="check-case-message" name="check-case-message" />
+						
+						<div class="study-report-bottom-left">
+							M&uacute;ltiples&nbsp;<select id="study-report-multiple" name="study-report-multiple">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">M&aacute;s</option>
+							</select>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<span>
+								<input type="checkbox" id="study-report-is-teaching-file" name="study-report-is-teaching-file" />
+								Teaching File
+							</span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>	<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<span style="color: red;">
+								<input type="checkbox" id="study-report-is-emergency" name="study-report-is-emergency" />
+								EMERGENCIA M&Eacute;DICA
+							</span>
+						
+						</div>
+						
+						<div class="study-report-bottom-right">
+							<input type="button" id="btn-save-report" value="Guardar" />
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<input type="button" id="btn-finish-report" value="Firmar" />
+						</div>
+						
+						</form>
+						
+						<!-- <div class="study-report-bottom-right">
+							<input type="button" id="btn-save-report" value="Guardar" />
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<input type="button" id="btn-finish-report" value="Firmar" />
+						</div> -->
+						
+						
+					</div>
+					
+					
+					
+					</div>
+					
+			</div>
+			
+			<div id="study-bottom" class="study-bottom">
+				
+				<input type="button" id="btn-comprobar-caso" value="Comprobar Caso"/>
+				
+				<input type="button" id="btn-segunda-lectura" value="Segunda Lectura" disabled="disabled"/>
+				
+				<input type="button" id="btn-study-log" class="primary" value="Log" />
+				
+			</div>
+				
+		</div>	
+		
+	</body>
+</html>

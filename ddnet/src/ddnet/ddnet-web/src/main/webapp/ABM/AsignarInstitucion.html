@@ -1,0 +1,157 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10pt;overflow-y:auto;}
+	.ui-button{font-size:.9em;margin:5px 0px;}
+	h5{text-align:left;}
+	input{vertical-align:middle;}
+	label{display:inline-block;width:280px;cursor:pointer;}
+	label.selected{color:#dcdcdc;}
+	div#institutionList label{text-align:left;}
+</style>
+<script type="text/javascript">
+	var role= null,login= null,firstName= null,lastName= null,isNew= null; var dialog= window.parent.$('div#dynamicModalDialog');
+	function get_url_params(){
+		var h4= $('h4');
+		login= $.url().param('login');
+		firstName= $.url().param('firstName');
+		lastName= $.url().param('lastName');
+		role= $.url().param('roleName');
+		isNew= $.url().param('new')=='true';
+		if(!isNew && role==='SIN ROL'){
+			window.parent.$alert('Por favor designar un ROL a este Usuario');
+			cancel_changes();
+		}
+		$(h4[0]).text('USUARIO : '+login+' ('+firstName+' '+lastName+')');
+		$(h4[1]).text('ROL : '+role);
+	}
+	function institutions_list(){
+		$.getJSON('../restricted/rest/abm/allinstitutions')
+		.done(function(data){
+			if(data && data.length>0){
+			$.each(data,function(i,inst){
+			var checkbox= '<input type="checkbox" id="'+inst.id+'" value="'+inst.name+'"/>&nbsp;' +
+						  '<label for="'+inst.id+'">'+inst.name+'</label>' ;
+			$('div#institutionList').append('<br>'+checkbox)});
+			$(':checkbox').on('change',function(){this.checked?$('label[for="'+$(this).attr('id')+'"]').addClass('selected'):$('label[for="'+$(this).attr('id')+'"]').removeClass('selected')});
+			$('label').on('mousedown',function(){return false});
+			if(!isNew){
+				var user= dialog.data('user');
+				$.each(user.institutions,function(i,inst){
+					$('input#'+inst.institution.id).prop('checked',true);
+					$('label[for="'+inst.institution.id+'"]').addClass('selected');
+				})
+			}}
+		})
+		.fail(function(){
+			window.parent.toastr['error']('No se pudo cargar las instituciones','ERROR');
+			if(isNew){
+			$.post('../restricted/rest/abm/deleteUser','login='+login);
+			dialog.unbind('dialogbeforeclose');	
+			}
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		});
+	}
+	function assign_institutions(){
+		if($('input:checked').length==0){window.parent.$alert('Seleccione al menos una Institución');return}
+		var Ids= []; var institutionNames= []; var checkbox= $('div#institutionList').find(':checked');
+		$.each(checkbox, function(i,c){Ids.push(c.id); institutionNames.push(c.value)});
+		var dto= { loginName:login,roleName:role,institutionId:Ids };
+		$.ajax({type:'POST', url:'../restricted/rest/abm/userinstitution/new', data:dto})
+		.done(function(){
+			window.parent.toastr['success']('Se han asignado las Instituciones','HECHO');
+			var fix= $.url().param('fix');
+			if(fix && fix!=null){
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+			window.parent.charge_users();
+			}
+			else{
+			var url= '../ABM/AsignarModalidad.html?login='+login+'&firstName='+firstName+'&lastName='+lastName+'&roleName='+role+'&institutionNames='+institutionNames+'&new=true';
+			window.parent.$("#dynamicModalDialogIframe").attr('src' , url)	
+			}
+		})
+		.fail(function(){
+			window.parent.toastr['error']('Falló la asignación de Instituciones','ERROR');
+			$.post('../restricted/rest/abm/deleteUser','login='+login);
+			dialog.unbind('dialogbeforeclose');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		});
+	}
+	function modify_institutions(){
+		if($('input:checked').length==0){window.parent.$alert('Seleccione al menos una Institución');return}
+		var newIds= []; var checkSelected= $('div#institutionList').find(':checkbox:checked');
+		$.each(checkSelected, function(i,c){newIds.push(c.id)});
+		var delIds= []; var checkDeselected= $('div#institutionList').find(':checkbox:not(:checked)');
+		$.each(checkDeselected, function(i,c){delIds.push(c.id)});
+		var dto= { loginName:login,roleName:role,newInstitutionId:newIds,delInstitutionId:delIds };
+		$.ajax({type:'POST', url:'../restricted/rest/abm/userinstitution', data:dto})
+		.done(function(){
+			window.parent.toastr['success']('Se han asignado las Instituciones','HECHO');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+			window.parent.charge_users();
+		})
+		.fail(function(){
+			window.parent.toastr['error']('Falló la asignación de Instituciones','ERROR');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		});
+	}
+	function cancel_new_user(){
+		var deleteUser= function(){
+			$.post('../restricted/rest/abm/deleteUser','login='+login);
+			dialog.unbind('dialogbeforeclose');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		}; window.parent.$confirm('Si no confirma las asignaciones,\nel nuevo usuario "'+login+'" se borrará',deleteUser);
+	}
+	function cancel_changes(){
+		window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+		dialog.dialog('close');
+	}
+	function preset_buttons(){
+		var buttons= $('button');
+		$(buttons[0]).button({label:'Confirmar',icons:{primary:'ui-icon-circle-check'}});
+		$(buttons[1]).button({label:'Cancelar',icons:{primary:'ui-icon-circle-close'}});
+		if(isNew){
+			$(buttons[0]).on('click', assign_institutions);
+			$(buttons[1]).on('click', cancel_new_user);
+		}else{
+			$(buttons[0]).on('click', modify_institutions);
+			$(buttons[1]).on('click', cancel_changes);
+		}
+	}
+	
+	$(document).ready(function(){
+		get_url_params();
+		institutions_list();
+		$('input#selectAll').on('click',function(){$('input:checkbox').prop('checked',$(this).prop('checked'));$(this).prop('checked')?$('div#institutionList').find('label').addClass('selected'):$('div#institutionList').find('label').removeClass('selected')});
+		preset_buttons();
+		
+		if(!isNew){dialog.unbind('dialogbeforeclose')} else{dialog.dialog('option','title','ASIGNAR INSTITUCIONES A USUARIO')}
+	});
+</script>
+</head>
+<body>
+<div align="center">
+	<button type="button"></button> &nbsp;&nbsp;
+	<button type="button"></button> <br>
+	<h4></h4> <h4></h4>
+	<h5>Seleccione las instituciones a las que pertenece.</h5>
+	<label>
+	<input type="checkbox" id="selectAll">&nbsp;
+	<b>MARCAR TODAS</b>
+	</label> <br>
+	<div id="institutionList"></div><br>
+</div>
+</body>
+</html>

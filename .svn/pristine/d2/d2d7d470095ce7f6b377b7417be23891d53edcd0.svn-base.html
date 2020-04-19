@@ -1,0 +1,220 @@
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
+
+		<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui.js"></script>
+		<script type="text/javascript" src="../js/purl.js"></script>
+		<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui-1.10.4.css" />
+
+<style type="text/css">
+
+body {
+
+	background: #ccc;
+}
+
+#newUser {
+
+	position: absolute;
+}
+
+.cajadetexto {
+	
+	width: 200px;
+	background-color: #fff;
+	border: double #aaa 0.25em;
+	border-radius: 5px;
+	text-align: center	!important;
+}
+
+.txtlabel {
+
+	display: inline-block;
+	width: 200px;
+}
+
+button {
+
+	width: 150px;
+}
+
+#dynamicModalDialog {
+	overflow: hidden;
+}
+
+#dynamicModalDialogIframe {
+	width: 100%; 
+	height: 100%;
+}
+
+.ui-widget {
+
+	font-size: 0.8em;
+}
+
+</style>
+
+<script type="text/javascript">
+
+	var box = null;
+	var contenedor = null;
+	var form = null;
+	var fName = null;
+	var lName = null;
+	var login = null;
+	var password = null;
+	var cPassword = null;
+	var AltoVentana = window.innerHeight;
+	var AnchoVentana;
+	var yaExiste = false;
+	
+	$(document).ready(function() {
+		
+		AnchoVentana = document.body.clientWidth;
+		box = $( '#newUser' );
+		contenedor = box.parent();
+		form = $( '#AltaUsuario' );
+		fName = $( '#first_name' );
+		lName = $( '#last_name' );
+		login = $( '#login' );
+		password = $( '#password' );
+		cPassword = $( '#c_password' );
+		var margen = ( contenedor.width() - box.width() ) / 2 ;
+		
+		clear();
+		
+		box.css( 'margin-left' , margen+'px' );
+		$( '#btnLimpiar' ).button({ icons: { primary: 'ui-icon-refresh' } })
+							.on( 'click' , function(){clear();} );
+		$( '#btnCrear' ).button({ icons: { primary: 'ui-icon-circle-check' } })
+							.on( 'click' , createUser );
+		$( '#btnCancelar' ).button({ icons: { primary: 'ui-icon-circle-close' } })
+							.on( 'click' , function(){if(confirm('No se creará el nuevo usuario')){
+														window.parent.$('#dynamicModalDialogIframe').attr('src', 'about:blank');
+														window.parent.$("#dynamicModalDialog").dialog('close');} 
+													});
+		
+		$('.cajadetexto').on('keypress', function(){
+			
+			var tecla = event.which || event.keyCode;
+			if(tecla == 13) createUser();
+			else return;
+		});
+		
+	});
+	
+	function clear() {
+		
+		fName.val('');
+		lName.val('');
+		login.val('');
+		password.val('');
+		cPassword.val('');
+	}
+	
+	function createUser() {
+		
+		window.yaExiste = false;
+		
+		if( isClear() ) { alert( 'Hay campos sin completar' );
+						  return;	}
+		
+		if(password.val() != cPassword.val()){ alert('las contraseñas no coinciden');
+											   return;}
+				
+		$.getJSON('../restricted/rest/abm/allusers')
+		.done(function(data) {		
+					
+		if(data && data.length>0){
+						
+			$.each(data, function(index, user){
+							
+			if( user == login.val() ) { window.yaExiste = true;   }
+				
+			});}
+		
+		if(window.yaExiste){ alert('ya existe un usuario con el nombre "' + login.val() + '"'); return;}
+		else{
+			$.post('../restricted/rest/abm/newuser' , form.serialize() )
+			.done( function(){
+									
+			alert( 'se ha creado el usuario: ' + login.val() );
+					
+			var url = '../ABM/AsignarRol.html?login=' + login.val() + '&Fname=' + fName.val() + '&Lname=' + lName.val() ;
+			window.parent.$("#dynamicModalDialogIframe").attr('src' , url);
+						
+			}).fail( function() {alert('no se pudo crear el usuario')} );
+		}});
+	}
+	
+	function isClear(){
+		
+		var flag = false;
+		
+		if(fName.val() == '') flag = true;
+		if(lName.val() == '') flag = true;
+		if(login.val() == '') flag = true;
+		if(password.val() == '') flag = true;
+		if(cPassword.val() == '') flag = true;
+		
+		return flag;
+	}
+
+</script>
+
+</head>
+
+<body>
+
+<div id="newUser">
+
+<br>
+
+<form id="AltaUsuario" method="post" autocomplete="off">
+	
+	<h4>Datos Personales</h4>
+	
+	<label class="txtlabel">Nombre:</label>
+	<input type="text" id="first_name" name="first_name" class="cajadetexto" />
+	<br><br>
+	<label class="txtlabel">Apellido:</label>
+	<input type="text" id="last_name" name="last_name" class="cajadetexto" />
+	
+	<h4>Datos de Usuario</h4>
+	
+	<label class="txtlabel">Usuario:</label>
+	<input type="text" id="login" name="login" class="cajadetexto" />
+	<br><br>
+	<label class="txtlabel">Contraseña:</label>
+	<input type="password" id="password" name="password" class="cajadetexto" />
+	<br><br>
+	<label class="txtlabel">Confirme Contraseña:</label>
+	<input type="password" id="c_password" name="c_password" class="cajadetexto" />
+	
+	<br><br>
+	<h5 align="center">deben completarse todos los campos</h5>
+	<br>
+
+</form>
+	
+	<div align="center">
+	<button id="btnCrear">Crear Usuario</button>
+	&nbsp;&nbsp;
+	<button id="btnLimpiar">Limpiar Campos</button>
+	<br><br>
+	<button id="btnCancelar">Cancelar</button>
+	</div>
+
+</div>
+
+</body>
+
+</html>

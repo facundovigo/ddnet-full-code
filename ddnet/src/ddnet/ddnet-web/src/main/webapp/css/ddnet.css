@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+/***	CSS Browser Selector
+
+    ie - Internet Explorer (All versions)
+    ie8 - Internet Explorer 8.x
+    ie7 - Internet Explorer 7.x
+    ie6 - Internet Explorer 6.x
+    ie5 - Internet Explorer 5.x
+    gecko - Mozilla, Firefox (all versions), Camino
+    ff2 - Firefox 2
+    ff3 - Firefox 3
+    ff3_5 - Firefox 3.5
+    ff3_6 - Firefox 3.6 new
+    opera - Opera (All versions)
+    opera8 - Opera 8.x
+    opera9 - Opera 9.x
+    opera10 - Opera 10.x
+    konqueror - Konqueror
+    webkit or safari - Safari, NetNewsWire, OmniWeb, Shiira, Google Chrome
+    safari3 - Safari 3.x
+    chrome - Google Chrome
+    iron - SRWare Iron
+
+	
+    win - Microsoft Windows (all versions)
+    vista - Microsoft Windows Vista new
+    linux - Linux (x11 and linux)
+    mac - Mac OS
+    freebsd - FreeBSD
+    ipod - iPod Touch
+    iphone - iPhone
+    ipad - iPad new
+    webtv - WebTV
+    j2me - J2ME Devices (ex: Opera mini) changed from mobile to j2me
+    blackberry - BlackBerry new
+    android - Google Android new
+    mobile - All mobile devices new
+	
+***/
+
+	
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;min-width:1000px;overflow-y:hidden;}
+	.win body{font-size:9pt;} .linux body{font-size:10pt;} .mac body{font-size:9pt;}
+	input[type=text]{border:double #222 0.25em;background:#eee;}
+	input[type=text]:focus{border: double #0972a5 0.25em;}
+	input[type="text"]:disabled{background:#bbb;color:#444;}
+	div#ddnet-loading{position:absolute;top:30%;left:45%;background:#000;color:#778899;font-size:11pt;width:200px;height:90px;padding-top:10px;display:none;}
+	div#page-loading{position:absolute;top:30%;left:43%;background:#fff;color:#000;font-size:11pt;width:280px;height:100px;padding-top:10px;display:none;}
+	div.bottom-of-page{font-size:0.9em;}
+	div.bottom-of-page a{font-weight:bold;color:#dcdcdc;}
+	.ui-datepicker{font-size:9pt!important;}
+	.ui-selectmenu-button{font-size:0.85em!important;height:18px!important;vertical-align:middle;padding-bottom:5px!important;}
+	.ui-selectmenu-text{vertical-align:top!important;}
+	div#tabPrincipal{top:-13px;background:none;border:none;}
+	div#tabPrincipal ul.ui-tabs-nav{background:#708090;text-align:center;border:solid 1px #999;font-size:0.9em;}
+	div#tabPrincipal ul.ui-tabs-nav li{display:inline-block;float:none;margin:0em;}
+	div#tabPrincipal .ui-tabs-panel.ui-widget-content{border:solid 1px #9a9a9a;border-top:none;color:black;overflow-x:hidden;overflow-y:auto;}
+	div#dynamicModalDialog{overflow:hidden;}
+	iframe#dynamicModalDialogIframe{width:99%;height:98%;}
+	span.ui-dialog-title{text-align:center!important;}
+	#toast-container{text-align:center;right:50px!important;}
+	.ui-dialog .ui-button{font-size:.9em!important;}
+	.win .ui-datepicker-calendar{font-size:.8em!important;}
+	

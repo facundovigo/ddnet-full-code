@@ -1,0 +1,194 @@
+/* ***********************
+	Main page styling
+**************************/
+
+/* Common stylings */
+
+/* Se mantienen por defecto */
+body {
+	background-color: lightslategray;
+}
+
+iframe {
+	border: 0;
+}
+
+tr.odd {
+	background-color: #d8d7d0 !important;
+	color: black;
+}
+
+tr.even {
+	background-color: #e8e7e0 !important;
+	color: black;
+}
+
+tr.DTTT_selected {
+	background-color: #787770 !important;
+}
+
+thead tr th {
+	background-color: #252525 !important;
+	color: white !important;
+}
+
+.alignLeft {
+	text-align: left;
+}
+
+.alignCenter {
+	text-align: center;
+}
+
+.alignRight {
+	text-align: right;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.clearfix:before,.clearfix:after {
+	content: "\0020";
+	display: block;
+	height: 0;
+	overflow: hidden;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.small-field-label {
+	display: inline-block !important;
+	width: 7em !important;
+}
+
+.small-field-input {
+	display: inline-block !important;
+	width: 7em !important;
+}
+
+.ui-datepicker {
+	font-size: 0.7em;
+}
+
+.single-file-uploader {
+	height: 70px;
+}
+
+/* Login/Logout/LoginError */
+.login-main-container {
+	text-align: center;
+}
+
+.login-product-title {
+	font-size: 1.5em;
+	font-weight: bolder;
+}
+
+.login-top-container {
+	margin-bottom: 30px;
+}
+
+.login-fields-container {
+	margin-bottom: 30px;
+}
+
+.login-actions-container {
+	font-size: 0.75em;
+}
+
+.login-message-container {
+	margin-bottom: 30px;
+}
+
+.login-message {
+	margin: 5px;
+	font-weight: normal;
+}
+
+#dd-useragent-status-text {
+	font-weight: bolder;
+}
+
+/* No son necesarios
+
+.study-report-status-tobeinformed {
+	color: red				!important;
+}
+.study-report-status-tobeconfirmed {
+	color: yellow			!important;
+}
+.study-report-status-informed {
+	color: green			!important;
+}
+
+*/
+
+/* Modificados */
+.top-of-page-layout-west {
+	/*.......................................*/
+	height: 15px !important;
+	width: 0 !important;
+	overflow: visible !important;
+	border: none !important;
+	/*.......................................*/
+}
+
+.top-of-page-layout-center {
+	line-height: 21px !important;
+	text-align: left !important;
+	vertical-align: middle !important;
+	/*.......................................*/
+	width: auto !important;
+	border: solid 1px pink !important;
+	overflow: visible !important;
+
+	/*.......................................*/
+}
+
+.top-of-page-layout-east {
+	vertical-align: middle !important;
+	/*.......................................*/
+	width: 0 !important;
+	height: 50px !important;
+	position: absolute !important;
+	right: 10px !important;
+	left: auto !important;
+	overflow: visible !important;
+	text-align: left !important;
+	font-size: 0.7em !important;
+	border: none !important;
+	/*.......................................*/
+}
+
+/*.......................................*/
+.col1 {
+	display: inline-block !important;
+	width: 90px !important;
+}
+
+.aux-filter {
+	padding-top: 5px !important;
+	padding-left: 10px !important;
+}
+/*.......................................*/
+.top-of-page-logo {
+	/*.......................................*/
+	height: 110px;
+	width: 70%;
+	margin-top: 5px;
+	margin-left: 5px;
+	/*.......................................*/
+}
+
+.top-of-page-title-text {
+	font-size: 1.4em;
+	font-weight: bolder;
+}
+
+/* Agregados */
+
+.ui-selectmenu-button{ 	top: 7px;
+						font-size: 0.88em; }

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Comprobar Caso</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui-1.10.4.js"></script>
+<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.js"></script>
+<script type="text/javascript" src="../js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+<script type="text/javascript" src="../js/study-report.js"></script>
+
+<style type="text/css">
+
+body {
+	background: #d4ddd9;
+	font-size: 0.75em;
+	font-family: Arial, sans-serif !important;
+}
+button {
+	float: right;
+}
+textarea {
+	resize: vertical;
+	width: 99%;
+	height: 100px;
+}
+
+</style>
+
+<script type="text/javascript">
+		
+var studyID = null;
+var dt = null;
+var state = null;
+
+	$(document).ready(function(){
+		
+		studyID = $.url().param('s');
+		state = parseInt( $.url().param('state') );
+		
+		$('#btn_check_case').button({label: state == 1 ? 'Solicitar' :
+											state == 2 ? 'Comprobado':
+											state == 3 ? 'Comprobar' :
+														 'Comprobar'  })
+							.on('click', function(){setCC(this);});
+		
+		$('#btn_close').button({label: 'Cerrar'})
+						.on('click', function(){
+												window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+												window.parent.$("#dynamicModalDialog").dialog("close");});
+		
+		var columns = [
+						{ "title": "FECHA", "data": "date", "defaultContent": "", 
+							"class": "left", "width": "25%" },
+						{ "title": "ESTADO", "data": "state", "defaultContent": "", 
+							"class": "left", "width": "25%" },
+						{ "title": "USUARIO", "data": "user", "defaultContent": "", 
+							"class": "left", "width": "25%" },
+						{ "title": "OBSERVACIONES", "data": "notes", "defaultContent": "", 
+							"class": "left", "width": "25%" }
+					  ];
+		var columnDefs = [{															
+     	   					"targets": 1,											
+    	   					"render": function ( data, type, row ) {					
+    		   														
+    		 				return 	data == 1 ? 'Comprobar' : data == 2 ? 'Solicitado' : 'Comprobado';
+    		 				
+    	   					}}];
+		
+	dt = $('#tb_check-case').dataTable({
+			"data": [],
+			"lengthChange": false,
+			"pageLength": 3,
+			"dom": 'rt<"clear">p',
+			"pagingType": "full_numbers",
+			"columns": columns,					
+			"columnDefs": columnDefs,					
+			"language": {
+	            "lengthMenu": "Mostrar _MENU_ datos por página",
+	            "zeroRecords": "No se encontró información para mostrar con los criterios especificados.",
+	            "info": "Mostrando página _PAGE_ de _PAGES_",
+	            "infoEmpty": "Sin información para mostrar",
+	            "infoFiltered": "(filtrados de un total de _MAX_ datos)",
+			    "emptyTable":     "Sin información para mostrar",
+			    "infoPostFix":    "",
+			    "thousands":      ".",
+			    "loadingRecords": "Cargando...",
+			    "processing":     "Procesando...",
+			    "search":         "Buscar:",
+			    "paginate": {
+			        "first":      "Primera",
+			        "last":       "Última",
+			        "next":       "Siguiente",
+			        "previous":   "Anterior"
+			    },
+			    "aria": {
+			        "sortAscending":  ": Click para ordenar ascendentemente",
+			        "sortDescending": ": Click para ordenar descendentemente"
+			    }
+			},
+			"createdRow": function ( row, data, index ) {
+	            
+	                $('td', row).css('background' , 'white');
+	                $('td', row).css('border-left' , 'solid 1px black');
+	                $('td', row).css('border-right' , 'solid 1px black');
+	            
+	        }
+		});
+		completeTable(dt);
+		
+		$('#txt_check-case').val(window.parent.$('#check-case-message').val());
+	});
+	
+	function completeTable(tabla){
+		
+		$.getJSON("rest/studies/"+ studyID +"/checkCase")
+		.done(function(info){
+			tabla.fnClearTable();
+			if (info && info.length > 0)	tabla.fnAddData(info);
+		})
+		.fail(function(){alert('Sucedió un error al momento de cargar los datos');});
+	}
+	
+	function setCC(elem){
+		
+		var button = $(elem);
+		var hidden = $('#check-case-val');
+		var txtarea = $('#txt_check-case');
+	
+		if (!txtarea.val().trim()){ alert('No hay texto ingresado');	return; }
+		
+	if(state > 0){	
+			if(button.text() == 'Comprobar') hidden.val('1');
+			else if(button.text() == 'Solicitar') hidden.val('2');
+			else hidden.val('3');
+			//alert(hidden.val());
+			$.post('rest/studies/'+ studyID + '/checkCase', $('form[name="check-case-form"]').serialize())
+			.done(function(){
+				alert('Se ha registrado su pedido');
+				window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+				window.parent.$("#dynamicModalDialog").dialog("close");
+				location.reload();
+			})
+			.fail(function(){ alert('Ocurrió un error al momento de guardar la información'); });
+		}
+		else{
+			window.parent.$('#check-case-message').val(txtarea.val());
+			window.parent.$('#check-case-flag').val('1');
+			alert('El estudio se marcará como caso a SOLICITAR,\nen el momento que se firme el informe');
+			window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+			window.parent.$("#dynamicModalDialog").dialog("close");
+		}
+	}
+
+	
+		
+</script>
+</head>
+<body>
+
+	<div id="check-case" >
+		
+	<div class="check-case-top">
+	<span>Observaciones</span>
+	<form name="check-case-form">
+		
+		<input type="hidden" id="check-case-val" name="check-case-val">
+		<textarea id="txt_check-case" name="txt_check-case"></textarea>
+		<br><br>
+	
+	</form>
+		
+		<button id="btn_check_case"></button>
+		<br><br><br><br>
+	</div>	
+	<div class="check-case-bottom">	
+		<table id="tb_check-case"></table>
+		<br><br>
+		<button id="btn_close"></button>
+	</div>
+	</div>
+
+</body>
+</html>

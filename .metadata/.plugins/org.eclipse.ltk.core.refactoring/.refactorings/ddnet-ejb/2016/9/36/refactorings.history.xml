@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;UserProfileDAO.java&apos; to &apos;ddnet-ejb/src/main/java/ddnet.ejb.dao&apos;&#x0A;- Original project: &apos;ddnet-ejb&apos;&#x0A;- Destination element: &apos;ddnet-ejb/src/main/java/ddnet.ejb.dao&apos;&#x0A;- Original element: &apos;ddnet.ejb.dao.UserProfileDAO.java&apos;" description="Copy compilation unit" destination="/src\/main\/java&lt;ddnet.ejb.dao" element1="/src\/main\/java&lt;ddnet.ejb.dao{UserProfileDAO.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1472746199308" units="1" version="1.0"/>
+</session>

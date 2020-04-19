@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Diagn&oacute;stico Digital Alta Pacientes</title>
+
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/welcome.css" />
+
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+<script type="text/javascript" src="js/css_browser_selector.js"></script>
+<script type="text/javascript">	
+	$(document).ready(function() {				
+		$('#login-ok-button').button({ icons: { primary: "ui-icon-circle-check" }, text: true });
+		$('#login-cancel-button').button({ icons: { primary: "ui-icon-circle-close" }, text: true });
+		
+		$("#login-form").validate({
+			rules: {
+				"login": {
+					required: true,
+					maxlength: 100					
+				},							
+				"password": {
+					required: true,
+					maxlength: 100
+				}							
+			},
+			messages: {
+				"login": "<br>Por favor, ingrese su nombre de usuario",
+				"password": "<br>Por favor, ingrese su clave de acceso"
+			}
+		});
+		
+		$('#login-field').focus();
+		$('#login-field').on('keydown', 'input', function (event) {
+		    if (event.which == 13) {
+		        event.preventDefault();
+				$('#password-field').focus();
+		    }
+		});
+		
+		CentrarElementos();
+		
+		window.addEventListener('resize', function(){CentrarElementos();});
+	});	
+	
+	function CentrarElementos(){
+		
+		$('img').css( 'margin-left' ,
+					 	( $('body').width() - $('img').width() -10 ) / 2 + 'px'
+					);
+		$('.title').css( 'margin-left' ,
+			 				( $('body').width() - $('.title').width() - 10 ) / 2 + 'px'
+					   );
+		$('.login-fields-container').css( 'margin-left' ,
+ 								( $('body').width() - $('.login-fields-container').width() -50 ) / 2 + 'px'
+		   					);
+		$('.login-actions-container').css( 'margin-left' ,
+					( $('body').width() - $('.login-actions-container').width() -10 ) / 2 + 'px'
+				);
+	}
+</script>
+</head>
+
+<body>
+	<div class="login-main-container">
+		<form id="login-form" name="login-form"
+			action="authentication-servlet/login" method="post">
+			<div class="login-top-container">
+				
+				<img src="utils/mainlogo" />
+				<label class="title">Alta de Pacientes</label>
+				
+			</div>
+			
+			<div class="login-fields-container">
+				
+				<label class="subtitle">Bienvenido/a! Inicie su sesión para ingresar</label>
+				<p>
+					<label for="login" class="for-text">Usuario:</label> 
+					<input type="text" id="login-field" name="login" class="text" />
+				</p>
+				<p>
+					<label for="password" class="for-text">Contraseña:</label> 
+					<input type="password" id="password-field" name="password" class="text" />
+				</p>
+			</div>
+			<div class="login-actions-container">
+				<button id="login-ok-button" type="submit" style="margin-left: 29px;">Ingresar</button>
+				&nbsp;&nbsp;<button id="login-cancel-button" type="reset">Cancelar</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

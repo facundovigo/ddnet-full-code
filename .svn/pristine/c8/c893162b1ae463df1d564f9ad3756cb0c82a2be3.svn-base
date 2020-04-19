@@ -1,0 +1,46 @@
+package ddnet.web.other;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.io.FileUtils;
+
+@WebServlet({"/utils"})
+public class UtilsServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		if (request.getRequestURI().endsWith("login")) {
+			final String login = request.getParameterValues("login")[0];
+			final String password = request.getParameterValues("password")[0];
+
+			if (securityHelper.login(session, login, password)) {
+				response.sendRedirect(request.getServletContext().getContextPath() + "/index.html");
+			} else {
+				response.sendRedirect(request.getServletContext().getContextPath() + "/login-error.html");
+			}
+		} else {
+			response.setStatus(HttpStatus.SC_NOT_FOUND);
+		}
+		
+	}
+	
+	
+	public void get() {
+		String logosFolder = configurationManager.getConfigurationItem("report.logos.source-path").getValue();			
+		File logoFile = FileUtils.getFile(logosFolder, "institucional.jpg");		
+		return logoFile.exists() ? Response.ok(FileUtils.readFileToByteArray(logoFile)).build() : Response.status(Status.NOT_FOUND).build();		
+	}
+}

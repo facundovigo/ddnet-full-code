@@ -1,0 +1,922 @@
+/**
+ * 
+ * 	Funciones de la ventana "study.html"
+ * 
+ */
+
+var study = null;
+var isIncidence = null;
+var aux = null;
+var button = null;
+var interval = null;
+
+/************************************************** DATOS CLINICOS *******************************************************/
+
+function setClinicalData( studyID ) {
+	
+	var form = $('form[name="study-clinical-data-form"]');
+	
+	$.post("rest/studies/" + studyID + "/datosclinicos" , form.serialize())
+	.done( function() { location.href='study2.html?s=' + studyID; } )
+	.fail( function() { alert('ocurrió un error al momento de setear los datos clínicos'); } );
+	
+}
+
+function getClinicalData( studyID ) {
+	
+	$('input[name="study-clinical-data-urgency"]').on('click', function(){
+		$('input[name="study-clinical-data-urgency"]').closest('label').find('span').css('background', 'none');
+		$(this).closest('label').find('span').css('background', 'white');
+	});
+	$("#study-clinical-data-normal").click();
+	
+	$.getJSON("rest/studies/" + studyID + '/datosclinicos')
+	.done( function(data) {
+		if(data && data != null){
+			
+			$('input[name="study-clinical-data-urgency"][value="'+data.priority+'"]').click();
+			$('#study-clinical-data-other').val(data.notes);
+			
+			$('input[name="study-clinical-data-urgency"]').prop('disabled', true);
+			$('#study-clinical-data-other').prop('disabled', true);
+			
+			$('#spn_user-last-cl-data').html('Último cambio hecho por: <b>' + data.user + '</b>');
+			
+			$('#btn_study-clinical-data-save').button({
+				label: "Modificar",
+				icons: {"primary": "ui-icon-pencil"}
+			
+			}).on('click', function(){
+				$('input[name="study-clinical-data-urgency"]').prop('disabled', false);
+				$('#study-clinical-data-other').prop('disabled', false);
+				
+				$('#btn_study-clinical-data-save').button({
+					label: "Guardar",
+					icons: {"primary": "ui-icon-disk"}
+				
+				}).on('click', function(){ setClinicalData(studyID); });
+			});
+			
+		} else{
+			$('#btn_study-clinical-data-save').button({
+				label: "Guardar",
+				icons: {"primary": "ui-icon-disk"}
+			
+			}).on('click', function(){ setClinicalData(studyID); });
+			
+			$('#spn_user-last-cl-data').text('No hubo cambios aplicados en este Estudio');
+		}
+		
+	}).fail(function(){ $('#tab_study-clinical-data').children().remove();
+						$('#tab_study-clinical-data').append('ERROR al cargar Datos Clínicos'); });
+	
+}
+
+/************************************************** ADJUNTAR ARCHIVOS *******************************************************/
+
+
+
+
+function configureAttachGrid(studyID){
+
+	var columns = [{ "title": "ARCHIVO", "data": "filename", "defaultContent": "-", "class": "left" },
+	               { "title": "DESCRIPCIÓN", "data": "desc", "class": "left", "width": "100px" },
+	               { "title": "ELIMINAR", "data": null, "class": "center", "width": "40px" } ];
+	var columnDefs = [
+				       {  "targets": 0,
+			              "render": function ( data, type, row ) {
+			            	  
+			            	  var typeoffile = row.desc == 'Archivo' ? 1 : 2 ;
+			            	  var url = 'rest/studies/'  + studyID + '/files/file?name=' + row.filename + '&type=' + typeoffile;
+			                  return "<a target='_blank' href='" + url + "' title='Click para ver el Anexo'>" +
+			                  			"<span>" + row.filename + "</span></a>";
+			              }					                   
+			           },
+			           {   "targets": 2,
+			        	   "render": function ( data, type, row ) {
+			        		   
+			        		   var typeoffile = row.desc == 'Archivo' ? 1 : 2 ;
+			        		   var url = 'rest/studies/'  + studyID + '/files/file?name=' + row.filename + '&type=' + typeoffile;
+			        		   return "<a href=\"#\"' onclick=\"deleteFile('" + row.filename + "', '" + url + "', '" + studyID + "');\">" +
+			        		   		  		"<img src='../images/trash.png' >" +
+			        		   		  "</a>";
+			        	   }
+			           }
+					 ];
+	
+	$('#study-files-table').dataTable({
+		"data": [],
+		"order": [[ 1, "asc" ]],
+		"lengthMenu": [ 5, 10, 15, 20, 25, 30, 50, 75, 100 ],
+		"lengthChange": false,
+		"pageLength": 10,
+		"columns": columns,					
+		"columnDefs": columnDefs,
+		"language": {
+	        "lengthMenu": "Mostrar _MENU_ archivos por página",
+	        "zeroRecords": "No se encontraron archivos para mostrar con los criterios especificados.",
+	        "info": "Mostrando página _PAGE_ de _PAGES_",
+	        "infoEmpty": "Sin archivos para mostrar",
+	        "infoFiltered": "(filtrados de un total de _MAX_ archivos)",
+		    "emptyTable":     "Sin archivos para mostrar",
+		    "infoPostFix":    "",
+		    "thousands":      ".",
+		    "loadingRecords": "Cargando...",
+		    "processing":     "Procesando...",
+		    "search":         "Buscar:",
+		    "paginate": {
+		        "first":      "Primera",
+		        "last":       "Última",
+		        "next":       "Siguiente",
+		        "previous":   "Anterior"
+		    },
+		    "aria": {
+		        "sortAscending":  ": Click para ordenar ascendentemente",
+		        "sortDescending": ": Click para ordenar descendentemente"
+		    }
+		}				
+	});
+	
+	chargeFileUploader(studyID);
+	chargeOMUploader(studyID);
+	loadFiles(studyID);
+}
+
+function loadFiles(studyID) {
+	
+	$.get('rest/studies/' + studyID + '/files')
+	  .done(function(result) {
+		  	var dt = $('#study-files-table').dataTable();
+		  	dt.fnClearTable();
+		  	if (result && result.length > 0) {
+		  		
+		  		dt.fnAddData(result);
+		  	}
+	  }).fail(function(){ $('#tab_study-files').children().remove();
+						  $('#tab_study-files').append('ERROR al cargar Archivos'); });
+}
+
+function deleteFile(filename, url, studyID) {
+	if (confirm('¿Confirma la eliminación del archivo "' + filename + '"?')) {
+		$.ajax({
+		    url: url,
+		    type: 'DELETE'
+		}).done(function() {
+			loadFiles(studyID);	
+			
+		}).fail(function() { 
+			alert('Ocurrió un error al momento de eliminar. Por favor, reintente la operación realizada.');
+		    loadFiles(studyID);					    
+		});
+	}
+}
+
+/************************************************* ASIGNACIÓN *********************************************************/
+
+function assignStudies( elem , studyID ) {
+	
+	var Abutton = $(elem);
+	var label = Abutton.button('option', 'label');
+	
+	var selectedPhysician = $('#cmb-study-assignment').val();
+	if (!selectedPhysician)	{
+			alert('Debe seleccionar un médico al cual se le asignará el o los estudios seleccionados.');
+			return;
+		}
+
+	var dto = {
+    		physicianCode: selectedPhysician,
+    		studiesIDs: []
+    };				    
+    
+    dto.studiesIDs.push( studyID );
+
+	if(label.startsWith('Asignar')) {    
+
+	    $.ajax({
+	    	  type: "POST",
+	    	  url: 'rest/studies/assign-studies',
+	    	  data: dto,
+	    	  success: function() { alert("El estudio fue asignado al usuario "+selectedPhysician);
+	    	  						location.href='study.html?s=' + studyID; },
+	    	  error: function(){ alert('Ocurrió un error al momento de Asignar el Estudio'); }
+	    	});
+	}
+	
+	else if(label.startsWith('Reasignar')) {
+		
+		$.ajax({
+	    	  type: "POST",
+	    	  url: 'rest/studies/reassign-studies',
+	    	  data: dto,
+	    	  success: function() { alert("El estudio fue reasignado al usuario "+selectedPhysician);
+	    	  						location.href='study.html?s=' + studyID; },
+	    	  error: function(){ alert('Ocurrió un error al momento de Asignar el Estudio'); }
+	    	});
+	}
+}
+
+function getAssignments ( studyID ){
+	
+	var login = null;
+	
+	$.getJSON("rest/studies/" + studyID + "/assign-studies")
+	.done( function(info) { 
+		
+		$("#spn_study-is-assigned").html('');
+		
+		if(info != null){
+				
+				$("#spn_study-is-assigned").html( '<span class="ui-icon black ui-icon-circle-check"></span>&nbsp;' +
+												  'Este estudio se asignó a: <b>' + info.firstName + ' ' + info.lastName +'</b>' );
+				
+				$('#lbl-assignments').text('Reasignar a: ');
+				
+				$('#btn-assign-study').button({
+					label: "Reasignar y Avisar",
+					icons: {"primary": "ui-icon-person",
+							"secondary": "ui-icon-mail-closed"}
+				});
+				
+				login = info.login;
+				
+		} else{ $("#spn_study-is-assigned").html('<span class="ui-icon black ui-icon-circle-close"></span>&nbsp;Este estudio no está asignado'); 
+			login = null; }
+		
+		chargeSelectMenu(login);
+		
+	}).fail( function() { $('#study-assignment').children().remove();
+	  					  $('#study-assignment').append('ERROR al cargar la Asignación'); } );
+	
+	$.get("rest/studies/" + studyID + "/assign-patient")
+	.done(function(d1,d2,d3){
+		if(d2 == 'nocontent'){
+			$("#spn_pat-is-user").html('<span class="ui-icon black ui-icon-circle-close"></span>&nbsp;Este paciente no tiene usuario');
+			$('#btn-assign-patient').css('display', 'inline-block');
+			
+		}else{
+			$("#spn_pat-is-user").html('<span class="ui-icon black ui-icon-circle-check"></span>&nbsp;Este paciente ya tiene usuario');
+			$('#btn-assign-patient').css('display', 'none');
+		}
+		
+	}).fail(function(){ $('#patient-assignment').children().remove();
+	  					$('#patient-assignment').append('ERROR al cargar la Asignación'); });
+	
+}
+
+function chargeSelectMenu(login){
+	
+	$.getJSON('rest/user/medicos')
+	.done(function(result) {
+	    	
+  		var physiciansSelect = $("#cmb-study-assignment");
+	    physiciansSelect.find('option').remove().end();			    		
+  		physiciansSelect.append('<option value="" selected="selected">Seleccione...</option>');
+	    
+  		if (result && result.length > 0) {
+	    	$.each(result, function(index, dr) {
+	    		
+	    		if(dr.login != login)
+			    	physiciansSelect.append('<option value="' + dr.login + '">' + dr.firstName + ' ' + dr.lastName + '</option>');
+		    });		
+	    }						  	
+	    
+  		physiciansSelect.selectmenu();
+  		
+	}).fail(function() { $('#study-assignment').children().remove();
+	  					 $('#study-assignment').append('ERROR al cargar la Asignación'); });
+}
+
+function showPatientAssignment( studyID ){
+	
+	$('#email-data').css('display', 'inline-block');
+	$('#btn_asgn-cancel').css('display', 'inline-block');
+	
+	$('#btn-assign-patient').button({
+		label: "Confirmar",
+		icons: {"primary": "ui-icon-check"}
+	
+	});
+}
+
+function assignPatient( elem, studyID ){
+	
+	var Abutton = $(elem);
+	var label = Abutton.button('option', 'label');
+	
+	if(label.startsWith('Confirmar')){
+	
+		var value = $('#txt_pat-mail').val();
+		
+		if(value == ''){
+			alert('Ingrese la dirección de correo del paciente');
+			return;
+		}
+		
+		if(confirm('¿Confirma la asignación?')){
+			
+			$.post('rest/studies/assign-patient', 'studyID='+studyID + '&email='+value)
+			.done(function(){
+				alert('El paciente ha sido asignado al sistema');
+				location.href='study.html?s=' + studyID;
+				
+			}).fail(function(){
+				alert('Ocurrió un error al momento de Asignar el paciente. Inténtelo nuevamente');
+			});
+		}
+		
+	}else showPatientAssignment();
+}
+
+function cancelAssignment( studyID ){
+	
+	$('#email-data').css('display', 'none');
+	$('#btn_asgn-cancel').css('display', 'none');
+	
+	$('#btn-assign-patient').button({
+		label: "Asignar al Paciente",
+		icons: {"primary": "ui-icon-pin-s"}
+	
+	});
+}
+
+
+/************************************************* INCIDENCIAS ********************************************************/
+
+function getIncidences( studyID ) {
+	
+	$.getJSON("rest/studies/" + studyID + '/incidences')
+	.done( function(data) {
+		
+		var mensaje = '';
+		
+		if(data && data.length>0){
+			$.each(data, function(index, i) {
+
+				var Fmsj = i.fecha.substring(6,8) + "-" + i.fecha.substring(4,6) + "-" + i.fecha.substring(0,4) ;
+				var Hmsj = i.fecha.substring(9,17) ;
+				
+				if(i.incidencia == 2){
+
+					mensaje += '*** El siguiente mensaje ha sido marcado como URGENCIA ***\n\n\t';
+					mensaje += "El día "+Fmsj+" a las "+Hmsj+" hs el usuario "+i.usuario+" escribió:\n\n\t\t" + i.mensaje + "\n\n\n";
+					
+					if(i.refInc == 0) {
+						$('#study-incidences-unsolved').css('display', 'block');
+						$('#study-incidences-unsolved').append('<span style="color:black; /*background:black;*/ font-size: 1.2em;"><b>#</b></span>');
+						$('#study-incidences-unsolved').append(' Marcada el día '+i.inicio.replace(/\//g, '-')+ ' por el usuario '+i.usuario+', ' + 
+																'para resolver el día '+i.resolucion.replace(/\//g, '-'));
+						$('#study-incidences-unsolved').append('&nbsp;&nbsp;&nbsp;<span id="'+Fmsj+'_'+Hmsj+'" class="urgency-span" onclick="selectMsj(this.id);"><b>VER</b></span>');
+						$('#study-incidences-unsolved').append('&nbsp;&nbsp;&nbsp;<span id="'+i.id+'" class="urgency-span-red" onclick="solveUrgency(this.id);"><b>RESOLVER</b></span>');
+						$('#study-incidences-unsolved').append('<br><br>');
+					}
+				} else if(i.incidencia == 1){
+					$('#study-incidences-solved').css('display', 'block');
+					
+					mensaje += '*** El siguiente mensaje ha sido marcado como RESOLUCIÓN ***\n\n\t';
+					mensaje += "El día "+Fmsj+" a las "+Hmsj+" hs el usuario "+i.usuario+" escribió:\n\n\t\t" + i.mensaje + "\n\n\n";
+					
+					var urgDate = i.inicio.substring(6,8) + "-" + i.inicio.substring(4,6) + "-" + i.inicio.substring(0,4) ;
+					urgDate += '_' + i.inicio.substring(9,17) ;
+					
+					$('#study-incidences-solved').append('<span style="color:black; /*background:black;*/ font-size: 1.2em;"><b>#</b></span>');
+					$('#study-incidences-solved').append('&nbsp;<span id="'+urgDate+'" class="urgency-span-red" onclick="selectMsj(this.id);"><b>URGENCIA</b></span>');
+					
+					$('#study-incidences-solved').append( ' Resuelta por el usuario '+i.usuario+' el día '+Fmsj+', pedida para el día '+i.resolucion.replace(/\//g, '-') );
+					
+					$('#study-incidences-solved').append('&nbsp;&nbsp;&nbsp;<span id="'+Fmsj+'_'+Hmsj+'" class="urgency-span" onclick="selectMsj(this.id);"><b>VER</b></span>');
+					$('#study-incidences-solved').append('<br><br>');
+					
+				} else mensaje += "El día "+Fmsj+" a las "+Hmsj+" hs el usuario "+i.usuario+" escribió:\n\n\t" + i.mensaje + "\n\n\n";
+			});
+			
+			$("#study-message-or-incident").text(mensaje);
+			$("#study-message-or-incident").attr( "readonly" , "readonly" );
+			$("#btn_add-message").show();
+			$("#btn_save-message").button('option', 'disabled', true);
+			$('#op-incidence').slideUp();
+			
+		} else {
+			$("#btn_add-message").hide();
+			$("#btn_save-message").button('option', 'disabled', false);
+			$('#op-incidence').slideDown();
+		}
+		
+		aux = $("#study-message-or-incident").val();
+		$("#study-message-incident-date").prop('disabled', true);
+		$("#study-message-incident-resolution-date").prop('disabled', true);
+		
+	}).fail(function(){ $('#tab_study-messages').children().remove();
+	  					$('#tab_study-messages').append('ERROR al cargar los Mensajes'); });
+}
+
+function selectMsj(elemID){
+	
+	var date = elemID.split('_');
+	var str = $("#study-message-or-incident").val();
+	var inicio = str.indexOf('El día ' + date[0] + ' a las ' + date[1] + ' hs');
+	var fin = inicio + 32;
+	var areat = document.getElementById('study-message-or-incident');
+	
+	if (areat.setSelectionRange) {
+        areat.focus();
+        areat.setSelectionRange(inicio, fin);
+    }
+    else if (areat.createTextRange) {
+        var range = areat.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character',fin);
+        range.moveStart('character', inicio);
+        range.select();
+    }
+	
+	var substring = areat.value.substr(0,inicio);
+	var array = substring.split('\n');
+	var pos = 0;
+	for(var i = 0; i < array.length -1 ; i++){
+		if(array[i] != '') pos += 20;
+		else pos += 5;
+	}
+	areat.scrollTop = pos;
+}
+
+function solveUrgency( urgID ){
+	
+	//alert(urgID);
+	$("#study-message-or-incident").val('');
+	$("#study-message-or-incident").removeAttr( "readonly" );
+	$("#btn_save-message").button('option', 'disabled', false);
+	$("#study-message-incident-date").prop('disabled', true);
+	$("#study-message-incident-resolution-date").prop('disabled', true);
+	$('#op-incidence').slideUp();
+	$("#btn_add-message").button({
+		label: 'Cancelar',
+		icons: {"primary": "ui-icon-close"}
+	});
+	$("#study-message-or-incident").attr( "placeholder" , "Deje un mensaje que describa la RESOLUCIÓN" );
+	
+	$('#study-message-is-incident').prop('checked', false);
+	$('input[name="ref-incidence"]').val(urgID);
+	$('input[name="resolution-message"]').val(1);
+	
+}
+
+
+
+function addMessage() {
+	
+	var label = $("#btn_add-message").button('option','label');
+	
+	if(label == 'Agregar Mensaje'){
+		
+		$("#study-message-or-incident").val('');
+		$("#study-message-or-incident").removeAttr( "readonly" );
+		$("#btn_save-message").button('option', 'disabled', false);
+		$("#study-message-incident-date").prop('disabled', true);
+		$("#study-message-incident-resolution-date").prop('disabled', true);
+		$('#op-incidence').slideDown();
+		$("#btn_add-message").button({
+			label: 'Cancelar',
+			icons: {"primary": "ui-icon-close"}
+		});
+		
+	} else if(label == 'Cancelar'){
+		$("#study-message-or-incident").val(aux);
+		$("#study-message-or-incident").attr( "readonly" , "readonly" );
+		$("#btn_save-message").button('option', 'disabled', true);
+		$("#study-message-incident-date").prop('disabled', true);
+		$("#study-message-incident-resolution-date").prop('disabled', true);
+		$('#op-incidence').slideUp();
+		$("#btn_add-message").button({
+			label: 'Agregar Mensaje',
+			icons: {"primary": "ui-icon-pencil"}
+		});
+		$('input[name="ref-incidence"]').val(0);
+		$('input[name="resolution-message"]').val(0);
+	}
+}
+
+function saveMessage( studyID ) {
+	
+	var msg = $("#study-message-or-incident").val();
+	var form = $('form[name="study-incidences"]');
+	
+	if( msg == '' ) {
+		alert( "Escriba un mensaje" );
+		return;
+	}
+	
+	if( $('#study-message-is-incident').prop('checked') ){
+		if($('#study-message-incident-date').val() == '' ){
+			alert('Indique fecha de la urgencia');
+			return;
+		}
+		if($('#study-message-incident-resolution-date').val() == '' ){
+			alert('Indique fecha para la resolución');
+			return;
+		}
+	}
+	
+	$.post("rest/studies/" + studyID + "/newmessage" , form.serialize())
+	.done( function() { location.href='study.html?s=' + studyID; } )
+	.fail( function() { alert('ocurrió un error al momento de guardar el mensaje'); } );
+		
+}
+
+
+/************************************************ INFORMES *********************************************************/
+
+
+function loadReport( studyID ){
+	
+	$.getJSON("rest/studies/" + studyID + "/report-info")
+	.done(function(info){
+		if(info && info != null){
+			$('#study-report-info').text(info.rs == 3 ? '[ Estado: INFORME FIRMADO ]' :
+										 info.rs == 2 ? '[ Estado: PENDIENTE DE FIRMA ]'
+													  : '[ Estado: SIN INFORMAR ]');
+			
+			$('#study-report-body').val(info.reportBody);
+			if(info.teachingFile) $('#study-report-is-teaching-file').click();
+			if(info.emergency) $('#study-report-is-emergency').click();
+			
+			if(info.rs == 3) {
+				$('#divTemplates').remove();
+				$('#study-report-body').prop('disabled', true);
+				$('#study-report-is-teaching-file').prop('disabled', true);
+				$('#study-report-is-emergency').prop('disabled', true);
+				$('.study-report-buttons').remove(); 
+				
+				var url = 'rest/reporting/reports/pdf/' + studyID;
+				$('#study-report-info').append("<a href='" + url + "'>" +
+						"<button id='btn_download-report' class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icons' role='button'>" +
+						"<span class='ui-button-icon-primary ui-icon ui-icon-circle-arrow-s'></span>" + 
+						"<span class='ui-button-text'>Descargar Informe</span>" +
+						"<span class='ui-button-icon-secondary ui-icon ui-icon-document'></span>" + 
+						"</button></a>");
+			}
+			
+			$('#study-report-info').append('<button id="btnPrevReport">Informes Previos</button>');
+			$('#btnPrevReport').button({icons:{'secondary':'ui-icon-note'}}).on('click', function(){getPrevReports(studyID);});
+			
+		}
+	}).fail(function(){
+		$('#tab_study-report').children().remove();
+		$('#tab_study-report').append('ERROR al cargar el Informe');
+	});
+	
+	
+	$.getJSON("rest/reporting/templates/methods")
+	.done(function(data){
+		if(data && data.length>0) {
+		
+		$.each(data, function(i, name) {
+		$("#TemplatesMenu").append( "<li id='"+name+"'><a>"+name+"</a></li>" );
+			
+		$.getJSON("rest/reporting/templates/methods/"+name)
+		.done(function(templ){
+			if(templ && templ.length>0){
+			
+			$("#"+name).append( "<ul id='ul_"+name+"' class='sub1'></ul>" );
+			$.each(templ, function(j, txt){
+						
+			$("#ul_"+name).append( "<li id='"+name+"_"+txt+"' onclick='writeTemplate(this,\""+studyID+"\");' >" +
+											"<a><b>"+txt.replace('.txt','')+"</b></a></li>" );
+			});
+			}}).fail(function(){
+				$('#divTemplates').children().remove();
+				$('#divTemplates').append('ERROR al cargar las plantillas');
+			});
+		});
+		
+	}}).fail(function(){
+		$('#divTemplates').children().remove();
+		$('#divTemplates').append('ERROR al cargar las plantillas');
+	});
+	
+	interval = window.setInterval(function(){
+		$('.onCharge').remove();
+		$('#jqxMenu').jqxMenu();
+		$('#jqxMenu').css('display','block');
+		clearInterval(interval);
+		
+	}, 5 * 1000);
+	
+}
+
+
+function writeTemplate( li , studyID ){
+	
+	var filesNames = li.id.split('_');
+	
+	var folder = filesNames[0];
+	var templ = filesNames[1].replace('.txt','');
+	
+	if ($('#study-report-body').val().trim())
+		if (!confirm('ATENCIÓN: Ya existe texto ingresado.\nSi continúa, el mismo será sobreescrito.\n' +
+					 ' ¿Confirma la utilización del protocolo base seleccionado?'))
+		return;
+	
+	$.getJSON("rest/reporting/templates/modalities/"+folder+"/"+templ)
+	.done(function(data){
+		var txt = $('#study-report-body');
+		txt.css('height', '250px');
+		txt.val(data.body);
+		txt.css('height', txt.prop('scrollHeight'));
+		
+	}).fail(function(){ alert('Ocurrió un error en la comunicación con el servidor. Por favor, reintente la operación realizada.'); });
+}
+
+
+function setMenu(){
+
+	var cuerpoWidth = $('#study-report').width();
+	var templ = $('#TemplatesContainer');
+	var menuWidth = 0;
+	
+	templ.css('width', cuerpoWidth-30 + 'px');
+	
+	$('#TemplatesMenu li').each(function(i, elem){
+		
+		menuWidth += $(elem).width() + 21;
+	});
+	
+	$('#jqxMenu').css('width', menuWidth + 'px');
+	
+if(!getF()){
+	
+	$('#jqxMenu').jqxMenu();
+	
+	$('#TemplatesMenu').show();
+	
+	clearInterval(Interval);
+}
+else{
+	
+	$('#jqxMenu').jqxMenu();
+	
+	$('#TemplatesMenu li').each(function(i, elem){
+		
+		$('#jqxMenu').jqxMenu('disable',elem.id,true);
+	});
+	
+	$('#TemplatesMenu').show();
+	
+	clearInterval(Interval);
+}
+	
+}
+
+function saveReport( studyID ) {
+	
+	var mensaje = '¿Confirma la grabación de los cambios introducidos?\nEl informe quedará marcado como "Preinformado",\npara permitir posteriores modificaciones.';
+	
+	if (!studyID)
+		return;
+	
+	if (!$('#study-report-body').val().trim()) alert('No hay texto ingresado');
+	
+	else{
+		
+	if($('#study-report-is-teaching-file').prop('checked')) mensaje += '\n\nATENCIÓN: ha marcado el estudio como TEACHING FILE.\n' +
+																		'Esta opción se confirma únicamente al FIRMAR el informe.\n';
+	if($('#study-report-is-emergency').prop('checked')) mensaje += '\n\nATENCIÓN: ha marcado el estudio como EMERGENCIA MÉDICA.\n' +
+																	'Esta opción se confirma únicamente al FIRMAR el informe.\n';
+	
+	if (!confirm(mensaje))
+		return;
+	
+	$('#finished-flag').val('false');
+	var form = $('form[name="report-data"]');
+	
+	$.post("rest/studies/" + studyID + "/report/body", form.serialize())
+	  .done(function(info) {
+		  location.href='study.html?s=' + studyID;	
+		  
+	  }).fail(function() { alert('Error al guardar el informe'); });
+	}
+}
+
+function finishReport ( studyID ) {
+	
+	if($('#study-report-multiple').val()==null)
+		$('#study-report-multiple').prop('selectedIndex','0');
+	
+	if (!studyID)
+		return;
+	
+	if (!$('#study-report-body').val().trim()) alert('No hay texto ingresado');
+	
+	else{
+	
+	if (!confirm('¿Confirma la finalización y cierre de este informe? No podrá volver a modificarlo una vez cerrado.'))
+		return;
+	
+	$('#finished-flag').val('true');
+	var form = $('form[name="report-data"]');
+	
+	$.post("rest/studies/" + studyID + "/report/body", form.serialize())
+	  .done(function(info) { 
+		  location.href='study.html?s=' + studyID;
+		  
+	  }).fail(function() {
+	    alert('Ocurrió un error en la comunicación con el servidor. ' + 
+	    	'Por favor, reintente la operación realizada.');
+	  });
+	}
+}
+
+/************************************************ LOG *********************************************************/
+
+function initLogTable(studyID){
+	
+	var columns = [
+					{ "title": "FECHA", "data": "date", "defaultContent": "", 
+						"class": "left", "width": "20%" },
+					{ "title": "USUARIO", "data": "user", "defaultContent": "", 
+						"class": "left", "width": "20%" },
+					{ "title": "ACCIÓN", "data": "action", "defaultContent": "", 
+						"class": "left", "width": "20%" },
+					{ "title": "PARÁMETROS", "data": "param", "defaultContent": "", 
+						"class": "left", "width": "20%" }
+				  ];
+	var columnDefs = [];				
+
+	$('#study-log-table').dataTable({
+		"data": [],
+		"order": [[ 0, "desc" ]],
+		"lengthMenu": [ 5, 10, 15, 20, 25, 30, 50, 75, 100 ],
+		"lengthChange": true,
+		"pageLength": 10,
+		"dom": 'rt<"clear">pl',
+		"pagingType": "full_numbers",
+		"columns": columns,					
+		"columnDefs": columnDefs,					
+		"language": {
+           "lengthMenu": "Mostrar _MENU_ datos por página",
+           "zeroRecords": "No se encontró información para mostrar con los criterios especificados.",
+           "info": "Mostrando página _PAGE_ de _PAGES_",
+           "infoEmpty": "Sin información para mostrar",
+           "infoFiltered": "(filtrados de un total de _MAX_ datos)",
+		    "emptyTable":     "Sin información para mostrar",
+		    "infoPostFix":    "",
+		    "thousands":      ".",
+		    "loadingRecords": "Cargando...",
+		    "processing":     "Procesando...",
+		    "search":         "Buscar:",
+		    "paginate": {
+		        "first":      "Primera",
+		        "last":       "Última",
+		        "next":       "Siguiente",
+		        "previous":   "Anterior"
+		    },
+		    "aria": {
+		        "sortAscending":  ": Click para ordenar ascendentemente",
+		        "sortDescending": ": Click para ordenar descendentemente"
+		    }
+		},
+		"createdRow": function ( row, data, index ) {
+           
+               $('td', row).css('background' , 'white');
+               $('td', row).css('border-left' , 'solid 1px black');
+               $('td', row).css('border-right' , 'solid 1px black');
+           
+       }
+	});
+	
+	loadLogTable(studyID);
+}
+
+function loadLogTable(studyID){
+	$.getJSON('rest/studies/' + studyID + '/study-log')
+	.done(function(data) {
+		
+		var dt = $('#study-log-table').dataTable();
+		dt.fnClearTable();
+	  	if (data && data.length > 0) 
+	  		dt.fnAddData(data);
+	  	
+	  	center_body($('#tab_study-log'));
+	  	
+	}).fail(function(){ $('#tab_study-log').children().remove();
+	  					$('#tab_study-log').append('ERROR al cargar el Logger'); });
+}
+
+
+function getPrevReports(studyID){
+	
+	var url = 'study-previous-reports.html?s=' + studyID ;
+	var height = window.innerHeight / 2;
+	var width = height;
+
+	$('#dynamicModalDialogIframe').css('width', '99.9%');
+	$('#dynamicModalDialogIframe').css('height', '98.5%');
+	
+	$("#dynamicModalDialog").dialog({
+		height: height,
+		width: width,
+		closeOnEscape: true,
+		closeText: "Cerrar",
+		modal: true,
+		title: 'INFORMES PREVIOS - Estudio ' + studyID,
+		open: function(ev, ui) {					        	
+			$('#dynamicModalDialogIframe').attr('src', url);
+		},
+		close: function(ev, ui) {
+			$('#dynamicModalDialogIframe').attr('src', 'about:blank');
+			//$("#dynamicModalDialog").remove();
+		}
+	});	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * 		CODIGO QR ESTUDIO
+ */
+	function get_study_qr_code( studyID ){
+		/*
+		var url = 'study-qr-code.html?s=' + studyID ;
+		var height = window.innerHeight / 2;
+		var width = height;
+
+		$('#dynamicModalDialogIframe').css('width', '99.9%');
+		$('#dynamicModalDialogIframe').css('height', '98.5%');
+		
+		$("#dynamicModalDialog").dialog({
+			height: height,
+			width: width,
+			closeOnEscape: true,
+			closeText: "Cerrar",
+			modal: true,
+			title: 'CÓDIGO QR - Estudio ' + studyID,
+			open: function(ev, ui) {					        	
+				$('#dynamicModalDialogIframe').attr('src', url);
+			},
+			close: function(ev, ui) {
+				$('#dynamicModalDialogIframe').attr('src', 'about:blank');
+			}
+		});*/
+		$('#tab_study-files').append('<div id="qr-code" style="width:250px; height:250px; margin-top:15px;"></div>');
+		
+		
+		var node = document.getElementById("qr-code");
+		while(node.firstChild)
+		    node.removeChild(node.firstChild);
+		
+		var qrcode = new QRCode(document.getElementById("qr-code"), {
+			width : 300,
+			height : 300
+		});
+		
+        	qrcode.makeCode(studyID + '|nahuellopez');
+        	
+    		var dialogHeight = 380;
+    		var dialogWidth = 330;
+    		var hideEffect = { effect: "fade", duration: 400 };
+    		
+       		$("#qr-code").dialog({
+       			height: dialogHeight,
+       			width: dialogWidth,
+       			closeOnEscape: true,
+       			closeText: "Cerrar",
+       			modal: true,
+       			title: "Código QR",
+       			hide: hideEffect,
+       			clickOutside: false,
+       			open: function(ev, ui) {					        	
+    				$('#qr-code.ui-widget-content').css('background', 'white');
+    			},
+       			close: function(ev, ui) {
+    				$('#qr-code').remove();
+    			}
+       		});  						        			
+        
+	}
+
+
+
+
+
+
+
+

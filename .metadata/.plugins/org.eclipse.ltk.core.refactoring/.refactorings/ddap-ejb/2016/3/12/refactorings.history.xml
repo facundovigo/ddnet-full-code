@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;PracticasSearchFilter.java&apos; to &apos;ddap-ejb/src/main/java/ddap.ejb&apos;&#x0A;- Original project: &apos;ddap-ejb&apos;&#x0A;- Destination element: &apos;ddap-ejb/src/main/java/ddap.ejb&apos;&#x0A;- Original element: &apos;ddap.ejb.PracticasSearchFilter.java&apos;" description="Copy compilation unit" destination="/src\/main\/java&lt;ddap.ejb" element1="/src\/main\/java&lt;ddap.ejb{PracticasSearchFilter.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1458070171655" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,74 @@
+	
+	body {
+		background: lightslategray;
+		font-family:Arial,sans-serif;
+		font-weight: normal!important;
+		font-size: 9pt;
+		min-width:1000px!important;
+	}
+	
+	div#ddap-loading-message{position:absolute;top:30%;left:45%;background:#000;color:#778899;font-size:11pt;width:200px;height:90px;padding-top:0px;display:none;}
+	
+	.ui-datepicker{ font-size: 0.7em; }
+	.ui-selectmenu-button{
+		top: 7px;
+		font-size: .8em;
+	}
+	.ui-tooltip{ font-size: 8pt						!important; }
+						
+	.ui-tabs.ui-widget-content {
+		background: slategray;
+		overflow: auto;
+	}
+	
+	input[type=text] {
+		background-color: #fff;
+		border: double black 0.25em;
+		border-radius: 5px;
+		color: black;
+		text-align: center;
+		font-style: italic;
+	}
+	
+	input[type=text]:focus {
+		background-color: #fff;
+		border: double black 0.25em;
+		border-radius: 5px;
+	}
+	
+	input[type="text"]:disabled {
+		background: #ddd;
+		color: #444;
+	}
+	
+	::-webkit-input-placeholder { color: lightslategray; } 		
+	:-moz-placeholder { color: lightslategray; }					
+	::-moz-placeholder { color: lightslategray; } 				
+	:-ms-input-placeholder { color: lightslategray; } 			
+	
+	.bottom-part {
+		margin-top: 8px;
+		font-size: 9pt;
+	}
+	
+	.bottom-part a{
+		color: blue;
+	}
+	
+	
+	div#dialog-message{
+		max-width: 500px						!important;
+		max-height: 300px						!important;
+	}
+	
+	
+	
+	div#progressbar{
+		 height: 15px;		
+	}
+	
+	div#dynamicModalDialog{overflow:hidden;}
+	
+	.win .ui-datepicker-calendar{font-size:.8em!important;}
+	.win span.only-for-linux{display:none;}
+	

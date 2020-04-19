@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>wadoTest</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description>get studies info</description>
+    <display-name>Study</display-name>
+    <servlet-name>Study</servlet-name>
+    <servlet-class>app.servlets.Study</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Study</servlet-name>
+    <url-pattern>/studies</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Series</display-name>
+    <servlet-name>Series</servlet-name>
+    <servlet-class>app.servlets.Series</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Series</servlet-name>
+    <url-pattern>/series</url-pattern>
+  </servlet-mapping>
+</web-app>

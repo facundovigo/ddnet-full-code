@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="../css/alta-osocial.css">
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		var isNew = $.url().param('new') == 'true';
+		
+		$('#btnPlanes').button({
+			label: 'Planes y Categorías',
+			icons: {'primary':'ui-icon-plus'}
+		});
+		$('#btnAcuerdos').button({
+			label: 'Acuerdos y Convenios',
+			icons: {'primary':'ui-icon-plus'}
+		});
+		$('#btnCtaCorr').button({
+			label: 'Cuenta Corriente',
+			icons: {'primary':'ui-icon-plus'}
+		});
+		
+		$('#btnConfirm').button({
+			label: 'Agregar',
+			icons: {'primary':'ui-icon-circle-check'}
+		})
+		.on('click', function(){
+			$.post('rest/osocial/new', $('#frmOsocial').serialize())
+			.done(function(){
+				alert('Se ha creado una nueva Obra Social');
+				
+				$('input[type="text"]').val('');
+				
+			}).fail(function(){alert('Ocurrió un error al momento de crear la Obra Social');});
+		});
+		$('#btnCancel').button({
+			label: 'Cancelar',
+			icons: {'primary':'ui-icon-circle-close'}
+		})
+		.on('click', function(){
+			window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+			window.parent.$("#dynamicModalDialog").dialog("close");
+		});
+	});
+	
+	
+</script>
+
+</head>
+
+<body>
+
+<div class="cuerpo" align="center">
+
+	<div class="panel1">
+	
+	<form id="frmOsocial">
+		
+		<label class="lblForText left">Nombre:..............</label><input type="text" name="nombre">
+		<label class="lblForText left">Domicilio:...........</label><input type="text" name="domicilio">
+		<label class="lblForText left">Localidad:...........</label><input type="text" name="localidad">
+		<label class="lblForText left">Provincia:...........</label><input type="text" name="provincia">
+		<label class="lblForText left">Código Postal:.......</label><input type="text" name="cp">
+		<label class="lblForText left">Condición de I.V.A.:</label><input type="text" name="iva">
+		<label class="lblForText left">C.U.I.T.:............</label><input type="text" name="cuit">
+		<label class="lblForText left">Forma de Pago:.......</label><input type="text" name="pago">
+	</form>
+	</div>
+	<div class="panel2">
+	
+		<button id="btnPlanes"></button>
+		<button id="btnAcuerdos"></button>
+		<button id="btnCtaCorr"></button>
+	</div>
+	<div class="panel3">
+	
+		<button id="btnConfirm"></button>
+		<button id="btnCancel"></button>
+	</div>
+
+</div>
+
+</body>
+
+</html>

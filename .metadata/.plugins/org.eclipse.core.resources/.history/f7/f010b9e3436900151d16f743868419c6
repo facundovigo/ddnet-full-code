@@ -1,0 +1,12 @@
+package app_funciones;
+
+import app_objetos.*;
+
+public class Init {
+
+	public static void main(String[] args) {
+		
+		new app_Frame();
+	}
+
+}

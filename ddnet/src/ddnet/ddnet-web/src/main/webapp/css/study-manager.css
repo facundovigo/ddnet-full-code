@@ -1,0 +1,135 @@
+/* Study Manager main container */
+
+/***	CSS Browser Selector
+
+    ie - Internet Explorer (All versions)
+    ie8 - Internet Explorer 8.x
+    ie7 - Internet Explorer 7.x
+    ie6 - Internet Explorer 6.x
+    ie5 - Internet Explorer 5.x
+    gecko - Mozilla, Firefox (all versions), Camino
+    ff2 - Firefox 2
+    ff3 - Firefox 3
+    ff3_5 - Firefox 3.5
+    ff3_6 - Firefox 3.6 new
+    opera - Opera (All versions)
+    opera8 - Opera 8.x
+    opera9 - Opera 9.x
+    opera10 - Opera 10.x
+    konqueror - Konqueror
+    webkit or safari - Safari, NetNewsWire, OmniWeb, Shiira, Google Chrome
+    safari3 - Safari 3.x
+    chrome - Google Chrome
+    iron - SRWare Iron
+
+	
+    win - Microsoft Windows (all versions)
+    vista - Microsoft Windows Vista new
+    linux - Linux (x11 and linux)
+    mac - Mac OS
+    freebsd - FreeBSD
+    ipod - iPod Touch
+    iphone - iPhone
+    ipad - iPad new
+    webtv - WebTV
+    j2me - J2ME Devices (ex: Opera mini) changed from mobile to j2me
+    blackberry - BlackBerry new
+    android - Google Android new
+    mobile - All mobile devices new
+	
+***/
+
+	div.form-holder{background:#708090;border:solid 1px #9a9a9a;width:auto;padding:10px;}
+	div#filterToggle{margin-top:-2px;padding:1px 0px;background:#000;border-bottom-left-radius:2em;border-bottom-right-radius:2em;cursor:pointer;border:solid 1px #9a9a9a;}
+	div#filterToggle:hover{border:solid 1px #0972a5;}
+	form#studySearchFilter{width:90%;color:#dcdcdc;padding-bottom:7px;overflow-x:auto;}
+	form#studySearchFilter input[type=text]{text-align:center;}
+	form#studySearchFilter button{min-width:100px;margin-top:3px;}
+
+	td.filter-align-center{width:420px;}
+	label.study-date-type{display:inline-block;}
+	label.study-date-type input{margin-left:15px;margin-right:10px;}
+	label.study-date-type.selected{font-weight:bold;text-shadow:2px 2px #000;}
+	input.between-date-text{width:90px;}
+	input.patient-filter-text{font-style:italic;width:145px;}
+	select#formModalities{width:65px;height:24px;background:#dcdcdc;border-radius:2.5px;}
+	button#formModalities_ms{width:65px!important;height:25px!important;padding-top:5px!important;font-size:.9em!important;vertical-align:1px!important;text-align:center!important;}
+	button#formModalities_ms{color:#000!important;background:#dcdcdc!important;border-radius:2.5px!important;}
+	.ui-multiselect-menu.ui-widget-content{width:170px!important;}
+	
+	td.filter-align-left{width:285px!important;vertical-align:top;}
+	span.filter-type-selector{cursor:pointer;color:#000;font-size:0.9em;}
+	span.filter-type-selector.current{background:#000;color:#0972a5;font-weight:bold;padding:2px 4px;}
+	span.filter-type-selector:not(.current):hover{text-shadow:2px 2px #0972a5;}
+	select#formInstitutions{width:203px;}
+	select#formUsers{width:200px;}
+	
+	td.filter-align-right{width:280px;vertical-align:top;}
+	label.right-filter{display:inline-block;width:117px;}
+	label.right-filter input{vertical-align:middle;}
+	select.another-filter{width:195px;}
+	label.another-filter-text{display:inline-block;margin-top:4px;}
+	
+	div.study-list-table{width:100%;overflow-y:hidden;}
+	div#study-list_wrapper{margin-top:18px;width:100%;font-size:9pt!important;}
+	div.dataTables_scroll{border:none!important;}
+	div.dataTables_scrollBody{border:none!important;}
+	table#study-list{width:95%!important;}
+	.win table#study-list{font-size:.9em!important;}
+	div#study-list_wrapper thead{background:#000!important;color:#dcdcdc!important;height:20px!important;}
+	div#study-list_wrapper th{text-align:center!important;}
+	div#study-list_wrapper tr.even:not(.selected){background:#dcdcdc!important;}
+	div#study-list_wrapper tr.odd:not(.selected){background:#cbcbcb!important;}
+	div#study-list_wrapper tr.even.DTTT_selected,div#study-list_wrapper tr.even.selected td.sorting_1,div#study-list_wrapper tr.even.selected td.sorting_2,div#study-list_wrapper tr.even.selected td.sorting_3{background:#0A80BC!important;}
+	div#study-list_wrapper tr.odd.DTTT_selected,div#study-list_wrapper tr.odd.selected td.sorting_1,div#study-list_wrapper tr.odd.selected td.sorting_2,div#study-list_wrapper tr.odd.selected td.sorting_3{background:#0972a5!important;}
+	div#study-list_wrapper td.open-study{cursor:pointer!important;}
+	div#study-list_wrapper tr:not(:first-child) td{border-top:solid 1pt #000!important;}
+	div#study-list_wrapper td:not(:first-child){border-left:solid 2px #000!important;}
+	div#study-list_wrapper .dataTables_paginate{font-size:0.9em!important;float:left!important;margin-top:6px!important;}
+	div#study-list_wrapper .dataTables_length{margin-top:14px!important;color:#000!important;float:right!important;margin-right:40px!important;}
+	div#study-list_wrapper .dataTables_length select{background:#dcdcdc!important;border-radius:2.5px!important;}
+	div#study-list_wrapper div#studyListInfo{margin-bottom:7px!important;float:left!important;margin-left:40px;margin-top:8px;}
+	div#study-list_wrapper a.paginate_button.current{border-radius:15px!important;background:#dcdcdc!important;}
+	div#study-list_wrapper a.paginate_button:hover{border-radius:15px!important;}
+	div#study-list_wrapper div.DTTT_container{margin-right:40px!important;margin-left:10px!important;}
+	div#study-list_wrapper img{width:15px!important;height:15px!important;}
+	div#study-list_wrapper img.datable-row-icon{cursor:pointer;}
+	.gecko div#study-list_wrapper thead{height:0px!important;}
+	span.urgent-study{color:#f00;}
+	span.priority-study{color:#f90;}
+	div.view-study-notes{cursor:pointer;}
+	
+	div.study-actions-buttons{position:absolute;height:43px;border-top:dotted 1px #9a9a9a;padding-top:10px;overflow-y:hidden;}
+	img#mainLogo{width:180px;height:40px;display:inline-block;}
+	div.study-actions-buttons button{display:inline-block;top:-15px;}
+	div.study-actions-buttons select{position:relative;top:-15px;background:#dcdcdc;border-radius:2.5px;height:22px;}
+	select#studyAssignTarget{width:142px;}
+	
+	
+	
+	img.visualization{width:120px!important;height:75px!important;border:solid 2px #0972a5;cursor:pointer;}
+	span.simpleView{font-size:9pt;margin-right:55px;}
+	span.intermedView{font-size:9pt;margin-left:40px;}
+	/*div#visualDialog{width:500px!important;}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

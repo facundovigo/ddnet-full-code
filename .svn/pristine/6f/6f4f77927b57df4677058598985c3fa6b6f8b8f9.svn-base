@@ -1,0 +1,8 @@
+package ddnet.web.other;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet({"/authentication-servlet/login", "/authentication-servlet/logout"})
+public class UtilsServlet extends HttpServlet {
+}

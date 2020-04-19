@@ -1,0 +1,44 @@
+package ddnet.web.security;
+
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+import ddnet.ejb.UserManagerLocal;
+import ddnet.ejb.entities.User;
+
+
+@Stateless
+@LocalBean
+public class RestorePassword {
+	@EJB
+	private UserManagerLocal userManager;
+	
+	/*public int usuarioExiste(String login){
+		
+		int existe = 0;
+		
+		String str = userManager.getByLogin(login).getLogin();
+		
+		//for(User u : userManager.getAll())
+			if("admin".equals(login)) existe = 1;
+		
+		return existe;
+	}*/
+	public boolean login(String login) {
+		
+		User user = userManager.getByLogin(login);
+		if (user != null) {
+			if (user.isDeleted()) {
+				return false;
+			}
+			if (user.isPasswordExpired()) {
+				return false;
+			}
+						
+			return true;
+		} else {
+			return false;
+		}
+	}
+}

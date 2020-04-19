@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Diagn&oacute;stico Digital Alta Pacientes</title>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/jquery.fileDownload.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<script type="text/javascript" src="../js/practicaxpaciente.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css">
+	<link rel="stylesheet" type="text/css" href="../css/practicaxpaciente.css">
+
+</head>
+
+<body>
+	
+	<div class="the-top" align="center"> SECCIÓN PR&Aacute;CTICAS POR PACIENTE </div>
+	
+	<div align="center">
+	<div class="filter" align="center">
+		<br>
+		<form id="search-practice-by-patient" class="practicaxpaciente">
+			
+			<label>Fecha : <select id="date-type" name="date-type">
+							<option value="1">Hoy</option>
+							<option value="2">Ayer</option>
+							<option value="3">&Uacute;ltima Semana</option>
+							<option value="4">&Uacute;ltimo Mes</option>
+							<option value="5">Todos</option>
+							<option value="6">Desde-Hasta</option>
+						   </select>
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label>Desde : 
+					<input type="text" class="choose-date" id="between-date-from" readonly="readonly" disabled="disabled">
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label>Hasta : 
+					<input type="text" class="choose-date" id="between-date-to" readonly="readonly" disabled="disabled">
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label>Estado : <select id="practice-state" name="practice-state">
+								<option value="">Todos</option>
+								<option value="registered">En Espera</option>
+								<option value="started">Ingres&oacute;</option>
+								<option value="finished">Termin&oacute;</option>
+								<option value="cancelled">Cancelado</option>
+						   </select>
+			</label>
+			<br><br>
+			<label>Acc.Number : 
+					<input type="text" id="accessionNumber" name="accession-number" title="Solamente números">
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label>Paciente : 
+					<input type="text" id="patient-filter" name="patient-filter" placeholder="Nombre o ID">
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label>Sexo : 
+					<select id="pat-sex" name="pat-sex">
+						<option value="">Ambos</option>
+						<option value="F">F</option>
+						<option value="M">M</option>
+						<option value="O">O</option>
+					</select>
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<button type="button" id="do-search"></button>
+			
+			<input type="hidden" name="between-date-from">
+			<input type="hidden" name="between-date-to">
+		</form>
+		
+		<br>
+	</div>
+	</div>
+	<br>
+	<div class="for-the-table" align="center">
+		<table id="pp-data-list"></table>
+	</div>
+</body>
+
+</html>

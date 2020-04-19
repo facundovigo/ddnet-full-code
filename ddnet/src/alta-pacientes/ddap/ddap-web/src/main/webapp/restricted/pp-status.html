@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+
+<style type="text/css">
+	body {
+		background: lightslategray;
+		font-family:Arial,sans-serif;
+	}
+	div#texto {
+		font-size: 10pt;
+		text-align: center;
+		line-height: 25px;
+	}
+	button.ui-button {
+		font-size: 9pt;
+		width: 120px;
+	}
+	
+</style>
+
+<script type="text/javascript">
+	
+	var code = null,
+		status = null;
+	
+	$(document).ready(function(){
+		window.parent.$('#dynamicModalDialogIframe').css('height', '97%');
+		
+		code = $.url().param('code');
+		status = $.url().param('status');
+		
+		$('button#ingreso').button({
+			label: 'Ya ingresó',
+			icons: {'primary': 'ui-icon-circle-check'}
+		
+		}).on('click', patient_is_inside)
+		  .css('display','none');
+		
+		$('button#cancelar').button({
+			label: 'Cancelar',
+			icons: {'primary': 'ui-icon-circle-close'}
+		
+		}).on('click', patient_had_cancelled)
+		  .css('display','none');
+		
+		$('div#texto').children().remove();
+		
+		if( code && code != null ) {
+			$.ajax({
+				method: 'GET',
+				dataType: 'json',
+				url: 'rest/practicaxpaciente/' + code
+			})
+			.done(function(data){
+				if (data && data != null) {
+					switch(status){
+						case '1': waiting_option(data); break;
+						case '2': inside_option(data); break;
+						case '3': outside_option(data); break;
+						case '4': cancelled_option(data); break;
+						default: close_modal(); break;
+					}
+					
+				} else {
+					window.parent.$alert('No hubo resultado. Intente nuevamente.');
+					close_modal();
+				}
+				
+			}).fail(function(){
+				window.parent.$alert('ERROR. Falló la búsqueda de Práctica por Paciente');
+				close_modal();
+			});
+
+		} else { close_modal(); }
+	
+	});
+	
+	function waiting_option( pp ){
+		$('div#texto').html(
+			'El paciente <b>'+pp.lastName+', '+pp.firstName+'</b> (<b>'+pp.docType+' '+pp.patID+'</b>) se encuentra <b>EN ESPERA</b>'		+
+			'<br>para realizarse una práctica de <b>' +pp.pract+ '</b>'																		+
+			'<br>registrada el día <b>'+pp.date+'</b> a las <b>'+pp.time+'</b> hs.'
+		);
+		$('button#ingreso').css('display','inline-block');
+	}
+	function inside_option( pp ){
+		$('div#texto').html(
+			'El paciente <b>'+pp.lastName+', '+pp.firstName+'</b> (<b>'+pp.docType+' '+pp.patID+'</b>)  <b>HA INGRESADO</b>'		+
+			'<br>para realizarse una práctica de <b>' +pp.pract+ '</b>'																+
+			'<br>el día <b>'+pp.dateIN+'</b> a las <b>'+pp.timeIN+'</b> hs.'
+		);
+		$('button#cancelar').css('display','inline-block');
+	}
+	function outside_option( pp ){
+		$('div#texto').html(
+			'El paciente <b>'+pp.lastName+', '+pp.firstName+'</b> (<b>'+pp.docType+' '+pp.patID+'</b>) <b>HA FINALIZADO</b>'		+
+			'<br>la práctica <b>' +pp.pract+ '</b>'																					+
+			'<br>el día <b>'+pp.dateOUT+'</b> a las <b>'+pp.timeOUT+'</b> hs.'
+		);
+	}
+	function cancelled_option( pp ){
+		$('div#texto').html(
+			'Se ha <b>CANCELADO</b> la práctica <b>' +pp.pract+ '</b>'											+
+			'<br>del paciente <b>'+pp.lastName+', '+pp.firstName+'</b> (<b>'+pp.docType+' '+pp.patID+'</b>)'	+
+			'<br>el día <b>'+pp.dateCNLD+'</b> a las <b>'+pp.timeCNLD+'</b> hs.'
+		);
+	}
+	
+	
+	function patient_is_inside(){
+		$.ajax({
+			method: 'POST',
+			url: 'rest/practicaxpaciente/' + code + '/ingreso'
+		}).done(function(){
+			window.parent.$("#dynamicModalDialog").bind('dialogclose',window.parent.do_the_search)
+			close_modal();
+		
+		}).fail(function(){
+			window.parent.$alert('ERROR. No se modificó el estado. Intente nuevamente.'); 
+		});
+	}
+	
+	function patient_had_cancelled(){
+		$.ajax({
+			method: 'POST',
+			url: 'rest/practicaxpaciente/' + code + '/cancelado'
+		})
+		.done(function(){
+			window.parent.$("#dynamicModalDialog").bind('dialogclose',window.parent.do_the_search)
+			close_modal();
+		})
+		.fail(function(){
+			window.parent.$alert('ERROR. No se modificó el estado. Intente nuevamente.'); 
+		});
+	}
+	
+	function close_modal(){
+		window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+		window.parent.$("#dynamicModalDialog").dialog("close");
+	}
+	
+</script>
+
+</head>
+<body>
+<br>
+	<div id="texto"></div><br><br>
+	<div class="for-buttons" align="center">
+		<button id="ingreso"></button><button id="cancelar"></button>
+	</div>
+
+</body>
+</html>

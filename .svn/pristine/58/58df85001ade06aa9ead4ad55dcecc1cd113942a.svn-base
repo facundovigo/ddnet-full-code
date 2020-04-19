@@ -1,0 +1,335 @@
+/* Manage study */
+body {
+	font-family: Arial, sans-serif !important;
+	font-size: 8.5pt;
+	overflow: auto;
+}
+
+input[type=text]{
+	
+	width: 200px;
+	background-color: #fff;
+	border: double #aaa 0.25em;
+	border-radius: 5px;
+	text-align: center	!important;
+}
+input[type="text"]:disabled {
+	background: #ddd;
+	color: #444;
+}
+
+/*	PARTE ALTA DE LA PÁGINA 	*/
+
+#study-header{
+	height: 100px;
+	border-bottom: dotted 1px black;
+}
+
+/*	LOGO INSTITUCION	*/
+
+#study-header-institution-logo {
+	position: absolute;
+	top: 5px;
+	float: left;
+	display: inline-block;
+}
+
+#institution-logo {
+	width: 220px;
+	height: 80px;
+}
+
+/*	DATOS ESTUDIO - PACIENTE 	*/
+
+#study-header-items{
+	position: absolute;
+	top: 5px;
+	margin-left: 230px;
+	display: inline-block;
+	line-height: 20px;
+}
+
+table{
+	width: 550px;
+}
+
+.study-header-item-value {
+	font-weight: bold;
+}
+
+/*	PARTE CENTRAL DE LA PÁGINA 	*/
+
+#study-body{
+	position: absolute;
+	top: 100px;
+	width: 99%;
+}
+
+.ui-tabs.ui-widget-content {
+	background: slategray;
+	overflow: auto;
+}
+
+.pestaña{
+	position: absolute;
+	margin-top: 30px;
+}
+
+/*	VISUALIZAR - DESCARGAR	*/
+
+.for-radio{
+	font-weight: 700;
+}
+
+.study-series-buttons{
+	text-align: center;
+}
+
+/*	DATOS CLÍNICOS 		*/
+
+#tab_study-clinical-data{
+	width: 650px;
+}
+
+.study-urgency-label span{
+	display: inline-block;
+	font-weight: bolder;
+	padding: 2px;
+	cursor: pointer;
+}
+
+.study-textarea {
+	width: 99%;
+	height: 120px;
+	padding: 2px;
+	resize: vertical;
+	border: solid 1px black;
+}
+
+/*	ARCHIVOS 	*/
+
+#study-files-table_wrapper {
+	font-size: 8.75pt;
+	width: 650px;
+}
+
+#study-files-table_wrapper th {
+	text-align: left;
+	padding: 5px 18px 5px 5px;
+}
+
+#study-files-table_wrapper td {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#study-files-table_filter{
+	margin-bottom: 10px;
+}
+
+#study-files-table_wrapper a{
+	color: black;
+	margin-left: 3px;
+	text-decoration: none;
+}
+
+#study-files-table_wrapper a img{
+	width: 15px;
+	height: 15px;
+}
+
+/*	ASIGNAR 	*/
+
+#tab_study-assignments{
+	width: 500px;
+	line-height: 30px;
+}
+
+#study-assignment{
+	text-align: center;
+}
+#patient-assignment{
+	text-align: center;
+}
+
+#email-data{
+	display: none;
+}
+#btn_asgn-cancel{
+	display: none;
+}
+
+#spn_study-is-assigned{
+	font-size: 1.1em;
+	font-style: italic;
+}
+#spn_pat-is-user{
+	font-size: 1.1em;
+	font-style: italic;
+}
+
+#cmb-study-assignment{
+	width: 150px;
+}
+
+.ui-selectmenu-button.ui-widget{
+	top: 9px;
+	font-size: 0.9em;
+}
+
+/*	MENSAJES	*/
+
+
+#tab_study-messages{
+	width: 700px;
+}
+
+#study-message-incident-date {
+	width: 75px;
+	text-align: center;
+}
+
+#study-message-incident-resolution-date {
+	width: 75px;
+	text-align: center;
+}
+
+.ui-datepicker{
+	font-size: 1em;
+}
+
+.urgency-label{
+	padding: 2px;
+	color: red;
+	font-weight: bolder;
+	background: #333;
+	cursor: pointer;
+}
+
+#op-incidence{
+	display: none;
+}
+
+#study-incidences-unsolved{
+	display: none;
+}
+#study-incidences-solved{
+	display: none;	
+}
+
+.urgency-span{
+	cursor: pointer;
+	color: black;
+	background: white;
+	padding: 2px;
+	border-radius: 5px;
+}
+.urgency-span-red{
+	cursor: pointer;
+	color: red;
+	background: white;
+	padding: 2px;
+	border-radius: 5px;
+}
+
+
+/*	INFORMES		*/
+
+#tab_study-report{
+	width: 700px;
+}
+
+#divTemplates{
+	
+	width: 99%;
+	/*border: solid 1px black;*/
+}
+
+#tab_study-report ul li a{
+	color: black	!important;
+}
+
+.jqx-widget-content.jqx-menu-dropdown {
+	width: 300px;
+	font-size: 0.95em;
+}
+
+.jqx-item.jqx-menu-item {
+	width: 300px;
+	font-size: 0.95em;
+}
+
+#jqxMenu{
+	display: none;
+}
+
+#study-report-body {
+	width: 98%;
+	height: 250px;
+	padding: 2px;
+	resize: vertical;
+	border: solid 1px black;
+}
+
+#lbl_teaching-file{
+	color: black;
+	padding: 2px;
+	cursor: pointer;
+	border-radius: 2px;
+}
+
+#lbl_emergency{
+	color: red;
+	padding: 2px;
+	cursor: pointer;
+	border-radius: 2px;
+}
+
+#btn_download-report{
+	margin-left: 7px;
+}
+#btnPrevReport{
+	margin-left: 7px;
+}
+
+#study-report-info{
+	text-align: center;
+	color: black;	
+}
+
+/*	LOG 	*/
+
+.study-log{
+	width: 800px;
+}
+
+#study-log-table_length{
+	
+	float: right;
+	margin-top: 10px;
+}
+
+.study-log-buttons{
+	text-align: center;
+}
+
+/*	PIE DE PÁGINA 	*/
+
+#study-foot{
+	position: absolute;
+	width: 99%;
+	height: 30px;
+	text-align: center;
+	border-top: 1px dotted black;
+}
+
+.span-bottom{
+	line-height: 25px;
+}
+
+a.span-bottom{
+	font-weight: bold;
+	color: silver;
+}

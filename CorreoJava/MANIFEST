@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: correojava.CorreoJava
+Class-Path: lib/postgresql-9.3-1101.jdbc4.jar lib/mail.jar
+

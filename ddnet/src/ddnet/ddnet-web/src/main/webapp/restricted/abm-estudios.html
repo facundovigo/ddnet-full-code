@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/abm-estudios.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/abm-estudios.css" />
+</head>
+<body>
+<div align="center">
+	<div class="study-form" align="center">
+	<form id="studyFilter">
+	<label>Fecha :&nbsp;
+	<select id="dateSelector" name="study-date-type">
+		<option value="2" selected="selected">Hoy</option>
+		<option value="3">Ayer</option>
+		<option value="4">Última Semana</option>
+		<option value="5">Último Mes</option>
+		<option value="1">Cualquier Día</option>
+		<option value="6">Desde - Hasta</option>
+	</select>
+	</label>
+	&nbsp;&nbsp;
+	<label>Desde :&nbsp;
+	<input type="text" id="betweenDateFrom" name="study-date-between-from" class="between-date" readonly="readonly" />
+	</label>
+	&nbsp;&nbsp;
+	<label>Hasta :&nbsp;
+	<input type="text" name="study-date-between-to" class="between-date" readonly="readonly" />
+	</label>
+	<br><br>
+	<label>Paciente :&nbsp;<input type="text" name="patient-data" /></label>
+	&nbsp;&nbsp;
+	<label>Modalidad :&nbsp;<select id="modalities" name="study-modality"><option value="" selected="selected">Todas</option></select></label>
+	&nbsp;&nbsp;
+	<button type="button"></button>
+	</form> <br>
+	</div> <br>
+	<div class="study-list-buttons">
+		<button type="button"></button> &nbsp;&nbsp;
+		<button type="button"></button>
+	</div>
+	<div class="study-list" align="center">
+	<table id="studyList"></table>
+	</div>
+</div>
+</body>
+</html>

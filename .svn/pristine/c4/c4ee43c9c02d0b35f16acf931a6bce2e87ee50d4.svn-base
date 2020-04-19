@@ -1,0 +1,10 @@
+INFO:
+	JBOSS 7.1 INSTALL PATH = C:\jboss-as-7.1.0
+	ADMIN CONSOLE = http://localhost:10090
+	ADMIN CONSOLE CREDENTIALS = admin / sgh6015
+	APP URL = http://190.210.189.236:8180/ddnet-web
+	SERVICIO WINDOWS DEL NUEVO JBOSS DONDE CORRE ESTO: JBOSS710 / JBoss Application Server 7.1.0
+
+Links utiles:
+	https://community.jboss.org/wiki/MultipleInstancesOfJBossAS7OnTheSameMachine
+

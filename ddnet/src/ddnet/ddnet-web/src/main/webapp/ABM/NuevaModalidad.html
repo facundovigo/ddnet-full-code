@@ -1,0 +1,81 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10pt;overflow-y:auto;}
+	h4{text-align:left;}
+	label{display:inline-block;cursor:pointer;}
+	div#notDefinedMod label{text-align:left;width:68px;margin-bottom:8px;}
+	div#notDefinedMod label.selected{color:#dcdcdc;font-style:italic;}
+	.ui-button{font-size:.9em;margin:5px 0px;}
+	input{vertical-align:middle;}
+</style>
+<script type="text/javascript">
+	function modalities_list(){
+		$.getJSON("../restricted/rest/abm/notdefinedmodality")
+		.done(function(data) {
+		if(data && data.length>0){
+			$.each(data, function(i, mod){
+			var name= mod.replace(/\\/g,'_');
+			var newModality= '<input type="checkbox" id="'+name+'" value="'+mod+'">' +
+							 '&nbsp;<label for="'+name+'">'+mod+'</label>' ;
+			$('div#notDefinedMod').append(newModality);
+			i%3 == 2? $('div#notDefinedMod').append('<br>'):$('div#notDefinedMod').append('&nbsp;&nbsp;&nbsp;')
+			}); $('label').on('mousedown',function(){return false});
+			$(':checkbox').on('change',function(){this.checked?$('label[for="'+$(this).attr('id')+'"]').addClass('selected'):$('label[for="'+$(this).attr('id')+'"]').removeClass('selected')});
+		} else $('div#notDefinedMod').append('<br>No se encontraron Modalidades');
+		})
+		.fail(function(){
+			window.parent.toastr['error']('No se pudo cargar las Modalidades','ERROR');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			window.parent.$('#dynamicModalDialog').dialog('close');
+		});
+	}
+	function create_the_modality(){
+		var checkbox= $('div#notDefinedMod').find(':checked');
+		if(checkbox.length<=0){window.parent.$alert('Seleccione al menos una Modalidad');return}
+		var modNames= [];
+		$.each(checkbox,function(i,c){ modNames.push(c.value) });
+		var dto= {modalityNames:modNames};
+		$.ajax({type:'POST', url:'../restricted/rest/abm/newmodality', data:dto})
+  	  	.done(function(){
+	  	  	window.parent.toastr['success']('Se han dado de alta las Modalidades','HECHO');
+			$.each(checkbox,function(i,c){ $('label[for="'+c.id+'"]').remove();$(c).remove() });
+			if($('div#notDefinedInst').find(':checbox').length==0) $('div#notDefinedMod').append('No se encontraron Modalidades.')
+  	  	})
+  	  	.fail(function(){window.parent.toastr['error']('No se pudo dar de alta las Modalidades','ERROR')});
+	}
+	function cancel_changes(){
+		window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+		window.parent.$('#dynamicModalDialog').dialog('close');
+	}
+	function preset_buttons(){
+		var buttons= $('button');
+		$(buttons[0]).button({label:'Dar de Alta',icons:{primary:'ui-icon-circle-check'}}).on('click',create_the_modality);
+		$(buttons[1]).button({label:'Cancelar',icons:{primary:'ui-icon-circle-close'}}).on('click',cancel_changes);
+	}
+	$(document).ready(function() {
+		modalities_list();
+		preset_buttons();
+		$('input#selectAll').on('click',function(){$('input:checkbox').prop('checked',$(this).prop('checked'));$(this).prop('checked')?$('div#notDefinedMod').find('label').addClass('selected'):$('div#notDefinedMod').find('label').removeClass('selected')})
+	});
+</script>
+</head>
+<body>
+<div align="center">
+	<button type="button"></button> &nbsp;&nbsp;
+	<button type="button"></button> <br>
+	<h4>La siguiente lista muestra las Modalidades que aún no se han dado de alta.</h4>
+	<label>
+	<input type="checkbox" id="selectAll">&nbsp;
+	<b>MARCAR TODAS</b>
+	</label> <br><br>
+	<div id="notDefinedMod"></div>
+</div>
+</body>
+</html>

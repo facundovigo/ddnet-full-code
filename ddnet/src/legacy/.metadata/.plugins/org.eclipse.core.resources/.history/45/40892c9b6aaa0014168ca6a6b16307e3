@@ -1,0 +1,5 @@
+package ddnet.web.other;
+
+public class UtilServlet {
+
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+
+<script type="text/javascript">
+	var studyId= null;
+	$(document).ready(function(){
+		studyId= $.url().param('s');
+		if(!studyId || studyId==null) close_window();
+		
+		$.get('rest/reporting/report/audio/'+studyId)
+		.done(function(data){
+			if(data && data!=null){
+				$.each(data,function(i,f){
+					$('body').append(
+						'<br><img src="../images/audio.png" />&nbsp;&nbsp;' +
+						'<a href="rest/reporting/report/audio/'+studyId+'/'+f+'">'+f+'</a><br>'
+					)
+				});
+			}
+		})
+		.fail(function(){close_window()});
+	});
+	function close_window(){
+		window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+		window.parent.$("#dynamicModalDialog").dialog("close");
+	}
+</script>
+		
+<style type="text/css">
+	body{background:#778899;color:#222;font-family:Arial,Helvetica,sans-serif;font-size:10pt;overflow-x:hidden;}
+	img{display:inline-block;width:18px;height:18px;vertical-align:sub;}
+</style>
+
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,101 @@
+/**********************************
+	Common styling for all pages
+**********************************/
+
+/* Common stylings */
+.align-left 	{ text-align: left;   }
+.align-center 	{ text-align: center; }
+.align-right 	{ text-align: right;  }
+
+body, .ui-layout-pane {
+	background-color: #dee1cd;
+}
+
+.study-report-status-tobeinformed {
+	color: white				!important;
+	background-color: red 		!important;
+	font-weight: bold			!important;
+}
+.study-report-status-tobeconfirmed {
+	color: black				!important;
+	background-color: yellow 	!important;
+	font-weight: bold			!important;
+}
+.study-report-status-informed {
+	color: white				!important;
+	background-color: green		!important;
+	font-weight: bold			!important;
+}
+
+.clearfix { zoom: 1; }
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+.clearfix:after { clear: both; }
+
+.top-of-page-layout-west {
+	padding: 0px 			!important;
+	height: 38px 			!important;
+	border: none			!important;
+	overflow: hidden		!important;
+}
+.top-of-page-layout-center {
+	padding: 0px	 		!important;
+	line-height: 38px 		!important;
+	text-align: center		!important;
+	vertical-align: middle	!important;
+	border: none			!important;
+	overflow: hidden		!important;
+}
+.top-of-page-layout-east {
+	vertical-align: middle 	!important;
+	border: none			!important;
+	overflow: hidden		!important;
+}
+.top-of-page-logo {
+	height: 38px;
+	width: 240px;	
+}
+.top-of-page-title-text {
+	font-size: 1.4em;
+	font-weight: bolder;
+}
+
+.small-field-label {
+	display: inline-block				!important;
+	width: 7em							!important;
+}
+.small-field-input {
+	display: inline-block				!important;
+	width: 7em							!important;
+}
+.ui-datepicker {
+	font-size: 0.7em;
+}
+.single-file-uploader {
+	height: 70px;
+}
+
+
+/* Login/Logout/LoginError */
+.login-main-container {
+	text-align: center;
+}
+.login-product-title {
+	font-size: 2em;
+	font-weight: bolder;	
+}
+.login-top-container {
+	margin-bottom: 30px;	
+}
+.login-fields-container {
+	margin-bottom: 30px;
+}
+.login-actions-container {
+	font-size: 0.75em;
+}
+.login-message-container {
+	margin-bottom: 30px;	
+}
+.login-message {
+	margin: 5px;
+	font-weight: normal;
+}

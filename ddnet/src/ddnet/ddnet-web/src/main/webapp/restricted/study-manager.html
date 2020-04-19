@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+	<script type="text/javascript" src="../js/dataTables.colVis.js"></script>
+	<script type="text/javascript" src="../js/jquery.fileDownload.js"></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../js/ddweb.js"></script>
+	<script type="text/javascript" src="../js/ddweb-useragent.js"></script>
+	<script type="text/javascript" src="../js/jquery.multiselect.min.js"></script>
+	<script type="text/javascript" src="../js/study-manager.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.colVis.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/jquery.multiselect.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/study-manager.css"/>
+</head>
+<body>
+	<div class="form-holder" align="center">
+	<form id="studySearchFilter">
+	<table>
+		<tr>
+		<td class="filter-align-left" align="left">
+			<label class="filter-type">Tipo de Filtro : &nbsp;
+			<span op="1" class="filter-type-selector">B&aacute;sico</span>&nbsp;&nbsp;
+			<span op="2" class="filter-type-selector">Avanzado</span>
+			</label>
+			<div class="advanced-filter">
+			<br>
+			<label>Centro :&nbsp; <select id="formInstitutions" name="study-diagnostic-center">
+			<option value="-1">Todos</option>
+			</select></label>
+			<br><br>
+			<label>Usuario : <select id="formUsers" name="study-user">
+			<option value="">Todos</option>
+			</select></label>
+			</div>
+		</td>
+		<td class="filter-align-center" align="center">
+			<label class="study-date-type selected"><input type="radio" id="dateToday" name="study-date-type" value="2" checked="checked"/>Hoy</label>
+			<label class="study-date-type"><input type="radio" id="dateYesterday" name="study-date-type" value="3"/>Ayer</label>
+			<label class="study-date-type"><input type="radio" id="dateLastWeek" name="study-date-type" value="4"/>Semana</label>
+			<label class="study-date-type"><input type="radio" id="dateLastMonth" name="study-date-type" value="5"/>Mes</label>
+			<label class="study-date-type"><input type="radio" id="dateAny" name="study-date-type" value="1"/>Hist&oacute;rico</label>
+			<br><br>
+			<label class="study-date-type">
+			<input type="radio" id="dateBetween" name="study-date-type" value="6"/>
+			Desde: <input type="text" class="between-date-text" name="study-date-between-from" readonly="readonly"/>
+			Hasta: <input type="text" class="between-date-text" name="study-date-between-to" readonly="readonly"/>
+			</label>
+			<br><br>
+			<label>Paciente: <input type="text" name="patient-data" class="patient-filter-text"></label>
+			&nbsp;&nbsp;
+			<label>Mod : <select id="formModalities" multiple="multiple"><option value="">Todas</option></select></label>
+			<input type="hidden" name="study-modality" />
+			<br><br>
+			<button type="button" id="doTheSearch"></button>&nbsp;&nbsp;
+			<button type="button" id="getNewStudies"></button>&nbsp;&nbsp;
+			<button type="button" id="cleanTheForm"></button>
+		</td>
+		<td class="filter-align-right" align="right">
+			<div class="advanced-filter">
+			<label class="right-filter">No Le&iacute;dos<input type="checkbox" name="no-leido"></label>&nbsp;&nbsp;&nbsp;
+			<label class="right-filter">Urgentes<input type="checkbox" name="urgente"></label><br>
+			<label class="right-filter">Preinformados<input type="checkbox" name="preinformado"></label>&nbsp;&nbsp;&nbsp;
+			<label class="right-filter">Prioridad<input type="checkbox" name="prioridad"></label><br>
+			<label class="right-filter">Firmados<input type="checkbox" name="firmado"></label>&nbsp;&nbsp;&nbsp;
+			<label class="right-filter">Adjuntos<input type="checkbox" name="adjunto"></label><br>
+			<label class="right-filter">MP3<input type="checkbox" name="mp3"></label>&nbsp;&nbsp;&nbsp;
+			<label class="right-filter">Orden M&eacute;dica<input type="checkbox" name="orden-medica"></label><br>
+			<label class="another-filter-text">Otros :&nbsp;
+			<select name="another-filter" class="another-filter">
+			<option value="0" selected="selected">Todos</option>
+			<option value="1">Urgencias</option>
+			<option value="2">Segunda Lectura</option>
+			<option value="3">Teaching Files</option>
+			<option value="4">Emergencia M&eacute;dica</option>
+			<option value="5">M&uacute;ltiples</option>
+			<option value="6">Comprobar</option>
+			<option value="7">Solicitado</option>
+			<option value="8">Comprobado</option>
+			</select>
+			</label>
+			</div>
+		</td>
+		</tr>
+	</table>
+	</form>
+	</div>
+	<div id="filterToggle" align="center"><span class="ui-icon ui-icon-circle-triangle-n"></span></div>
+	<div class="study-list-table" align="center">
+	<table id="study-list"></table>
+	</div>
+	<div class="study-actions-buttons" align="center">
+		<select id='study-request-images-quality' class='bottomSel'>
+		<option value='lossy' selected='selected'>LOSSY</option>
+		<option value='loseless'>LOSSLESS</option>
+		<option value='dicomdir'>DICOMDIR</option>
+		</select>&nbsp;
+		<button type="button" id="studyGetImages"></button>&nbsp;&nbsp;
+		<button type="button" id="studySimpleView"></button>&nbsp;&nbsp;
+		<img src="../utils/mainlogo" id="mainLogo" />&nbsp;&nbsp;
+		<button type="button" id="studyAdvancedView"></button>&nbsp;&nbsp;
+		<button type="button" id="studyAssignTo"></button>&nbsp;
+		<select id='studyAssignTarget'>
+		<option value="">Seleccione...</option>
+		</select>
+	</div>
+<!-- 	<script type="text/javascript">$(function(){$('div#page-loading').hide()})</script> -->
+</body>
+</html>

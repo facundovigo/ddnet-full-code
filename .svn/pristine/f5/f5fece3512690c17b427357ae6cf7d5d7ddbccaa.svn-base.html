@@ -1,0 +1,388 @@
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
+
+		<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui.js"></script>
+		<script type="text/javascript" src="../js/purl.js"></script>
+		<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+
+
+<style type="text/css">
+
+body {	background: lightslategray;	}
+
+
+#divRole {
+	text-align: left;
+	font-size: 0.9em;
+}
+.datosUsuario{	position: absolute;
+				width: 95%;	}
+				
+.divButtons{padding-top: 390px;	}
+.medInfo{ display: none; }
+
+
+button {	width: 100px;	}
+.ui-widget {	font-size: 0.8em;	}
+
+
+label {
+	display: inline-block;
+	font-size: 9pt;
+	text-align: left;
+}
+.txtlabel{
+	width: 100px;
+}
+
+.cajadetexto {
+	width: 200px;
+	background-color: #fff;
+	border: double #aaa 0.25em;
+	border-radius: 5px;
+	text-align: center	!important;
+}
+.cajadetexto:focus {	border: double #888 0.25em;	}
+
+.chrome br.plus {	display: none;	}
+.chrome br {	line-height: 1em;	}
+
+#cmbRole{
+	width: 200px;
+}
+
+.selProv{
+	width: 250px;
+}
+#user_prov-button{ top: 7px;
+					font-size: 0.7em; }
+
+textarea{
+	width: 75%;
+	height: 60px;
+	resize: none;
+}
+
+</style>
+
+<script type="text/javascript">
+
+var login = null;
+var Fname = null;
+var Lname = null;
+var dialog;
+var role = null;
+var isNew = null;
+
+$(document).ready(function() {
+	
+	login = $.url().param('login');
+	Fname = $.url().param('Fname');
+	Lname = $.url().param('Lname');
+	dialog = window.parent.$("#dynamicModalDialog");
+	role = $.url().param('role');
+	isNew = $.url().param('new') == 'true';
+	
+	$('#spnData').text(login + ' ( ' + Fname + ' ' +  Lname +  ' )');
+	
+	$('#cmbRole').selectmenu({
+		change: function( e, data ) {
+			if(data.item.value.startsWith('Medico')){
+				$('.medInfo').css('display', 'block');
+			
+			}else{
+				$('.medInfo').css('display', 'none');
+			}
+	}});
+	$('#user_prov').selectmenu();
+	
+	$('#user_phone1').on('keypress', function(){
+		
+		var tecla = event.which || event.keyCode;
+		if(tecla < 48 || tecla > 57) return false;
+		else return;
+	});
+	$('#user_phone2').on('keypress', function(){
+		
+		var tecla = event.which || event.keyCode;
+		if(tecla < 48 || tecla > 57) return false;
+		else return;
+	});
+	
+	$.getJSON("../restricted/rest/abm/allroles")
+	.done(function(data) {
+		
+	if(data && data.length > 0){
+			
+		var roleSelect = $('#cmbRole');
+		roleSelect.find('option').remove().end();
+		roleSelect.append('<option value=""></option>');
+		
+		$.each(data, function(i , rol) {
+			
+			if(!isNew && rol.name == role){
+				roleSelect.append('<option  id="rol_'+rol.id+'" value="' + rol.name + '" selected="selected" >' + rol.name + '</option>');
+				
+				if(role.startsWith('Medico')){ $('.medInfo').css('display', 'block'); }
+				else{ $('.medInfo').css('display', 'none'); }
+			}
+			else
+				roleSelect.append('<option  id="rol_'+rol.id+'" value="' + rol.name + '" >' + rol.name + '</option>');
+		});
+		
+		roleSelect.selectmenu('refresh');
+		
+	}}).fail(function(){alert('ERROR al cargar los roles');});
+	
+	if(isNew){
+		
+		dialog.dialog( 'option', 'title', 'ASIGNAR ROL A USUARIO' );
+	
+		dialog.bind('dialogbeforeclose', function(event, ui) {
+		  alert('Debe completar las asignaciones\npara terminar de crear el usuario,\n'+
+				 'de lo contrario presione el botón CANCELAR');
+		  		return false;
+		});
+	
+		$('#btnRole').button({ icons: { primary: 'ui-icon-circle-check' } })
+					 .on('click' , function() { assignRole(); });
+		$('#btnCancelar').button({ icons: { primary: 'ui-icon-circle-close' } })
+						 .on('click' , function() { if(confirm('Si no confirma las asignaciones,\nel nuevo usuario "'+login+'" se borrará')) 
+							 								deleteUser(); });
+	
+	}else{
+		
+		$('#btnRole').button({ icons: { primary: 'ui-icon-circle-check' } })
+					 .on('click' , function() { if(confirm('¿Confirma los cambios?'))modifyRole(); });
+		$('#btnCancelar').button({ icons: { primary: 'ui-icon-circle-close' } })
+						 .on('click' , function() { dialog.dialog('close'); });
+		
+		$.getJSON('../restricted/rest/abm/info/'+login)
+		.done(function(user){
+			if(user){
+				
+				if(user.perfil != null){
+					$("#user_f_name").val(user.perfil.fancyName);
+					$("#user_mail").val(user.perfil.email);
+					$("#user_skype").val(user.perfil.skype);
+					$("#user_phone1").val(user.perfil.phone1);
+					$("#user_phone2").val(user.perfil.phone2);
+					$("#user_address").val(user.perfil.address);
+					$("#user_loc").val(user.perfil.location);
+					$("#user_prov").val(user.perfil.province).selectmenu("refresh");
+					$("#user_mn").val(user.perfil.mn);
+					$("#user_mp").val(user.perfil.mp);
+					$("#user_title").val(user.perfil.title);
+					$("#txtAddInfo").val(user.perfil.additionalInfo);
+				}
+			}
+			
+		}).fail(function(){alert('Ocurrió un error al momento de cargar la información');});
+	}
+	
+	var margen = ( $('body').width() - 166 ) / 2 ;
+	
+	$('#divRole').css( 'padding-left' , margen+'px');
+	
+	$(document).tooltip();
+});
+
+function assignRole() {
+	
+	if( $('#cmbRole').val() == '' ) alert( 'seleccione un rol para el usuario' );
+	
+	else{
+
+		var Rname = $('#cmbRole').val();
+		var form = $('form[name="dataUser"]');
+			
+			if($('#user_mail').val() == ''){
+				alert('Agregue una dirección de correo electrónico');
+				return;
+			}
+			if($('#user_f_name').val().length > 10){
+				alert('El nombre no debe tener más de 10 caracteres');
+				return;
+			}
+			
+			$.post('../restricted/rest/abm/new/userprofile/' + login, form.serialize())
+				.done(function(){
+				var url = '../ABM/AsignarInstitucion.html?login=' + login + '&Fname=' + Fname + '&Lname=' + Lname 
+									+ '&Rname=' + Rname + '&new=true';
+		
+				window.parent.$("#dynamicModalDialogIframe").attr('src' , url);	
+				
+			}).fail(function(){alert('ocurrió un error con los datos de usuario');});
+	}
+}
+
+function modifyRole(){
+	
+	if( $('#cmbRole').val() == '' ) alert( 'seleccione un rol para el usuario' );
+	
+	else{
+		var value = $('#cmbRole').val();
+		var form = $('form[name="dataUser"]');
+		
+		if($('#user_mail').val() == ''){
+			alert('Agregue una dirección de correo electrónico');
+			return;
+		}
+		if($('#user_f_name').val().length > 10){
+			alert('El nombre no debe tener más de 10 caracteres');
+			return;
+		}
+		
+		if(value != role){
+	
+		$.post('../restricted/rest/abm/update-user', 'value='+ value +'&login='+ login +'&numCol=3')
+		.done(function(){})
+		.fail(function(){alert('ERROR al cambiar de rol');});
+		}
+		
+		$.post('../restricted/rest/abm/modify/userprofile/' + login, form.serialize())
+		.done(function(){
+
+			window.parent.$("#dynamicModalDialogIframe").attr('src' , 'about:blank');
+			dialog.dialog('close');
+			window.parent.CargarTablaUsuario(window.parent.tablaU.dataTable());
+		})
+		.fail(function(){alert('ocurrió un error con los datos de usuario');});
+	}
+	
+}
+
+function deleteUser(){
+	
+	$.post('../restricted/rest/abm/deleteUser', 'login='+login);
+	dialog.unbind('dialogbeforeclose');
+	window.parent.$('#dynamicModalDialogIframe').attr('src', 'about:blank');
+	dialog.dialog('close');
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<span style="font-weight: bold; font-size:0.9em">Usuario: </span><span id="spnData" style="font-size: 0.85em;"></span>
+
+<br><br>
+
+<span style="font-weight: bold; font-size: 0.8em;">Seleccione el rol que tendrá el usuario.</span>
+
+<br><br class="plus">
+
+<div id="divRole">
+
+	<select id="cmbRole"></select>
+
+</div>
+
+<br><br class="plus">
+
+<span id="lblData" style="font-weight: bold; font-size: 0.8em;">Datos complementarios del usuario.</span>
+
+<br><br class="plus"><br><br class="plus">
+
+<div class="datosUsuario" align="center">
+	
+	<form name="dataUser" autocomplete="off">
+	
+		<label class="txtlabel">Nombre Común:</label>
+		<input type="text" id="user_f_name" name="fancyName" class="cajadetexto" 
+		placeholder="hasta 10 caracteres" title="es un alias para denominar al usuario" />
+		<br><br>
+		
+		<label class="txtlabel">Mail: ......................</label>
+		<input type="text" id="user_mail" name="mail" class="cajadetexto" placeholder="campo obligatorio" />
+		&nbsp;&nbsp;&nbsp;
+		<label class="txtlabel">Contacto Skype: .....</label>
+		<input type="text" id="user_skype" name="skype" class="cajadetexto" />
+		<br><br>
+		<label class="txtlabel">N&uacute;mero Tel&eacute;fono:</label>
+		<input type="text" id="user_phone1" name="phone1" class="cajadetexto" 
+			placeholder="solo números" title="celular, fijo, etc" />
+		&nbsp;&nbsp;&nbsp;
+		<label class="txtlabel">Otro N&uacute;mero: .........</label>
+		<input type="text" id="user_phone2" name="phone2" class="cajadetexto" 
+			placeholder="solo números" title="celular, fijo, etc" />
+		<br><br>
+		
+		<label class="txtlabel">Direcci&oacute;n: ..............</label>
+		<input type="text" id="user_address" name="address" class="cajadetexto" />
+		&nbsp;&nbsp;&nbsp;
+		<label class="txtlabel">Localidad: ..............</label>
+		<input type="text" id="user_loc" name="localidad" class="cajadetexto" />
+		<br>
+		<label class="txtlabel">Provincia: ..............</label>
+		<select id="user_prov" name="provincia" class="selProv">
+			<option selected="selected" value="">Seleccione...</option>
+			<option value="Buenos Aires">Buenos Aires</option>
+			<option value="Catamarca">Catamarca</option>
+			<option value="Chaco">Chaco</option>
+			<option value="Chubut">Chubut</option>
+			<option value="C.A.B.A.">Ciudad Autónoma de Buenos Aires</option>
+			<option value="Córdoba">Córdoba</option>
+			<option value="Corrientes">Corrientes</option>
+			<option value="Entre Ríos">Entre Ríos</option>
+			<option value="Formosa">Formosa</option>
+			<option value="Jujuy">Jujuy</option>
+			<option value="La Pampa">La Pampa</option>
+			<option value="La Rioja">La Rioja</option>
+			<option value="Mendoza">Mendoza</option>
+			<option value="Misiones">Misiones</option>
+			<option value="Neuquén">Neuquén</option>
+			<option value="Río Negro">Río Negro</option>
+			<option value="Salta">Salta</option>
+			<option value="San Juan">San Juan</option>
+			<option value="San Luis">San Luis</option>
+			<option value="Santa Cruz">Santa Cruz</option>
+			<option value="Santa Fé">Santa Fé</option>
+			<option value="Santiago del Estero">Satiago del Estero</option>
+			<option value="Tierra del Fuego">Tierra del Fuego</option>
+			<option value="Tucumán">Tucumán</option>
+		</select>
+		
+		<div class="medInfo">
+		<br><br>
+		<label class="txtlabel">M.N.: .....................</label>
+		<input type="text" id="user_mn" name="mn" class="cajadetexto" />
+		&nbsp;&nbsp;&nbsp;
+		<label class="txtlabel">M.P.: .....................</label>
+		<input type="text" id="user_mp" name="mp" class="cajadetexto" />
+		<br><br>
+		<label class="txtlabel">T&iacute;tulo: ...................</label>
+		<input type="text" id="user_title" name="title" class="cajadetexto" />
+		</div>
+		
+		<br><br>
+		<label>Información Adicional</label><br>
+		<textarea id="txtAddInfo" name="addInfo"></textarea>
+		
+	</form>
+
+</div>
+
+<br><br class="plus">
+
+<div align="center" class="divButtons">
+<button id="btnRole">Confirmar</button>
+&nbsp;&nbsp;
+<button id="btnCancelar">Cancelar</button>
+</div>
+
+</body>
+
+</html>

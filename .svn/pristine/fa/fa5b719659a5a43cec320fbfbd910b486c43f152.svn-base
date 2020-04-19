@@ -1,0 +1,39 @@
+package ddnet.web.api.rest;
+
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import ddnet.ejb.*;
+import ddnet.ejb.entities.User;
+import ddnet.web.security.SecurityHelper;
+
+@Stateless
+@Path("restore")
+public class RestorePassword {
+	
+	@EJB
+	private SecurityHelper securityHelper;
+	@EJB
+	private UserManager usermanager;
+	
+	
+	// Función que retorna un flag si existe el usuario ingresado
+	@GET
+	@Path("isUser/{login}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public int isRegisteredUser(@PathParam("login") String login){
+		
+		int flag = 0;								//declaro el flag
+		
+		for(User u : usermanager.getAll())			//recorro todos los usuarios
+			if(u.getLogin().equals(login)) flag = 1;//si coincide con algún login levanta el flag
+				
+		return flag;
+	}
+}

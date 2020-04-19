@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Log de Trazabilidad</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="../css/main.css" />
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.js"></script>
+<script type="text/javascript" src="../js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+
+
+<style type="text/css">
+	
+	body{
+		font-family: Arial, sans-serif !important;
+		font-size: 0.9em !important;
+	}
+	
+	input[type=text] {
+		background-color: #fff;
+		border: double black 0.25em;
+		border-radius: 5px;
+		padding-left: 5px;
+		width: 200px;
+		text-align: center;
+	}
+	input[type=text]:focus {
+		background-color: #fff;
+		border: double black 0.25em;
+		border-radius: 5px;
+		padding-left: 5px;
+	}
+	input[type="text"]:disabled {
+		background: #ddd;
+		color: #444;
+	}
+	
+	.ui-widget{
+		font-size: 0.85em;
+	}
+</style>
+
+<script type="text/javascript">
+		
+	var studyID = null;
+	var dialog = null;
+	
+	$(document).ready(function() {
+	
+		studyID = $.url().param('s');
+		dialog = window.parent.$("#dynamicModalDialog");
+		
+		$('#btnConfirm').button({ 
+			icons: { primary: 'ui-icon-circle-check' } 
+		}).on('click' , function() { 
+			
+			var value = $('#txtEmail').val();
+			
+			if(value == ''){
+				alert('Ingrese la dirección de correo del paciente');
+				return;
+			}
+			
+			if(confirm('¿Confirma la asignación?')){
+				
+				$.post('rest/studies/assign-patient', 'studyID='+studyID + '&email='+value)
+				.done(function(){
+					alert('El paciente ha sido asignado al sistema');
+					dialog.dialog('close');
+					
+				}).fail(function(){
+					alert('Ocurrió un error al momento de asignar el paciente');
+					dialog.dialog('close');
+				});
+			}
+		});
+		
+		$('#btnCancelar').button({ 
+			icons: { primary: 'ui-icon-circle-close' } 
+		}).on('click' , function() { 
+			dialog.dialog('close'); 
+		});
+		
+	});
+</script>
+
+</head>
+<body>
+
+	<p>	Es necesario agregar una dirección de correo electrónico, a la cual se le enviará un email con los pasos para que pueda acceder al sistema.</p>
+	
+	<br><br>
+	
+	<div align="center">
+	
+		E-mail:&nbsp; <input type="text" id="txtEmail">
+		<br><br><br>
+		<button id="btnConfirm">Confirmar</button>&nbsp;&nbsp;
+		<button id="btnCancelar">Cancelar</button>
+	</div>
+
+</body>
+</html>

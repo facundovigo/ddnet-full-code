@@ -1,0 +1,10 @@
+package ddnet.web.other;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet({"/utils"})
+public class UtilsServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+}

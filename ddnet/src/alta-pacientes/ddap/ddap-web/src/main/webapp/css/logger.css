@@ -1,0 +1,112 @@
+/**
+*	HOJA DE ESTILOS PANTALLA LOGGER APLICACIÓN ALTA DE PACIENTES
+*/
+
+
+
+	form.logger-buttons {
+		width: 600px;
+		padding: 10px;
+		border: solid 1px black;
+	}
+
+ 
+
+
+
+	div.log-table {
+		padding: 10px;
+	}
+	
+	
+	table#log-data {
+		font-size: 9pt					!important;
+		color: white					!important;
+		width: 99%						!important;
+		border-right: solid 1px black	!important;
+		border-left: solid 1px black	!important;
+	}
+	div#log-data_wrapper thead {
+		background: #505050			!important;
+		color: white				!important;
+		
+	}
+	div#log-data_wrapper th{
+		text-align: center					!important;
+		border-top: solid 1.5px black		!important;
+	}
+	div#log-data_wrapper tr.even:not(.selected){
+		background: #909090 		!important;
+	}
+	div#log-data_wrapper tr.odd:not(.selected){
+		background: #a0a0a0			!important;
+	}
+	/*div#log-data_wrapper tbody td {
+		border-top: solid 1px #505050		!important;
+	}*/
+	div#log-data_wrapper .dataTables_paginate{
+		font-size: 0.8em 			!important; 
+		float: right				!important;
+		margin-top: 12px			!important;
+	}
+	div#log-data_wrapper .dataTables_length {
+		margin-bottom: 18px			!important;
+		color: #eee					!important;
+	}
+	div#log-data_wrapper .dataTables_length select {
+		color: #eee					!important;
+		background: #808080			!important;
+		border-radius: 3px			!important;
+	}
+	div#log-data_wrapper .dataTables_info {
+		font-size: 0.85em 			!important;
+		margin-top: 12px			!important;
+		color: #eee					!important;
+	}
+	div#log-data_wrapper div.l-cant{
+		float: left					!important;
+		color: #eee					!important;
+		margin-top: 10px			!important;
+	}
+	div#log-data_wrapper a.paginate_button.current{
+		border-radius: 15px			!important;
+		color: #eee					!important;
+		background: #707070			!important;
+	}
+	
+	div#log-data_wrapper a.paginate_button:hover{
+		border-radius: 15px			!important;
+		color:	#eee				!important;
+		background: #505050			!important;
+	}
+
+	div#log-data_wrapper a.paginate_button {
+		color:	#eee				!important;
+	}
+
+
+
+
+
+
+	select#users {
+		width: 150px;
+		height: 20px;
+	}
+	span.ui-selectmenu-text {
+		font-size: 8pt;
+	}
+	span.ui-selectmenu-button {
+		top: 9px;
+	}
+
+
+
+
+	input.choose-date {
+		width: 90px;
+	}
+
+
+
+

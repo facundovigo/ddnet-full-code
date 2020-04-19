@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Diagn&oacute;stico Digital Alta Pacientes</title>
+
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/welcome.css" />
+
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript">	
+		$(document).ready(function() {				
+			$('#login-again-button').button({ icons: { primary: "ui-icon-refresh" }, text: true });
+			$('#login-again-button').on("click", function() {
+				location.href = 'login-form.html'; 
+			});			
+			
+			CentrarElementos();
+			
+			window.addEventListener('resize', function(){CentrarElementos();});
+		});	
+		
+		function CentrarElementos(){
+			
+			$('img').css( 'margin-left' ,
+						 	( $('body').width() - $('img').width() -10 ) / 2 + 'px'
+						);
+			$('.title').css( 'margin-left' ,
+				 				( $('body').width() - $('.title').width() - 10 ) / 2 + 'px'
+						   );
+			$('.login-message-container').css( 'margin-left' ,
+	 								( $('body').width() - $('.login-message-container').width() -50 ) / 2 + 'px'
+			   					);
+			$('.login-error-actions-container').css( 'margin-left' ,
+						( $('body').width() - $('.login-error-actions-container').width() -10 ) / 2 + 'px'
+					);
+		}
+		</script>
+</head>
+<body>
+	<div class="login-main-container">
+		<div class="login-top-container">
+			<p>
+				<img src="utils/mainlogo" />
+				<label class="title">Alta de Pacientes</label>
+			</p>
+		</div>
+		<div class="login-message-container">
+			<label class="login-message">El usuario y/o password ingresado no es correcto</label>
+		</div>
+		<div class="login-error-actions-container">
+			<button id="login-again-button">Reintentar</button>
+		</div>
+	</div>
+</body>
+</html>
+

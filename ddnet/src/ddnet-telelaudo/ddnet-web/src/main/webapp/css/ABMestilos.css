@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+
+#tabs {
+	
+	font-size: 0.8em;
+	margin-top: 10px;
+	heigth: 100%;
+}
+
+th {
+	
+	text-align: center	!important;
+}
+
+#tabUsuarios {
+	
+	height: 54%;
+	padding: 10px 17%;
+}
+
+.userButtons{
+	
+	margin-top: 15px;
+}
+
+.cant {
+	
+	position: absolute;
+	margin-left: 47.5%;
+	font-weight: bold;
+}
+
+#tabEstudios{
+	
+	height: 54%;
+}
+
+#tabEstTop{
+
+	width: 91%;
+	margin: 0 4%;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+#tbEstudios{
+	
+	padding-top: 10px;
+}
+
+.cantS {
+	
+	position: absolute;
+	margin-left: 47.5%;
+	font-weight: bold;
+}
+
+

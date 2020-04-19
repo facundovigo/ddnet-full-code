@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+
+<style type="text/css">
+	body {
+		background: lightslategray;
+		
+		font-family: Arial,sans-serif;
+		font-weight: normal;
+		font-size: 10pt;
+	}
+	.tb_pat-data {
+		width: 425px;
+		background: white;
+		border: 1px solid black;
+		color: black;
+	}
+	table.title {
+		text-align: center;
+		font-weight: bolder;
+		border-bottom: none;
+	}
+	tr.even{ 
+		background: #fefefe; 
+	}
+	tr.odd{ 
+		background: #ededed; 
+	}
+	td.fija {
+		width: 125px;
+		height: 20px;
+		font-weight: bolder;
+	}
+</style>
+<script type="text/javascript">
+	
+	var patientData = null;
+	var dialog = null;
+	
+	$(document).ready(function(){
+		
+		dialog = window.parent.$('div#dynamicModalDialog');
+		patientData = dialog.data('patientData');
+		
+		$('td.data').text('');
+		
+		$('td[name="documento"]').text(patientData.docType+' '+patientData.docNumber);
+		$('td[name="apellido"]').text(patientData.lastName);
+		$('td[name="nombre"]').text(patientData.firstName);
+		$('td[name="sexo"]').text(patientData.patSex == null ? '---' : patientData.patSex );
+		$('td[name="fechaNac"]').text(patientData.birthDate == null ? '---' : patientData.birthDate);
+		$('td[name="tel"]').text(patientData.phoneNumber == null ? '---' : patientData.phoneNumber);
+		$('td[name="cel"]').text(patientData.cellPhoneNumber == null ? '---' : patientData.cellPhoneNumber);
+		$('td[name="correo"]').text(patientData.mailAddress == null ? '---' : patientData.mailAddress);
+		$('td[name="ocup"]').text(patientData.occupation == null ? '---' : patientData.occupation);
+		$('td[name="direcc"]').text(patientData.address == null ? '---' : patientData.address);
+		$('td[name="loc"]').text(patientData.location == null ? '---' : patientData.location);
+		$('td[name="cp"]').text(patientData.zipCode == null ? '---' : patientData.zipCode);
+		$('td[name="prov"]').text(patientData.province == null ? '---' : patientData.province);
+		$('td[name="nac"]').text(patientData.nationality == null ? '---' : patientData.nationality);
+		$('td[name="obraSocial"]').text(patientData.medInsurance == null ? '---' : patientData.medInsurance);
+		$('td[name="osPlan"]').text(patientData.plan == null ? '---' : patientData.plan);
+		$('td[name="osNumber"]').text(patientData.numPlan == null ? '---' : patientData.numPlan);
+		$('td[name="observ"]').text(patientData.observation == null ? '---' : patientData.observation);
+	});
+	
+</script>
+
+</head>
+
+<body>
+	
+	<br>
+	<div class="patient-data">
+		<table class="tb_pat-data title" align="center" id="pat-tb-title"><tr><td>Datos Identificaci&oacute;n</td></tr></table>
+		
+		<table class="tb_pat-data body" align="center" id="pat-tb-body">
+			<tr class="even"><td class="fija">Documento:</td>		<td class="data" name="documento"></td></tr>
+			<tr class="odd"><td class="fija">Apellido:</td>			<td class="data" name="apellido"></td></tr>
+			<tr class="even"><td class="fija">Nombre:</td>			<td class="data" name="nombre"></td></tr>
+			<tr class="odd"><td class="fija">Fecha Nacimiento:</td><td class="data" name="fechaNac"></td></tr>
+			<tr class="even"><td class="fija">Sexo:</td>				<td class="data" name="sexo"></td></tr>
+			<tr class="odd"><td class="fija">Telefono:</td>		<td class="data" name="tel"></td></tr>
+			<tr class="even"><td class="fija">Celular:</td>			<td class="data" name="cel"></td></tr>
+			<tr class="odd"><td class="fija">Email:</td>			<td class="data" name="correo"></td></tr>
+			<tr class="even"><td class="fija">Nacionalidad:</td>		<td class="data" name="nac"></td></tr>
+		</table>
+		
+		<table class="tb_pat-data title" align="center"><tr><td>Datos Sociales</td></tr></table>
+		
+		<table class="tb_pat-data body" align="center">
+			<tr class="even"><td class="fija">Dirección:</td>	<td class="data" name="direcc"></td></tr>
+			<tr class="odd"><td class="fija">Localidad:</td>	<td class="data" name="loc"></td></tr>
+			<tr class="even"><td class="fija">C.P.:</td>		<td class="data" name="cp"></td></tr>
+			<tr class="odd"><td class="fija">Provincia:</td>	<td class="data" name="prov"></td></tr>
+			<tr class="even"><td class="fija">Ocupación:</td>	<td class="data" name="ocup"></td></tr>
+		</table>
+		
+		<table class="tb_pat-data title" align="center"><tr><td>Datos M&eacute;dicos</td></tr></table>
+	
+		<table class="tb_pat-data body" align="center">	
+			<tr class="even"><td class="fija">Obra Social:</td>	<td class="data" name="obraSocial"></td></tr>
+			<tr class="odd"><td class="fija">Plan:</td>			<td class="data" name="osPlan"></td></tr>
+			<tr class="even"><td class="fija">N°:</td>			<td class="data" name="osNumber"></td></tr>
+		</table>
+		
+		<table class="tb_pat-data title" align="center"><tr><td>Observaciones</td></tr></table>
+		<table class="tb_pat-data body" align="center">
+			<tr class="odd"><td class="data" name="observ" style="padding:0px 10px;"></td></tr>
+		</table>
+	</div>
+	
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+Minuta reunión 2014-10-14
+=========================
+
+Idea de la reunión 
+------------------
+
+Definir alcance y detalles de implementación del proyecto de Telelaudo y en general la nueva línea de producto que incluye las características de teleradiología.
+IMPORTANTE: se decide avanzar primero con lo temas de Telelaudo para mostrar avances lo antes posible.
+
+Detalles
+--------
+
+- Incluir los minutos en la fecha del estudio (ahora sería fecha/hora)
+- Incluir tag "(0008,0090)	PN	ReferringPhysicianName" en la grilla
+- Incluir tag "(0008,1050)	PN	PerformingPhysicianName" (o el tag que indique quien que tomó el estudio) en la grilla
+- Analizar si es posible lanzar un .EXE desde el browser, con parámetros. (Idea tecnica de solución: custom url handler -> http://stackoverflow.com/questions/796748/how-can-i-add-a-custom-url-handler-on-windows-like-itunes-itms)
+- Analizar posible bug: si se da de alta un usuario nuevo, se le asigna un estudio (dd_user_study), al intentar el login de dicho usuario la pagina deja de responder.
+(Los puntos anteriores deben estar disponibles en la version 'legacy' también)
+
+
+Ahora si, especificamente relacionado al proyecto de Telelaudo (en orden en que idealmente deben realizarse):
+
+- Modificaciones estéticas para acercar el producto a la imagen del producto de DRIM.
+
+- Se va a crear un modelo de DB (tablas "dd_xxx") que cubran lo necesario para la app. No se dependerá mas de las tablas de dcm4chee. Se crearán por ej: dd_patient, se extenderá
+dd_study, etc.
+
+- Enviar XML cuando se recibe un estudio nuevo con los datos del mismo a Telelaudo.
+	* Crear servicio de Windows SENDER
+	* Crear servicio de Windows RECEIVER
+	* Agregar campos en la tabla "dd_study" para marcar "tags_sent" (flag para saber si se envio o no el XML) y otro "instances_sent" (flag para saber si se enviaron o no las imagenes)
+	
+
+- Enviar imágenes desde el centro de diagnostico hacia Telelaudo.
+	* Crear servicio de Windows SENDER
+	* No es necesario un servicio de "RECEIVER": la tecnica para enviar las imágenes es un C-STORE SCU (nosotros) hacia Telelaudo (SCP).
+	* La IP del server de Telelaudo y de los centros de diagnostico es fija, por lo que *NO* es necesario ningun mecanismo para actualizar IPs.
+	* Se debe poder definir un calendario/horarios en los cuales el envio automatico de estudios se efectúa.
+	
+
+- Informe
+	* incluir las firmas de los médicos que pasó Sergito.
+    * incluir un footer de informe por institucion (misma logica que el membrete/header)
+ 
+
+- Visualizacion de imagenes por parte del medico que diagnostica
+	* Siempre dar la posibilidad de elegir si visualizar el estudio desde la instalación de Telelaudo (si el estudio se encuentra en TL) o desde el Centro de Diagnostico.
+
+	Opciones presentadas al medico que diagnostica al requerir este la visualizacion del estudio:
+
+		* WADO - Simple (Oviyam): Redireccionar a la URL correspondiente - Telelaudo o la del centro de diagnostico, segun eleccion del usuario - como se hace actualmente.
+		* WADO - Avanzado (Weasis): Redireccionar a la URL correspondiente - Telelaudo o la del centro de diagnostico, segun eleccion del usuario - como se hace actualmente.
+		* "Recibir estudio en mi Visualizador" (loseless): en esta caso, siempre (indep'tmente de si se solicita visualizar desde Telelaudo o el CD) - el browser del medico que
+          diagnostica se comunicará con Telelaudo solicitando se le envíe a su visualizador el correspondiente estudio y luego TL:
+			1. Actualizar la IP del PACS correspondiente (para esto, se va a crear un servicio Windows que corre en cada centro de diagnostico y tambien en Telelaudo para solicitar
+               esta actualización en el PACS destino)
+			2. Solicitará un envío de imagenes al medico que lo solicito (DICOM SEND) Sergito: estas seguro que esto se va a poder hacer? TL le pide al PACS del Centro de diagnostico 
+  			   que le envíe las imagenes a la IP del medico??? Podremos hacer una prueba de concepto de esto el finde? o me explicas el paso a paso asi lo hago?			
+		* "Recibir estudio en mi Visualizador" (lossy): procedimiento idem al anterior, pero buscamos en otro storage diferente al anterior.
+
+
+- QUEDA POR DEFINIR: Esquema de asignacion automatica de nuevos estudios, medicos de guardia, etc, etc.
+
+
+
+Notas generales
+---------------
+
+Tiene que haber 2 estados del estudio (o subestados para el estado particular de "en proceso de diagnostico") o puede ser un solo estado general?
+
+por un lado la "asignacion":
+
+ - "Sin asignar": cuando se recibe en Telelaudo
+ - "Asignado": se derivó el medico que diagnostica o bien automaticamente o bien manualmente
+ - "Verificado": el medico que diagnostica "vio" (TODO: definir bien que es esto) que tiene el estudio asignado, pero no esta haciendo nada.
+ - "???": enganchar los otros estados?
+
+
+del informe:
+  - "A informar"
+  - "Informe parcial"
+  - "Informado"
+
+Mi duda sobre si son 2 estados separados es por si en algun momento, por ej, el estudio podria volver a "sin asignar" (x ej el medico que diagnostica tiene que "derivarlo" o reasignarlo
+a un colega porque no lo puede hacer el, pero dejo un "informe parcial")
+
+
+
+
+

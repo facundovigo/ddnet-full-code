@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+
+.divInfo {
+	
+	position: absolute;
+	top: 3px;
+	height: 15px;
+	text-align: center					!important;
+	font-family: Arial, sans-serif		!important;
+	font-size: 0.7em					!important;
+	width: 99%;
+}
+
+#tabs {
+	
+	top: 13px;
+	font-size: 0.8em;
+	margin-top: 10px;
+	heigth: 100%;
+}
+
+th {
+	
+	text-align: center	!important;
+}
+
+#tabUsuarios {
+	
+	
+	height: 54%;
+	padding: 10px 17%;
+	
+}
+
+.userButtons{
+	
+	margin-top: 15px;
+}
+
+.cant {
+	
+	position: absolute;
+	margin-left: 47.5%;
+	font-weight: bold;
+}
+
+#tbUsuarios_wrapper th {
+	padding: 5px 18px 5px 5px;
+	border: solid 1px #6ea9ad;
+	background-color: #ced9cd;	
+}
+
+#tbUsuarios_wrapper tr.odd {
+	background-color: #eee9dd;
+}
+
+#tbUsuarios_wrapper tr.even {
+	background-color: #dee9dd;
+}
+
+#tbUsuarios_wrapper tr.DTTT_selected {
+	background-color: #a6b3cd;
+}
+
+#tbUsuarios_wrapper td {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 0;
+	padding-right: 0;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/barcodeScaningPreferencesCategoryTitle">
+        <CheckBoxPreference
+            android:key="@string/useFlashPreferenceKey"
+            android:title="@string/useFlashPreferenceTitle"
+            android:defaultValue="false" />
+        <CheckBoxPreference
+            android:key="@string/autoFocusPreferenceKey"
+            android:title="@string/autoFocusPreferenceTitle"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="@string/returnFirstDetectedBarcodePreferenceKey"
+            android:title="@string/returnFirstDetectedBarcodePreferenceTitle"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

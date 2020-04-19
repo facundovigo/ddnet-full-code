@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;trash.png&apos; to &apos;images&apos;&#x0A;- Original project: &apos;ddnet-web&apos;&#x0A;- Destination element: &apos;images&apos;&#x0A;- Original element: &apos;trash.png&apos;" description="Copy file" element1="src/main/webapp/images/trash.png" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1457631236263" target="/ddap-web/src/main/webapp/images" units="0" version="1.0"/>
+</session>

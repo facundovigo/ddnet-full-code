@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DDnet - Web - Administrador de Estudio</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+	<script type="text/javascript" src="../js/jquery.fileDownload.js"></script>
+	<script type="text/javascript" src="../js/jquery.uploadfile.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../js/jquery-combobox-autocomplete.js"></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../js/ddweb.js"></script>
+	<script type="text/javascript" src="../js/ddweb-useragent.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<script type="text/javascript" src="../js/toastr.js"></script>
+	<script type="text/javascript" src="../js/configure-datatables.js"></script>
+	<script type="text/javascript" src="../js/adjust-script.js"></script>
+	<script type="text/javascript" src="../js/upload-file.js"></script>
+	<script type="text/javascript" src="../js/qrcode.js"></script>
+	<script type="text/javascript" src="../js/study.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="../css/uploadfile.css" />
+	<link rel="stylesheet" type="text/css" href="../css/toastr.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/study.css" />
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" />
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css" />
+</head>
+<body>
+<div id="studyHeader" align="center">
+	<div class="header-institution-logo"><img id="institutionLogo"/></div>
+	<div class="header-info">
+	<label style="width:65px;">Estudio :</label>&nbsp;<span></span> <br>
+	<label style="width:65px;">Paciente :</label>&nbsp;<span></span> <br>
+	<label style="width:65px;">PatientID :</label>&nbsp;<span style="width:125px;"></span>
+	<label style="width:50px;">Edad :</label>&nbsp;<span style="width:106px;"></span>
+	<label style="width:45px;">Sexo :</label>&nbsp;<span></span> <br>
+	<label style="width:65px;">StudyID :</label>&nbsp;<span style="width:125px;"></span>
+	<label style="width:50px;">Fecha :</label>&nbsp;<span style="width:106px;"></span>
+	<label style="width:45px;">Mod :</label>&nbsp;<span></span>
+	</div>
+</div>
+<div id="tabs">
+	<ul>
+		<li><a href="#studyReport">Informes</a></li>
+		<li><a href="#studyMessages">Mensajes</a></li>
+		<li><a href="#studyFiles">Archivos</a></li>
+		<li><a href="#studyLog">Log</a></li>
+	</ul>
+	<div id="studyReport">
+		<div class="report-left" align="right">
+			<div class="visual-menu">
+			<h4>Im&aacute;genes : </h4>
+			<ul id="visualMenu">
+				<li class="ui-widget-header">VER</li>
+				<li><span class="ui-icon ui-icon-zoomout"></span>Visual. Simple</li>
+				<li><span class="ui-icon ui-icon-zoomout"></span>Visual. Intermedia</li>
+				<li><span class="ui-icon ui-icon-zoomin"></span>Visual. Avanzada</li>
+				<li class="ui-widget-header">DESCARGAR</li>
+				<li><span class="ui-icon ui-icon-arrowstop-1-s"></span>Lossy</li>
+				<li><span class="ui-icon ui-icon-arrowthickstop-1-s"></span>Lossless</li>
+				<li><span class="ui-icon ui-icon-disk"></span>DicomDIR</li>
+				<li class="ui-widget-header">SERIES</li>
+				<li><span class="ui-icon ui-icon-clipboard"></span>Mostrar Todas</li>
+			</ul>
+			</div>
+		</div>
+		<div class="report-center" align="center">
+		<label>Plantillas :</label> &nbsp;
+		<select id="templates"></select>
+		<label style="width:420px;font-size:.9em;font-style:italic;">cargando...</label> <br>
+		<label style="width:498px;text-align:left;">INFORME :</label> <br>
+<textarea id="studyReportBody"
+placeholder="Escriba el Informe o ingrese una plantilla.
+Los datos del paciente se incorporan al momento de cerrar el Informe.">
+</textarea>
+		</div>
+		<div class="report-right" align="left">
+			<div class="report-actions">
+			<h4>Acciones sobre el Informe</h4>
+			<button type="button" title="guarde el texto para luego seguir editando su Informe"></button> <br><br>
+			<button type="button" title="su Informe quedará cerrado y ya no se podrá editar"></button> <br><br>
+			<span style="display:inline-block;margin:6px 0px;">Marcar como :</span> <br>
+			&nbsp;<label title="si el estudio requiere intervención médica urgente"><input type="checkbox" id="clinicalEmergency"> Emergencia M&eacute;dica</label> <br>
+			&nbsp;<label title="si el estudio contiene un hallazgo de índole académico"><input type="checkbox" id="teachingFile"> Teaching File</label> <br>
+			&nbsp;<label title="si se quiere revisar ante una duda en el diagnóstico"><input type="checkbox" id="secondRead"> Segunda Lectura</label> <br><br>
+			<button type="button"></button> <br><br>
+			<label class="report-rec-status">Puede grabar : <img class="report-rec-status" src="../images/punto_rojo.png" /></label> <br><br>
+			<a id="viewRecords" class="no-records" href="">Audios Grabados</a>
+			</div>
+		</div>
+	</div>
+	<div id="studyMessages" align="center">
+	<div class="study-messages" align="left">
+		<h4>MENSAJES</h4>
+		<button type="button"></button> &nbsp;
+		<button type="button"></button> <br><br>
+		<textarea id="msgBody" class="msg-body"></textarea> 
+		<input type="hidden" id="msgMemory" value="">
+		<input type="hidden" id="urgencyFlag" value="0"> 
+		<input type="hidden" id="urgencySolved" value="0"> <br><br>
+		<div id="selectUrgency">
+		<label class="is-urgency"><input type="checkbox" id="isUrgency"> NUEVA URGENCIA</label> &nbsp;
+		<label>Fecha : <input type="text" class="inc-date"></label>
+		<label>Resolver : <input type="text" class="inc-date"></label>
+		</div>
+		<h5>URGENCIAS sin resolver y resueltas	</h5>
+		<div id="incidentsNotSolved" class="msg-info"></div> <br>
+		<div id="incidentsSolved" class="msg-info"></div>
+	</div>
+	<div class="study-assignments" align="center">
+		<h4>ASIGNACIONES</h4>
+		<span id="assignedTo"></span> <br><br>
+		<label id="selectUser"></label> &nbsp;
+		<select id="usersList"></select> <br>
+		<button type="button"></button> <br><br>
+		<h5>Usuario DDnet</h5>
+		<span id="assignedUser"></span>
+		<h6>Env&iacute;e un correo al Paciente para dar de alta como usuario</h6>
+		<label>E-mail : <input type="text" id="patientMail"></label> <br><br>
+		<button type="button"></button>
+	</div>
+	<div class="study-clinical-data" align="left">
+		<div class="clinical-data">
+		<h4>DATOS CL&Iacute;NICOS - ANTECEDENTES</h4>
+		<label>Tipo : 
+		<select class="cld-selector">
+			<option value="0" style="color:#000">Normal (48hs.)</option>
+			<option value="1" style="color:#d90">Prioridad (24hs.)</option>
+			<option value="2" style="color:#a00">Urgente (1h.)</option>
+		</select>
+		</label> &nbsp;
+		<button type="button"></button> <br><br>
+		<textarea class="cld-messages"></textarea> <br><br>
+		<span class="cld-info"></span>
+		</div>
+	</div>
+	</div>
+	<div id="studyFiles" align="center">
+	<div class="med-order-list" align="center">
+		<h4>&Oacute;RDENES M&Eacute;DICAS</h4>
+		<table id="medOrderList"></table> <br><br>
+		<div id="ordMedUploader" class="single-file-uploader">Subir Ord.M&eacute;dica</div>
+	</div>
+	<div class="files-list" align="center">
+		<h4>ARCHIVOS</h4>
+		<table id="filesList"></table> <br><br>
+		<div id="fileUploader" class="single-file-uploader">Subir Archivo</div> <br>
+		<h5>Utilice la App para subir Archivos</h5>
+		<button type="button"></button>
+	</div>
+	<div class="mp3-list" align="center">
+		<h4>AUDIOS</h4>
+		<table id="mp3List"></table> <br><br>
+		<div id="mp3Uploader" class="single-file-uploader">Subir Audio</div>
+	</div>
+	</div>
+	<div id="studyLog" align="center">
+	<div align="center">
+	<h3>Cambios realizados en este Estudio</h3>
+	<div class="study-log"><table id="loggerList"></table></div>
+	</div>
+	</div>
+</div>
+<div id="studyFoot" align="center">
+	<span id="userInfo"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+	<a id="configurationLink" href="javascript:open_conf_dialog();">Configuraci&oacute;n</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+	<span id="ddnetVersion"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+	<a href="javascript: window.close();" class="span-bottom">Cerrar</a>
+</div>
+<div id="page-loading" align="center"><br><label><b>Aguarde Por Favor</b></label><br><br><img src="../images/page-loader.gif"></div>
+</body>
+</html>

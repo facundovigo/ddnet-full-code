@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>Telelaudo - Web - Recuperar Contrase&#241;a</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.4.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.js"></script>
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+
+<style type="text/css">
+	
+	/**
+	 *	Estilos personalizados de la página
+	 */
+	
+	body {	/* Diseño del cuerpo */
+	
+		font-family: sans-serif;
+		font-size: 10pt;
+	}
+	
+	img {	/* Ajuste del logo Telelaudo */
+		
+		width: 40%;		
+		margin: 0 30%;	
+		height: 10%;	
+	}
+	
+	.divPassword {	/* Ajuste de los elementos */
+		
+		position: absolute;
+		height: 55%;
+		width: 38.5%;
+		margin: 0 30%;
+		padding-top: 20px;
+	}
+	
+	h4 {	/* Ajuste de etiquetas */
+		
+		margin-left: 5px;
+	}
+	span {	/* Ajuste de etiquetas */
+	
+		margin-left: 5px;
+	}
+	
+	#txtDato {	/* Diseño de textBox */
+	
+		background-color: #fff;
+		border: double #aaa 0.25em;
+		border-radius: 5px;
+		padding-left: 5px;
+		text-align: center;
+	}
+	#txtDato {	/* textBox enfocado */
+		
+		background-color: #fff;
+		border: double #888 0.25em;
+		border-radius: 5px;
+		padding-left: 5px;
+	}
+	
+	.ui-widget {	/* Diseño botón jQueryUI */
+		
+		font-size: 0.9em;
+	}
+	
+	.lblRadio {		/* Ajuste etiquetas de radioButton*/
+		
+		display: inline-block;
+	}
+	
+</style>
+
+<script type="text/javascript">
+
+/**
+ * Funciones javascript de la página
+ */
+
+	$(document).ready(function(){	// Funciones al arranque
+		
+		$('#btnRecuperar').button({								// configurar botón con jQueryUI
+					label: 'Enviar',							// qué dice el botón
+					icons: {primary: 'ui-icon-circle-check'}	// ícono del botón (CHECK)
+								 })	
+	
+		// acciones al hacer click en el botón
+						  .on('click', function(){
+							  var check  = $('input[type="radio"]:checked');	// opción seleccionada
+							  if(check.length == 0){ alert('Seleccione una opción'); 
+							  						 return;}	// No toma en cuenta si no hay opción seleccionada
+							  
+							  if($('#txtDato').val() == ''){ alert('No hay texto ingresado'); 
+		  						 							 return;}	// No toma en cuenta si no hay dato
+		  						 							 
+		  					  $.getJSON('password/abm/allusers')
+		  					 	.done(function(data){alert(data);})
+		  					  	.fail(function(){alert('error');});
+						  });
+		
+		centrarObjetos();	// centrar en la página los elementos
+		
+		// acciones al momento de redimensionar la ventana
+		window.addEventListener( "resize" , function() { centrarObjetos(); } );
+		
+		// acciones al hacer click sobre cada radioButton
+		$('#radLogin').on('click', function(){
+			
+			if($(this).prop('checked'))		// se ingresa el siguiente texto si fue marcado
+				$('#lblInfo').text("Ingrese su nombre de usuario. Si está registrado en el sistema"
+								+	" se le enviará un correo a la dirección que tenga asignada.");
+						});
+		$('#radMail').on('click', function(){
+			
+			if($(this).prop('checked'))		// se ingresa el siguiente texto si fue marcado
+				$('#lblInfo').text("Ingrese su dirección de correo. Si está registrada en el "
+							    +  "sistema se le enviará un correo a esta misma dirección.");
+						});
+		
+	});
+	
+	function centrarObjetos(){	//función para centrar elementos
+		
+		var divAncho = $('.divPassword').width(),		//ancho del contenedor
+			a = $('label[for="radLogin"]').width() + 10,//ancho etiqueta radioButton
+			b = $('#txtDato').width(),					//ancho textBox
+			c = $('#btnRecuperar').width();				//ancho botón
+		
+		$('input[type="radio"]').css('margin-left', (divAncho - a)/2 + 'px');	// aplicar margen a los radioButton
+		$('#txtDato').css('margin-left', (divAncho - (b+c))/2 + 'px');			// aplicar margen al textBox
+	}
+	
+</script>
+</head>
+<body>
+	<img src="images/telelaudo.png" />	<!-- logo de Telelaudo -->
+	
+	<div class="divPassword">				<!-- contenedor de los elementos de la página -->
+	
+		<h4>
+			Seleccione cómo quiere renovar su contraseña:	
+		</h4>
+		
+		<br><br>
+		
+		<!-- El usuario elegirá si se recupera la contraseña por login o 
+				por una dirección de correo que se encuentre en la BD 	-->
+				
+		<input type="radio" id="radLogin" name="radioButton" >
+			<label class="lblRadio" for="radLogin">Por nombre de usuario</label>	<br>
+		<input type="radio" id="radMail" name="radioButton" >
+			<label class="lblRadio" for="radMail">Por dirección de correo</label>	<br><br><br>
+			
+		<span id="lblInfo"></span>	<!-- Informar sobre el procedimiento según la opción elegida -->
+		<br><br>
+		
+		<input type="text" id="txtDato" > 		<!-- Aquí se ingresa el dato pedido -->
+		<button id="btnRecuperar"></button>		<!-- Ejecutar la recuperación -->
+		
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+<title>Cross-Browser QRCode generator for Javascript</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/qrcode.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/main.css" />
+</head>
+
+<body>
+	<span>Utilice la App de Diagn&oacute;stico Digital para escanear este código y adjuntar archivos.</span>
+	<input id="text" type="text" value="1" style="width:80%; display:none;" /><br />
+	<br />
+	<div id="qrcode" style="width:100px; height:100px; margin-top:15px; "></div>
+	
+	<script type="text/javascript">
+	
+	//{ 'id': 1234567, 'p': 'HERRERA, SERGIO G', 'e': 'RX RODILLA', 'f': '1999-12-31T15:42' }
+	
+	var studyID = $.url().param('s');
+	var studyText = '';
+	
+	$.getJSON('rest/studies/'+studyID)
+	.done(function(study){
+		if(study && study != null){
+		
+			studyText += study.id + '|';
+			studyText += "{ 'id': " + study.pid + "," ;
+			studyText += " 'p': '" + study.pn + "'," ;
+			studyText += " 'e': '" + study.desc + "'," ;
+			studyText += " 'f': '" + study.qrdate.replace(' ','T') + "' }" ;
+			
+			$("#text").val(studyText);
+			
+			makeCode();
+		}
+	}).fail(function(){alert('error buscando estudio');});
+	
+	
+	
+	var qrcode = new QRCode(document.getElementById("qrcode"), {
+		width : 250,
+		height : 250
+	});
+	
+	function makeCode () {		
+		var elText = document.getElementById("text");
+		
+		if (!elText.value) {
+			alert("Input a text");
+			elText.focus();
+			return;
+		}
+		
+		qrcode.makeCode(elText.value);
+	}
+	
+	
+	
+	$('#qrcode').css('margin-left','50%');
+	var aux = $('#qrcode').css('margin-left');
+	$('#qrcode').css('margin-left',(parseInt(aux) - 128)+'px');
+	
+	$("#text").
+		on("blur", function () {
+			makeCode();
+		}).
+		on("keydown", function (e) {
+			if (e.keyCode == 13) {
+				makeCode();
+			}
+		});
+	</script>
+
+</body>
+</html>

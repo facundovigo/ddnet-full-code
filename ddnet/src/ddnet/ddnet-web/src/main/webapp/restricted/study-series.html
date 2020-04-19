@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/configure-datatables.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" />
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:9pt;}
+	select#downloadType{background:#dcdcdc!important;border-radius:2.5px!important;display:inline-block;vertical-align:middle;height:24px;padding:3px 4px;}
+	div.series .ui-button{font-size:.95em;height:25px;margin-top:4px;min-width:100px;}
+	div#seriesList_wrapper{width:90%!important;}
+	div#seriesList_wrapper table{width:99%!important;border:solid 1px #000!important;}
+	div#seriesList_wrapper thead{background:#222!important;color:#eee!important;font-size:.9em!important;}
+	div#seriesList_wrapper tbody{font-size:.9em!important;}
+	div#seriesList_wrapper tr.even:not(.selected){background:#ededed!important;}
+	div#seriesList_wrapper tr.odd:not(.selected){background:#dcdcdc!important;}
+	div#seriesList_wrapper tr:not(:first-child) td{border-top:solid 1px #333!important;}
+	div#seriesList_wrapper td:not(:first-child){border-left:solid 1px #333!important;}
+	div#seriesList_wrapper div#seriesCant{float:left;margin-top:10px!important;}
+	div#seriesList_wrapper .dataTables_length{float:left!important;font-size:8pt!important;color:#000!important;margin-top:12px!important;}
+	div#seriesList_wrapper .dataTables_length select{background:#dcdcdc!important;border-radius:2.5px!important;}
+	div#seriesList_wrapper .dataTables_paginate{float:right!important;font-size:8pt!important;}
+	div#seriesList_wrapper a.paginate_button.current{border-radius:15px!important;}
+	div#seriesList_wrapper a.paginate_button:hover{border-radius:15px!important;background:#ccc!important;color:black!important;}
+	div#seriesList_wrapper div.DTTT_container{font-size:.9em!important;}
+</style>
+<script type="text/javascript">
+	var dt= null, studyId= null;
+	function close(){
+		window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+		window.parent.$("#dynamicModalDialog").dialog("close");
+	}
+	function init_buttons(){
+		var buttons= $('div.series').find('button');
+		$(buttons[0]).button({
+			label:'Visualizar',
+			icons:{primary:'ui-icon-search'}
+		}).on('click',function(){
+			var rows= dt.api().rows('.selected').data();
+			if(rows.length==1){
+				$.each(rows,function(i,row){
+				var url= window.parent.getConfig('actions.study.simple-view.url');
+				url= url.replace('${HOST}',location.hostname).replace('${STUDYID}',studyId).replace('${SERIEID}',row.serieUID);
+				window.open(url,'Visualización simple para serie: '+row.serieUID,800,800);
+				});
+			} else if(rows.length>1){
+				window.parent.$alert('Seleccione sólo una Serie para ver');
+			} else return false;
+		});
+		$(buttons[1]).button({
+			label:'Descargar como',
+			icons:{primary:' ui-icon-arrowstop-1-s'}
+		}).on('click',function(){
+			var quality= $('select#downloadType').val();
+			if(!quality) return;
+			
+			var rows= dt.api().rows('.selected').data(); var seriesIds= [];
+			if(rows.length<=0){window.parent.$alert('Seleccione al menos una Serie');return}
+			else $.each(rows,function(i,row){ seriesIds.push(row.serieUID) });
+			
+			if(seriesIds.length>0){
+				if(quality=='dicomdir'){
+					$.each(seriesIds,function(i,s){
+						var url= 'rest/studies/'+studyId+'/media?quality=0&series='+s+'&options=nonexec';
+		        		window.parent.$.fileDownload(url);
+					});
+				} else {
+				if(window.parent.ddUserAgent.isUserAgentActive()) {
+					window.parent.getStudyImagesFor(window.parent.study,quality,seriesIds);
+				} else{
+					window.parent.ddUserAgent.startUserAgent(
+    					function(){window.parent.getStudyImagesFor(study,quality,seriesIds)}, 
+    					function(){window.parent.warnUserAgentNotStarted()}
+	    			);
+				}}
+			} else return;
+		});
+	}
+	$(document).ready(function(){
+		studyId= $.url().param('s');
+		if(!studyId || studyId==null){window.parent.toastr['warning']('Falló la búsqueda de Series','ERROR');close()}
+		dt= window.parent.jqDataTable.studySeries();
+		$.getJSON('rest/studies/currentStudy/series/'+ studyId)
+		.done(function(data){
+			dt.api().clear();
+		  	if(data && data.length>0){
+		  		dt.fnAddData(data);
+		  		$('div#seriesCant').html('Total : <b>'+data.length+'</b> Series');
+		  	} else $('div#seriesCant').html('Total : <b>0</b> Series');
+		})
+		.fail(function(){
+			window.parent.toastr['error']('Falló la búsqueda de Series','ERROR');
+			close();
+		});
+		init_buttons();
+		if(!window.parent.actionIsAllowed(window.parent.userinfo,window.parent.userinfo.institutions[0].institution.id,'request-study-images')){
+			var buttons= $('div.series').find('button');
+			$(buttons[1]).remove();
+			$('select#downloadType').remove();
+		}
+		if(!window.parent.actionIsAllowed(window.parent.userinfo,window.parent.userinfo.institutions[0].institution.id,'simple-study-visualization')){
+			var buttons= $('div.series').find('button');
+			$(buttons[0]).remove();
+		}
+	});
+</script>
+</head>
+<body>
+<div class="series" align="center">
+<button type="button"></button> &nbsp;&nbsp;
+<button type="button"></button> &nbsp;
+<select id="downloadType">
+	<option value="lossy">Lossy</option>
+	<option value="loseless">Lossless</option>
+	<option value="dicomdir">DicomDIR</option>
+</select> <br><br>
+<table id="seriesList"></table>
+</div>
+</body>
+</html>

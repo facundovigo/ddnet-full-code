@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete 6 resources" deleteContents="false" description="Delete 6 resources" element1="/ddnet" element2="/ddnet-centeragent" element3="/ddnet-ejb" element4="/ddnet-tl" element5="/ddnet-useragent" element6="/ddnet-web" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="6" stamp="1440697501592"/>&#x0A;<refactoring comment="Delete 4 resources" deleteContents="false" description="Delete 4 resources" element1="/ddnet" element2="/ddnet-ejb" element3="/ddnet-tl" element4="/ddnet-web" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="4" stamp="1440775120165"/>
+</session>

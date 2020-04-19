@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+
+<style type="text/css">
+	body {
+		background: lightslategray;
+		font-family: Impact, Charcoal, sans-serif;
+		font-size: 11pt;
+		padding: 0 20px;
+	}
+</style>
+
+<script type="text/javascript">
+
+	$(function(){
+		
+	});
+	
+	$(document).ready(function(){
+		
+		$.getJSON('rest/osocial/all')
+		.done(function(data){
+			if(data && data.length > 0){
+				
+				$('#divResult').children().remove();
+				$('#divResult').text('');
+				$('#divResult').append('<br><br><span onclick="getValue(null);">000 - Ninguna</span>');
+				
+				$.each(data, function(i, os){
+					
+					$('#divResult').append('<br><br><span id="'+os.name+'" onclick="getValue(this);">'
+														+	os.code+' - '+os.name + '</span>');
+				});
+				
+				$('span').css('cursor', 'pointer');
+				
+			}else{
+				$('#divResult').children().remove();
+				$('#divResult').append('<br><br>No se encontraron Obras Sociales');
+			}
+			
+		}).fail(function(){	alert('Ocurrió un error al momento de cargar las Obras Sociales');
+							window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+							window.parent.$("#dynamicModalDialog").dialog("close");	
+		});
+	});
+	
+	function getValue(elem){
+		
+		var value = elem != null ? elem.id : '';
+		
+		window.parent.$('#txtMedInsurance').val(value);
+		window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+		window.parent.$("#dynamicModalDialog").dialog("close");
+	}
+	
+</script>
+
+</head>
+
+<body>
+
+	<div id="divResult"></div>
+
+</body>
+
+</html>

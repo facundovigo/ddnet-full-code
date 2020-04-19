@@ -1,0 +1,99 @@
+/**
+ * Funciones javascript de la página
+ */
+
+$(document).ready(function(){	// Funciones al arranque
+		
+	//pruebaCookie();
+	//alert(document.cookie);
+	
+		$('#btnRecuperar').button({								// configurar botón con jQueryUI
+					label: 'Enviar',							// qué dice el botón
+					icons: {primary: 'ui-icon-circle-check'}	// ícono del botón (CHECK)
+								 })	
+	
+		// acciones al hacer click en el botón
+					  .on('click', function(){
+						  var check  = $('input[type="radio"]:checked');	// opción seleccionada
+						  var op = check.val();
+							  
+						  if(check.length == 0){ alert('Seleccione una opción'); 
+						  						 return;}	// No toma en cuenta si no hay opción seleccionada
+						  
+						  if($('#txtDato').val() == ''){ alert('No hay texto ingresado'); 
+	  						 							 return;}	// No toma en cuenta si no hay dato
+						  
+						  DoTheRestore($('#txtDato').val(), op);	// restaurar contraseña
+					  });
+		
+		centrarObjetos();	// centrar en la página los elementos
+		
+		// acciones al momento de redimensionar la ventana
+		window.addEventListener( "resize" , function() { centrarObjetos(); } );
+		
+		// acciones al hacer click sobre cada radioButton
+		$('#radLogin').on('click', function(){
+			
+			if($(this).prop('checked'))		// se ingresa el siguiente texto si fue marcado
+				$('#lblInfo').text("Ingrese su nombre de usuario. Si está registrado en el sistema"
+								+	" se le enviará un correo a la dirección que tenga asignada.");
+						});
+		$('#radMail').on('click', function(){
+			
+			if($(this).prop('checked'))		// se ingresa el siguiente texto si fue marcado
+				$('#lblInfo').text("Ingrese su dirección de correo. Si está registrada en el "
+							    +  "sistema se le enviará un e-mail a esta misma dirección.");
+						});
+});
+	
+function centrarObjetos(){	//función para centrar elementos
+		
+		var divAncho = $('.divPassword').width(),		//ancho del contenedor
+			a = $('label[for="radLogin"]').width() + 10,//ancho etiqueta radioButton
+			b = $('#txtDato').width(),					//ancho textBox
+			c = $('#btnRecuperar').width();				//ancho botón
+		
+		$('input[type="radio"]').css('margin-left', (divAncho - a)/2 + 'px');	// aplicar margen a los radioButton
+		$('#txtDato').css('margin-left', (divAncho - (b+c))/2 + 'px');			// aplicar margen al textBox
+}
+
+function pruebaCookie(){
+	
+	var cookies = document.cookie.split(';');
+	
+	for(var i=0; i < cookies.length; i++){
+		if(cookies[i]==='CANT_MAX=') alert(cookies[i]);
+	}
+}
+
+function DoTheRestore(val, op){
+	
+	$.post('authentication-servlet/restore', 'dato='+ val +'&op='+ op)
+	  .done(function(data){
+			if(data && data.length > 0){
+				
+				var str0 = data.substring(data.indexOf('=')+1,data.indexOf(';'));
+				var str1 = data.substring(data.lastIndexOf('=')+1,data.length);
+				var flag = parseInt(str0);
+				var hecho = str1.startsWith('true');
+				
+				if(flag == 1){ 
+					if(hecho){
+						alert('ok');
+						//location.href='authentication-servlet/login';
+					}
+					else{
+						alert('nu');
+					}
+				}
+				else {
+					document.cookie =
+						'CANT_MAX=OK;expires=24*60*60';
+					location.reload();
+				}
+			}
+	  })
+	  .fail(function(e0,e1,e2){alert(e2);});
+}
+
+

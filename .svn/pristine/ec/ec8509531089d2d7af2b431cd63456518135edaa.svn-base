@@ -1,0 +1,52 @@
+package ddnet.web.security;
+
+import java.util.Collection;
+
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+import ddnet.ejb.UserManagerLocal;
+import ddnet.ejb.entities.User;
+
+
+@Stateless
+@LocalBean
+public class RestorePassword {
+	@EJB
+	private UserManagerLocal userManager;
+	
+/**
+ * Funciones en Java para recuperar contraseñas
+ * 	
+ */
+	
+// Levantar un flag si el dato ingresado por el cliente es correcto
+	public int flagDato(String dato, int op) {
+	
+	int flag = 0;									// declaro el flag
+	Collection<User> us = userManager.getAll();		// tomo todos los usuarios
+	
+	if(op==1){										// si pidió recuperar por nombre de usuario
+	
+		for(User u : us)							// recorro los usuarios
+			if(u.getLogin().equals(dato))			// si coincide el dato con el login de un usuario
+				flag = 1;							// levanta el flag
+	}
+	else if(op==2){									// si pidió recuperar por dirección de correo
+		
+		for(User u : us){
+			if(u.getMedico() != null){				// si el usuario es médico y coincide el mail
+				if(u.getMedico().getMailAddress().equals(dato))
+					flag = 1;						// levanta el flag
+			}
+			else if(u.getCentro() != null){			// si el usuario es centro y coincide el mail
+				if(u.getCentro().getMailAddress().equals(dato))
+					flag = 1;						// levanta el flag
+			}
+		}
+	}
+		
+	return flag;
+	}
+}

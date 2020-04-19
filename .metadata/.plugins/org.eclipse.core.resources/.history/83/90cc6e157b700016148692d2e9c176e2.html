@@ -1,0 +1,238 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10pt;overflow-y:auto;}
+	h5{text-align:left;}
+	select{height:22px;background:#dcdcdc;border-radius:2.5px;padding-left:3px;}
+	select#allRoles{width:220px;} select#allProvinces{width:175px;}
+	label{display:inline-block;width:125px;text-align:right;font-size:.9em;margin-bottom:10px;}
+	input{border:double #222 0.25em;background:#eee;text-align:center;}
+	input:focus{border:double #0972a5 0.25em;}
+	div#medInfo{display:none;}
+	textarea{width:75%;height:60px;resize:none;border:double #222 0.25em;background:#eee;font-size:.9em;}
+	textarea:focus{border:double #0972a5 0.25em;}
+	.ui-button{font-size:.9em;margin:5px 0px;}
+	.ui-tooltip{font-size:.8em;}
+	::-webkit-input-placeholder{color:#778899;font-style:italic;}:-moz-placeholder{color:#778899;font-style:italic;}::-moz-placeholder{color:#778899;font-style:italic;}:-ms-input-placeholder{color:#778899;font-style:italic;}
+</style>
+<script type="text/javascript">
+	var role= null,login= null,firstName= null,lastName= null,isNew= null,perm=null; var dialog= window.parent.$("div#dynamicModalDialog");
+	function get_url_params(){
+		login= $.url().param('login');
+		firstName= $.url().param('firstName');
+		lastName= $.url().param('lastName');
+		role= $.url().param('role');
+		isNew= $.url().param('new')=='true';
+		perm= $.url().param('perm')=='true';
+		$('h4#userInfo').text('USUARIO : '+login+' ('+firstName+' '+lastName+')');
+	}
+	function preset_selectmenu(){
+		$.getJSON("../restricted/rest/abm/allroles")
+		.done(function(data){
+			if(data && data.length>0){
+			var select= $('select#allRoles');
+			select.find('option').remove().end();
+			select.append('<option value="">Obligatorio</option>');
+			$.each(data,function(i ,rol){
+				if(!isNew && rol.name==role){
+				select.append('<option value="'+rol.name +'" selected="selected" chores="'+rol.chores+'">'+rol.name+'</option>');
+				role.indexOf('Medico')!=-1 ? $('div#medInfo').show() : $('div#medInfo').hide()
+				} else select.append('<option value="'+rol.name+'" chores="'+rol.chores+'">'+rol.name+'</option>');
+			})}
+		})
+		.fail(function(){$('select#allRoles').find('option').remove().end();$('select#allRoles').append('<option value="">ERROR al cargar los roles</option>')});
+		$('select#allRoles').on('change',function(){$(this).val().indexOf('Medico')!=-1 ? $('div#medInfo').show() : $('div#medInfo').hide()});
+		$.getJSON("../restricted/rest/abm/provincias")
+		.done(function(data){
+			if(data && data.length>0){
+			var select= $('select#allProvinces'); var user= dialog.data('user');
+			select.find('option').remove().end();
+			select.append('<option value="">Seleccione...</option>');
+			$.each(data,function(i,p){
+				if(!isNew && user.perfil!=null && user.perfil.province==p.name) select.append('<option value="'+p.name+'" selected="selected">'+p.name+'</option>');
+				else select.append('<option value="'+p.name+'">'+p.name+'</option>');
+			})}
+		})
+		.fail(function(){$('select#allProvinces').find('option').remove().end();$('select#allProvinces').append('<option value="">ERROR</option>')});
+	}
+	function preset_inputs(){
+		$('input[placeholder="solo números"]').on('keypress',function(){
+			var tecla= event.which || event.keyCode;
+			if(tecla<48 || tecla>57) return false; else return;
+		});
+		$('input:not([title=""])').tooltip();
+	}
+	function assign_role(){
+		var value= $('select#allRoles').val();
+		if(value==''){window.parent.$alert('Seleccione un Rol para el usuario');return}
+		if($('input[placeholder="campo obligatorio"]').val()==''){window.parent.$alert('Agregue una dirección de correo electrónico');return}
+		if($('input[placeholder="hasta 10 caracteres"]').val().length>10){window.parent.$alert('El nombre no debe tener más de 10 caracteres');return}
+		
+		var chores= $('select#allRoles').attr('chores');
+		
+		/*
+		$.post('../restricted/rest/abm/user-permissions?login='+login+'&chores='+chores+'&new=true')
+		.done(function(){
+			window.parent.toastr['success']('Permisos asignados al usuario','HECHO');
+		})
+		.fail(function(){
+			window.parent.toastr['error']('Falló la creación del usuario','ERROR');
+			$.post('../restricted/rest/abm/deleteUser','login='+login);
+			dialog.unbind('dialogbeforeclose');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		});
+		
+		$.post('../restricted/rest/abm/new/userprofile/'+login,$('form#userProfile').serialize())
+		.done(function(){
+			window.parent.toastr['success']('Se ha creado el Perfil del usuario','HECHO');
+			var url= '../ABM/AsignarInstitucion.html?login='+login+'&firstName='+firstName+'&lastName='+lastName+'&roleName='+value+'&new=true';
+			window.parent.$("#dynamicModalDialogIframe").attr('src',url);
+		}).fail(function(){
+			window.parent.toastr['error']('Falló la creación del Perfil','ERROR');
+			$.post('../restricted/rest/abm/deleteUser','login='+login);
+			dialog.unbind('dialogbeforeclose');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		});*/
+	}
+	function modify_role(){
+		var modifyRole= function(){
+			var value= $('select#allRoles').val();
+			if(value==''){window.parent.$alert('Seleccione un Rol para el usuario');return}
+			if($('input[placeholder="campo obligatorio"]').val()==''){window.parent.$alert('Agregue una dirección de correo electrónico');return}
+			if($('input[placeholder="hasta 10 caracteres"]').val().length>10){window.parent.$alert('El nombre no debe tener más de 10 caracteres');return}
+			var chores= $('select#allRoles').attr('chores');
+			
+			if(role=='SIN ROL'){
+				var url= '../ABM/AsignarInstitucion.html?login='+login+'&firstName='+firstName+'&lastName='+lastName+'&roleName='+value+'&new=true&fix=si';
+				window.parent.$("#dynamicModalDialogIframe").attr('src',url);
+				if(!perm){
+					$.post('../restricted/rest/abm/user-permissions?login='+login+'&chores='+chores+'&new=true')
+					.done(function(){window.parent.toastr['success']('Permisos asignados al usuario','HECHO')})
+					.fail(function(){window.parent.toastr['error']('Falló la asignación de Permisos','ERROR')});
+				}
+			}
+			if(role!='SIN ROL' && value!=role){
+				$.post('../restricted/rest/abm/user-permissions?login='+login+'&chores='+chores+'&new=false')
+				.done(function(){window.parent.toastr['success']('Permisos asignados al usuario','HECHO')})
+				.fail(function(){window.parent.toastr['error']('Falló la asignación de Permisos','ERROR')});
+				
+				$.post('../restricted/rest/abm/update-user', 'value='+value+'&login='+login+'&numCol=3')
+				.done(function(){window.parent.toastr['success']('Se ha modificado el Rol','HECHO')})
+				.fail(function(obj){window.parent.toastr['error']('Falló la modificación del Rol','ERROR')});
+				
+				$.post('../restricted/rest/abm/modify/userprofile/'+login,$('form#userProfile').serialize())
+				.done(function(){window.parent.toastr['success']('Se ha modificado el Perfil','HECHO')})
+				.fail(function(a,b,c){window.parent.toastr['error']('Falló la modificación del Perfil','ERROR')});
+				
+				dialog.dialog('close');
+				window.parent.charge_users();
+			}
+		}; window.parent.$confirm('¿Confirma los cambios?',modifyRole)
+	}
+	function cancel_new_user(){
+		var deleteUser= function(){
+			$.post('../restricted/rest/abm/deleteUser','login='+login);
+			dialog.unbind('dialogbeforeclose');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		}; window.parent.$confirm('Si no confirma las asignaciones,\nel nuevo usuario "'+login+'" se borrará',deleteUser);
+	}
+	function cancel_changes(){
+		window.parent.$('#dynamicModalDialogIframe').attr('src', 'about:blank');
+		dialog.dialog('close');
+	}
+	function preset_buttons(){
+		var buttons= $('button');
+		$(buttons[0]).button({label:'Confirmar',icons:{primary:'ui-icon-circle-check'}});
+		$(buttons[1]).button({label:'Cancelar',icons:{primary:'ui-icon-circle-close'}});
+		if(isNew){
+			$(buttons[0]).on('click', assign_role);
+			$(buttons[1]).on('click', cancel_new_user);
+		}else{
+			$(buttons[0]).on('click', modify_role);
+			$(buttons[1]).on('click', cancel_changes);
+		}
+	}
+	
+	$(document).ready(function(){
+		get_url_params();
+		preset_selectmenu();
+		preset_inputs();
+		preset_buttons();
+		if(isNew){
+			dialog.dialog('option','title','ASIGNAR ROL A USUARIO');
+			dialog.bind('dialogbeforeclose',function(ev,ui){
+				window.parent.$alert('Debe completar las asignaciones\npara terminar de crear el usuario,\nde lo contrario presione el botón CANCELAR');
+			  	return false;
+			});
+		} else{
+			var user= dialog.data('user'); var inputs= $('input');
+			//$.getJSON('../restricted/rest/abm/info/'+login)
+			//.done(function(user){
+				if(user){
+					if(user.perfil != null){
+						$(inputs[0]).val(user.perfil.fancyName);
+						$(inputs[1]).val(user.perfil.email);
+						$(inputs[2]).val(user.perfil.skype);
+						$(inputs[3]).val(user.perfil.phone1);
+						$(inputs[4]).val(user.perfil.phone2);
+						$(inputs[5]).val(user.perfil.address);
+						$(inputs[6]).val(user.perfil.location);
+						$(inputs[7]).val(user.perfil.mn);
+						$(inputs[8]).val(user.perfil.mp);
+						$(inputs[9]).val(user.perfil.title);
+						$('textarea').val(user.perfil.additionalInfo);
+					}
+				}
+			//}).fail(function(){alert('Ocurrió un error al momento de cargar la información')});
+		}
+	});
+</script>
+</head>
+<body>
+<div align="center">
+	<button type="button"></button> &nbsp;&nbsp;
+	<button type="button"></button> <br>
+	<h4 id="userInfo"></h4>
+	<h5>Seleccione el rol que tendrá el usuario.</h5>
+	<select id="allRoles"></select><br>
+	<h5>Datos complementarios del usuario.</h5>
+	<form id="userProfile" autocomplete="off">
+		<label>Nombre Com&uacute;n :</label>
+		<input type="text" name="fancyName" placeholder="hasta 10 caracteres" title="es un alias para denominar al usuario" /> <br>
+		<label>Mail :</label>
+		<input type="text" name="mail" placeholder="campo obligatorio" /> <br>
+		<label>Contacto Skype :</label>
+		<input type="text" name="skype" /> <br>
+		<label>N&uacute;mero Tel&eacute;fono :</label>
+		<input type="text" name="phone1" placeholder="solo números" title="celular, fijo, otro" /> <br>
+		<label>Otro N&uacute;mero :</label>
+		<input type="text" name="phone2" placeholder="solo números" title="celular, fijo, otro" /> <br>
+		<label>Direcci&oacute;n :</label>
+		<input type="text" name="address" /> <br>
+		<label>Localidad :</label>
+		<input type="text" name="localidad" /> <br>
+		<label>Provincia :</label>
+		<select id="allProvinces" name="provincia"></select> <br>
+		<div id="medInfo">
+		<label>M.N. :</label>
+		<input type="text" name="mn" /> <br>
+		<label>M.P. :</label>
+		<input type="text" name="mp" /> <br>
+		<label>T&iacute;tulo :</label>
+		<input type="text" name="title" /> <br>
+		</div>
+		<label style="margin-top:8px;margin-bottom:-4px;">Información Adicional</label> <br>
+		<textarea name="addInfo"></textarea>
+	</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/jquery.form.js"></script>
+	<script type="text/javascript" src="../js/jquery.uploadfile.min.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/orden-medica.js"></script>
+	<script type="text/javascript" src="../js/jquery-combobox-autocomplete.js"></script>
+	<script type="text/javascript" src="../js/new-practice.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="../css/uploadfile.css">
+<style type="text/css">
+	body{background:#778899;font-family:Arial,sans-serif;font-weight:normal;font-size:9pt;}
+	div.buttons{margin:12px 0px;}
+	input[type=text]{background-color:#fff;border:double #000 0.25em;border-radius:5px;color:#000;text-align:center;font-style:italic;}
+	input[type="text"]:disabled{background:#ddd;color:#444;}
+	form#new-practice select{height:22px;background:#dcdcdc;border-radius:2.5px;padding-left:3px;}
+	form#new-practice{margin-left:20px;}
+	form#new-practice label,form#new-practice span{margin-bottom:6px;display:inline-block;}
+	span#value-from-practice{color:#fff;background:#060;font-size:10.5pt;padding:2px;margin-left:3px;}
+	span#emergency-value-from-practice{color:#fff;background:#600;font-size:10.5pt;padding:2px;margin-left:3px;}
+	div.by-modality select{margin-bottom:10px;}
+	textarea{width:95%;height:40px;resize:none;border:double #000 0.25em;border-radius:5px;}
+	input#AccessionNumber{font-weight:bold;font-style:normal;}
+	input#isEmergency{vertical-align:middle!important;}
+	
+	
+	.custom-combobox{position:relative;display:inline-block;}
+	div.by-modality .custom-combobox{width:92%!important;}
+	div#medChooser .custom-combobox{width:280px!important;}
+	div.by-modality .custom-combobox-input{width:95%!important;}
+	div#medChooser .custom-combobox-input{width:230px!important;}
+	.custom-combobox-toggle{position:absolute;top:0;bottom:0;margin-left:-1px;padding:0;}
+	.custom-combobox-input{margin:0;padding:5px 10px;}
+	.ui-selectmenu-button{display:inline-block!important;height:22px!important;font-size:.85em!important;vertical-align:middle!important;}
+	.ui-autocomplete.ui-widget-content{max-width:90%!important;}
+	
+	
+	option.add-new-med{font-style:italic;font-weight:bold;}
+	span#matrNumber{font-weight:bold;}
+	div#addMed{display:none;}
+	div#addMed .ui-button{font-size:.9em;width:27px;height:24px;}
+	.ui-tooltip{font-size:8pt;}
+</style>
+</head>
+<body>
+	<div class="buttons" align="center">
+		<button id="btn_confirm-practice"></button> &nbsp;
+		<button id="btn_clear-form"></button> &nbsp;
+		<button id="btn_cancel-op"></button>
+	</div>
+	<div class="practice-data-form" style="padding-top:15px;">
+	<form id="new-practice" class="pacientes">
+		<div align="center"> <label>Accession Number :</label> &nbsp;
+		<input type="text" id="AccessionNumber" name="study-acc-number" title="Solamente Números"> </div> <br>
+		<label style="width:72px;">Paciente : </label>
+		<span id="patient-name" style="width:180px;"></span>
+		<label style="width:75px;">Sexo : </label>
+		<span id="patient-sex" style="width:100px;"></span> 
+		<label style="width:135px;">Práctica de Emergencia : </label> 
+		<input type="checkbox" id="isEmergency"> <br>
+		<label style="width:72px;">Documento : </label>
+		<span id="patient-id" style="width:180px;"></span>
+		<label style="width:75px;">Fecha Nac : </label>
+		<span id="patient-bdate" style="width:100px;"></span> 
+		<label style="width:130px;">Valor de la Práctica : </label>
+		<span id="value-from-practice"></span><span id="emergency-value-from-practice" hidden=""></span> <br><br>
+		<label>Modalidad de la práctica a realizar:</label> &nbsp;&nbsp;
+		<select id="modalities" name="modality"></select> <br><br>
+		<div class="by-modality">
+		<label>Seleccione Modalidad para cargar las Prácticas correspondientes</label> <br><br>
+		<label>Seleccione Modalidad para cargar los Equipos correspondientes</label>
+		</div> <br>
+		<!-- <div class="uploader-container">
+			<label>Orden M&eacute;dica:</label>
+			<div id="omuploader" class="single-file-uploader" style="display:inline;"></div>
+		</div> <br> -->
+		<div id="medChooser">
+		<label>Médico derivante :</label> &nbsp;&nbsp;
+		<select name="ref-physician" id="medicos" style="width:225px;"></select> &nbsp;&nbsp;
+		<label>Matr&iacute;cula :</label> &nbsp;
+		<span id="matrNumber" style="width:120px;"></span>
+		</div>
+		<div id="addMed">
+		<label>Médico derivante :</label> &nbsp;&nbsp;
+		<input type="text" id="refPhysician"> &nbsp;&nbsp;&nbsp;
+		<label><input type="radio" name="med-license-type" checked="checked" value="M.N.">M.N.</label>
+		<label><input type="radio" name="med-license-type" value="M.P.">M.P.</label> &nbsp;&nbsp;
+		<label>N° :  </label>
+		<input type="text" id="licNumber" style="width:85px;" title="Solamente Números"> &nbsp;&nbsp;
+		<button type="button" title="Agregar"></button> &nbsp;
+		<button type="button" title="Cancelar"></button>
+		</div>
+		<!--<br><br>
+		<label>Observaciones : </label> <br>
+		<textarea name="practice-observation" ></textarea> -->
+	</form>
+	</div>
+</body>
+</html>

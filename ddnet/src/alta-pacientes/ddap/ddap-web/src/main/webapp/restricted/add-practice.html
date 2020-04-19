@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript">
+	
+		var isNew = null;
+		var practiceID = null;
+	
+		$(document).ready(function(){
+			
+			
+			isNew = parseInt($('input#flag-is-new').val()) == 1;
+			practiceID = $('input[name="practice-id"]').val();
+			$('input[name="id-practica"]').val(practiceID);
+					
+			if(isNew){
+				$('#btn_modify-practice').button({
+					label: 'Agregar',
+					icons: {'primary': 'ui-icon-circle-check'}
+				
+				}).on('click', create_the_practice );
+				
+			} else{
+				get_current_practice();
+				
+				$('#btn_modify-practice').button({
+					label: 'Modificar',
+					icons: {'primary': 'ui-icon-circle-check'}
+				
+				}).on('click', edit_the_practice );
+			}
+			
+			$('button#clear-practice-form').button({
+				label: 'Limpiar',
+				icons: {'primary': 'ui-icon-refresh'}
+			
+			}).on('click', clear_practice_form );
+			
+			$('button#cancel-practice-op').button({
+				label: 'Cancelar',
+				icons: {'primary': 'ui-icon-circle-close'}
+			
+			}).on('click', cancel_the_operation );
+			
+			$('input[title="Solamente números"]').on('keypress', function(){
+				
+				var tecla = event.which || event.keyCode;
+				if(tecla < 48 || tecla > 57) return false;
+				else return;
+			}).tooltip();
+			$('input[title="Solo números y el punto"]').on('keypress', function(){
+				var tecla = (event.which) ? event.which : event.keyCode;
+				if(tecla<48||tecla>57){
+					if(tecla!=46 && tecla!=8) return false;
+					else return true;
+				}
+				return true;
+			}).tooltip();
+		});
+	</script>
+
+</head>
+
+<body>
+
+	<div class="patient-data-form">
+	
+		<form id="new-practica" class="practicas">
+		
+			<input type="hidden" name="id-practica" />
+		
+			<label>Prestaci&oacute;n : </label>
+			<input type="text" id="capability" name="prestacion" placeholder="obligatorio" 
+					style="width: 110px;" >
+			
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			
+			<label>Nombre : </label>
+			<input type="text" id="name" name="nombre" placeholder="campo obligatorio"
+					style="width: 410px;" >
+				
+			<br><br>
+			
+			<label style="width:100px;text-align:right;" >Modalidad : </label>
+			<select id="modality" name="modalidad" style="width:250px;">
+				<option value="" selected="selected" >Obligatorio</option>
+				<option value="BI" >BI - Imagen Biomagnética</option>
+				<option value="CR" >CR - Radiografía Computarizada</option>
+				<option value="CT" >CT - Tomografía Computarizada</option>
+				<option value="DX" >DX - Radiografía Digital</option>
+				<option value="DXA" >DXA - Densitometría Ósea</option>
+				<option value="ECG" >ECG - Electrocardiograma</option>
+				<option value="ES" >ES - Endoscopía</option>
+				<option value="IO" >IO - Radiografía Intraoral</option>
+				<option value="MG" >MG - Mamografía</option>
+				<option value="MR" >MR - Resonancia Magnética</option>
+				<option value="NM" >NM - Medicina Nuclear</option>
+				<option value="OT" >OT - Otra</option>
+				<option value="PX" >PX - Radigrafía Panorámica</option>
+				<option value="RF" >RF - Radio Fluoroscopia</option>
+				<option value="RT" >RT - Radioterapia</option>
+				<option value="US" >US - Ultrasonido</option>
+				<option value="XA" >XA - Hemodinamia</option>
+			</select>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<label>Regi&oacute;n : </label> &nbsp;
+			<input type="text" id="region" name="region" title="Solamente números" 
+					style="width: 45px;">
+				
+			<br><br>
+			
+			<label style="width:118px;text-align:right;" >Nombre Interno : </label>
+			<input type="text" id="internal" name="interno" 
+					style="width: 200px;" >
+			
+			&nbsp;&nbsp;<span class="only-for-linux">&nbsp;&nbsp;</span>
+			
+			<label style="width:122px;text-align:left;" >Nombre Abreviado: </label>
+			<input type="text" id="abbreviated" name="abrev" 
+					style="width: 200px;" >
+			
+			<br><br>
+			
+			<label style="width:120px;text-align:right;" >Servicio : </label>
+			<input type="text" id="service" name="servicio" 
+					style="width: 200px;" >
+			
+			&nbsp;&nbsp;<span class="only-for-linux">&nbsp;&nbsp;</span>
+			
+			<label style="width:118px;text-align:right;" >Especialidad : </label>
+			<input type="text" id="specialty" name="especialidad" 
+					style="width: 200px;" >
+			
+			<br><br>
+			
+			<label>Tipo : </label>
+			<select id="type" name="tipo">
+				<option selected="selected" value="Práctica">Pr&aacute;ctica</option>
+				<option value="Práctica Adicional">Pr&aacute;ctica Adicional</option>
+				<option value="Otra">Otra</option>
+			</select>
+			
+			&nbsp;&nbsp;&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			
+			<label style="display:inline-block;">Requiere Informe : 
+				<input type="checkbox" id="need-report" name="reqInforme" style="vertical-align: middle;">
+			</label>
+			
+			&nbsp;&nbsp;<span class="only-for-linux">&nbsp;&nbsp;</span>
+			
+			<label style="width:123px;text-align:right;" >Regi&oacute;n Informe : </label>
+			<input type="text" id="report-region" name="regionInforme" 
+					style="width: 200px;">
+			
+			<br><br>
+			
+			<label style="width:90px;text-align:right;" >Valor  : $</label>
+			<input type="text" id="practice-value" name="valor" placeholder="obligatorio" title="Solo números y el punto"
+				   style="width:100px;text-align:right;padding-right:4px;color:#0b0;">
+				   
+			&nbsp;
+				   
+			<label style="width:155px;text-align:right;" >Valor de Emergencia : $</label>
+			<input type="text" id="practice-emergency-value" name="emergency-value" placeholder="obligatorio" title="Solo números y el punto"
+				   style="width:100px;text-align:right;padding-right:4px;color:#b00;">
+			<br>
+		</form>
+	</div>
+	<br>
+	<div class="buttons" align="center">
+		<button id="btn_modify-practice"></button> &nbsp;
+		<button id="clear-practice-form"></button> &nbsp;
+		<button id="cancel-practice-op"></button>
+	</div>		
+
+</body>
+
+</html>

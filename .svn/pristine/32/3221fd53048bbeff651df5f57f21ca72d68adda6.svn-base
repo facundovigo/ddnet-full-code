@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+
+.divInfo {
+	
+	position: absolute;
+	top: 3px;
+	height: 15px;
+	text-align: center					!important;
+	font-family: Arial, sans-serif		!important;
+	font-size: 0.7em					!important;
+	width: 99%;
+}
+
+#tabs {
+	
+	top: 13px;
+	font-size: 0.8em;
+	margin-top: 10px;
+	heigth: 100%;
+}
+
+th {
+	
+	text-align: center	!important;
+}
+
+#tabUsuarios {
+	
+	
+	height: 54%;
+	padding: 10px 17%;
+	
+}
+
+.userButtons{
+	
+	margin-top: 15px;
+}
+
+.cant {
+	
+	position: absolute;
+	margin-left: 47.5%;
+	font-weight: bold;
+}

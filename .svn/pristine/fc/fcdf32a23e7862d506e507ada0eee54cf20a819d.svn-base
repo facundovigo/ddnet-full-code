@@ -1,0 +1,40 @@
+package ddnet.ejb.dao;
+
+import java.util.Collection;
+
+import javax.ejb.Stateless;
+
+import ddnet.ejb.entities.Medico;
+import ddnet.ejb.util.data.AbstractDAO;
+
+
+@Stateless
+public class MedicoDAO extends AbstractDAO<Long, Medico> {
+	
+	public MedicoDAO() {
+		super(Medico.class);
+	}
+	
+	
+	@Override
+	public Collection<Medico> getAll() {
+		return entityManager.createQuery("SELECT med FROM Medico med", Medico.class).getResultList();
+	}
+	
+	public Collection<Medico> getOnCall() {
+		return entityManager.createQuery("SELECT med FROM Medico med WHERE isOnCall = true", Medico.class).getResultList();
+	}
+	
+	public Medico getByName(String name){
+		
+		return entityManager.createQuery("SELECT med FROM Medico med WHERE name = :name", Medico.class)
+				.setParameter("name", name)
+				.getResultList().get(0);
+	}
+	
+	@Override
+	public void persist(Medico entity) {
+		// TODO Auto-generated method stub
+		super.persist(entity);
+	}
+}

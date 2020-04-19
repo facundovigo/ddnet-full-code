@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>DDnet - Web - Login Error</title>
+	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10pt;min-width:1000px;}
+	img{width:800px;height:125px;}
+	.ui-button{margin-top:10px;font-size:.9em;}
+</style>
+<script type="text/javascript">	
+	$(document).ready(function() {
+		$('button').button({
+			label:'Reintentar',
+			icons:{primary:'ui-icon-refresh'}
+		}).on('click',function(){location.href= 'login-form.html'})
+	});
+</script>
+</head>
+<body>
+<div class="login-main-container" align="center">
+	<br><img src="utils/mainlogo" />
+	<h2>DDnet - Web</h2>
+	<h4>Ha ocurrido un error intentando ingresar.</h4>
+	<button type="button">Reintentar</button>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,18 @@
+	
+	/*** DDNET actualizado hasta el día Miércoles 18 de mayo de 2016 ***/ $(function(){$('span#ddnetVersion').text('Versión 2016.09.07');$.ajax({type:"GET",dataType:'json',url:'rest/user/info',beforeSend:function(){$('span#userInfo').text('Espere...')}}).done(function(user){$('#userInfo').text(user.login+' ['+user.lastName+', '+user.firstName+']');update_configuration_tip(user.prop);if(!user.permissions.canAccessABM) $('a[href="abm.html"]').closest('li').remove()}).fail(function(){window.location.href='../authentication-servlet/logout'})})
+
+	window.addEventListener('resize',ajustes.ddnet_principal);
+	function $alert(mensaje){if(!mensaje||mensaje==null)return false;mensaje=mensaje.toString();var cuerpo='';cuerpo+='<div id="dialog-message" title="Mensaje"><br>';cuerpo+=mensaje.replace(/\n/g,'<br>');cuerpo+='</div>';$('body').append(cuerpo);$("#dialog-message").dialog({modal:true,buttons:{OK:function(){$(this).dialog("close");$(this).remove();}}});}
+	function $confirm(mensaje,callback){if(!mensaje||mensaje==null)return false;mensaje=mensaje.toString();var cuerpo='';cuerpo+='<div id="dialog-confirm" title="Confirmar"><br>';cuerpo+=mensaje.replace(/\n/g,'<br>');cuerpo+='</div>';$('body').append(cuerpo);$('div#dialog-confirm').dialog({resizable:false,modal:true,buttons:{'Confirmar':function(){$(this).dialog('close');$(this).remove();callback();},'Cancelar':function(){$(this).dialog('close');$(this).remove()}}})}
+	function set_as_datepicker(elem){var dayNames=["Domingo","Lunes","Martes","Mi&eacute;rcoles","Jueves","Viernes","S&aacute;bado"];var dayNamesMin=["DOM","LUN","MAR","MIE","JUE","VIE","SAB"];var monthNames=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Setiembre","Octubre","Noviembre","Diciembre"];var monthNamesShort=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];$(elem).datepicker({dateFormat:"dd/mm/yy",changeYear:true,yearRange:"-100:+0",changeMonth:true,dayNames:dayNames,dayNamesMin:dayNamesMin,monthNames:monthNames,monthNamesShort:monthNamesShort})}
+	function openDialog(url,title,height,width){var iframe='<div id="dynamicModalDialog"><iframe id="dynamicModalDialogIframe" src=""></iframe></div>';$('body').append(iframe);$('div#dynamicModalDialog').dialog({title:title,height:height,width:width,closeOnEscape:true,closeText:'Cerrar',clickOutside:false,hide:{effect:'fade',duration:500},modal:true,open:function(ev,ui){$('iframe#dynamicModalDialogIframe').attr('src',url)},close:function(ev,ui){$('iframe#dynamicModalDialogIframe').attr('src','about:blank');$('div#dynamicModalDialog').remove()}});}
+	var ddConfig=null;function getConfig(name){var entry=$.grep(ddConfig,function(element,index){return element.name==name});if(entry&&entry.length>0)return entry[0].value;return null}
+	function open_conf_dialog(){var url='config.html',title='Configuración de Usuario';openDialog(url, title, 350, 350)}
+	function update_configuration_tip(userProp){if(userProp&&userProp!=null){var viewerMessage='',host=userProp.hostname,aet=userProp.aet,port=userProp.port;if(aet)viewerMessage+=aet+'@';if(host)viewerMessage+=host;if(port)viewerMessage+=(host?':'+port:'Puerto:'+port);if(viewerMessage.length>0)$("a#configurationLink").attr('title','Visualizador : '+viewerMessage)}else $("a#configurationLink").attr('title','')}
+	
+	$(document).ready(function(){
+		$('div#tabPrincipal').tabs({beforeLoad:function(){$('.ui-datepicker').remove()}});
+		$.getJSON('rest/config/all').done(function(result){ddConfig=result}).fail(function(){window.location.href='../authentication-servlet/logout'});
+		$('a#configurationLink').tooltip();
+		ajustes.ddnet_principal();
+	});

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+<style type="text/css">
+	body{background:#778899;font-family:Arial,sans-serif;font-size:9pt;}
+	h4{text-align:left;}
+	label{display:inline-block;width:145px;text-align:right;}
+	form#userPrivileges input[type="checkbox"]{vertical-align:middle!important;}
+</style>
+<script type="text/javascript">
+	var user= null;
+	
+	function get_user(){
+		user= window.parent.$('div#dynamicModalDialog').data('user');
+		$('h4').html('Privilegios del usuario <i>'+user.login+'</i>');
+		$('input[name="doPatient"]').prop('checked',user.privilegio.doPatient);
+		$('input[name="doPatientPractice"]').prop('checked',user.privilegio.doPatientPractice);
+		$('input[name="doPractice"]').prop('checked',user.privilegio.doPractice);
+		$('input[name="doEquipment"]').prop('checked',user.privilegio.doEquipment);
+		$('input[name="doLogger"]').prop('checked',user.privilegio.doLogger);
+		$('input[name="doAbm"]').prop('checked',user.privilegio.doAbm);
+	}
+	function do_the_changes(){
+		var form= $('form#userPrivileges');
+		var checked= $(form).find('input:checked');
+		if(checked.length<=0){window.parent.$alert('Seleccione al menos un Privilegio');return}
+		$.post('rest/user/'+user.login+'/privileges',$(form).serialize())
+		.done(function(){window.parent.$alert('Se han realizado los cambios');window.parent.charge_table();cancel_changes()})
+		.fail(function(){window.parent.$alert('ERROR. No se hicieron los cambios');cancel_changes()});
+	}
+	function cancel_changes(){
+		window.parent.$('div#dynamicModalDialog').dialog('close');
+	}
+	function preset_buttons(){
+		var buttons= $('button');
+		$(buttons[0]).button({
+			label:'Modificar',
+			icons:{primary:'ui-icon-check'}
+		}).on('click',do_the_changes);
+		$(buttons[1]).button({
+			label:'Cancelar',
+			icons:{primary:'ui-icon-close'}
+		}).on('click',cancel_changes);
+	}
+	$(document).ready(function(){
+		get_user();
+		preset_buttons();
+	});
+</script>
+</head>
+<body>
+<div align="center">
+<h4></h4>
+<form id="userPrivileges">
+	<label>Alta Pacientes :</label> &nbsp;
+	<input type="checkbox" name="doPatient"> <br><br>
+	<label>Alta Pr&aacute;ctica por Paciente :</label> &nbsp;
+	<input type="checkbox" name="doPatientPractice"> <br><br>
+	<label>Alta Pr&aacute;cticas :</label> &nbsp;
+	<input type="checkbox" name="doPractice"> <br><br>
+	<label>Alta Equipos :</label> &nbsp;
+	<input type="checkbox" name="doEquipment"> <br><br>
+	<label>Logger :</label> &nbsp;
+	<input type="checkbox" name="doLogger"> <br><br>
+	<label>ABM :</label> &nbsp;
+	<input type="checkbox" name="doAbm"> <br><br>
+</form>
+<br>
+<button type="button"></button> &nbsp;&nbsp;
+<button type="button"></button>
+</div>
+</body>
+</html>

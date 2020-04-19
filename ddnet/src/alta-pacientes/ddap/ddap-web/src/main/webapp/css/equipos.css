@@ -1,0 +1,87 @@
+
+	
+	div.to-the-left {
+		float: left;
+	}
+	
+	div.to-the-right {
+		float: right;
+	}
+	
+	select#eq-modalities {
+		width: 220px;
+	}
+	
+	table#eq-list {
+		width: 95%;
+		font-size: 9pt					!important;
+		color: white					!important;
+	}
+	div#eq-list_wrapper thead {
+		background: #505050				!important;
+		color: white					!important;
+		
+	}
+	div#eq-list_wrapper th {
+		text-align: center				!important;
+		border-top: solid 1.5px black	!important;
+	}
+	div#eq-list_wrapper tr.even {
+		background: #909090 			!important;
+	}
+	div#eq-list_wrapper tr.odd {
+		background: #a0a0a0				!important;
+	}
+	div#eq-list_wrapper .dataTables_paginate{
+		font-size: 0.8em 			!important;
+		margin-top: 12px			!important;
+	}
+	div#eq-list_wrapper div.eq-cant{
+		color: black				!important;
+		margin-bottom: 17px			!important;
+	}
+	div#eq-list_wrapper a.paginate_button.current{
+		border-radius: 15px			!important;
+		color: #eee					!important;
+		background: #707070			!important;
+	}
+	div#eq-list_wrapper a.paginate_button:hover{
+		border-radius: 15px			!important;
+		color:	#eee				!important;
+		background: #505050			!important;
+	}
+	div#eq-list_wrapper a.paginate_button {
+		color:	#eee				!important;
+	}
+	
+	form#eq-list {
+		line-height: 25px;
+	}
+	form#eq-form select {
+		width: 220px;
+	}
+	form#eq-form input[type=text] {
+		width: 215px;
+	}
+	
+	
+	input[type=number] {
+		background-color: #fff;
+		border: double black 0.25em;
+		border-radius: 5px;
+		color: black;
+		text-align: center;
+		font-style: italic;
+	}
+	input[type=number]:focus {
+		background-color: #fff;
+		border: double black 0.25em;
+		border-radius: 5px;
+		color: black;
+		text-align: center;
+		font-style: italic;
+	}
+	input[type=number]:disabled {
+		background: #ddd;
+		color: #444;
+	}

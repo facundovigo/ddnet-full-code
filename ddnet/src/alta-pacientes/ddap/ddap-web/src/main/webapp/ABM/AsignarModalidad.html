@@ -1,0 +1,265 @@
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
+
+		<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui.js"></script>
+		<script type="text/javascript" src="../js/purl.js"></script>
+		<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui-1.10.4.css" />
+
+
+<style type="text/css">
+
+body {
+
+	background: #ccc;
+}
+
+button {
+
+	width: 100px;
+}
+
+.ui-widget {
+
+	font-size: 0.8em;
+}
+
+#divMod {
+	
+	text-align: left;
+	font-size: 0.9em;
+}
+
+label {
+
+	width: 50px;
+	display: inline-block;
+	font-size: 0.8em;
+}
+
+.chrome br.plus {
+	
+	display: none;
+}
+
+.chrome br {
+
+	line-height: 1em;
+}
+
+br {
+
+	line-height: 0.5em;
+}
+
+</style>
+
+<script type="text/javascript">
+
+var login = null;
+var Fname = null;
+var Lname = null;
+var Rname = null;
+var Iname = null;
+var isNew = null;
+var assignedMods = null;
+var dialog;
+
+$(document).ready(function() {
+	
+	login = $.url().param('login');
+	Fname = $.url().param('Fname');
+	Lname = $.url().param('Lname');
+	Rname = $.url().param('Rname');
+	Iname = $.url().param('Iname');
+	assignedMods = $.url().param('mods');
+	isNew = $.url().param('new') == 'true';
+	dialog = window.parent.$("#dynamicModalDialog");
+	
+	$('#spnData').text(login + ' ( ' + Fname + ' ' +  Lname +  ' )');
+	
+	if(isNew){
+	window.parent.$("#dynamicModalDialog").dialog( 'option', 'title', 'ASIGNAR MODALIDADES A USUARIO' );
+	
+	$('#btnCancelar').button({ icons: { primary: 'ui-icon-circle-close' } })
+						.on('click' , function() { if(confirm('Si no confirma las asignaciones,\n'+
+														'el nuevo usuario "'+login+'" se borrará')) deleteUser(); });
+	
+	$('#spnData1').text(Rname);
+	$('#spnData2').text(Iname);	}
+	
+	else{
+		
+		$('br').remove();
+		$.each($('span'), function(i,s){	if(i > 1) $(s).remove();	});
+		var aux = assignedMods.replace( /,/g , ' ');
+		var m = '';
+		assignedMods = [];
+		for(var i = 0; i<aux.length; i++){
+			
+			m += aux[i];
+			if(aux[i] == ' '){assignedMods.push(m.replace(/\\/g,'_'));m='';}
+			if((i + 1)==aux.length){assignedMods.push(m.replace(/\\/g,'_'));m='';}
+		}
+		
+		dialog.unbind('dialogbeforeclose');
+	}
+	
+	$.getJSON("../restricted/rest/abm/allmodalities")
+	.done(function(data) {
+		
+	if(data && data.length > 0){
+		
+		$('#divMod').append("<br><br class='plus'>");
+		
+		var mods = [] ;
+		
+		$.each(data, function(i , mod) {
+				
+		var modName = mod.name.replace(/\\/g, '_');
+			
+		var check = "<input type='checkbox' id='" + modName + "' />" 
+						+ "<label for='" + modName + "'>" + mod.name + "</label>";
+		
+		mods.push(check);
+	});
+		
+		for(var i = 0 ; i < mods.length ; i++ ){
+			
+			$('#divMod').append(mods[i]);
+			
+			if( i % 2 == 0) $('#divMod').append('&nbsp;&nbsp;&nbsp;');
+			
+			else $('#divMod').append("<br><br>");
+			
+			if(!isNew)
+				$.each(assignedMods, function(index, modalidad){$('#'+modalidad).prop('checked', true);});
+				
+		}
+	}
+	})
+	.fail(function(){alert('ERROR al cargar las modalidades');});
+	
+	$('#btnMod').button({ icons: { primary: 'ui-icon-circle-check' } })
+	.on('click' , function() { assignModalities(); });
+	$('#btnCancelar').button({ icons: { primary: 'ui-icon-circle-close' } })
+						.on('click', function(){dialog.dialog('close');});
+	
+	$('#divMod').append('<br>');
+	var margen = ( $('body').width() - 142 ) / 2 ;
+	
+	$('#divMod').css( 'padding-left' , margen+'px');
+	
+	$('#chkAll').on('click', function(){
+		
+		$('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+	});
+	
+});
+
+function assignModalities() {
+	
+	var IDs = getSelectedCheckBox();
+	
+	if( IDs != null){
+	
+	var dto = {
+    		loginname: login,
+    		names: IDs
+    };
+	
+	$.ajax({
+  	  		type: "POST",
+  	  		url: '../restricted/rest/abm/usermodality',
+  	  		data: dto,
+  	  		success: function() { alert('asignación completa');
+  	  							  dialog.unbind('dialogbeforeclose');
+  	  							  window.parent.$('#dynamicModalDialogIframe').attr('src', 'about:blank');
+  	  							  dialog.dialog("close");
+  	  							  window.parent.CargarTablaUsuario(window.parent.tablaU.dataTable());},
+			error: function() { alert('Ocurrió un error al momento de asignar modalidades');
+								dialog.unbind('dialogbeforeclose');
+								window.parent.$('#dynamicModalDialogIframe').attr('src', 'about:blank');
+								dialog.dialog("close"); }
+  	});
+	}
+	
+}
+
+function getSelectedCheckBox() {
+	
+	var IDs = [];
+	
+	if( $('input:checked').length == 0 ) {alert("seleccione al menos una modalidad");
+											return null;}
+	
+	else{
+	$.each( $('input[type="checkbox"]:checked') , function( i , chk ) {
+		
+		if(chk.id != 'chkAll') IDs.push(chk.id.replace(/_/g,'\\'));
+		
+	});
+	
+	return IDs;
+	
+	}
+}
+
+function deleteUser(){
+	
+	$.post('../restricted/rest/abm/deleteUser', 'login='+login);
+	dialog.unbind('dialogbeforeclose');
+	dialog.dialog('close');
+}
+
+
+</script>
+
+
+</head>
+
+<body>
+
+<span style="font-weight: bold; font-size:0.9em">Usuario: </span><span id="spnData" style="font-size: 0.85em;"></span>
+
+<br>
+
+<span style="font-weight: bold; font-size:0.9em">Rol: </span><span id="spnData1" style="font-size: 0.85em;"></span>
+
+<br>
+
+<span style="font-weight: bold; font-size:0.9em">Instituciones: </span><span id="spnData2" style="font-size: 0.85em;"></span>
+
+<br><br>
+
+<span style="font-weight: bold; font-size: 0.8em;">Seleccione las modalidades con las que trabaja.</span>
+
+<br><br class='plus'>
+
+<div id="divMod">
+
+	<input type="checkbox" id="chkAll" value="all"/>
+		<label for="chkAll" style="width: 120px;"><b>MARCAR TODAS</b></label>
+	<br><br>
+
+</div>
+
+<br><br><br class='plus'><br class='plus'>
+
+<div align="center" style="padding-top: 15px;">
+<button id="btnMod">Asignar</button>
+&nbsp;&nbsp;
+<button id="btnCancelar">Cancelar</button>
+</div>
+
+</body>
+
+</html>

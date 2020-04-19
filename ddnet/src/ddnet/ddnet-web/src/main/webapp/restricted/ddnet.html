@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DDnet - Web - Principal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<script type="text/javascript" src="../js/toastr.js"></script>
+	<script type="text/javascript" src="../js/adjust-script.js"></script>
+	<script type="text/javascript" src="../js/configure-datatables.js"></script>
+	<script type="text/javascript" src="../js/ddnet.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="../css/toastr.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/ddnet.css">
+</head>
+<body>
+	<div id="tabPrincipal">
+		<ul>
+		<li><a href="study-manager.html">Visualizaci&oacute;n Estudios</a></li>
+		<li><a href="abm.html">Consola ABM</a></li>
+		</ul>
+	</div>
+	<div class="bottom-of-page" align="center">
+		<span id="userInfo"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+		<a id="configurationLink" href="javascript:open_conf_dialog();">Configuraci&oacute;n</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+		<span>DDNET UserAgent: <a href='javascript:ddUserAgent.startUserAgent();' id="dd-useragent-status-text">Desconectado</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+		<span id="ddnetVersion"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+		<a href="../authentication-servlet/logout">Cerrar Sesi&oacute;n</a>
+	</div>
+	<div id="ddnet-loading" align="center"><img src="../images/ddnet-loader.gif"><br><label>Buscando...</label></div>
+	<div id="page-loading" align="center"><br><label><b>Aguarde Por Favor</b></label><br><br><img src="../images/page-loader.gif"></div>
+</body>
+</html>

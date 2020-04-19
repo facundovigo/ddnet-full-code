@@ -1,0 +1,62 @@
+
+
+
+
+
+
+
+
+
+
+
+
+	body{background:black;font-family:"Lucida Console",Monaco,monospace;font-size:10pt;color:#ccc;}
+	div.top-of-page{margin-top:10px;width:99.9%;height:40px;}
+	div.top-of-page label{font-size:18pt;font-weight:bold;text-shadow:2px 2px #0972a5;}
+	div.bottom-of-page{margin-top:10px;width:99.9%;height:55px;}
+	img.viewer-logo{width:350px;height:45px;margin-top:7px;}
+	div#viewer-tabs{overflow:auto;}
+	div#viewer-tabs li .ui-icon-close{float:left;margin:0.4em 0.3em 0 0;cursor:pointer;}
+	div.show-hide-filter{background:#777;border:solid 1px black;width:750px;padding:0px 10px;}
+	div.show-hide-filter img#filter-arrow{width:70px;height:18px;}
+	div.study-search{padding:10px;border:solid 1px black;background:#333;width:750px;}
+	form#study-filter{}
+	form#study-filter label{color:#ccc;}
+	form#study-filter input.date-picker{width:90px;}
+	form#study-filter select{background:#dcdcdc;color:#0972a5;}
+	form#study-filter input[name=patient]{width:320px;}
+	form#study-filter div.buttons{margin:5px 0px;}
+	form#study-filter button#do-search{width:100px;}
+	div.study-list{padding:10px;}
+	table#list-of-studies{font-size:9pt!important;color:white!important;width:99%!important;cursor:pointer!important;}
+	div#list-of-studies_wrapper thead{background:black!important;color:white!important;}
+	div#list-of-studies_wrapper th{text-align:center!important;border-top:solid 1.5px black!important;}
+	div#list-of-studies_wrapper tr.even{background:black!important;}
+	div#list-of-studies_wrapper tr.odd{background:#053954!important;}
+	div#list-of-studies_wrapper .dataTables_paginate{font-size:0.8em!important;float:right!important;margin-top:12px!important;}
+	div#list-of-studies_wrapper .dataTables_length{margin-bottom:18px!important;color:#eee!important;}
+	div#list-of-studies_wrapper .dataTables_length select{border-radius:3px!important;}
+	div#list-of-studies_wrapper .dataTables_info{font-size:0.85em!important;margin-top:12px!important;color:#eee!important;}
+	div#list-of-studies_wrapper div.std-cant{float:left!important;color:#eee!important;margin-top:10px!important;}
+	div#list-of-studies_wrapper a.paginate_button.current{border-radius:15px!important;color:#eee!important;background:#0972a5!important;}
+	div#list-of-studies_wrapper a.paginate_button:hover{border-radius:15px!important;color:#eee!important;background:#505050	!important;}
+	div#list-of-studies_wrapper a.paginate_button{color:#eee!important;}
+	div#dicom-info{display:none;}
+	div#dicom-tags{display:none;}
+	input[type=text]{background-color:#ddd;border:double #0972a5 0.25em;color:#0972a5;text-align:center;font-style:italic;}
+	input[type="text"]:disabled{background:#aaa;color:#444;}
+	div.loader{position:absolute;top:30%;left:46%;width:240px;height:100px;background:#0972a5;display:none;}
+	div.loader img{margin-left:0px;margin-top:17px;}
+	div.loader label{color:black;font-size:10pt;margin-top:78px;margin-left:0px;text-align:center;}
+	div.loader.imagesLoading{top:87%!important;}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

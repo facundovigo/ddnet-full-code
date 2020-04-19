@@ -1,0 +1,4 @@
+activeuserprofiles=Servidor-Linux-Mint;Team
+eclipse.preferences.version=1
+org.eclipse.rse.systemtype.local.systemType.defaultUserId=server
+useridperkey=Servidor-Linux-Mint.Local\=server;

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+<script type="text/javascript" src="../js/logger.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css">
+<link rel="stylesheet" type="text/css" href="../css/logger.css">
+
+</head>
+
+<body>
+	<div class="the-top" align="center"> SECCIÓN LOG </div>
+	<br><br>
+	
+	<div align="center">
+		<form id="log-search-form" class="logger-buttons" align="center" >
+			
+			<label>Fecha : <select id="log-date-type" name="date-type">
+							<option value="1">Hoy</option>
+							<option value="2">Ayer</option>
+							<option value="3">&Uacute;ltima Semana</option>
+							<option value="4">&Uacute;ltimo Mes</option>
+							<option value="5">Todos</option>
+							<option value="6">Desde-Hasta</option>
+						   </select>
+			</label>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<label>Desde : 
+					<input type="text" class="choose-date" id="log-between-date-from" readonly="readonly" disabled="disabled">
+			</label>
+			&nbsp;&nbsp;&nbsp;
+			<label>Hasta : 
+					<input type="text" class="choose-date" id="log-between-date-to" readonly="readonly" disabled="disabled">
+			</label>
+			<input type="hidden" name="log-date-from"/>
+			<input type="hidden" name="log-date-to"/>
+			<br><br>
+			<label>Usuario : <select id="users" name="user"></select></label>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button id="refresh-log" type="button"></button>
+		</form>
+	</div>
+	<br>
+	<div class="log-table" align="center">
+		<table id="log-data"></table>
+	</div>
+	
+</body>
+
+</html>

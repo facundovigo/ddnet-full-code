@@ -1,0 +1,49 @@
+/* Study files */
+.study-files-layout-north {
+	text-align: left;
+	border: none;
+}
+
+.study-files-layout-center {
+	text-align: left;
+	border: none;
+	overflow: hidden;
+}
+
+.study-files-layout-south {
+	text-align: center;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-top: 1px;
+	margin: 0 auto;
+	margin-bottom: 3px;
+	overflow: hidden;
+}
+
+#study-files-table_wrapper {
+	font-size: 8.75pt;
+}
+
+#study-files-table_wrapper th {
+	text-align: left;
+	padding: 5px 18px 5px 5px;
+}
+
+#study-files-table_wrapper td {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.study-action-button {
+	font-size: 0.75em;
+	width: 12em;
+	height: 2em;
+	margin-left: 5em;
+}
+
+#study-files-table_filter {
+	margin-bottom: 10px;
+}

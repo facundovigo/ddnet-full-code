@@ -1,0 +1,20 @@
+package ddnet.ejb.dao;
+
+import javax.ejb.Stateless;
+
+import ddnet.ejb.entities.PasswordRestore;
+import ddnet.ejb.util.data.AbstractDAO;
+
+@Stateless
+public class PasswordRestoreDAO extends AbstractDAO<Long, PasswordRestore> {
+
+	public PasswordRestoreDAO() {
+		super(PasswordRestore.class);
+	}
+	
+	@Override
+	public void persist(PasswordRestore entity) {
+		
+		super.persist(entity);
+	}
+}

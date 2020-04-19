@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="com.vogella.jersey.second">
+        <property name="context-root" value="com.vogella.jersey.second"/>
+        <property name="java-output-path" value="/com.vogella.jersey.second/build/classes"/>
+    </wb-module>
+</project-modules>

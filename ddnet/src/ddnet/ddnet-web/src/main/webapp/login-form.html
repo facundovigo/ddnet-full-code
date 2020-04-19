@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>DDnet - Web - Login</title>
+	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<script type="text/javascript">
+	$(document).ready(function() {				
+		$('button#login-ok-button').button({icons:{primary:"ui-icon-circle-check"},text:true});
+		$('button#login-cancel-button').button({icons:{primary:"ui-icon-circle-close"},text:true});
+		$('form#loginForm').validate({
+			rules:{'login':{required:true,maxlength:100}},
+			messages:{'login': 'Por favor, ingrese su nombre de usuario'}
+		});
+		$('input#loginField').focus();
+		$('input#loginField').on('keydown','input',function(event){
+		    if(event.which == 13){event.preventDefault();$('input#passwordField').focus();}
+		});
+	});
+</script>
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10pt;min-width:1000px;}
+	img{width:800px;height:125px;}
+	label:not(.error){display:inline-block;width:60px;text-align:right;font-style:italic;}
+	input{border:double #222 0.25em;background:#eee;margin-right:10px;text-align:center;width:150px;}
+	input:focus{border:double #0972a5 0.25em;}
+	button{margin-top:10px;}
+	a{font-size:8.5pt;color:#dcdcdc;font-weight:bold;}
+</style>
+</head>
+<body>
+<div class="login-main-container" align="center">
+	<form id="loginForm" name="login-form" action="authentication-servlet/login" method="post">
+		<br> <img src="utils/mainlogo" /> <br><br>
+		<h2>Bienvenido/a al Visualizador Web</h2> <br>
+		<label for="login" class="small-field-label">Usuario :</label> &nbsp;
+		<input type="text" id="loginField" name="login" /> <br><br>
+		<label for="password" class="small-field-label">Clave :</label> &nbsp;
+		<input type="password" id="passwordField" name="password" /> <br><br>
+		<button id="login-ok-button" type="submit">Ingresar</button> &nbsp;&nbsp;
+		<button id="login-cancel-button" type="reset">Cancelar</button> <br>
+	</form>
+	<br><br>
+	<a href="restore-password.html" target="_self">&iquest;Olvid&oacute; su Contrase&ntilde;a?</a>
+</div>
+</body>
+</html>

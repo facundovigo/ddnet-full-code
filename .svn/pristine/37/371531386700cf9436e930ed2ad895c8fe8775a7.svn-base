@@ -1,0 +1,463 @@
+/**
+ * 
+ * 	Funciones de la ventana "study.html"
+ * 
+ */
+
+var studyUID = null;
+var seriesTable = null;
+var ddConfig = null;
+var study = null;
+
+$(document).ready(function() {
+    
+	seriesTable = $('#tb_study-series');
+	studyUID = $.url().param('s');
+	
+	reconocer_usuario();
+	init_configs();
+	load_study();
+	$('#ddnet-version').text('Version 2016.02.01');		// etiqueta versión de la app
+	$('#tabs').tabs();
+	ddUserAgent.initialize();
+	init_table(seriesTable, studyUID, "none");
+	init_buttons();
+	init_radiobtns();
+	configureDatePickers();
+	getClinicalData(studyUID);
+	configureAttachGrid(studyUID);
+	getAssignments(studyUID);
+	getIncidences(studyUID);
+	loadReport(studyUID);
+	initLogTable(studyUID);
+	center_body($('.div-to-center'));
+});
+
+/**
+ * 	Usuario actual
+ */
+	function reconocer_usuario(){
+		$.getJSON("rest/user/info")
+		.done(function(info) {
+			window.userinfo = info;
+			
+		    $('#userinfo').text(info.login + ' [' + info.lastName + ', ' + info.firstName + ']');	// completar span
+		
+		}).fail(function(){	window.close();	});		// cerrar pestaña en caso de errores, como no estar logueado
+	}
+	
+/**
+ * 	datos de la tabla dd_config
+ */
+	function init_configs(){
+		$.getJSON('rest/config/all')
+		  .done(function(result) {
+			  	ddConfig = result;
+			  	
+		}).fail(function() { window.close(); });
+	}
+	
+	function getConfig(name) {
+		var entry = $.grep(ddConfig, function(element, index){
+		      return element.name == name;
+		});
+		
+		if (entry && entry.length > 0)
+			return entry[0].value;
+		return null;
+	}
+	
+/**
+ * 	cargar datos de estudio y paciente
+ */
+	function load_study() {
+		
+		$.getJSON("rest/studies/" + studyUID + "/full")
+		  .done(function(studyinfo) {
+			  study = studyinfo;
+			  
+			  $("#study-header-patient-name").text(study.patientName);
+				if (study.accessionNumber)
+					$("#study-header-accession-number").text(study.accessionNumber);
+				$("#study-header-patient-id").text(study.patientID);
+				$("#study-header-modality").text(study.modality);
+				$("#study-header-patient-age").text(study.age);
+				$("#study-header-patient-sex").text(study.sex);
+				$("#study-header-study-date").text(study.formattedStudyDate);
+				
+				$.get("rest/institutions/" + study.institutionID + "/logo/check")
+				.done(function(flag){
+					if(flag && flag ==1){
+						$("#institution-logo").attr("src", "rest/institutions/" + study.institutionID + "/logo");
+					}else $("#institution-logo").attr("src", "../images/logo.jpg");
+				});
+				
+		  }).fail(function() { window.close(); });
+		
+		ajustar_pantalla();
+	}
+	
+/**
+ * 	ejecutar cuando se redimensiona la ventana
+ */
+	window.addEventListener( "resize" , function(){
+		ajustar_pantalla();
+		center_body($('.div-to-center'));
+	});
+
+/**
+ *	acomodar la disposición de los elementos 
+ */
+	function ajustar_pantalla(){
+		
+		var bottom_of_page = $('#study-foot');
+		var center_of_page = $('#study-body');
+		var top_of_page = $('#study-header');			// para centrar la parte de arriba de la pantalla
+		top_of_page.css('width', '99%');				// inicializar ancho
+	
+		var ancho1 = $('#study-header-institution-logo').width();		// ancho del logo
+		var ancho2 = $('#study-header-items').width();					// ancho de la info
+		var anchoTotal = top_of_page.width();							// ancho de la ventana
+		var totalOcupado = ancho1 + ancho2;								// ancho que ocupa la app
+		
+		if($('body').width() > 800){											// si la ventana tiene un ancho
+			var anchoUtil = anchoTotal - totalOcupado;							// mayor al que ocupa la app
+			var margen = anchoUtil / 2;											// calcular el margen
+			
+			top_of_page.css('padding-left', margen+'px')						// aplicar el margen
+					   .css('width', porcentaje(anchoTotal, margen) + '%');
+			bottom_of_page.css('width', '99%');
+			center_of_page.css('width', '99%');
+			
+		}else{
+			top_of_page.css('padding-left', '0px')								// si tiene un ancho insuficiente
+					   .css('width', '800px');									// adapta la ventana
+			bottom_of_page.css('width', '800px');
+			center_of_page.css('width', '800px');
+			
+		}
+
+		var altoVentana = window.innerHeight;				// para definir la altura de los demás cuerpos
+		var h1 = top_of_page.height(),
+			h2 = bottom_of_page.height();
+		var altoOcupado = h1 + h2 ;
+		
+		var margenTop = altoVentana - h2 - 2 ;				// calcular margen pie de página
+		bottom_of_page.css('top', margenTop+'px');			// aplicar margen
+		
+		var altoUtil = altoVentana - altoOcupado - 10 ;		// calcular altura página
+		center_of_page.css('height', altoUtil+'px');		// aplicar altura
+		$('#tabs').css('height', (altoUtil-5)+'px');
+	
+}
+
+/**
+ * 	calcular porcentaje de ancho que se utiliza
+ */
+	function porcentaje(factor1, factor2){
+		
+		var x = 0, aux = 0;			// regla de tres simple
+		
+		aux = factor2 * 99;
+		x = aux / factor1;
+									// retorna la diferencia
+		return (99 - x);			// entre el total y el resultado
+	}
+	
+/**
+ * centrar elementos
+ */	
+	function center_body(elem){
+		
+		var ancho1 = $('#tabs').width();
+		var ancho2 = elem.width();
+		var margen = ancho1 - ancho2;
+		margen /= 2;
+		elem.css('margin-left', margen+'px');
+	}
+	
+/**
+ * 	dar estilo y acciones a los botones
+ */
+	function init_buttons(){
+		
+		$('#btn_simple-view').button({						// botón para visualización simple (Oviyam)
+			label: "Visualización Simple",				
+			icons: {"primary": "ui-icon-circle-zoomout"}	// estilos jQuery
+			
+		}).on('click', function(){													// al hacer click
+			switch(parseInt($('input[name="rad_study-view"]:checked').val())){
+				case 1: complete_simple_view();										// según la opción 
+						break;														// muestra todo el estudio
+				case 2: part_simple_view();											// o lo muestra por series
+						break;
+			}
+		});
+		
+		$('#btn_advanced-view').button({					// botón para visualización avanzada (Oviyam2)
+			label: "Visualización Avanzada",				
+			icons: {"primary": "ui-icon-circle-zoomin"}		// estilos jQuery
+			
+		}).on('click', function(){													// al hacer click
+			switch(parseInt($('input[name="rad_study-view"]:checked').val())){
+				case 1: complete_advanced_view();									// según la opción 
+						break;														// muestra todo el estudio
+				case 2: part_advanced_view();										// o lo muestra por series
+						break;
+			}
+		});
+		
+		$('#btn_download').button({							// botón para descargar imágenes (ddUserAgent)
+			label: "Descargar Imágenes",				
+			icons: {"primary": "ui-icon-circle-arrow-s"}	// estilos jQuery
+			
+		}).on('click', function(){													// al hacer click
+			switch(parseInt($('input[name="rad_study-view"]:checked').val())){
+				case 1: complete_download_images();									// según la opción 
+						break;														// descarga todo el estudio
+				case 2: part_download_images();										// o solo por series
+						break;
+			}
+		});
+		
+		$('#btn_qr-code').button({
+			label: "Código QR"
+				
+		}).on('click', function(){get_study_qr_code(studyUID);});
+		
+		$('#btn-assign-study').button({
+			label: "Asignar y Avisar",
+			icons: {"primary": "ui-icon-person",
+					"secondary": "ui-icon-mail-closed"}
+		
+		}).on('click', function(){assignStudies( this , studyUID );} );
+		
+		$('#btn-assign-patient').button({
+			label: "Asignar al Paciente",
+			icons: {"primary": "ui-icon-pin-s"}
+		
+		}).on('click', function(){ assignPatient(this, studyUID); });
+		
+		$('#btn_asgn-cancel').button({
+			label: "Cancelar",
+			icons: {"primary": "ui-icon-close"}
+		
+		}).on('click', function(){ cancelAssignment(studyUID); });
+		
+		$('#btn_add-message').button({
+			label: 'Agregar Mensaje',
+			icons: {"primary": "ui-icon-pencil"}
+		
+		}).on('click', function(){ addMessage(); });
+		
+		$('#btn_save-message').button({
+			label: 'Guardar Mensaje',
+			icons: {"primary": "ui-icon-disk"}
+		
+		}).on('click', function(){ saveMessage(studyUID); });
+		
+		$('#btn_save-report').button({
+			label: 'Guardar Informe',
+			icons: {"primary": "ui-icon-folder-open"}
+		
+		}).on('click', function(){ saveReport(studyUID); });
+		
+		$('#btn_finish-report').button({
+			label: 'Firmar Informe',
+			icons: {"primary": "ui-icon-folder-collapsed"}
+		
+		}).on('click', function(){ finishReport(studyUID); });
+		
+		$('#btn_refresh-log').button({
+			label: "Recargar Log",
+			icons: {"primary": "ui-icon-refresh"}
+		
+		}).on('click', function(){
+			loadLogTable(studyUID);
+		});
+		
+	}
+
+/**
+ * 	acciones para los radio buttons
+ */
+	function init_radiobtns(){
+		$('input[name="rad_study-view"][value="1"]').on('click', function(){
+			desmarcar_todo();
+			$('.study-series-buttons button').button('option', 'disabled', false);
+			$('.study-series-buttons select').prop('disabled', false);
+			center_body($('#tab_study-view'));
+			reinitialize_table($('#tb_study-series'), studyUID, "none");
+		});
+		$('input[name="rad_study-view"][value="2"]').on('click', function(){
+			desmarcar_todo();
+			$('.study-series-buttons button').button('option', 'disabled', true);
+			$('.study-series-buttons select').prop('disabled', true);
+			center_body($('#tab_study-view'));
+			reinitialize_table($('#tb_study-series'), studyUID, "os");
+		});
+		
+		$('input[name="rad_study-view"][value="1"]').click();
+		
+		$('#study-message-is-incident').on('click', function(){
+			
+			$('#study-message-incident-date').val('');
+			$('#study-message-incident-resolution-date').val('');
+			
+			$('#study-message-incident-date').prop('disabled', !$(this).prop('checked')); 
+			$('#study-message-incident-resolution-date').prop('disabled', !$(this).prop('checked'));
+			
+			if($(this).prop('checked'))
+				$("#study-message-or-incident").attr( "placeholder" , "Deje un mensaje que describa la URGENCIA" );
+			else
+				$("#study-message-or-incident").removeAttr( "placeholder" );
+		});
+		
+		$('#study-report-is-teaching-file').on('click', function(){
+			if($(this).prop('checked')) $('#lbl_teaching-file').css('background', 'white');
+			else $('#lbl_teaching-file').css('background', 'none');
+		});
+		$('#study-report-is-emergency').on('click', function(){
+			if($(this).prop('checked')) $('#lbl_emergency').css('background', 'white');
+			else $('#lbl_emergency').css('background', 'none');
+		});
+	}
+	
+/**
+ * 	Configurar DatePicker
+ */
+	function configureDatePickers() {
+		// Configuración de los calendarios para búsqueda de estudios.				
+		var dayNames = ["Domingo", "Lunes", "Martes", "Mi&eacute;rcoles", 
+			"Jueves", "Viernes", "S&aacute;bado"]; 
+		var dayNamesMin = ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"];
+		var monthNames = ["Enero", "Febrero", "Marzo", "Abril", 
+		                  "Mayo", "Junio", "Julio", "Agosto",
+		                  "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+		$("#study-message-incident-date").datepicker({ dateFormat: "dd/mm/yy", 
+			changeYear: true, yearRange: "-100:+0", changeMonth: true,
+			dayNames: dayNames, dayNamesMin: dayNamesMin, monthNames: monthNames });
+		$("#study-message-incident-resolution-date").datepicker({ dateFormat: "dd/mm/yy", 
+			changeYear: true, yearRange: "-100:+0", changeMonth: true,
+			dayNames: dayNames, dayNamesMin: dayNamesMin, monthNames: monthNames });
+	}
+	
+/**
+ * 	visualizar estudio completo Oviyam
+ */
+	function complete_simple_view(){
+		var url = getConfig('actions.study.simple-view.url')		// url del Oviyam
+			.replace('${STUDYID}', studyUID)						// ID del estudio
+			.replace('&seriesUID=${SERIEID}', '')					// sin especificar series
+			.replace('${HOST}', location.hostname) ;				// host donde se esta trabajando
+
+		window.open(url, '', 'fullscreen=yes, scrollbars=auto');	// abrir nueva ventana Oviyam
+		$.post('rest/studies/'+ studyUID + '/simpleView');			// registrar en el LOG
+	}
+
+/**
+ * 	visualizar estudio por series Oviyam
+ */
+	function part_simple_view(){
+		var thisSerie = getSelectedSeries();
+		var url = '';
+		var post = 'rest/studies/'+ studyUID + '/simpleView/';
+		
+		if(thisSerie.length <= 0){
+			$('#btn_simple-view').button('option','disabled',true);
+			return;
+			
+		} else{
+			$.each(thisSerie, function(i, serie){
+				url = getConfig('actions.study.simple-view.url')		// url del Oviyam
+					.replace('${STUDYID}', studyUID)					// ID del estudio
+					.replace('${SERIEID}', serie.serieUID)				// ID de la serie
+					.replace('${HOST}', location.hostname) ;
+				post += serie.desc;
+			});
+		}
+		
+		window.open(url, '', 'fullscreen=yes, scrollbars=auto');	// abrir nueva ventana Oviyam
+		$.post(post);												// registrar en el LOG
+	}
+
+/**
+ * 	visualizar estudio completo Oviyam2
+ */
+	function complete_advanced_view(){
+		var url = getConfig('actions.study.advanced-view.url')		// url de Oviyam2	
+			.replace('${HOST}', location.hostname)					// host donde se esta trabajando
+			.replace('${STUDYID}', studyUID);						// ID del estudio
+
+		window.open(url, '', 'fullscreen=yes, scrollbars=auto');	// abrir nueva ventana Oviyam2
+	}
+
+/**
+ * 	visualizar estudio por series Oviyam2
+ */
+	function part_advanced_view(){
+		var thisSerie = getSelectedSeries();
+		var url = '';
+		//var post = 'rest/studies/'+ studyUID + '/simpleView/';
+		
+		if(thisSerie.length <= 0){
+			$('#btn_advanced-view').button('option','disabled',true);
+			return;
+			
+		} else{
+			$.each(thisSerie, function(i, serie){
+				url = getConfig('actions.study.advanced-view.url')		// url del Oviyam2
+					.replace('${STUDYID}', studyUID)					// ID del estudio
+					.replace('${SERIEID}', serie.serieUID)				// ID de la serie
+					.replace('${HOST}', location.hostname) ;
+				//post += serie.desc;
+			});
+		}
+		
+		window.open(url, '', 'fullscreen=yes, scrollbars=auto');	// abrir nueva ventana Oviyam2
+	}
+
+
+/**
+ * 	descargar todo el estudio
+ */
+	function complete_download_images(){
+		var quality = $('#sel_download-type').val();
+		
+		if (ddUserAgent.isUserAgentActive()) {
+			getStudyImagesFor(study, quality);
+    	} else {
+			ddUserAgent.startUserAgent(
+					function() { getStudyImagesFor(study, quality); }, 
+					function() { warnUserAgentNotStarted(); });
+    	}
+	}
+
+/**
+ * 	descargar estudio por series
+ */
+	function part_download_images(){
+		var selectedSeries = getSelectedSeries();
+		var quality = $('#sel_download-type').val();
+		
+	    var seriesID = [];
+    	$.each(selectedSeries, function(index, s) {
+    		seriesID.push(s.serieUID);
+        });
+    	
+    	if (seriesID.length > 0) {
+        	if (ddUserAgent.isUserAgentActive()) {
+        		getStudyImagesFor(study, quality, seriesID);
+        	} else {
+    			ddUserAgent.startUserAgent(
+    					function() { getStudyImagesFor(study, quality, seriesID); }, 
+    					function() { warnUserAgentNotStarted(); });
+        	}		        	
+        	
+    	} else {
+        	alert('Por favor, seleccione una o más series previo a realizar esta acción.');
+        }
+	}
+
+
+	

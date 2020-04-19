@@ -1,0 +1,218 @@
+package ddnet.web.api.rest;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import ddnet.ejb.CentroManager;
+import ddnet.ejb.MedicoManager;
+import ddnet.ejb.MedicoUserManager;
+import ddnet.ejb.ModalityManager;
+import ddnet.ejb.UserManager;
+import ddnet.ejb.entities.Centro;
+import ddnet.ejb.entities.User;
+
+@Stateless
+@Path("/medicos")
+public class Medico {
+	
+	@EJB
+	private MedicoManager medicoManager;
+	@EJB
+	private MedicoUserManager medicouserManager;
+	@EJB
+	private ModalityManager modManager;
+	@EJB
+	private UserManager uManager;
+	@EJB
+	private CentroManager cManager;
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<MedicoDTO> getMedicos() {
+		List<MedicoDTO> medicos = new ArrayList<MedicoDTO>();
+		
+		for(ddnet.ejb.entities.Medico medico : medicoManager.getAll()){
+			
+		for(ddnet.ejb.entities.User us : medicouserManager.getAll(medico.getUserID()))
+			
+			if(!us.isAdministrator())
+			medicos.add(new MedicoDTO(us.getLogin(),medico.getName(),us.getFirstName(),us.getLastName()));
+			
+		}
+		
+		return medicos;
+	}
+	
+	@GET
+	@Path("/deGuardia")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<MedicoDTO> getMedicoDeGuardia() {
+		List<MedicoDTO> medicos = new ArrayList<MedicoDTO>();
+		
+		for(ddnet.ejb.entities.Medico medico : medicoManager.getOnCall()){
+			
+		for(ddnet.ejb.entities.User us : medicouserManager.getAll(medico.getUserID()))
+			
+			medicos.add(new MedicoDTO(us.getLogin(),medico.getName(),us.getFirstName(),us.getLastName()));
+			
+		}
+		
+		return medicos;
+	}
+	
+	@POST
+	@Path("/deGuardia/{med-before}/{med-after}")
+	public void setMedicoDeGuardia(	@PathParam("med-before") String medBefore,
+									@PathParam("med-after") String medAfter) {
+		
+		ddnet.ejb.entities.Medico old = medicoManager.getByName(medBefore),
+								  now = medicoManager.getByName(medAfter);
+		
+		old.setOnCall(false);
+		now.setOnCall(true);
+	}
+	
+	@POST
+	@Path("/new/{user}/{role}")
+	public void setDrData(	@PathParam("user") String user,
+							@PathParam("role") String role,
+							@FormParam("mail") String mail,
+							@FormParam("phone1") String phone1,
+							@FormParam("phone2") String phone2,
+							@FormParam("skype") String skype,
+							@FormParam("ab_name") String abrevName,
+							@FormParam("title") String title,
+							@FormParam("matr") String matricula,
+							@FormParam("address") String address,
+							@FormParam("localidad") String localidad,
+							@FormParam("provincia") String provincia,
+							@FormParam("f_name") String fantName) {
+		
+		User u = uManager.getByLogin(user);
+		
+		if(role.startsWith("Admin")){
+			ddnet.ejb.entities.Medico med = new ddnet.ejb.entities.Medico();
+			
+			u.setAdministrator(true);
+			med.setUserID(u.getId());
+			med.setMailAddress(mail);
+			med.setPhone1(phone1);
+			med.setPhone2(phone2);
+			med.setSkype(skype);
+			
+			medicoManager.persist(med);
+		}
+		else if(role.startsWith("Medico")){
+			ddnet.ejb.entities.Medico med = new ddnet.ejb.entities.Medico();
+			
+			med.setUserID(u.getId());
+			med.setMailAddress(mail);
+			med.setName(abrevName);
+			med.setMatricula(matricula);
+			med.setPhone1(phone1);
+			med.setPhone2(phone2);
+			med.setSkype(skype);
+			med.setTitle(title);
+			
+			medicoManager.persist(med);
+		}
+		else if(role.startsWith("Centro")){
+			Centro centro = new Centro();
+			
+			centro.setUserID(u.getId());
+			centro.setMailAddress(mail);
+			centro.setAddress(address);
+			centro.setLocalidad(localidad);
+			centro.setProvincia(provincia);
+			centro.setPhone1(phone1);
+			centro.setPhone2(phone2);
+			centro.setSkype(skype);
+			centro.setName(fantName);
+			
+			cManager.persist(centro);
+		}
+	}
+	
+	//devolver los usuarios que pueden ser asignados según una modalidad específica
+		@GET
+		@Path("/modality")
+		@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+		public Collection<ddnet.ejb.entities.User> getUserbyModality(
+				/*@FormParam("instituciones[]") String[] instIDs,*/ @FormParam("modalidades[]") String[] modalities){
+			
+			Set<String> userModalities = new HashSet<String>();
+			
+			for(String mod : modalities) userModalities.add(modManager.findByName(mod).getName().toLowerCase());
+			
+			return medicouserManager.getUserbyModality(userModalities);
+		}
+	
+	public class MedicoDTO {
+		private long id;
+		private String name;
+		private String login;
+		private String uname;
+		private String ulname;
+		
+		public MedicoDTO() {			
+			
+		}
+		public MedicoDTO(long id, String name) {			
+			this.id = id;
+			this.name = name;
+		}
+		public MedicoDTO(String login, String name, String uname, String ulname){
+			this.login = login;
+			this.name = name;
+			this.uname = uname;
+			this.ulname = ulname;
+		}
+		
+		public long getId() {
+			return id;
+		}
+		public void setId(long id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getLogin() {
+			return login;
+		}
+		public void setLogin(String login) {
+			this.login = login;
+		}
+		public String getUname() {
+			return uname;
+		}
+		public void setUname(String uname) {
+			this.uname = uname;
+		}
+		public String getUlname() {
+			return ulname;
+		}
+		public void setUlname(String ulname) {
+			this.ulname = ulname;
+		}		
+		
+		
+		
+	}
+}

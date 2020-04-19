@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Diagn&oacute;stico Digital - DDWEB - Administrador de estudios</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
+		
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui-1.10.4.css" />
+		<link rel="stylesheet" type="text/css" href="../css/layout-default.css" />		
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../css/study-manager.css" />
+		<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css" />
+		<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css" />
+		<link rel="stylesheet" type="text/css" href="../js/bubbletip/bubbletip.css" />
+		<link rel="stylesheet" type="text/css" href="../css/toastr.css" />
+		
+		<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui-1.10.4.js"></script>
+		<script type="text/javascript" src="../js/jquery.layout-1.3.0.js"></script>
+		<script type="text/javascript" src="../js/jquery.dataTables.js"></script> 
+		<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>		
+		<script type="text/javascript" src="../js/jquery.validate.js"></script>
+		<script type="text/javascript" src="../js/jquery.blockUI.js"></script>
+		<script type="text/javascript" src="../js/jquery.ui-contextmenu.js"></script>
+		<script type="text/javascript" src="../js/jquery.fileDownload.js"></script>		
+		<script type="text/javascript" src="../js/jquery.ui.dialog-clickoutside.js"></script>
+		<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="../js/ddweb.js"></script>
+		<script type="text/javascript" src="../js/ddweb-useragent.js"></script>
+		<script type="text/javascript" src="../js/shortcut.js"></script>		
+		<script type="text/javascript" src="../js/json2.js"></script>
+		<script type="text/javascript" src="../js/jquery.storageapi.js"></script>
+		<script type="text/javascript" src="../js/jQuery.bubbletip-1.0.6.js"></script>		
+		<script type="text/javascript" src="../js/toastr.js"></script>    		
+		<script type="text/javascript" src="../js/study-manager.js"></script>
+	</head>
+	<body>
+		<div class="ui-layout-center">
+			<div>
+				<table id="studies-found" class="display" border="1"></table>
+			</div>	
+		</div>
+		
+		<div class="ui-layout-north">
+		
+			<div class="top-of-page-layout-west">
+				<img src="../images/logo_telelaudo.png" class="top-of-page-logo" alt="Diagn&oacute;stico Digital logo" />
+			</div>
+			
+			<div class="top-of-page-layout-center">
+				<form id="study-search-form" name="study-search-form">
+				
+					<div class="study-search-box-center">
+					<div>
+							<label class="filter-field-label" for="study-date-type-today">Centro:</label>
+							<select id="study-diagnostic-center" name="study-diagnostic-center"	style="width: 287px;">
+							</select>
+						</div>
+						<div>
+							<input type="radio" id="study-date-type-today" name="study-date-type" 
+								class="study-date-type-chooser" value="2" checked="checked" />
+							<label class="study-date-type-label" for="study-date-type-today">Hoy</label>
+							<input type="radio" id="study-date-type-yesterday" name="study-date-type" 
+								class="study-date-type-chooser" value="3" />
+							<label class="study-date-type-label" for="study-date-type-yesterday">Ayer</label>
+							<input type="radio" id="study-date-type-lastweek" name="study-date-type"
+								class="study-date-type-chooser" value="4" />
+							<label class="study-date-type-label" for="study-date-type-lastweek" style="width:48px !important;">Semana</label>
+							<input type="radio" id="study-date-type-lastmonth" name="study-date-type"
+								class="study-date-type-chooser" value="5" />
+							<label class="study-date-type-label" for="study-date-type-lastmonth">Mes</label>
+							<input type="radio" id="study-date-type-any" name="study-date-type"
+								class="study-date-type-chooser" value="1" />
+							<label class="study-date-type-label" for="study-date-type-any">Hist&oacute;rico</label>
+						</div>
+						<div>
+							
+							<input type="radio" id="study-date-type-between" name="study-date-type" 
+										class="study-date-type-chooser" value="6" />
+										
+							<label class="" for="study-date-between-from"
+										style="	display: inline-block !important; width: 50px !important;">Desde:</label>
+										
+							<input type="text" id="study-date-between-from" name="study-date-between-from" 
+										class="study-search-text-field-date" readonly="readonly" />
+							
+							<label class="" for="study-date-between-to"
+										style="	display: inline-block !important; width: 50px !important;">Hasta:</label>
+									
+							<input type="text" id="study-date-between-to" name="study-date-between-to" 
+										class="study-search-text-field-date" readonly="readonly" />
+						</div>
+						
+						<div style="padding-top: 5px !important; padding-bottom: 5px !important;">
+						
+						<label class="" for="patient-data-name">Buscar:</label>
+						<input type="text" id="patient-data-name" name="patient-data-name" 
+										class="study-search-text-field"/>
+						
+						<button type="button" class="study-search-box-button" id="study-search-dosearch"
+								title="Atajo: CONTROL-F7">Buscar</button>
+								
+						</div>
+						
+						<div>
+							
+							<label>Usuario:</label>
+							<select id="study-user" name="study-user"></select>
+							
+							<label>Modalidad:</label>
+							<select id="study-modality" name="study-modality"></select>
+						</div>
+					</div>	
+					<input type="hidden" id="study-report-status" name="study-report-status" />	
+					
+					<input type="hidden" id="no-leido" name="no-leido" value="0" />
+					
+					<input type="hidden" id="urgente" name="urgente" value="0" />
+					
+					<input type="hidden" id="preinformado" name="preinformado" value="0" />
+					
+					<input type="hidden" id="preferente" name="preferente" value="0" />
+					
+					<input type="hidden" id="firmado" name="firmado" value="0" />
+					
+					<input type="hidden" id="con-anexo" name="con-anexo" value="0" />
+					
+					<input type="hidden" id="incidenciaH" name="incidencia" value="0" />
+					
+					<input type="hidden" id="new-study" name="new-study" value="0" />
+					
+					<input type="hidden" name="aux-filter" value="0" />
+					
+					
+				</form>
+				
+			</div>
+			
+			<div class="top-of-page-layout-east">
+					
+					<div class="study-search-button-container">
+							<button type="button" class="study-search-box-button" id="study-search-pendings"
+								title="Atajo: CONTROL-F8">Pendientes</button>
+							<button type="button" class="study-search-box-button" id="study-search-clean"
+								title="Atajo: CONTROL-F9">Todos</button>
+					</div>
+					
+					<div id="search-details-message"></div>
+					
+						<div>
+							<input type="checkbox" id="check1" />
+							<label class="col1" for="check1">No le&iacute;dos</label>
+							
+							<input type="checkbox" id="check2" />
+							<label for="check2">Urgentes</label>
+						</div>
+					
+						<div>
+							<input type="checkbox" id="check3" />
+							<label for="check3" class="col1">Preinformados</label>
+							
+							<input type="checkbox" id="check4" />
+							<label for="check4">Preferentes</label>
+						</div>
+						<div>
+							<input type="checkbox" id="check5" />
+							<label for="check5" class="col1">Firmados</label>
+							
+							<input type="checkbox" id="check6" />
+							<label for="check6">Con anexos</label>
+						</div>
+						
+					<div class="aux-filter">
+					
+						<select id="aux-filter" style= "width:170px;">
+						
+							<option value="0" selected="selected"></option>
+							<option value="1">INCIDENCIAS</option>
+							<option value="2">SEGUNDA LECTURA</option>
+							<option value="3">TEACHING FILES</option>
+							<option value="4">M&Uacute;LTIPLES</option>
+							<option value="5">COMPROBAR</option>
+							<option value="6">SOLICITADO</option>
+							<option value="7">COMPROBADO</option>
+							
+						</select>
+					
+					</div>	
+					
+			</div>
+			
+			<div id="top-of-table"></div>
+			
+		</div>
+
+		<div id="dynamicModalDialog">
+			<iframe id="dynamicModalDialogIframe" src=""></iframe>					
+		</div>
+		
+		<div id="config-tip" style="display:none;"><pre class="tip"><span id="config-tip-text"></span></pre></div>
+	</body>
+</html>

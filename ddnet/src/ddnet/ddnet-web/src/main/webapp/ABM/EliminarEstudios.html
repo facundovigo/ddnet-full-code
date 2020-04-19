@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10pt;overflow-y:auto;}
+	div#studies-info{font-size:.9em;max-height:200px;overflow:auto;}
+	table{background:#bbb;border:solid 1px black;}
+	thead{font-weight:bold;text-align:center;}
+	thead td{border-bottom:solid 1px black;}
+	tr.even{background:#eee;}
+	tr.odd{background:#ddd;}
+	td{max-width:160px;}
+	td.left{border-right:solid 1px black;}
+	div.delete-actions-buttons{margin-left:20px;}
+	.ui-button{font-size:.9em;width:140px;}
+	div.delete-actions-buttons span{font-size:9pt;}
+	div.second-part-process{display:none;}
+	h4{text-align:left;}
+	label.wait-for-delete{display:inline-block;font-size:12pt;font-weight:bold;display:none;}
+</style>
+<script type="text/javascript">
+	var dialog= window.parent.$("#dynamicModalDialog"); var iFrame= window.parent.$("#dynamicModalDialogIframe");
+	var selectedStudies= null;
+	function write_study_info(){
+		var body= $('table#info').find('tbody');
+		$(body).children().remove();
+		$.each(selectedStudies, function(i,s){
+			$(body).append(
+			'<tr class="'+(i%2==0? "even":"odd")+'">' +
+			'<td class="left">'+ s.pid +'</td>' +
+			'<td class="left">'+ s.pn +'</td>' +
+			'<td class="left">'+ s.mod +'</td>' +
+			'<td class="left">'+ (s.desc=='---'? 'Sin Descripción':s.desc) +'</td>' +
+			'<td>'+ s.date +'</td>' +
+			'</tr>'
+			)
+		});
+	}
+	function do_the_delete(opCode){
+		var delete_studies= function(){
+		var studyOrPatient= 0;
+		studyOrPatient= parseInt($('input:checked').val());
+		if(studyOrPatient<=0){$alert('Seleccione opción Estudio o Paciente');return}
+		var studyIds= []; $.each(selectedStudies,function(i,study){studyIds.push(study.id)});
+		var dto= {studyIds:studyIds, opCode:opCode, studyOrPatient:studyOrPatient};
+		$('label.wait-for-delete').show();
+		$.ajax({type:'POST', dataType:'json', url:'../restricted/rest/study/delete', data:dto})
+		.done(function(data,a,b){
+			if(data && data!=null){
+			$('div.first-part-process').hide();
+			$('div.second-part-process').show();
+			var body= $('table#result').find('tbody');
+			$(body).children().remove();
+			$.each(data,function(i,del){
+				$(body).append(
+				'<tr class="'+(i%2==0? "even":"odd")+'">' +
+				'<td class="left">'+ del.studyId +'</td>' +
+				'<td class="left">'+ del.patName +'</td>' +
+				'<td class="left" align="center"><span class="ui-icon '+(del.state[4].flag?'ui-icon-check':'ui-icon-close')+' black"></span></td>' +
+				'<td class="left" align="center"><span class="ui-icon '+(del.state[0].flag?'ui-icon-check':'ui-icon-close')+' black"></span></td>' +
+				'<td class="left" align="center"><span class="ui-icon '+(del.state[1].flag?'ui-icon-check':'ui-icon-close')+' black"></span></td>' +
+				'<td class="left" align="center"><span class="ui-icon '+(del.state[2].flag?'ui-icon-check':'ui-icon-close')+' black"></span></td>' +
+				'<td align="center"><span class="ui-icon '+(del.state[3].flag?'ui-icon-check':'ui-icon-close')+' black"></span></td>' +
+				'</tr>'
+				)
+			})}
+			window.parent.toastr['success']('Se ha realizado la Eliminación','HECHO');
+			window.parent.do_the_search();
+		})
+		.fail(function(){
+			window.parent.toastr['error']('Falló la Eliminación','ERROR');
+			iFrame.attr('src','about:blank');
+			dialog.dialog('close');
+		}).always($('label.wait-for-delete').hide());
+		};
+		window.parent.$confirm('Los datos eliminados NO pueden recuperarse',delete_studies);
+	}
+	function borrar_todo(){do_the_delete(1)}
+	function borrar_imagenes(){do_the_delete(2)}
+	function borrar_data(){do_the_delete(3)}
+	function borrar_extras(){do_the_delete(4)}
+	function cancelar(){$(iFrame).attr('src','about:blank');dialog.dialog('close')}
+	function preset_buttons(){
+		var buttons= $('button');
+		$(buttons[0]).button({
+			label:'Borrar Todo',
+			icons:{primary:'ui-icon-trash'}
+		}).on('click',borrar_todo);
+		$(buttons[1]).button({
+			label:'Borrar Imágenes',
+			icons:{primary:'ui-icon-trash'}
+		}).on('click',borrar_imagenes);
+		$(buttons[2]).button({
+			label:'Borrar Datos',
+			icons:{primary:'ui-icon-trash'}
+		}).on('click',borrar_data);
+		$(buttons[3]).button({
+			label:'Borrar Extras',
+			icons:{primary:'ui-icon-trash'}
+		}).on('click',borrar_extras);
+		$(buttons[4]).button({
+			label:'Cancelar',
+			icons:{primary:'ui-icon-circle-close'}
+		}).on('click',cancelar);
+		$(buttons[5]).button({
+			label:'Cerrar',
+			icons:{primary:'ui-icon-circle-close'}
+		}).on('click',cancelar);
+	}
+	
+	$(document).ready(function() {
+		selectedStudies= dialog.data('selectedStudies');
+		if(!selectedStudies||selectedStudies==null)dialog.dialog('close');
+		write_study_info();
+		preset_buttons();
+	});
+</script>
+</head>
+<body>
+<div class="first-part-process">
+	<div align="center"><label class="wait-for-delete">
+	<img src="../images/wait-for-delete.gif">&nbsp;&nbsp;
+	Eliminando Estudios
+	&nbsp;&nbsp;<img src="../images/wait-for-delete.gif">
+	</label></div>
+	<h4>Estudios Seleccionados:</h4>
+	<div id="studies-info" align="center">
+	<table id="info">
+	<thead>
+		<tr>
+		<td class="left">PATIENT-ID</td>
+		<td class="left">NOMBRE</td>
+		<td class="left">MOD.</td>
+		<td class="left">DESCRIPCIÓN</td>
+		<td>FECHA</td>
+		</tr>
+	</thead>
+	<tbody></tbody>
+	</table>
+	</div> <br><br>
+	<div class="delete-options">
+	<label>
+		<input type="radio" name="study-or-patient" value="1" checked="checked">
+		 BORRAR ESTUDIO: Se eliminará solamente registro del Estudio seleccionado
+	</label> <br>	
+	<label>
+		<input type="radio" name="study-or-patient" value="2">
+		 BORRAR PACIENTE: Se eliminará todo registro del Paciente seleccionado
+	</label>
+	</div> <br><br>
+	<div class="delete-actions-buttons">
+		<button type="button"></button> &nbsp;&nbsp;
+		<span>Eliminar Imágenes, Datos, Extras.</span> <br><br>
+		<button type="button"></button> &nbsp;&nbsp;
+		<span>Eliminar Imágenes DICOM almacenadas en el servidor.</span> <br><br>
+		<button type="button"></button> &nbsp;&nbsp;
+		<span>Eliminar Datos de la base de datos.</span> <br><br>
+		<button type="button"></button> &nbsp;&nbsp;
+		<span>Eliminar informes y demás anexos.</span> <br><br>
+		<button type="button"></button> &nbsp;&nbsp;
+		<span>Salir sin realizar operación.</span>
+	</div>
+</div>
+<div class="second-part-process" align="center">
+	<h4>Resultado Eliminaci&oacute;n :</h4>
+	<table id="result">
+	<thead>
+		<tr>
+		<td class="left">Nro.</td>
+		<td class="left">PACIENTE</td>
+		<td class="left">DATOS</td>
+		<td class="left">IMGS.</td>
+		<td class="left">INF.</td>
+		<td class="left">ARCH.</td>
+		<td>OM</td>
+		</tr>
+	</thead>
+	<tbody></tbody>
+	</table><br>
+	<button type="button"></button>
+</div>
+</body>
+</html>

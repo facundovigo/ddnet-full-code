@@ -1,0 +1,41 @@
+/* Edit study report */
+.edit-study-report-layout-north {
+	text-align: left;
+	border: none;
+}
+
+.edit-study-report-layout-center {
+	text-align: left;
+	border: none;
+	overflow: hidden;
+}
+
+.edit-study-report-layout-south {
+	text-align: center;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-top: 1px;
+	/*margin: 0 auto;*/
+}
+
+.edit-study-report-action-button {
+	font-size: 0.75em;
+	width: 15em;
+	height: 2.5em;
+	margin-left: 0px;
+}
+
+#edit-study-report-insert-template {
+	font-size: 0.7em;
+	width: 10em;
+	height: 2em;
+}
+
+#report-body-editor {
+	resize: none !important;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
+}

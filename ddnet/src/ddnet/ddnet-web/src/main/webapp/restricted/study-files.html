@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+	<script type="text/javascript" src="../js/ddweb.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="../css/uploadfile.css" />
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/study-files.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:8.7pt;overflow-y:auto;}
+	table#studyFiles{width:95%!important;margin:12px 0px!important;}
+	table#studyFiles a{color:#000!important;text-decoration:none!important;}
+	div#studyFiles_wrapper thead{background:#000!important;color:#dcdcdc!important;height:20px!important;}
+	div#studyFiles_wrapper th{text-align:center!important;}
+	div#studyFiles_wrapper tr.even{background:#dcdcdc!important;}
+	div#studyFiles_wrapper tr.odd{background:#cbcbcb!important;}
+	div#studyFiles_wrapper .dataTables_paginate{font-size:0.9em!important;float:right!important;margin-top:12px!important;}
+	div#studyFiles_wrapper .dataTables_length{margin-top:18px!important;color:#000!important;float:left!important;}
+	div#studyFiles_wrapper .dataTables_length select{background:#dcdcdc!important;border-radius:2.5px!important;}
+	div#studyFiles_wrapper div#filesListCant{font-size:9.5pt;float:left!important;margin-top:12px!important;}
+	div#studyFiles_wrapper a.paginate_button.current{border-radius:15px!important;background:#dcdcdc!important;}
+	div#studyFiles_wrapper a.paginate_button:hover{border-radius:15px!important;}
+	div#studyFiles_wrapper .dataTables_filter{color:black!important;margin-bottom:18px!important;float:right!important;}
+ 	div#studyFiles_wrapper .dataTables_filter input{border:double #222 0.25em!important;background:#eee!important;text-align:center!important;font-style:italic!important;}
+	div#studyFiles_wrapper .dataTables_filter input:focus{border:double #0972a5 0.25em!important;}
+</style>
+<script type="text/javascript">
+	var dt= null, studyId= null;
+	function throw_error(){
+		window.parent.toastr['warning']('Falló la búsqueda de Adjuntos','ERROR');
+		window.parent.$('iframe#dynamicModalDialogIframe').attr('src','');
+		window.parent.$('div#dynamicModalDialog').dialog('close');
+	}
+	function charge_table(){
+		$.getJSON('rest/study/files/'+studyId)
+	  	.done(function(result) {
+	  	dt.fnClearTable();
+	  	if (result && result.length > 0){
+	  		dt.fnAddData(result);
+	  		$('div#filesListCant').html('TOTAL : <b>'+result.length+' archivos</b>');
+	  	}})
+		.fail(function(){throw_error()});
+	}
+	$(document).ready(function() {
+		studyId= $.url().param('s');
+		if(!studyId||studyId==null){throw_error()}
+		dt= window.parent.jqDataTable.studyFiles(studyId);
+		charge_table();
+	});
+</script>
+</head>
+<body>
+<div align="center">
+	<table id="studyFiles"></table>
+</div>
+</body>
+</html>

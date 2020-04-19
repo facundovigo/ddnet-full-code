@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"> 
+	<fo:layout-master-set>
+		<fo:simple-page-master margin-right="2cm" margin-left="2cm" 
+			margin-bottom="1cm" margin-top="0.5cm" font-family="sans-serif" 
+			font-size="0.6em" page-width="21cm" page-height="29.7cm" master-name="main">
+		<fo:region-body margin-bottom="1cm" margin-top="1cm"/>
+		<fo:region-before extent="1.5cm"/>
+		</fo:simple-page-master>
+	</fo:layout-master-set>
+
+	<fo:page-sequence master-reference="main" wrap-option="wrap" 
+		linefeed-treatment="preserve" white-space-collapse="false" 
+		white-space-treatment="preserve">
+		
+		<fo:flow flow-name="xsl-region-body">
+			<fo:block width="50%" margin-left="25%" margin-right="25%" margin-bottom="10mm">
+				<fo:external-graphic src="${INSTITUTION_LOGO_FILE}" content-height="20mm" content-width="100%">  
+        		</fo:external-graphic>
+        	</fo:block>		
+
+			<fo:block text-align="left" margin-left="25%" margin-right="25%">${PATIENT_DATA}</fo:block>
+			
+			<fo:block text-align="left">${REPORT_BODY}</fo:block>
+
+			<fo:block text-align="right">${DR_DATA}</fo:block>
+						
+			<fo:block text-align="right">
+				<fo:external-graphic src="${SIGNATURE_FILE}" content-height="15mm" content-width="40mm">  
+        		</fo:external-graphic>
+        	</fo:block>		
+		</fo:flow>
+		
+	</fo:page-sequence>
+</fo:root>

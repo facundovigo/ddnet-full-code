@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;orden-medica.html&apos; to &apos;restricted&apos;&#x0A;- Original project: &apos;ddap-web&apos;&#x0A;- Destination element: &apos;restricted&apos;&#x0A;- Original element: &apos;orden-medica.html&apos;" description="Copy file" element1="src/main/webapp/restricted/orden-medica.html" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1456755653081" target="/ddap-web/src/main/webapp/restricted" units="0" version="1.0"/>
+</session>

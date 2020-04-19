@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>Telelaudo - Web - Recuperar Contrase&#241;a</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.4.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/restore-password.css" />
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.js"></script>
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+<script type="text/javascript" src="js/restore-password.js"></script>
+
+</head>
+<body>
+	<img src="images/telelaudo.png" />	<!-- logo de Telelaudo -->
+	
+	<div class="divPassword">			<!-- contenedor de los elementos de la página -->
+	
+		<h4>
+			Seleccione cómo quiere renovar su contraseña:	
+		</h4>
+		
+		<br><br>
+		
+		<!-- El usuario elegirá si se recupera la contraseña por login o 
+				por una dirección de correo que se encuentre en la BD 	-->
+				
+		<input type="radio" id="radLogin" name="radioButton" value="1">
+			<label class="lblRadio" for="radLogin">Por nombre de usuario</label>	<br>
+		<input type="radio" id="radMail" name="radioButton" value="2">
+			<label class="lblRadio" for="radMail">Por dirección de correo</label>	<br><br><br>
+			
+		<span id="lblInfo"></span>	<!-- Informar sobre el procedimiento según la opción elegida -->
+		<br><br>
+		
+		<input type="text" id="txtDato" name="dato"> 		<!-- Aquí se ingresa el dato pedido -->
+		<button id="btnRecuperar"></button>					<!-- Ejecutar la recuperación -->
+		
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Diagn&oacute;stico Digital Alta Pacientes</title>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/jquery.fileDownload.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<script type="text/javascript" src="../js/pacientes.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css">
+	<link rel="stylesheet" type="text/css" href="../css/pacientes.css">
+
+</head>
+
+<body>
+	
+	<div class="the-top" align="center"> SECCIÓN PACIENTES </div>
+	
+	<div id="body-to-hide">
+	<div align="center" class="search-for-patient">
+		<form id="patient-search" align="center">
+		
+			<label> Tipo Documento : 
+				<select id="document-type" name="tipoDoc">
+					<option value="" selected="selected">Todos</option>
+					<option value="DNI">DNI</option>
+					<option value="DU">DU</option>
+					<option value="LC">LC</option>
+					<option value="LE">LE</option>
+					<option value="CI">CI</option>
+				</select>
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label> N° Documento : 
+				<input type="text" id="doc-number" name="nroDoc" title="Solamente Números">
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label> Paciente : 
+				<input type="text" id="pat-name" name="nombrePac" placeholder="Apellido o Nombre">
+			</label>
+			<br><br>
+			<label> Sexo : 
+				<select id="pat-sex" name="sexoPac">
+					<option value="">Todos</option>
+					<option value="F">F</option>
+					<option value="M">M</option>
+					<option value="O">O</option>
+				</select>
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label> Fecha de Alta : 
+				<input type="text" id="birth-date" name="fechaAlta" readonly="readonly">
+			</label>
+			<span id="clearBirthDate" title="borrar fecha seleccionada">X</span>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<button id="do-pat-search" type="button"></button>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;</span>
+			<button id="add-new" type="button"></button>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;</span>
+			<button id="do-retry" type="button"></button>
+			<input type="hidden" id="is-new-flag" value="0">
+		</form>
+	</div>
+	<br><br>
+	<div align="center" class="patient-table-parent">
+		<table id="patient-table"></table>
+	</div>
+	</div>
+	<br><br>
+	<div align="center" class="patient-actions-parent">
+	<div class="patient-actions">
+	</div>
+	</div>
+</body>
+
+</html>

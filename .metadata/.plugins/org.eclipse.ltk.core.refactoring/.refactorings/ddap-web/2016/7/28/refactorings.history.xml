@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Equipment.java&apos; to &apos;ddap-web/src/main/java/ddap.web.api.rest&apos;&#x0A;- Original project: &apos;ddap-web&apos;&#x0A;- Destination element: &apos;ddap-web/src/main/java/ddap.web.api.rest&apos;&#x0A;- Original element: &apos;ddap.web.api.rest.Equipment.java&apos;" description="Copy compilation unit" destination="/src\/main\/java&lt;ddap.web.api.rest" element1="/src\/main\/java&lt;ddap.web.api.rest{Equipment.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1467745662416" units="1" version="1.0"/>
+</session>

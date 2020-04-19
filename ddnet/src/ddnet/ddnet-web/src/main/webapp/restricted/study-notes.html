@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:9pt;overflow-y:auto;}
+	textarea{resize:none;width:98%;height:500px;border-radius:2px;margin:4px 0px;background:#cbcbcb;font-size:.9em;}
+</style>
+<script type="text/javascript">
+	studyId= null;
+	function throw_error(){
+		window.parent.toastr['warning']('No se pudo cargar los Mensajes','ERROR');
+		window.parent.$('iframe#dynamicModalDialogIframe').attr('src','');
+		window.parent.$('div#dynamicModalDialog').dialog('close');
+	}
+	$(document).ready(function() {
+		studyId= $.url().param('s');
+		if(!studyId||studyId==null){throw_error()}
+		
+		$.getJSON('rest/study/incidencias/'+studyId)
+		.done(function(data){
+			var body= $('textarea');
+			$(body).text('');
+			if(data && data.length>0){
+				$.each(data,function(i,inc){
+				var fechaMsj= inc.fecha.substring(6,8)+'-'+inc.fecha.substring(4,6)+'-'+inc.fecha.substring(0,4);
+				var horaMsj= inc.fecha.substring(9,14);
+				$(body).append(
+					(inc.incidencia==2? '*** El siguiente mensaje ha sido marcado como URGENCIA ***\n\n\t'
+					:inc.incidencia==1? '*** El siguiente mensaje ha sido marcado como RESOLUCIÓN ***\n\n\t' :'')
+					+'El día '+fechaMsj+' a las '+horaMsj+'hs. el usuario '+inc.usuario+' escribió:'+
+					'\n\n\t'+inc.mensaje+'\n\n\n'
+				)})
+			}
+		}).fail(function(){throw_error()});
+	});
+</script>
+</head>
+<body>
+<div align="center">
+<textarea readonly="readonly"></textarea>
+</div>
+</body>
+</html>

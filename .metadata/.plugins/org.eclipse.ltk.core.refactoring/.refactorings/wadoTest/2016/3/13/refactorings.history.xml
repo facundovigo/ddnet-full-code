@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;StudyListDAO.java&apos; to &apos;wadoTest/src/app.dcm.dao&apos;&#x0A;- Original project: &apos;wadoTest&apos;&#x0A;- Destination element: &apos;wadoTest/src/app.dcm.dao&apos;&#x0A;- Original element: &apos;app.dcm.dao.StudyListDAO.java&apos;" description="Copy compilation unit" destination="/src&lt;app.dcm.dao" element1="/src&lt;app.dcm.dao{StudyListDAO.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1458572064352" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,135 @@
+
+	div.filter {
+		margin-top: 15px;
+		width: 760px;
+		border: solid 1px black;
+	}
+	
+	
+	input.choose-date {
+		width: 90px;
+	}
+	
+	 
+	select#date-type{
+		width: 116px;
+	}
+	select#practice-state{
+		width: 87px;
+	}
+	select#pat-sex{
+		width: 70px;
+	}
+	
+	.ui-selectmenu-button{
+		top: 8.5px;
+		height: 22px;
+	}
+	
+	.win form.practicaxpaciente input:not(.choose-date){width:145px;}
+	input#accessionNumber{width:115px!important;}
+	
+	
+	div.for-the-table {
+		padding: 10px;
+	}
+	
+	table#pp-data-list {
+		font-size: 9pt				!important;
+		color: black				!important;
+		width: 99%					!important;
+	}
+	div#pp-data-list_wrapper thead {
+		background: black			!important;
+		color: white				!important;
+	}
+	div#pp-data-list_wrapper th{
+		text-align: center			!important;
+	}
+	div#pp-data-list_wrapper tr.even:not(.selected) {
+		background: #fefefe 		!important; 
+	}
+	div#pp-data-list_wrapper tr.odd:not(.selected) {
+		background: #ededed			!important;
+	}
+	div#pp-data-list_wrapper .dataTables_paginate {
+		font-size: 0.9em 			!important;
+		float: right				!important;
+		margin-top: 12px			!important;
+	}
+	div#pp-data-list_wrapper .dataTables_length {
+		margin-bottom: 18px			!important;
+		color: black				!important;
+	}
+	div#pp-data-list_wrapper .dataTables_info {
+		font-size: 0.9em 			!important;
+		margin-top: 12px			!important;
+		color: black				!important;
+	}
+	div#pp-data-list_wrapper div.pp-cant{
+		float: left					!important;
+		color: black				!important;
+		margin-top: 10px			!important;
+	}
+	div#pp-data-list_wrapper a.paginate_button.current{
+		border-radius: 15px			!important;
+	}
+	
+	div#pp-data-list_wrapper a.paginate_button:hover{
+		border-radius: 15px			!important;
+	}
+	
+	
+	
+	
+	img.table-icon {
+		width: 16px;
+		height: 16px;
+		cursor: pointer;
+	}
+	
+	span.en-espera {
+		background: #C63636;
+		color: white;
+		font-weight: bold;
+		width: 69px;
+		padding: 2px 5px;
+		cursor: pointer;
+	}
+	span.ingreso {
+		background: #EBED69;
+		color: black;
+		font-weight: bold;
+		padding: 2px 12.8px;
+		cursor: pointer;
+	}
+	span.termino {
+		background: green;
+		color: white;
+		font-weight: bold;
+		width: 69px;
+		padding: 2px 10.5px;
+		cursor: pointer;
+	}
+	span.cancelado {
+		background: white;
+		color: #C63636;
+		font-weight: bold;
+		width: 69px;
+		padding: 2px 4px;
+		cursor: pointer;
+		border: solid 1px #C63636;
+	}
+	
+	
+	
+	iframe img {
+		width: 200px		!important;
+	}
+	
+	
+	
+	
+	
+	
+	

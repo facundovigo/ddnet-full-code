@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="true" key="J2EE_EXPORT_OVERWRITE"/>
+	<item value="false" key="J2EE_EXPORT_SOURCE"/>
+	<list key="J2EE_IMPORT_APP_CLIENT">
+		<item value="/home/server/Escritorio/ddnet-useragent-1.0-jar-with-dependencies.jar"/>
+	</list>
+	<list key="J2EE_IMPORT_null">
+		<item value="/home/server/Apps/DCM4chee/dcm4chee-2.17.2-psql/server/default/deploy/dcm4chee-wado.war"/>
+		<item value="/home/server/Documentos/dd_visualizador_20150724.war"/>
+		<item value="/media/server/NLopez/DiagnosticoDigital/DCM4chee_arch/dd_visualizador.war"/>
+	</list>
+	<list key="J2EE_EXPORT_JST_EAR">
+		<item value="/home/server/Documentos/ddnet_20160907.ear"/>
+		<item value="/home/server/Documentos/ddnet_20160902.ear"/>
+		<item value="/home/server/Documentos/ddnet_20160825.ear"/>
+		<item value="/home/server/Escritorio/ddnet_cipo.ear"/>
+		<item value="/home/server/Documentos/ddap_20160816.ear"/>
+		<item value="/home/server/Documentos/ddnet-nuevo_20160816.ear"/>
+	</list>
+	<list key="J2EE_EXPORT_JST_WEB">
+		<item value="/home/server/Apps/DCM4chee/dcm4chee-2.17.2-psql/server/default/deploy/dd-viewer.war"/>
+		<item value="/home/server/share/dd-viewer.war"/>
+		<item value="/home/server/Escritorio/dd-viewer.war"/>
+		<item value="/media/server/MYLINUXLIVE/visualizador/dd-viewer.war"/>
+		<item value="/home/server/Apps/DCM4chee/dcm4chee-2.17.2-psql/server/default/deploy/wadoTest.war"/>
+	</list>
+	<list key="MRU_RUNTIME_STORE">
+		<item value="JBoss 4.2 Runtime"/>
+		<item value="JBoss 7.1 Runtime"/>
+	</list>
+	<list key="J2EE_EXPORT_JST_EJB">
+		<item value="/home/server/Escritorio/ddnet-ejb-client.jar"/>
+	</list>
+</section>

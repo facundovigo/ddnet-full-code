@@ -1,0 +1,270 @@
+/* Study Manager main container */
+.ui-layout-pane-north {
+	text-align: right !important;
+	font-family: Arial, sans-serif !important;
+	/*font-size: 0.7em					!important;*/
+	padding-top: 2px !important;
+	padding-bottom: 2px !important;
+	padding-left: 1px !important;
+	padding-right: 1px !important;
+	border: none !important;
+	/*....................................................*/
+	height: 200px !important;
+	/*....................................................*/
+}
+
+.ui-layout-pane-south {
+	text-align: center !important;
+	font-family: Arial, sans-serif !important;
+	font-size: 0.7em !important;
+	padding-top: 2px !important;
+	padding-bottom: 2px !important;
+	border: none !important;
+}
+
+.ui-layout-pane-west {
+	text-align: left !important;
+	font-family: Arial, sans-serif !important;
+	font-size: 0.8em !important;
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+/* Main container's filter control */
+.study-layout-north {
+	text-align: left !important;
+	font-family: Arial, sans-serif !important;
+	font-size: 1em !important;
+	font-weight: bold !important;
+	padding-top: 2px !important;
+	padding-left: 10px !important;
+	padding-bottom: 2px !important;
+	border: none !important;
+}
+
+.study-layout-south {
+	text-align: center !important;
+	font-family: Arial, sans-serif !important;
+	font-size: 0.75em !important;
+	border: none !important;
+}
+
+.study-search-button-container {
+	/*..................................................*/
+	text-align: left !important;
+	padding-left: 10px !important;
+	/*..................................................*/
+	font-family: Arial, sans-serif !important;
+	font-size: 1em !important;
+	border: none !important;
+	margin: 0 !important;
+}
+
+.study-layout-center {
+	text-align: left !important;
+	font-family: Arial, sans-serif !important;
+	font-size: 1em !important;
+	border: none !important;
+}
+
+.filter-field-label {
+	display: inline-block !important;
+	width: 35px;
+}
+
+.study-search-text-field {
+	width: 180px;
+	margin-right: 15px;
+}
+
+.study-search-text-field-date {
+	width: 95px;
+}
+
+.study-date-type-label {
+	display: inline-block !important;
+	width: 35px !important;
+}
+
+.study-date-type-chooser {
+	width: 10px;
+	margin: 7px;
+}
+
+#studies-found-actions-container {
+	margin-top: 5px;
+	text-align: center;
+	font-size: 0.7em;
+}
+
+#studies-found {
+	width: 100% !Important;
+}
+
+#studies-found_wrapper {
+	font-size: 8.75pt;
+}
+
+#studies-found_wrapper th {
+	text-align: left;
+	padding: 5px 18px 5px 5px;
+}
+
+#studies-found_wrapper td {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+#studies-found_wrapper td.study {
+	cursor: pointer;
+}
+
+.ui-menu-item {
+	font-size: 9pt;
+}
+
+#dynamicModalDialog {
+	overflow: hidden;
+	padding: 0 !important;
+}
+
+#dynamicModalDialogIframe {
+	width: 100%;
+	height: 100%;
+}
+
+.datable-row-icon {
+	height: 1em;
+	width: 2em;
+	cursor: pointer;
+}
+
+.study-search-box-west {
+	/*....................................................*/
+	border: none !important;
+	font-size: 0.8em !important;
+	/*....................................................*/
+	width: 0px !important;
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+.study-search-box-center {
+	/*....................................................*/
+	border: none !important;
+	width: 85% !important;
+	font-size: 0.8em !important;
+	margin: 0 auto !important;
+	text-align: center !important;
+	line-height: 30px !important;
+	/*....................................................*/
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	padding-left: 0px !important;
+	padding-right: 50px !important;
+}
+
+.study-search-box-east {
+	/*....................................................*/
+	border: none !important;
+	width: auto !important;
+	font-size: 0.8em !important;
+	/*....................................................*/
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+.study-search-box-button {
+	font-size: 0.9em;
+	width: 9em;
+	height: 3em;
+}
+
+.study-action-button {
+	/*font-size: 0.7em;*/
+	width: 11em;
+	height: 3em;
+}
+
+#search-details-message {
+	margin-top: 5px;
+	text-align: left;
+	font-size: 1em;
+	font-weight: bold;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+
+/* TEMP */
+.study-search-box-center label {
+	width: 80px;
+	display: inline-block;
+}
+
+#studies-found th {
+	text-align: center !important;
+	items-align: center !important;
+}
+
+#incidencia {
+	font-size: 150% !important;
+}
+
+#incidencia.unresolved {
+	color: red !important;
+}
+
+.study-search-box-center button {
+	font-size: 0.7em !important;
+}
+
+#study-search-dosearch .ui-button-text {
+	font-size: 1.2em;
+}	
+
+#top-of-table {
+	position: absolute;
+	top: 180px;
+	left: -0.6%;
+	width: 99.5%;
+	height: 30px;
+	font-size: 0.8em;
+	border: none;
+}
+
+#result {
+	width: 25.5%;
+	text-align: left;
+	display: inline-block;
+	color: #333333;
+}
+
+#incidences {
+	width: 47%;
+	text-align: center;
+	display: inline-block;
+	color: red;
+}
+
+#newstd {
+	width: 25.5%;
+	text-align: right;
+	display: inline-block;
+	color: #333333;
+}
+
+#btnIncidence {
+	cursor: pointer;
+}
+
+#btnNewStd {
+	cursor: pointer;
+}

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">DDMobile</string>
+    <string name="title_activity_login">DDMOBILE - Login</string>
+    <string name="top_text_activity_main">Usuario activo: %s</string>
+    <string name="action_settings">Configuración</string>
+    <string name="action_logout">Cerrar sesión</string>
+    <string name="low_storage_error">¡Queda poco espacio!</string>
+    <string name="noStudySelected">Sin estudio seleccionado</string>
+    <string name="scanStudyQR">Escanear QR...</string>
+    <string name="deselectStudy">Deseleccionar</string>
+    <string name="qr_no_se_pudo_leer">No se pudo leer un código</string>
+    <string name="useFlashPreferenceKey">USE_FLASH_PREFERENCE_KEY</string>
+    <string name="useFlashPreferenceTitle">Usar flash</string>
+    <string name="autoFocusPreferenceKey">AUTO_FOCUS_PREFERENCE_KEY</string>
+    <string name="autoFocusPreferenceTitle">Autofocus</string>
+    <string name="returnFirstDetectedBarcodePreferenceKey">RETURN_FIRST_DETECTED_BARCODE_PREFERENCE_KEY</string>
+    <string name="returnFirstDetectedBarcodePreferenceTitle">Usar primer código detectado</string>
+    <string name="barcodeScaningPreferencesCategoryTitle">Escaneo</string>
+    <string name="title_activity_settings">Preferencias</string>
+    <string name="addAttachmentLabel">Adjuntar...</string>
+    <string name="sendAttachmentsLabel">Enviar adjuntos</string>
+    <string name="attachmentsContainerLabel">Adjuntar:</string>
+</resources>

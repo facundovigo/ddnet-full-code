@@ -1,0 +1,12 @@
+#Fri Jul 10 17:00:05 ART 2015
+diagnosticodigital\:ddnet-ejb\:pom\:1.0.0=/home/server/workspace/ddnet/src/ddnet/ddnet-ejb/pom.xml
+dd\:wsreceiver\:war\:0.0.1-SNAPSHOT=/home/server/workspace/ws-recv/wsreceiver/target/classes
+dd\:wsreceiver\:pom\:0.0.1-SNAPSHOT=/home/server/workspace/ws-recv/wsreceiver/pom.xml
+diagnosticodigital\:ddnet-centeragent\:pom\:0.0.1-SNAPSHOT=/home/server/workspace/ddnet/src/ddnet-centeragent/pom.xml
+diagnosticodigital\:ddnet-ejb\:jar\:1.0.0=/home/server/workspace/ddnet/src/ddnet/ddnet-ejb/target/classes
+diagnosticodigital\:ddnet-useragent\:pom\:1.0=/home/server/workspace/ddnet/src/ddnet-useragent/pom.xml
+diagnosticodigital\:ddnet-web\:pom\:1.0.0=/home/server/workspace/ddnet/src/ddnet/ddnet-web/pom.xml
+diagnosticodigital\:ddnet-web\:war\:1.0.0=/home/server/workspace/ddnet/src/ddnet/ddnet-web/target/classes
+diagnosticodigital\:ddnet-centeragent\:jar\:0.0.1-SNAPSHOT=/home/server/workspace/ddnet/src/ddnet-centeragent/target/classes
+diagnosticodigital\:ddnet\:pom\:1.0.0=/home/server/workspace/ddnet/src/ddnet/pom.xml
+diagnosticodigital\:ddnet-useragent\:jar\:1.0=/home/server/workspace/ddnet/src/ddnet-useragent/target/classes

@@ -1,0 +1,79 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10pt;overflow-y:auto;}
+	h4{text-align:left;margin-left:100px;}
+	label{display:inline-block;width:140px;text-align:right;}
+	input{border:double #222 0.25em;background:#eee;text-align:center;}
+	input:focus{border: double #0972a5 0.25em;}
+	.ui-button{font-size:.9em;}
+</style>
+<script type="text/javascript">
+	function cancel_the_process(){
+		window.parent.$confirm('No se creará el Usuario',function(){
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			window.parent.$("#dynamicModalDialog").dialog('close');
+		});
+	}
+	function clear_all_fields(){$('input').val('')}
+	function isClear(){var input= $('input');return $(input[0]).val()==''||$(input[1]).val()==''||$(input[2]).val()==''||$(input[3]).val()==''||$(input[4]).val()==''}
+	function create_the_user(){
+		var input= $('input');
+		if(isClear()){window.parent.$alert('Hay campos sin completar');return}
+		if($(input[3]).val()!=$(input[4]).val()){window.parent.$alert('Las contraseñas no coinciden');return}
+		$.post('../restricted/rest/abm/newuser',$('form#altaUsuario').serialize())
+		.done(function(){
+			window.parent.toastr['success']('Se ha creado el Usuario '+$(input[2]).val(),'LISTO!');
+			var url= '../ABM/AsignarRol.html?login='+$(input[2]).val()+'&firstName='+$(input[0]).val()+'&lastName='+$(input[1]).val()+'&new=true';
+			window.parent.$("#dynamicModalDialogIframe").attr('src',url);
+		})
+		.fail(function(obj,err,status){
+			if(status=='No Aceptable') window.parent.toastr['warning']('Ya existe el Usuario '+$(input[2]).val(),'FALLÓ');
+			else window.parent.toastr['error']('Falló el alta del nuevo Usuario','ERROR');
+		});
+	}
+	function preset_buttons(){
+		var buttons= $('button');
+		$(buttons[0]).button({label:'Crear Usuario',icons:{primary:'ui-icon-circle-check'}}).on('click',create_the_user);
+		$(buttons[1]).button({label:'Limpiar',icons:{primary:'ui-icon-refresh'}}).on('click',clear_all_fields);
+		$(buttons[2]).button({label:'Cancelar',icons:{primary:'ui-icon-circle-close'}}).on('click',cancel_the_process);
+	}
+	$(document).ready(function() {
+		preset_buttons();
+		$('input').on('keypress',function(){var tecla=event.which||event.keyCode;if(tecla==13)create_the_user();else return});
+	});
+</script>
+</head>
+<body>
+<div align="center">
+	<br>
+	<form id="altaUsuario" autocomplete="off">
+		<h4>Datos Personales</h4>
+		&nbsp;<label>Nombre :</label>
+		<input type="text" name="first-name" /> <br><br>
+		<label>Apellido :</label>
+		<input type="text" name="last-name" />
+		<h4>Datos de Usuario</h4>
+		<label>Usuario :</label>
+		<input type="text" name="login" /> <br><br>
+		<label>Contraseña :</label>
+		<input type="password" name="password" /> <br><br>
+		<label>Confirme Contraseña :</label>
+		<input type="password" name="c_password" /> <br><br>
+		<h5 align="center">deben completarse todos los campos</h5><br>
+	</form>
+	<div align="center">
+		<button type="button"></button>&nbsp;&nbsp;
+		<button type="button"></button>&nbsp;&nbsp;
+		<button type="button"></button>
+	</div>
+</div>
+</body>
+
+</html>

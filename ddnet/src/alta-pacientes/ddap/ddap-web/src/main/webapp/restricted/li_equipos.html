@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+<script type="text/javascript" src="../js/equipos.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css">
+<link rel="stylesheet" type="text/css" href="../css/equipos.css">
+
+</head>
+
+<body>
+	<div class="the-top" align="center"> SECCIÓN EQUIPOS </div>
+	<br><br>
+	
+	<div align="center">
+	<div class="main">
+		<div class="to-the-left" align="center">
+			<br>
+			<label style="color:black;"> Modalidad : 
+				<select id="eq-modalities"></select>
+			</label>
+			<br><br><br>
+			<table id="eq-list"></table>
+			<br>
+		</div>
+		<div class="to-the-right" align="center">
+			<br>
+			<div class="eq-buttons" align="center">
+				<button id="new-eq"></button>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button id="mod-eq"></button>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button id="del-eq"></button>
+			</div>
+			<br><br>
+			<form id="eq-form">
+				<label>
+					Modalidad : ..........
+					<select id="new_modalities" name="modalidad"></select>
+				</label> 
+				<br><br>
+				<label>
+					Código : ...............
+					<input type="text" name="codigo" readonly="readonly">
+				</label> 
+				<br><br>
+				<label>
+					Marca : ................
+					<input type="text" name="marca">
+				</label> 
+				<br><br>
+				<label>
+					Modelo : ..............
+					<input type="text" name="modelo">
+				</label> 
+				<br><br>
+				<label>
+					Tiempo de Práctica : 
+					<input type="number" name="horas" min="0" max="59" value="0">hs.
+					<input type="number" name="minutos" min="0" max="59" value="0">min.
+					<input type="number" name="segundos" min="0" max="59" value="0">seg.
+				</label>
+			</form>
+		</div>
+	</div>
+	</div>
+	
+</body>
+
+</html>

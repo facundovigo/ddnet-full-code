@@ -1,0 +1,80 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10pt;overflow-y:auto;}
+	h4{text-align:left;}
+	label{display:inline-block;cursor:pointer;}
+	div#notDefinedInst label{text-align:left;width:250px;}
+	div#notDefinedInst label.selected{color:#dcdcdc;font-style:italic;}
+	.ui-button{font-size:.9em;margin:5px 0px;}
+	input{vertical-align:middle;}
+</style>
+<script type="text/javascript">
+	function institutions_list(){
+		$.getJSON("../restricted/rest/abm/notdefinedinstitution")
+		.done(function(data){
+		if(data && data.length>0){
+			$.each(data,function(i, inst){
+			var name= inst.replace(/ /g,'_space_').replace(/\./g,'_dot_');
+			var newInstitution= '<br><input type="checkbox" id="'+name+'" value="'+inst+'">' +
+								'&nbsp;<label for="'+name+'">'+inst+'</label>' ;
+			$('div#notDefinedInst').append(newInstitution);
+			}); $('label').on('mousedown',function(){return false});
+			$(':checkbox').on('change',function(){this.checked?$('label[for="'+$(this).attr('id')+'"]').addClass('selected'):$('label[for="'+$(this).attr('id')+'"]').removeClass('selected')});
+		} else $('div#notDefinedInst').append('<br>No se encontraron Instituciones.');
+		})
+		.fail(function(){
+			window.parent.toastr['error']('No se pudo cargar las instituciones','ERROR');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			window.parent.$('#dynamicModalDialog').dialog('close');
+		});
+	}
+	function create_the_institution(){
+		var checkbox= $('div#notDefinedInst').find(':checked');
+		if(checkbox.length<=0){window.parent.$alert('Seleccione al menos una Institución');return}
+		var instNames= [];
+		$.each(checkbox,function(i,c){ instNames.push(c.value) });
+		var dto= {institutionNames:instNames};
+		$.ajax({type:'POST', url:'../restricted/rest/abm/newinstitution', data:dto})
+		.done(function(){
+			window.parent.toastr['success']('Se han dado de alta las Instituciones','HECHO');
+			$.each(checkbox,function(i,c){ $('label[for="'+c.id+'"]').remove();$(c).remove() });
+			if($('div#notDefinedInst').find(':checbox').length==0) $('div#notDefinedInst').append('No se encontraron Instituciones.')
+		})
+		.fail(function(){window.parent.toastr['error']('No se pudo dar de alta las Instituciones','ERROR')});
+	}
+	function cancel_changes(){
+		window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+		window.parent.$('#dynamicModalDialog').dialog('close');
+	}
+	function preset_buttons(){
+		var buttons= $('button');
+		$(buttons[0]).button({label:'Dar de Alta',icons:{primary:'ui-icon-circle-check'}}).on('click',create_the_institution);
+		$(buttons[1]).button({label:'Cancelar',icons:{primary:'ui-icon-circle-close'}}).on('click',cancel_changes);
+	}
+	$(document).ready(function(){
+		institutions_list();
+		preset_buttons();
+		$('input#selectAll').on('click',function(){$('input:checkbox').prop('checked',$(this).prop('checked'));$(this).prop('checked')?$('div#notDefinedInst').find('label').addClass('selected'):$('div#notDefinedInst').find('label').removeClass('selected')});
+	});
+</script>
+</head>
+<body>
+<div align="center">
+	<button type="button"></button> &nbsp;&nbsp;
+	<button type="button"></button> <br>
+	<h4>La siguiente lista muestra las Instituciones que aún no se han dado de alta.</h4>
+	<label>
+	<input type="checkbox" id="selectAll">&nbsp;
+	<b>MARCAR TODAS</b>
+	</label> <br>
+	<div id="notDefinedInst"></div>
+</div>
+</body>
+</html>

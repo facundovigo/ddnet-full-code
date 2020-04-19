@@ -1,0 +1,121 @@
+var dt= null;
+
+
+
+function add_new_user(){openDialog('../ABM/NuevoUsuario.html','NUEVO USUARIO',700,600)}
+function add_new_institution(){openDialog('../ABM/NuevaInstitucion.html','NUEVA INSTITUCIÓN',700,600)}
+function add_new_modality(){openDialog('../ABM/NuevaModalidad.html','NUEVA MODALIDAD',700,600)}
+function charge_users(){
+	$.ajax({type:'GET',dataType:'json',url:'rest/abm/user',beforeSend:function(){$('div#ddnet-loading').show()}})
+	.done(function(info) {
+		dt.fnClearTable();
+		if(info&&info.length>0){dt.fnAddData(info);	$('div#userListCant').html('Resultado: <b>'+info.length+' usuarios</b>')}
+	})
+	.fail(function(){$alert('Ocurrió un error al momento de cargar los USUARIOS')})
+	.always(function(){$('div#ddnet-loading').hide(600)});
+}
+function preset_actions_buttons(){
+	var buttons= $('div.user-actions-buttons').find('button');
+	$(buttons[0]).button({
+		label:'Nuevo Usuario',
+		icons:{primary:'ui-icon-circle-plus',secondary:'ui-icon-person'}
+	}).on('click',add_new_user);
+	$(buttons[1]).button({
+		label:'Nueva Institución',
+		icons:{primary:'ui-icon-circle-plus',secondary:'ui-icon-home'}
+	}).on('click',add_new_institution);
+	$(buttons[2]).button({
+		label:'Nueva Modalidad',
+		icons:{primary:'ui-icon-circle-plus',secondary:'ui-icon-tag'}
+	}).on('click',add_new_modality);
+}
+function update_user_data(login,value,op){
+	var dto= {login:login, value:value, numCol:op};
+	$.ajax({type:'POST', url:'rest/abm/update-user', data:dto})
+	.done(function(){toastr['success']('Cambios realizados','HECHO');charge_users()})
+	.fail(function(){toastr['error']('Falló la modificación','ERROR')});
+}
+function preset_table(){
+	var table= $('table#userList');
+	$(table).on('dblclick','td',function(){
+		var pos= $(table).dataTable().fnGetPosition(this);
+		var fila= pos[0], columna= pos[1];
+		var user= $(table).dataTable().fnGetData(fila);
+		switch(columna){
+		case 1: $(this).html('<input type="text" title="presione ENTER para confirmar" >')
+					   .find('input').val(user.firstName).css('text-align','center').focus().tooltip()
+					   .on('blur',function(){$(this).parent().html(user.firstName)})
+					   .on('keypress',function(){
+						   var tecla= event.which||event.keyCode;
+						   if(tecla==13){if(!$(this).val()){$alert('Ingrese el nombre del Usuario');return}update_user_data(user.login,$(this).val(),1)}
+						   else return;
+					   });
+		break;
+		case 2: $(this).html('<input type="text" title="presione ENTER para confirmar" >')
+					   .find('input').val(user.lastName).css('text-align','center').focus().tooltip()
+					   .on('blur',function(){$(this).parent().html(user.lastName)})
+					   .on('keypress',function(){
+						   var tecla= event.which||event.keyCode;
+						   if(tecla==13){if(!$(this).val()){$alert('Ingrese el apellido del Usuario');return}update_user_data(user.login,$(this).val(),2)}
+						   else return;
+					   });
+		break;
+		case 3: var url= '../ABM/AsignarRol.html?login='+user.login+'&firstName='+user.firstName+'&lastName='+user.lastName +
+						 '&role='+(user.institutions[0]&&user.institutions[0]!=null?user.institutions[0].role.name:'SIN ROL')+'&new=false'
+						 +'perm='+(user.permissions&&user.permissions!=null);
+				openDialog(url,'PERFIL DE USUARIO',700,600);
+				$('div#dynamicModalDialog').data('user',user);
+		break;
+		case 4:	var url= '../ABM/AsignarModalidad.html?login='+user.login+'&firstName='+user.firstName+'&lastName='+user.lastName+'&new=false';
+				openDialog(url,'MODALIDADES DEL USUARIO',700,600);
+				$('div#dynamicModalDialog').data('user',user);
+		break;
+		case 5: var url= '../ABM/AsignarInstitucion.html?login='+user.login+'&firstName='+user.firstName+'&lastName='+user.lastName +
+						 '&roleName='+(user.institutions[0]&&user.institutions[0]!=null?user.institutions[0].role.name:'SIN ROL')+'&new=false';
+				openDialog(url,'INSTITUCIONES DEL USUARIO',700,600);
+				$('div#dynamicModalDialog').data('user',user);
+		break;
+		case 6: $(this).html('<input type="checkbox" title="CLICK para bloquear/desbloquear" >')
+		   			   .find('input').prop('checked',!user.deleted).focus().tooltip()
+		   			   .on('blur',function(){$(this).parent().html(user.deleted?'<div align="center"><span class="ui-icon ui-icon-close black"></span></div>':'<div align="center"><span class="ui-icon ui-icon-check black"></span></div>')})
+		   			   .on('click',function(){update_user_data(user.login,$(this).prop('checked'),4)});
+		break;
+		case 7: $confirm('Una vez borrado, el Usuario no se puede recuperar', function(){
+					$.post('rest/abm/deleteUser','login='+user.login)
+					.done(function(){toastr['success']('Usuario borrado','HECHO');charge_users()})
+					.fail(function(){toastr['error']('Falló la modificación','ERROR')});
+				});
+		break;
+		case 8: var dialog='';
+				dialog+= '<div id="modPswd" title="Cambiar Contraseña" align="center"> <br>'	+ 
+						 'Nueva Contraseña : <input type="password" id="newPassword" class="mod-password" /></div>';
+				$('body').append(dialog);
+		
+				$('div#modPswd').dialog({
+					modal:true,
+					close:function(ev,ui){$(this).remove()},
+					buttons:{
+						OK:function(){
+							$(this).dialog('close');$(this).remove();
+						},
+						Cancelar:function(){$(this).dialog('close');$(this).remove();}
+					}
+				});
+		default: break;
+		}
+	})
+}
+
+	window.addEventListener('resize',ajustes.abmUsuarios);
+
+	$(document).ready(function(){
+		dt= jqDataTable.userABM();
+		$('div#userListCant').html('Resultado: <b>0 usuarios</b>');
+		preset_actions_buttons();
+		charge_users();
+		preset_table();
+		ajustes.abmUsuarios();
+	});
+	
+	
+	

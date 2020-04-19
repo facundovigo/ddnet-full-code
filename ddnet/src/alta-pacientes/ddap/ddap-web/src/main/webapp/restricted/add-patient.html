@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript">
+	
+		var isNew = null;
+	
+		$(document).ready(function(){
+
+			isNew = parseInt($('#is-new-flag').val()) == 1;
+			
+			$.getJSON('rest/patient/provincias')
+			.done(function( data ){
+				var sel = $('select#sel_province');
+				sel.find('option').remove().end();
+				sel.append('<option value="">Seleccione...</option>');
+				
+				if(data && data != null){
+					$.each(data, function(i,provincia){
+						if(!isNew && patientInfo.province==provincia.name)
+						sel.append('<option value="'+provincia.name+'" selected="selected">'+ provincia.name +'</option>');
+						else sel.append('<option value="'+provincia.name+'">'+ provincia.name +'</option>');
+					});
+				}
+			})
+			.fail(function(){
+				var sel = $('select#sel_province');
+				sel.find('option').remove().end();
+				sel.append('<option value="" selected="selected" >ERROR cargando Provincias</option>');
+			});
+					
+			if(isNew){
+				$('#txtDocNumber').removeAttr('readonly');
+				$('label#form-title').text('Dar de alta un nuevo Paciente en el sistema');
+				
+				$('#btn_modify-patient').button({
+					label: 'Agregar',
+					icons: {'primary': 'ui-icon-circle-check'}
+				
+				}).on('click', create_the_patient );
+				
+			} else{
+				get_current_patient();
+				$('#txtDocNumber').attr('readonly', 'readonly');
+				$('label#form-title').text('Modificar Paciente en el sistema');
+				
+				$('#btn_modify-patient').button({
+					label: 'Modificar',
+					icons: {'primary': 'ui-icon-circle-check'}
+				
+				}).on('click', edit_the_patient );
+			}
+			
+			$('#btn_clear-form').button({
+				label: 'Limpiar',
+				icons: {'primary': 'ui-icon-refresh'}
+			
+			}).on('click', clear_patient_form );
+			
+			$('#btn_cancel-op').button({
+				label: 'Cancelar',
+				icons: {'primary': 'ui-icon-circle-close'}
+			
+			}).on('click', cancel_the_action );
+			
+			$('#txtMedInsurance').on('click', function(){
+				openDialog('osocial-search.html', 'INDIQUE LA OBRA SOCIAL', 500, 500);
+			});
+			
+			set_as_datepicker($('#txtBirthDate'));
+			
+			$('input[title="Solamente números"]').on('keypress', function(){
+				
+				var tecla = event.which || event.keyCode;
+				if(tecla < 48 || tecla > 57) return false;
+				else return;
+			}).tooltip();
+		});
+	</script>
+
+</head>
+
+<body>
+	
+	<div class="buttons" align="center">
+	
+		<button id="btn_modify-patient"></button>
+		&nbsp;
+		<button id="btn_clear-form"></button>
+		&nbsp;
+		<button id="btn_cancel-op"></button>
+	</div>
+	<br>
+	<div class="patient-data-form" align="center">
+	
+		<form id="frm_new-patient" class="pacientes">
+			<label id="form-title" style="font-size:1.1em;font-weight:bold;color:black;">
+				
+			</label>
+			<br><br>
+			<label>Tipo de Documento : </label>
+			<select id="cmbDocType" name="docType">
+				
+				<option value="" selected="selected">obl.</option>
+				<option value="DNI">DNI</option>
+				<option value="DU">DU</option>
+				<option value="LC">LC</option>
+				<option value="LE">LE</option>
+				<option value="CI">CI</option>
+			</select>
+			
+			&nbsp;
+			
+			<label>N° : </label>
+			<input type="text" id="txtDocNumber" name="docNumber" placeholder="obligatorio" title="Solamente números">	<br><br>
+			
+			<label style="width:80px;">Apellido : </label>
+			<input type="text" id="txtLastName" name="lastName" placeholder="campo obligatorio">
+				
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			
+			<label style="width:80px;">Nombre's : </label>
+			<input type="text" id="txtFirstName" name="firstName"placeholder="campo obligatorio" >	
+			
+			<br><br>
+			
+			<label>Fecha de Nacimiento:</label>
+			<input type="text" id="txtBirthDate" name="birthDate" readonly="readonly" style="width: 115px;" >
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			
+			<label>Sexo : </label>
+			<input type="radio" id="radioMasc" name="radioPatSex" value="M" checked="checked">
+			<label for="radioMasc">Masculino</label>
+			<input type="radio" id="radioFem" name="radioPatSex" value="F">
+			<label for="radioFem">Femenino</label>
+			<input type="radio" id="radioOther" name="radioPatSex" value="O">
+			<label for="radioOther">Otro</label>	
+			
+			<br><br>
+			
+			<label style="width:85px;" >Telefono : </label>
+			<input type="text" id="txtPhoneNumber" name="phoneNumber" title="Solamente números">
+			
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			
+			<label style="width:78px;" >Celular : </label>
+			<input type="text" id="txtCellPhoneNumber" name="cellPhoneNumber" title="Solamente números">	
+			
+			<br><br>
+			
+			<label style="width:85px;" >Email : </label>
+			<input type="text" id="txtMailAddress" name="mailAddress" style="width: 250px;" >	
+			
+			<br><br>
+			
+			<label style="width:85px;" >Nacionalidad: </label>
+			<input type="text" id="txtNationality" name="nationality">
+			
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			
+			<label style="width:78px;" >Domicilio : </label>
+			<input type="text" id="txtAddress" name="address">	
+			
+			<br><br>
+			
+			<label style="width:85px;" >Localidad : </label>
+			<input type="text" id="txtLocation" name="location">
+			
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+	
+			<label style="width:95px;" >Código Postal: </label>
+			<input type="text" id="txtZipCode" name="zipCode" style="width: 110px;" >
+			
+			<br><br>
+			
+			<label style="width:85px;" >Provincia : </label>
+			<select id="sel_province" name="province" style="width: 255px;"></select>
+			
+			<br><br>
+			
+			<label style="width:85px;" >Ocupación : </label>
+			<input type="text" id="txtOccupation" name="occupation" style="width: 250px;">
+		
+			<br><br>
+		
+<!-- 			<label style="width:100px;" >Obra Social : </label> -->
+<!-- 			<input type="text" id="txtMedInsurance" name="medInsurance" readonly="readonly" placeholder="Click para seleccionar Obra Social" -->
+<!-- 					style="width: 250px;cursor:pointer;">	 -->
+					
+<!-- 			<br><br> -->
+			
+<!-- 			<label style="width:80px;" >Plan : </label> -->
+<!-- 			<input type="text" id="txtPlan" name="plan"> -->
+			
+<!-- 			&nbsp;&nbsp;&nbsp;&nbsp; -->
+			
+<!-- 			<label>N° : </label> -->
+<!-- 			<input type="text" id="txtNumPlan" name="numPlan" style="width: 120px;" title="Solamente números"> -->
+			
+<!-- 			<br><br> -->
+			
+			<label>OBSERVACIONES</label>	<br>
+			<textarea id="txtObservation" name="observation" 
+			style="resize:none;width:550px;height:50px;border:double black 0.25em;border-radius:5px;"></textarea>
+		</form>
+	</div>	
+		
+		<!-- 
+		
+		<label class="lblForText">Médico Principal:...</label>
+		
+		<input type="text" id="txtMainDoctor" name="mainDoctor">	<br><br>
+		
+		<label class="lblForText right">M.N.:</label>
+		
+		<input type="text" id="txtMN" name="mn">
+		
+		<label style="margin-left: 4px;">M.P.:</label>
+		
+		<input type="text" id="txtMP" name="mp">-->
+		
+	
+
+
+
+</body>
+
+</html>

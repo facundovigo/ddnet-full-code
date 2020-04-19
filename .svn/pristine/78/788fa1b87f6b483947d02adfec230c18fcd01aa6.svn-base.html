@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Segunda Lectura</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui-1.10.4.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.js"></script>
+<script type="text/javascript" src="../js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+
+<style type="text/css">
+
+body {
+	background: #d4ddd9;
+	font-size: 0.75em;
+	font-family: Arial, sans-serif !important;
+}
+button {
+	float: right;
+}
+textarea {
+	resize: vertical;
+	width: 99%;
+	height: 100px;
+}
+tr {
+	height: 40px;
+}
+
+</style>
+
+<script type="text/javascript">
+		
+var studyID = null;
+var discrepance = null;
+
+	$(document).ready(function(){
+		
+		studyID = $.url().param('s');
+		discrepance = $.url().param('disc');
+		
+		if(discrepance != null && discrepance > 0){
+			
+			$('input[type="checkbox"][value="'+discrepance+'"]').prop('checked', true);
+			$('#second-reading :input').attr( 'disabled' , true );
+		}
+		
+		$('button').button({label: 'Guardar'})
+		.on('click', setSecReading);
+		
+		$('input[type="checkbox"]').on('click', function(){
+			var check = $(this);
+			$.each($('input[type="checkbox"]'), function(i, c){
+				if($(c).val() != check.val()) $(c).prop('checked', false);
+			});
+		});
+	});
+	
+	function setSecReading(){
+		
+		var checked = $('input:checked').length;
+		
+		if( checked <= 0 ) {alert("seleccione un grado de discrepancia");
+							return;}
+		
+		else if(checked > 1) {alert("ha seleccionado más de un grado de discrepancia");
+								return;}
+		else{
+			var discrepance = $('input:checked');
+			$.post('rest/studies/'+ studyID + '/secReading', $('form[name="second-reading-form"]').serialize())
+			.done(function(){
+				alert('La segunda lectura se ha guardado correctamente');
+				window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+				window.parent.$("#dynamicModalDialog").dialog("close");
+			})
+			.fail(function(){
+				alert('Ocurrió un error al momento de guardar la segunda lectura');
+				window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+				window.parent.$("#dynamicModalDialog").dialog("close");
+			});
+		}
+	}
+		
+</script>
+</head>
+<body>
+
+	<div id="second-reading" >
+		
+	<form name="second-reading-form">
+		
+		<table>
+		
+		<tr>
+		<td><input type="checkbox" name="type-of-discrepance" value="4"></td>
+		<td><span>Sin Discrepancias - De acuerdo con la interpretación.</span></td>
+		</tr>
+		
+		<tr>
+		<td><input type="checkbox" name="type-of-discrepance" value="1"></td>
+		<td><span>Discrepancia Grado 1 - No modifican conductas médicas. Ejemplos: Se omitió hallazgo casual, diagnóstico difícil,
+				errores de ortografía o en la estructura del informe, o conclusión redundante (copy-paste).</span></td>
+		</tr>
+		
+		<tr>
+		<td><input type="checkbox" name="type-of-discrepance" value="2"></td>
+		<td><span>Discrepancia Grado 2 - No modifican conductas médicas: Diagnóstico evidente omitido.</span></td>
+		</tr>
+		
+		<tr>
+		<td><input type="checkbox" name="type-of-discrepance" value="3"></td>
+		<td><span>Discrepancia Grado 3 - Modifican conductas médicas. Ejemplos: Diagnóstico fácil o se omitió algo importante (ej:
+					tumor, fractura), errores de lateralidad (Derecha &lt;---&gt;Izquierda).</span></td>
+		</tr>	
+		
+		</table>
+		
+		<textarea id="txt_second-reading" name="txt_second-reading"></textarea>
+		<br><br>
+		</form>
+		
+		<button id="btn_second_reading"></button>
+		
+	
+		
+	</div>
+
+</body>
+</html>

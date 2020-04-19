@@ -1,0 +1,577 @@
+package ddnet.web.api.rest;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.StringReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.stream.StreamSource;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.filefilter.FileFileFilter;
+import org.apache.fop.apps.FOPException;
+import org.apache.fop.apps.Fop;
+import org.apache.fop.apps.FopFactory;
+import org.apache.fop.apps.MimeConstants;
+import org.apache.tika.config.TikaConfig;
+import org.apache.tika.detect.Detector;
+import org.apache.tika.io.TikaInputStream;
+import org.apache.tika.metadata.Metadata;
+
+import ddnet.ejb.ConfigurationManager;
+import ddnet.ejb.StudyManagerLocal;
+import ddnet.ejb.StudySearchFilter;
+import ddnet.ejb.entities.User;
+import ddnet.web.security.SecurityHelper;
+
+@Stateless
+@Path("/studies")
+public class Study {
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+	private static final FopFactory fopFactory = FopFactory.newInstance();
+	private static final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	private static final Executor saveReportsToFileExecutor = Executors.newFixedThreadPool(3);
+	
+	@EJB
+	private StudyManagerLocal studyManager;
+	@EJB
+	private SecurityHelper securityHelper;
+	@EJB
+	private ConfigurationManager configurationManager;
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+	public Collection<StudyDTO> getStudies(@Context HttpServletRequest request,
+			@QueryParam("study-date-between-from") String studyDateFrom,
+			@QueryParam("study-date-between-to") String studyDateTo,
+			@QueryParam("study-accessionnumber") String accessionNumber,
+			@QueryParam("patient-data-id") String patientID,
+			@QueryParam("patient-data-name") String patientName,
+			@QueryParam("patient-data-dob") String patientDOB,
+			@QueryParam("study-modality") String modality) throws ParseException {
+		User user = securityHelper.getUser(request.getSession());
+		
+		StudySearchFilter filter = new StudySearchFilter
+				(getDateFromString(studyDateFrom), getDateFromString(studyDateTo), 
+						accessionNumber, patientID, patientName,
+						getDateFromString(patientDOB), modality);
+		
+		return flatten(studyManager.findStudies(user, filter));
+	}
+
+	@Path("{study-id}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+	public StudyDTO getStudy(@Context HttpServletRequest request,
+			@PathParam("study-id") String studyID) throws ParseException {
+		User user = securityHelper.getUser(request.getSession());
+		
+		return flatten(studyManager.getStudy(user, studyID));
+	}	
+	
+	@Path("{study-id}/report/body")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED + "; charset=UTF-8")
+	public Response updateReportBody(@Context HttpServletRequest request,
+			@PathParam("study-id") String studyID,
+			@FormParam("report-body") String reportBody, @FormParam("finished") boolean finished) {		
+		User user = securityHelper.getUser(request.getSession());
+		// TODO: Definir como se va indicar _quien_  o _en nombre de quien_ se realiza la edición de un informe.
+		User editor = user; 
+		
+		ddnet.ejb.entities.Study study = studyManager.getStudy(user, studyID);
+		
+		if (!study.isReported()) {
+			study.setReport(reportBody);
+			study.setReported(finished);
+			if (finished)
+				saveReportFile(study, editor);
+			return Response.ok().build();
+		} else 
+			return Response.notModified().build();
+	}
+
+	private void saveReportFile(final ddnet.ejb.entities.Study study, final User editor) {
+		try  {
+			saveReportsToFileExecutor.execute(new Runnable() {
+				@Override
+				public void run() {
+					OutputStream outputFile = null;
+					try {
+						String savedReportsPath = configurationManager.getConfigurationItem("report.saved-reports.path").getValue();
+						outputFile = new FileOutputStream(new File(savedReportsPath, study.getLegacyStudy().getStudyID() + ".pdf"));
+						writeStudyPDFTo(study, editor, outputFile);
+					} catch (Throwable t) {
+						t.printStackTrace();
+					} finally {
+						if (outputFile != null) {
+							try {
+								outputFile.flush();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							try {
+								outputFile.close();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}			
+			});
+		} catch(Throwable t) {
+			t.printStackTrace();
+		}
+	}
+	
+	private void writeStudyPDFTo(ddnet.ejb.entities.Study study, User editor, OutputStream output) throws FOPException, IOException, TransformerException {
+		Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, output);
+        Transformer transformer = transformerFactory.newTransformer();
+        String xslFO = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("study-report.fo"));        
+        xslFO = xslFO.replaceAll("\\$\\{REPORT_BODY\\}", Matcher.quoteReplacement(study.getReport()));
+        xslFO = xslFO.replaceAll("\\$\\{INSTITUTION_LOGO_FILE\\}", Matcher.quoteReplacement(getInstitutionLogoFile(study)));
+        xslFO = xslFO.replaceAll("\\$\\{SIGNATURE_FILE\\}", Matcher.quoteReplacement(getSignatureFile(editor)));
+        xslFO = xslFO.replaceAll("\\$\\{INSTITUTION_FOOTER_FILE\\}", Matcher.quoteReplacement(getInstitutionFooterFile(study)));
+        transformer.transform(new StreamSource(new StringReader(xslFO)), new SAXResult(fop.getDefaultHandler()));
+	}
+	
+	private String getInstitutionLogoFile(ddnet.ejb.entities.Study study) {
+		try {
+			String logosFolder = configurationManager
+					.getConfigurationItem("report.logos.source-path").getValue();			
+			return FileUtils.getFile(logosFolder, "INST" + study.getInstitution().getId() + ".jpg").getCanonicalPath();
+		} catch (Throwable t) {
+			return "";
+		}
+	}
+
+	private String getInstitutionFooterFile(ddnet.ejb.entities.Study study) {
+		try {
+			String logosFolder = configurationManager
+					.getConfigurationItem("report.logos.source-path").getValue();			
+			return FileUtils.getFile(logosFolder, "INST_FOOTER" + study.getInstitution().getId() + ".jpg").getCanonicalPath();
+		} catch (Throwable t) {
+			return "";
+		}
+	}
+
+	private String getSignatureFile(User user) {
+		try {
+			String signaturesFolder = configurationManager
+					.getConfigurationItem("report.signatures.source-path").getValue();			
+			return FileUtils.getFile(signaturesFolder, user.getLogin() + ".jpg").getCanonicalPath();
+		} catch (Throwable t) {
+			return "";
+		}
+	}	
+	
+
+	@Path("{study-id}/report/body")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN + "; charset=UTF-8")
+	public String getReportBody(@Context HttpServletRequest request,
+			@PathParam("study-id") String studyID) {		
+		User user = securityHelper.getUser(request.getSession());
+		
+		ddnet.ejb.entities.Study study = studyManager.getStudy(user, studyID);
+		return study.getReport();
+	}
+
+	
+	@Path("{study-id}/notes")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED + "; charset=UTF-8")
+	public Response updateNotes(@Context HttpServletRequest request,
+			@PathParam("study-id") String studyID,
+			@FormParam("notes") String notes) {		
+		User user = securityHelper.getUser(request.getSession());
+		
+		ddnet.ejb.entities.Study study = studyManager.getStudy(user, studyID);		
+		study.setNotes(notes);
+		return Response.ok().build();
+	}
+
+	@Path("{study-id}/notes")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN + "; charset=UTF-8")
+	public String getNotes(@Context HttpServletRequest request,
+			@PathParam("study-id") String studyID) {		
+		User user = securityHelper.getUser(request.getSession());
+		
+		ddnet.ejb.entities.Study study = studyManager.getStudy(user, studyID);
+		return study.getNotes();
+	}		
+	
+	@Path("{study-id}/files")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+	public Collection<String> getFiles(@Context HttpServletRequest request,
+			@PathParam("study-id") String studyID) {		
+		User user = securityHelper.getUser(request.getSession());
+		
+		ddnet.ejb.entities.Study study = studyManager.getStudy(user, studyID);
+		if (study == null)
+			return Collections.<String>emptyList();
+		
+		Collection<String> files = new ArrayList<String>();
+		File studyUploadedFilesDirectory = getStudyUploadDirectory(study);
+		for(File filename : studyUploadedFilesDirectory.listFiles((FileFilter)FileFileFilter.FILE))
+			files.add(filename.getName());
+		
+		return files;
+	}
+
+	@Path("{study-id}/files/file")
+	@GET
+	public Response getFile(@Context HttpServletRequest request,
+			@Context HttpServletResponse response,
+			@PathParam("study-id") String studyID, 
+			@QueryParam("name") String filename) throws IOException {		
+		User user = securityHelper.getUser(request.getSession());
+		
+		ddnet.ejb.entities.Study study = studyManager.getStudy(user, studyID);
+		if (study == null)
+			return Response.status(Status.NOT_FOUND).build();
+		
+		File rootDirectory = getStudyUploadDirectory(study);
+		File requestedFile = new File(rootDirectory, filename);
+		if (requestedFile == null || !requestedFile.exists())
+			return Response.status(Status.NOT_FOUND).build();
+		
+		if (!requestedFile.getCanonicalPath().startsWith(rootDirectory.getCanonicalPath()))
+			return Response.status(Status.NOT_FOUND).build();
+
+		final String fileMimeType = getFileMimeType(requestedFile);
+		response.setHeader("Content-Disposition", String.format("inline; filename=\"%s\"", requestedFile.getName()));
+		
+		return Response.ok(requestedFile)
+				.header("Content-Type", fileMimeType)
+				.build();
+	}
+
+	private String getFileMimeType(File file) {
+		try {
+			TikaConfig config = TikaConfig.getDefaultConfig();
+			Detector detector = config.getDetector();
+			TikaInputStream stream = TikaInputStream.get(file);
+			Metadata metadata = new Metadata();
+			metadata.add(Metadata.RESOURCE_NAME_KEY,FilenameUtils.getBaseName(file.getCanonicalPath()));
+			org.apache.tika.mime.MediaType mediaType = detector.detect(stream, metadata);
+			return mediaType.toString();
+		}
+		catch(Throwable t) {
+			return MediaType.APPLICATION_OCTET_STREAM;
+		}
+	}
+	
+	@Path("{study-id}/files/file")
+	@DELETE
+	public Response deleteFile(@Context HttpServletRequest request,
+			@Context HttpServletResponse response,
+			@PathParam("study-id") String studyID, 
+			@QueryParam("name") String filename) throws IOException {		
+		User user = securityHelper.getUser(request.getSession());
+		
+		ddnet.ejb.entities.Study study = studyManager.getStudy(user, studyID);
+		if (study == null)
+			return Response.status(Status.NOT_FOUND).build();
+		
+		File rootDirectory = getStudyUploadDirectory(study);
+		File requestedFile = new File(rootDirectory, filename);
+		if (requestedFile == null || !requestedFile.exists())
+			return Response.status(Status.NOT_FOUND).build();
+		
+		if (!requestedFile.getCanonicalPath().startsWith(rootDirectory.getCanonicalPath()))
+			return Response.status(Status.NOT_ACCEPTABLE).build();
+
+		requestedFile.delete();
+		
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("{study-id}/files")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response uploadStudyFile(@Context HttpServletRequest request,
+			@PathParam("study-id") String studyID) throws IOException {
+		User user = securityHelper.getUser(request.getSession());		
+		ddnet.ejb.entities.Study study = studyManager.getStudy(user, studyID);
+		if (study == null)
+			return Response.status(Status.BAD_REQUEST).build();
+		
+		ServletFileUpload uploader = new ServletFileUpload(new DiskFileItemFactory());
+		try {
+			@SuppressWarnings("unchecked")
+			List<FileItem> parseRequest = uploader.parseRequest(request);
+			for (FileItem fileItem : parseRequest) {
+				if ("study-file".equals(fileItem.getFieldName())) {
+					String uploadedFilename = new File(getStudyUploadDirectory(study), 
+							fileItem.getName()).getAbsolutePath();
+					writeToFile(uploadedFilename, fileItem.get());					
+					break;
+				}
+			}
+		} catch (FileUploadException e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}		
+		
+		return Response.ok().build();
+	}
+
+	
+	@Path("{study-id}/media")
+	@GET
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public Response getStudyMedia(@Context HttpServletRequest request,
+			@Context HttpServletResponse response,
+			@PathParam("study-id") String studyID) {		
+		User user = securityHelper.getUser(request.getSession());
+		
+		response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", 
+				studyID + "-DICOMDIR.zip"));
+		
+		return Response.ok(studyManager.getStudyMedia(user, studyID)).build();
+	}
+	
+	private void writeToFile(String filename, byte[] data) throws IOException {
+		OutputStream out = null;
+		try {
+			out = new FileOutputStream(new File(filename));
+			out.write(data);
+		}
+		finally {
+			if (out != null)
+			{
+				try {
+					out.flush();
+					out.close();
+				} catch(Throwable t) {}
+			}
+		}
+	}	
+	
+	private File getStudyUploadDirectory(ddnet.ejb.entities.Study study) {
+		File rootDirectory = getStudyUploadedFilesRootDirectory();
+		File studyFilesFolder = new File(rootDirectory, study.getLegacyStudy().getStudyID());
+		if (!studyFilesFolder.exists()) studyFilesFolder.mkdirs();
+		return studyFilesFolder;
+	}
+
+	private File getStudyUploadedFilesRootDirectory() {
+		return new File(configurationManager.getConfigurationItem("study.uploaded-files.path").getValue());
+	}
+
+	private Date getDateFromString(String input) throws ParseException {
+		return (input != null && !input.trim().equals("")) ? DATE_FORMAT.parse(input) : null;
+	}
+
+	private StudyDTO flatten(ddnet.ejb.entities.Study study) {
+		return flatten(Collections.singletonList(study)).iterator().next();
+	}
+	
+	private Collection<StudyDTO> flatten(Collection<ddnet.ejb.entities.Study> studies) {
+		Collection<StudyDTO> result = new ArrayList<StudyDTO>();
+		File uploadsRoot = getStudyUploadedFilesRootDirectory();
+		
+		StudyDTO dto = null;
+		for(ddnet.ejb.entities.Study study : studies) {
+			dto = new StudyDTO();
+			
+			try { dto.setId(study.getLegacyStudy().getStudyID()); } catch (Throwable t) {}
+			try { dto.setPID(study.getLegacyStudy().getLegacyPatient().getPatientID()); } catch (Throwable t) {}
+			try { dto.setPN(study.getLegacyStudy().getLegacyPatient().getName()); } catch (Throwable t) {}
+			try { dto.setAge(study.getLegacyStudy().getLegacyPatient().getCalculatedAge()); } catch (Throwable t) {}
+			try { dto.setDate(study.getLegacyStudy().getFormattedDate()); } catch (Throwable t) {}
+			try { dto.setMod(study.getLegacyStudy().getModalities()); } catch (Throwable t) {}
+			try { dto.setDesc(study.getLegacyStudy().getDescription()); } catch (Throwable t) {}
+			try { dto.setRS(study.getReportStatus()); } catch (Throwable t) {}
+			try { dto.setFC(new File(uploadsRoot, study.getLegacyStudy().getStudyID()).list().length); } catch (Throwable t) {}
+			try { dto.setNS(study.hasNotes() ? 1 : 0); } catch (Throwable t) {}
+			try { dto.setIID(study.getInstitution().getId()); } catch (Throwable t) {}
+			try { dto.setTI(study.getLegacyStudy().getTotalInstances()); } catch (Throwable t) {}
+			try { dto.setAN(study.getLegacyStudy().getAccessionNumber()); } catch (Throwable t) {}
+			
+			result.add(dto);
+		}
+		
+		return result;
+	}
+	
+	public class StudyDTO 
+	{
+		/**
+		 * Study IUID.
+		 */
+		private String id = "?";
+		/**
+		 * Patient ID.
+		 */
+		private String pid = "?";
+		/**
+		 * Patient name.
+		 */
+		private String pn = "?";
+		/**
+		 * Patient age.
+		 */
+		private String age = "?";
+		/**
+		 * Study date.
+		 */
+		private String date = "?";
+		/**
+		 * Modalities.
+		 */
+		private String mod = "?";
+		/**
+		 * Study description.
+		 */
+		private String desc = "?";
+		/**
+		 * Study's report status.
+		 */
+		private int rs = 0;
+		/**
+		 * # of uploaded files for this study. 
+		 */
+		private int fc = 0;
+		
+		/**
+		 * Note Status: 0 = no notes written. 1 = Notes written.
+		 */
+		private int ns = 0;
+		
+		/**
+		 * Instituion ID.
+		 */
+		private long iid = -1;
+
+		/**
+		 * Total Instances: cantidad total de imágenes que tiene este estudio.
+		 */
+		private int ti = 0;
+
+		/**
+		 * Accesion Number
+		 */
+		private String an;
+		
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id != null ? id : "?";
+		}
+		public String getPID() {
+			return pid;
+		}
+		public void setPID(String pid) {
+			this.pid = pid != null ? pid : "?";
+		}
+		public String getPN() {
+			return pn;
+		}
+		public void setPN(String pn) {
+			this.pn = pn != null ? pn : "?";
+		}
+		public String getAge() {
+			return age;
+		}
+		public void setAge(String age) {
+			this.age = age != null ? age : "?";
+		}
+		public String getDate() {
+			return date;
+		}
+		public void setDate(String date) {
+			this.date = date != null ? date : "?";
+		}
+		public String getMod() {
+			return mod;
+		}
+		public void setMod(String mod) {
+			this.mod = mod != null ? mod : "?";
+		}
+		public String getDesc() {
+			return desc;
+		}
+		public void setDesc(String desc) {
+			this.desc = desc != null ? desc : "?";
+		}
+		public int getRS() {
+			return rs;
+		}
+		public void setRS(int rs) {
+			this.rs = rs;
+		}
+		public int getFC() {
+			return fc;
+		}
+		public void setFC(int fc) {
+			this.fc = fc;
+		}
+		public int getNS() {
+			return ns;
+		}
+		public void setNS(int ns) {
+			this.ns = ns;
+		}
+		public long getIID() {
+			return iid;
+		}
+		public void setIID(long iid) {
+			this.iid = iid;
+		}
+		public int getTI() {
+			return ti;
+		}
+		public void setTI(int ti) {
+			this.ti = ti;
+		}
+		public String getAN() {
+			return an;
+		}
+		public void setAN(String an) {
+			this.an = an;
+		}
+	}	
+}

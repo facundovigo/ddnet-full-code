@@ -1,0 +1,172 @@
+
+	/*.ui-widget{ font-size: 0.7em; }*/
+	
+	
+	.the-top {
+		font-weight: bolder;
+		font-size: 17pt;
+		color: black;
+	}
+	
+
+
+	div.search-for-patient {
+		margin-top: 15px;
+	}
+	
+	div.search-for-patient form{
+		width: 800px;
+		padding: 15px;
+		border: solid 1px black;
+	}
+	
+	
+	
+	/**
+	 *	Formulario de Búsqueda
+	 */
+	
+	form#patient-search select#document-type {
+		width: 65px;
+	} 
+	form#patient-search input#doc-number {
+		width: 100px;
+	}
+	.linux form#patient-search input#pat-name {
+		width: 300px;
+	}
+	.win form#patient-search input#pat-name {
+		width: 250px;
+	}
+	form#patient-search select#pat-sex {
+		width: 65px;
+	}
+	form#patient-search input#birth-date {
+		width: 90px;
+	}
+	form#patient-search button#do-pat-search {
+		width: 105px;
+	}
+	form#patient-search button#add-new {
+		width: 105px;
+	}
+	form#patient-search button#do-retry {
+		display: none;
+	}
+	form#frm_new-patient select{
+		border-radius:2.5px;
+		height:23px;
+		background:#dcdcdc;
+		padding-left:3px;
+	}
+	form#frm_new-patient{
+		width: 630px;
+		text-align:left;
+		font-size:9pt!important;
+	}
+	
+	
+	label{display:inline-block;}
+	
+	/**
+	 *	Widgets JQuery UI
+	 */
+	.linux .ui-selectmenu-text{font-size:.8em;}
+	.win .ui-selectmenu-text{font-size:.7em;}
+	.ui-selectmenu-button{top:8.5px;height:22px;}
+	.win .ui-button{font-size:.95em}
+	
+	
+	/**
+	 *	JQuery DataTable
+	 */
+	div.patient-table-parent {
+		padding: 10px;
+	}
+	table#patient-table {
+		font-size: 9pt											!important;
+		color: black											!important;
+		width: 99%												!important;
+		border-right: solid 1px black							!important;
+		border-left: solid 1px black							!important;
+	}
+	div#patient-table_wrapper thead {
+		background: #ddd										!important;
+		color: black											!important;
+	}
+	div#patient-table_wrapper th{
+		text-align: center										!important;
+		border-top: solid 1.5px black							!important;
+	}
+	div#patient-table_wrapper tr.even {
+		background: #fefefe 									!important; 
+		cursor: pointer											!important;
+	}
+	div#patient-table_wrapper tr.odd {
+		background: #ededed										!important;
+		cursor: pointer											!important;
+	}
+	div#patient-table_wrapper .dataTables_paginate{
+		font-size: 0.8em 										!important;
+		float: right											!important;
+		margin-top: 12px										!important;
+	}
+	div#patient-table_wrapper .dataTables_length {
+		margin-bottom: 18px										!important;
+		color: black											!important;
+	}
+	div#patient-table_wrapper .dataTables_length select {
+		border-radius: 5px										!important;
+	}
+	div#patient-table_wrapper .dataTables_info {
+		font-size: 0.85em 										!important;
+		margin-top: 12px										!important;
+		color: black											!important;
+	}
+	div#patient-table_wrapper div.pat-cant{
+		float: left												!important;
+		color: black											!important;
+		margin-top: 10px										!important;
+	}
+	div#patient-table_wrapper a.paginate_button.current{
+		border-radius: 15px										!important;
+	}
+	
+	div#patient-table_wrapper a.paginate_button:hover{
+		border-radius: 15px										!important;
+	}
+	div#patient-table_wrapper img.table-image {
+		width: 16px												!important;
+		height: 16px											!important;
+	}
+	
+	
+	
+	
+	/**
+	 *	Div oculto para acciones sobre pacientes
+	 */
+	div.patient-actions-parent {
+		display: none;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	span#clearBirthDate{
+		display:none;
+		margin-left:4px;
+		cursor:pointer;
+	}
+	
+	
+	
+	
+	
+	

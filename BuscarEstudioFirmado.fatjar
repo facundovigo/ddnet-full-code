@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Mon Sep 28 18:02:26 ART 2015
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=BuscarEstudioFirmado.jar
+manifest.mergeall=true
+manifest.mainclass=app_funciones.Init
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=<inc|BuscarEstudioFirmado/config>

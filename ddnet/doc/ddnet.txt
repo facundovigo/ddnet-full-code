@@ -1,0 +1,241 @@
+Proyecto DDWEB
+--------------
+
+- Login
+	- Contemplar ESTADO_ADMINISTRATIVO
+
+
+- BD
+
+	Tabla USUARIO
+		ID_USUARIO
+		LOGIN
+		PASSWORD
+
+
+	Tabla USUARIO_ESTUDIO
+		ID_USUARIO
+		STUDY_ID
+			- 
+
+	Tabla USUARIO_MODALIDADES
+		ID_USUARIO
+		MODALIDADES
+			- Tener en cuenta la tabla USUARIO_MODALIDADES para armar en el filtrado: 1) las modalidades posible - 2) ALL es todas las modalidades que tenga configuradas.
+
+
+	Tabla INSTITUCION		<- Tiene la relacion entre estudios e instituciones
+		ID_INSTITUCION
+		NOMBRE
+		AE_TITLE
+		ESTADO_ADMINISTRATIVO	usuarios de instituciones con baja logica NO PUEDEN HACER NADA,
+                                        NI LOGIN -- CODIGO DE ERROR ESPECIAL
+
+	Tabla USUARIO_INSTITUCION
+		ID_USUARIO
+		ID_INSTITUCION
+		ID_ROL
+
+
+	Tabla ACCION						
+		ID ACCION
+		NOMBRE
+		    Ejemplos:
+			- Consultar estudios
+			- Ver informe
+			- Crear informe
+			- Visualizacion basica
+			- Visualizacion avanzada
+
+
+	Tabla ROL_ACCION
+		ID_ROL
+		ID_ACCION
+	
+
+	Tabla ROL
+		ID_ROL
+		NOMBRE
+
+
+	Tabla DD_STUDY: datos propios de DDNET sobre estudios
+		ID_STUDY
+		HAS_REPORT		<- Si fue informado o no
+
+	*** PARA ESTA TABLA NECESITAMOS QUE ANTE UN INSERT EN LA TABLA "study" SE GENERE UN REGISTRO EN ESTA TABLA. ****
+
+
+	- Script de carga inicial:
+		- Crear registros en "DD_STUDY" segun registros existentes en "study".
+
+
+- Filtros:
+	- Study Date: Hoy, Ayer, Ult 7, Ult 15, Ult 30, Desde-Hasta (por defecto: buscar estudios de hoy)
+	- Modality
+    - Patient Name
+    - Patient ID
+    - Estudio informado / no informado / todos.
+
+- Datos presentados de los estudios encontrados:
+    - Patient ID
+	- Patient Name
+    - Study Date
+    - Modality
+    - Study Description  (TAC TORAX HEL) (especializacion sobre la modalidad)
+    - Estado Informe (a informar / informado)
+
+- Acciones sobre los estudios encontrados:
+	- Se tiene que poder auditar cada accion, especialmente 'Generar Informe'.
+	- Visualizar (basandose en el StudyID para ir a la pagina que corresponda)
+		- Simple 	-> montarse sobre Oviyam
+		- Avanzada 	-> montarse sobre Weasis 
+    	- Ver/Generar Informe
+		- Protocolo: es un unico texto. Sin Secciones.
+
+		- Protocolos base: son a nivel de "Study Description"
+			 	-- UTILIZAR VARIABLES AL MOMENTO DE CARGAR UN PB: PatientName, StudyDate, PatientID, etc --
+				-- Cual sería el origen de los valores para reemplazar dichas variables? TAGs? DB?  --
+			- Origenes
+				- Archivos (DOC,TXT, PDF, etc)										
+				- Pensar a futuro si DB serviria
+			
+		- Tiene que poder guardarse un parcial del informe para retormarlo luego. Sigue en estado A INFORMAR. la segunda vez que lo edita, en vez de levantar
+		  el protocolo base, retoma el previamente guardado.
+
+		- cuando se "Cierra" el informe, se genera un PDF en una estructura:
+				- INFORMES
+					- AAAAMMD
+						STUDYID.pdf
+			
+
+PROTOCOLOS BASE
+	- GENERALIZADO_GLOBAL
+		. TAC RODILLA.DOC
+		. TAC CEREBRO.DOC
+		- MEDICOS
+			- SERGIO_HERRERA
+				. TAC RODILLA.DOC
+				. TAC CEREBRO.DOC
+			- DR STRANGELOVE
+				<<nada>>
+
+
+TO-DO
+-----
+LISTO - Agregar logo en pantalla de login y la principal.
+LISTO - Aviso de "LOADING..." al hacer la búsqueda de estudios...
+LISTO - Controlar caso de que un usuario no tenga modalidades cargadas: pincha el 'IN' de user modalities!
+- Mensajes de error descriptivos login 
+LISTO - Manejo de errores (postback y ajax)
+LISTO - Crear un script para carga de datos para el usuario admin
+LISTO - Pensar en paginacion para ver los estudios
+
+
+
+Requerimientos
+--------------
+
+2014-06-05
+LISTO - 1. Instructivo de instalación
+LISTO - 2. Desarrollo de la funcionalidad de informes (guardados en DB y no en archivos)
+
+CONFIRMADO - A confirmar si se hace:
+	LISTO - Grilla de estudios: letra más chica. Más registros por página en lugar de 10.
+	LISTO - Flotar los botones de búsqueda de estudios hacia arriba, no abajo de todo.
+	LISTO - Las acciones sobre los estudios (visualizacion simple y avanzada, reportes, etc) deben aparecer de un menu contextual y no como botones.
+
+2014-06-13
+LISTO - 1. Scripts de ABM de todo (instituciones, usuarios, etc)
+LISTO - 2. Filtro por Institucion.
+LISTO - 3. Recorrido del procedimiento de instalación.
+LISTO - 4. Continuar con funcionalidad de informes.
+
+
+2014-06-16
+LISTO - En la grilla de resultados de estudios, distinguir el estado de informe "A confirmar" (edicion parcial)
+LISTO - fecha desde -fecha hasta: fecha desde  y fecha hasta  ambos muestren la fecha de hoy.
+LISTO - Separar los protocolos base en carpetas segun la modalidad. 
+SUSP. - implementar lo de anexar a los protocolos genericos los propios del medico.
+LISTO - download dicomdir del estudio.
+LISTO - subir y bajar archivo de mp3 relacionado al estudio.
+
+2014-06-22
+LISTO - Video tutorial instalación DDNET
+LISTO - Asegurar estas variables para reportes: Nombre de Paciente, ID de Paciente, Descripcion del estudio, fecha del estudio, Edad.
+
+
+2014-06-29
+LISTO - volver a poner botones para las acciones sobre estudios.
+LISTO - A INFORMAR => ROJO / A CONFIRMAR => AMARILLO / INFORMADO => VERDE  solo a la celda correspondiente.
+LISTO - modalidades: lista vertical, no horizontal (columnas para que no sea muy largo)
+LISTO - (0008,0080)	LO	InstitutionName	: guardar este campo en un study_add_field libre y hacer la relacion con institucion por este valor.
+	<attr tag="00080080" field="studyCustomAttribute3" /> <!-- Institution Name  -->
+LISTO - (0010,1010)	AS	PatientAge		: guardar este campo en un patient_add_field libre y utilizarlo para saber la edad del paciente.
+	<attr tag="00101010" field="patientCustomAttribute3" /> <!-- Patient's Age -->
+LISTO - agregar la edad del paciente en la grilla de estudios (entre nombre paciente y fecha de estudio)
+LISTO - al editar un informe, poner en el titulo la edad.
+LISTO - renombrar columna "INFORME" -> "ESTADO"
+LISTO - renombrar columna "NOMBRE PACIENTE" -> "APELLIDO PACIENTE"
+LISTO - !!! ESTOY DEVOLVIENDO EL CUERPO DEL INFORME EN LA CONSULTA DE ESTUDIOS!!!!  - solo quitarlo de la respuesta, el resto esta arreglado para pedir el report-body cuando haga falta.
+	* DEV: inicio -> 253k  - tras modificacion: 111k
+LISTO - Se achica el panel de busqueda cuando se agranda la tabla (segun los datos de los estudios)
+
+
+2014-07-17
+LISTO - Identificar aquellos estudios que tienen archivos subidos. Identificar cada tipo de archivo (Word, MP3, etc) con un icono distintivo.
+LISTO - En lugar de descargar los archivos adjuntos a un estudios, intentar abrirlos directamente y en caso de que no tengan acción asociada, recien ahi descargar el archivo.
+LISTO - Realizar instructivo de instalación + video de instalación sobre Linux.
+LISTO - Posibilitar acciones sobre múltiples estudios a la vez. Ej: bajar DICOMDIR o informe de aquellos estudios que se hayan seleccionado.
+- Crear el rol "Supervisor" y una pagina especifica para este rol donde pueda, inicialmente, tener tareas de administración. Inicialmente la unica tarea será:
+  "Asignar estudios a un usuario específico". Esto requiere además implementar el hecho de que cada perfil debería tener una página default distinta, tras el login.
+  (Medicos van al administrador de estudios, Supervisores/Admins a esta nueva pagina de administración)
+- Pensar en una página donde un PACIENTE (crear este rol) pueda tener acceso a sus estudios, pudiendo visualizar estos estudios, junto con el informe correspondiente, 
+  mas un PDF con las imagenes relevantes del estudio. Se deberia crear un usuario para cada paciente con, x ej, el DNI y una clave aleatoria y conocida para informarle
+  a dicho paciente, y además los estudios deberian poder auto-relacionarse a dicho usuario para que no haya que asignarselos manualmente. Podría llegar a consultarse
+  un sistema externo para consultar, x ej, el email y avisarle de que ya tiene el estudio listo.
+
+2014-07-24
+LISTO - Agregar un campo de "Observaciones" para que se escriba info del paciente en modo texto.
+LISTO - Agregar seguridad a los perfiles (prender/apagar opciones como editar informe, ver informe, etc) - *** Interfaz de usuario ***
+POSPUESTO (2014-08-08) - Agregar seguridad a los perfiles (prender/apagar opciones como editar informe, ver informe, etc) - *** Parte servidor ***
+
+2014-08-03
+- Campo de "Observaciones" para estudio: se agreguen notas / texto sin borrar lo anterior.
+
+2014-08-10
+LISTO - Al salir en cerrar sesión, cuando ingreso en otro momento es como que si hubiese salido sin haber cerrado la sesión.
+LISTO - No se activan los botones de funciones cuando se da de alta un nuevo usuario, con admin/admin funciona bien.
+		Para eso hacemos
+		* crear un usuario nuevo
+		* se asigna una institución y un rol (igual al administrador)
+		* carga los pacientes pero los botones no se activan
+		* creo un nuevo rol y sus respectivas acciones y sucede lo mismo
+		* Comentario, recorda que la institución lo hacemos con el campo …customer3 en la tabla study
+ 
+2014-08-25
+LISTO - podemos poner la cantidad de imágenes por estudios en un campo total? (tabla study campo num_instances)
+
+2014-09-06
+LISTO - Incluir en los reportes un membrete de la institucion y como pie la firma del medico.
+- encriptar/hash/anti-tamper del texto del reporte.
+
+2014-12-05
+	- Por cancelación proyecto TL (Arreglamos 20 hs por lo hecho).
+
+
+-----------------------------
+SPRINT BACKLOG:
+-----------------------------
+
+- encriptar/hash/anti-tamper del texto del reporte.
+- Campo de "Observaciones" para estudio: se agreguen notas / texto sin borrar lo anterior.
+- MEJORA: Queries separados para obtener la institucion de cada estudio!
+- Crear el rol "Supervisor" y una pagina especifica para este rol donde pueda, inicialmente, tener tareas de administración. Inicialmente la unica tarea será:
+  "Asignar estudios a un usuario específico". Esto requiere además implementar el hecho de que cada perfil debería tener una página default distinta, tras el login.
+  (Medicos van al administrador de estudios, Supervisores/Admins a esta nueva pagina de administración)
+- Pensar en una página donde un PACIENTE (crear este rol) pueda tener acceso a sus estudios, pudiendo visualizar estos estudios, junto con el informe correspondiente, 
+  mas un PDF con las imagenes relevantes del estudio. Se deberia crear un usuario para cada paciente con, x ej, el DNI y una clave aleatoria y conocida para informarle
+  a dicho paciente, y además los estudios deberian poder auto-relacionarse a dicho usuario para que no haya que asignarselos manualmente. Podría llegar a consultarse
+  un sistema externo para consultar, x ej, el email y avisarle de que ya tiene el estudio listo.
+- DICOMDIR: Guardar los archivos DICOM en una carpeta "images", no el root del .zip generado.
+

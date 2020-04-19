@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="265" key="DIALOG_WIDTH"/>
+		<item value="571" key="DIALOG_Y_ORIGIN"/>
+		<item value="473" key="DIALOG_HEIGHT"/>
+		<item value="894" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Noto Sans|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="$.ajax" key="selection"/>
+		<list key="findhistory">
+			<item value="$.ajax"/>
+			<item value="toastr"/>
+			<item value="UserProfile"/>
+			<item value="allowedInstitutionsIDs"/>
+			<item value="from-ins"/>
+			<item value="access-study"/>
+			<item value="actionisallowed"/>
+			<item value="actionisallo"/>
+		</list>
+		<list key="replacehistory">
+			<item value="UserPermissions"/>
+			<item value=""/>
+			<item value="&quot;"/>
+			<item value="userinfo"/>
+			<item value="MedicoDerivante"/>
+			<item value="MedicosDerivantes"/>
+			<item value="studyId"/>
+			<item value="studyFiles"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="385" key="DIALOG_Y_ORIGIN"/>
+		<item value="724" key="DIALOG_X_ORIGIN"/>
+	</section>
+</section>

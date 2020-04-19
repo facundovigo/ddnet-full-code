@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+/***	CSS Browser Selector
+
+    ie - Internet Explorer (All versions)
+    ie8 - Internet Explorer 8.x
+    ie7 - Internet Explorer 7.x
+    ie6 - Internet Explorer 6.x
+    ie5 - Internet Explorer 5.x
+    gecko - Mozilla, Firefox (all versions), Camino
+    ff2 - Firefox 2
+    ff3 - Firefox 3
+    ff3_5 - Firefox 3.5
+    ff3_6 - Firefox 3.6 new
+    opera - Opera (All versions)
+    opera8 - Opera 8.x
+    opera9 - Opera 9.x
+    opera10 - Opera 10.x
+    konqueror - Konqueror
+    webkit or safari - Safari, NetNewsWire, OmniWeb, Shiira, Google Chrome
+    safari3 - Safari 3.x
+    chrome - Google Chrome
+    iron - SRWare Iron
+
+	
+    win - Microsoft Windows (all versions)
+    vista - Microsoft Windows Vista new
+    linux - Linux (x11 and linux)
+    mac - Mac OS
+    freebsd - FreeBSD
+    ipod - iPod Touch
+    iphone - iPhone
+    ipad - iPad new
+    webtv - WebTV
+    j2me - J2ME Devices (ex: Opera mini) changed from mobile to j2me
+    blackberry - BlackBerry new
+    android - Google Android new
+    mobile - All mobile devices new
+	
+***/
+
+	div.left-part{float:left;width:48%;}
+	div.right-part{float:right;width:50%;color:#000;margin-left:10px;}
+
+	div#userList_wrapper{width:90%!important;font-size:0.9em!important;color:#000!important;margin-top:18px!important;}
+	table#userList{width:99%!important;border:solid 1px #333!important;}
+	div#userList_wrapper th{text-align:center!important;padding:5px 18px 5px 5px;background-color:#bababa;border-left:solid 1px #333;}
+	div#userList_wrapper th:nth-of-type(1){border-left:none!important;}
+	div#userList_wrapper tbody{border-left:solid 1px #333!important;}
+	div#userList_wrapper tr.even{background:#cbcbcb!important;cursor:pointer!important;}
+	div#userList_wrapper tr.odd{background:#dcdcdc!important;cursor:pointer!important;}
+	div#userList_wrapper .dataTables_paginate{font-size:0.8em!important;float:right!important;margin-top:15px!important;}
+	div#userList_wrapper .dataTables_length{float:left!important;margin-top:20px!important;color:black!important;}
+	div#userList_wrapper .dataTables_length select{background:#dcdcdc!important;border-radius:2.5px!important;}
+	div#userList_wrapper .dataTables_info{font-size:0.85em!important;margin-top:12px!important;color:black!important;}
+	div#userList_wrapper div#userListCant{color:black!important;margin-top:5px!important;float:left!important;}
+	div#userList_wrapper a.paginate_button.current{border-radius:15px!important;}
+	div#userList_wrapper a.paginate_button:hover{border-radius:15px!important;background:#ccc!important;color:black!important;}
+	div#userList_wrapper .dataTables_filter{color:black!important;margin-bottom:10px!important;}
+	div#userList_wrapper .dataTables_filter input{border-radius:2.5px!important;}
+
+
+	form#new-user label{display:inline-block;width:170px;text-align:right;}
+	form#new-user input{border:double #000 0.25em;border-radius:2.5px;text-align:center;font-style:normal;}
+	form#new-user input[type="checkbox"]{vertical-align:middle!important;}
+	
+	div.right-part .ui-button{font-size:.9em;margin-left:125px;}
+

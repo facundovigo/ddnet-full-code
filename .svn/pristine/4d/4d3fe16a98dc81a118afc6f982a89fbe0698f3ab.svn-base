@@ -1,0 +1,67 @@
+	/**
+	 *	Estilos personalizados de la página
+	 */
+	
+	body {	/* Diseño del cuerpo */
+	
+		font-family: sans-serif;
+		font-size: 10pt;
+	}
+	
+	img {	/* Ajuste del logo Telelaudo */
+		
+		width: 40%;		
+		margin: 0 30%;	
+		height: 10%;	
+		cursor: pointer;
+	}
+	
+	.divPassword {	/* Ajuste de los elementos */
+		
+		position: absolute;
+		height: 55%;
+		width: 38.5%;
+		margin: 0 30%;
+		padding-top: 20px;
+	}
+	
+	h4 {	/* Ajuste de etiquetas */
+		
+		margin-left: 5px;
+	}
+	span {	/* Ajuste de etiquetas */
+	
+		margin-left: 5px;
+	}
+	
+	#txtDato {	/* Diseño de textBox */
+	
+		background-color: #fff;
+		border: double #aaa 0.25em;
+		border-radius: 5px;
+		padding-left: 5px;
+		text-align: center;
+	}
+	#txtDato {	/* textBox enfocado */
+		
+		background-color: #fff;
+		border: double #888 0.25em;
+		border-radius: 5px;
+		padding-left: 5px;
+	}
+	
+	.ui-widget {	/* Diseño botón jQueryUI */
+		
+		font-size: 0.9em;
+	}
+	
+	.lblRadio {		/* Ajuste etiquetas de radioButton*/
+		
+		display: inline-block;
+	}
+	
+	#lblCant {		/* label cantidad */
+	
+		color: red;
+		
+	}

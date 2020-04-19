@@ -1,0 +1,314 @@
+/**
+*	HOJA DE ESTILOS PANTALLA PRINCIPAL APLICACIÓN ALTA DE PACIENTES
+*/
+
+body{
+	background: lightslategray;
+	
+	font-family: monospace;
+	font-weight: 600;
+	font-size: 1.1em;
+	
+}
+
+.left{ text-align: left; }
+.center{ text-align: center; }
+.right{ text-align: right; }
+
+.ui-widget{ font-size: 0.7em; }
+.ui-selectmenu-button{ 	top: 7px;
+						font-size: 0.6em; }
+
+input[type=text] {
+	background-color: #fff;
+	border: double black 0.25em;
+	border-radius: 5px;
+	
+	width: 210px;
+	
+	color: black;
+	text-align: center;
+	font-style: italic;
+}
+
+input[type=text]:focus {
+	background-color: #fff;
+	border: double black 0.25em;
+	border-radius: 5px;
+	
+	color: black;
+	text-align: center;
+	font-style: italic;
+}
+
+input[type="text"]:disabled {
+	background: #ddd;
+	color: #444;
+}
+
+input[type=number] {
+	background-color: #fff;
+	border: double black 0.25em;
+	border-radius: 5px;
+	
+	width: 210px;
+	
+	color: black;
+	text-align: center;
+	font-style: italic;
+}
+
+input[type=number]:focus {
+	background-color: #fff;
+	border: double black 0.25em;
+	border-radius: 5px;
+	
+	color: black;
+	text-align: center;
+	font-style: italic;
+}
+
+input[type="number"]:disabled {
+	background: #ddd;
+	color: #444;
+}
+
+::-webkit-input-placeholder { color: lightslategray; } 		/* WebKit */
+:-moz-placeholder { color: lightslategray; }					/* Firefox 18- */
+::-moz-placeholder { color: lightslategray; } 				/* Firefox 19+ */
+:-ms-input-placeholder { color: lightslategray; } 			/* IE 10+ */
+
+.lblForText{
+	display: inline-block;
+	width: 180px;
+}
+
+select{
+	width: 210px;
+}
+
+/*** LINUX CHROME ***/
+
+.linux.chrome .cuerpo{
+	position: absolute;
+	top: 5px;
+	left: 20px;
+	
+	width: 90%;
+	height: 90%;
+	padding: 5px 10px;
+	
+	color: white;
+	font-size: 1em;
+}
+
+.linux.chrome .panel1{
+	position: absolute;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+	line-height: 40px;
+}
+.linux.chrome .panel2{
+	position: absolute;
+	top: 475px;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+}
+
+
+/*** LINUX CHROME ***/
+
+
+/*** LINUX FIREFOX ***/
+
+.linux.gecko .cuerpo{
+	position: absolute;
+	top: 5px;
+	left: 20px;
+	
+	width: 90%;
+	height: 90%;
+	padding: 5px 10px;
+	
+	color: white;
+	font-size: 1em;
+}
+
+.linux.gecko .panel1{
+	position: absolute;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+	line-height: 40px;
+}
+.linux.gecko .panel2{
+	position: absolute;
+	top: 475px;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+}
+
+.linux.gecko .ui-widget{ font-size: 0.9em; }
+.linux.gecko .ui-selectmenu-button{ top: 7px;
+									font-size: 0.8em; }
+
+/*** LINUX FIREFOX ***/
+
+
+/*** WINDOWS CHROME ***/
+
+.win.chrome .cuerpo{
+	position: absolute;
+	top: 5px;
+	left: 20px;
+	
+	width: 90%;
+	height: 90%;
+	padding: 5px 10px;
+	
+	color: white;
+	font-size: 1em;
+}
+
+.win.chrome .panel1{
+	position: absolute;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+	line-height: 40px;
+}
+.win.chrome .panel2{
+	position: absolute;
+	top: 475px;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+}
+
+/*** WINDOWS CHROME ***/
+
+
+/*** WINDOWS FIREFOX ***/
+
+.win.gecko .cuerpo{
+	position: absolute;
+	top: 5px;
+	left: 20px;
+	
+	width: 90%;
+	height: 90%;
+	padding: 5px 10px;
+	
+	color: white;
+	font-size: 1em;
+}
+
+.win.gecko .panel1{
+	position: absolute;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+	line-height: 40px;
+}
+.win.gecko .panel2{
+	position: absolute;
+	top: 475px;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+}
+
+/*** WINDOWS FIREFOX ***/
+
+
+/*** ANDROID ***/
+
+.android .cuerpo{
+	position: absolute;
+	top: 5px;
+	left: 20px;
+	
+	width: 90%;
+	height: 90%;
+	padding: 5px 10px;
+	
+	color: white;
+	font-size: 1em;
+}
+
+.android .panel1{
+	position: absolute;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+	line-height: 40px;
+}
+.android .panel2{
+	position: absolute;
+	top: 475px;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+}
+
+/*** ANDROID ***/
+
+
+/*** MAC ***/
+
+.mac .cuerpo{
+	position: absolute;
+	top: 5px;
+	left: 20px;
+	
+	width: 90%;
+	height: 90%;
+	padding: 5px 10px;
+	
+	color: white;
+	font-size: 1em;
+}
+
+.mac .panel1{
+	position: absolute;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+	line-height: 40px;
+}
+.mac .panel2{
+	position: absolute;
+	top: 475px;
+	
+	width: 92.5%;
+	padding: 10px 10px;
+	
+	border: solid black 1px;
+}
+
+/*** MAC ***/

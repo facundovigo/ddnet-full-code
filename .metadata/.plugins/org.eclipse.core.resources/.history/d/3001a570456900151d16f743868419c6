@@ -1,0 +1,22 @@
+package app_funciones;
+
+import javax.swing.JOptionPane;
+
+import app_objetos.*;
+
+public class Init {
+
+	public static void main(String[] args) {
+		
+		try{
+		//new app_Frame();
+		 String current = new java.io.File( "." ).getCanonicalPath();
+	     
+		 JOptionPane.showMessageDialog(null, "Current dir:"+current);
+		}catch(Exception e){JOptionPane.showMessageDialog(null, e.toString());}
+		 	//System.out.println("Current dir:"+current);
+	     //String currentDir = System.getProperty("user.dir");
+	        //System.out.println("Current dir using System:" +currentDir);
+	}
+
+}

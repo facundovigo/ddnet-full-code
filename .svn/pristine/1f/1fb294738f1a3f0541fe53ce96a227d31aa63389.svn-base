@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+#tabs {
+	
+	font-size: 0.8em;
+	margin-top: 10px;
+	heigth: 100%;
+}
+
+th {
+	
+	text-align: center	!important;
+}
+
+#tabUsuarios {
+	
+	
+	height: 54%;
+	padding: 10px 17%;
+	
+}
+
+.userButtons{
+	
+	margin-top: 15px;
+}
+
+.cant {
+	
+	position: absolute;
+	margin-left: 47.5%;
+	font-weight: bold;
+}

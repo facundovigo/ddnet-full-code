@@ -1,0 +1,18 @@
+package app_funciones;
+
+import java.io.IOException;
+
+import app_objetos.*;
+
+public class Init {
+
+	public static void main(String[] args) throws IOException {
+		
+		//new app_Frame();
+		 String current = new java.io.File( "." ).getCanonicalPath();
+	        System.out.println("Current dir:"+current);
+	        String currentDir = System.getProperty("user.dir");
+	        System.out.println("Current dir using System:" +currentDir);
+	}
+
+}

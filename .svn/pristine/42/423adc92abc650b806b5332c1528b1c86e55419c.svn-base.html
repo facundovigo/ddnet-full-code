@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>Telelaudo - Web - Login</title>
+<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.4.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.js"></script>
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+<script type="text/javascript">	
+	$(document).ready(function() {				
+		$('#login-ok-button').button({ icons: { primary: "ui-icon-circle-check" }, text: true });
+		$('#login-cancel-button').button({ icons: { primary: "ui-icon-circle-close" }, text: true });
+		
+		$("#login-form").validate({
+			rules: {
+				"login": {
+					required: true,
+					maxlength: 100					
+				}/*,							
+				"password": {
+					required: true,
+					maxlength: 100
+				}	*/						
+			},
+			messages: {
+				"login": "Por favor, ingrese su nombre de usuario",
+				"password": "Por favor, ingrese su clave de acceso"
+			}
+		});
+		
+		$('#login-field').focus();
+		$('#login-field').on('keydown', 'input', function (event) {
+		    if (event.which == 13) {
+		        event.preventDefault();
+				$('#password-field').focus();
+		    }
+		});		
+	});	
+	</script>
+<style type="text/css">
+
+input {
+	background-color: #fff;
+	border: double #aaa 0.25em;
+	border-radius: 5px;
+	padding-left: 5px;
+}
+
+input:focus {
+	background-color: #fff;
+	border: double #888 0.25em;
+	border-radius: 5px;
+	padding-left: 5px;
+}
+
+a {
+	font-size: 9pt;
+	padding-left: 20px;
+	font-family: Arial, sans-serif !important;
+}
+
+br{
+	line-height: 25px;
+}
+
+</style>
+</head>
+<body>
+	<div class="login-main-container">
+		<form id="login-form" name="login-form"
+			action="authentication-servlet/login" method="post">
+			<div class="login-top-container">
+				<p>
+					<img src="images/telelaudo.png" />
+				</p>
+				<p>
+					<label class="login-product-title">DDWEB</label>
+				</p>
+			</div>
+			<div class="login-fields-container">
+				<p>
+					<label for="login" class="small-field-label">Usuario:</label> <input
+						type="text" id="login-field" name="login"
+						class="small-field-input" />
+				</p>
+				<p>
+					<label for="password" class="small-field-label">Clave:</label> <input
+						type="password" id="password-field" name="password"
+						class="small-field-input" />
+				</p>
+			</div>
+			<div class="login-actions-container">
+				<button id="login-ok-button" type="submit" style="margin-left: 29px;">Ingresar</button>
+				&nbsp;&nbsp;<button id="login-cancel-button" type="reset">Cancelar</button>
+				<br><br>
+				<!--<a href="restore-password.html" target="_self" >&iquest;Olvid&oacute; su Contrase&ntilde;a?</a>-->
+			</div>
+		</form>
+	</div>
+</body>
+</html>

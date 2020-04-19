@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/purl.js"></script>
+<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="../css/alta-equipo.css">
+
+<script type="text/javascript">
+
+	$(function(){
+		
+		var isNew = $.url().param('new') == 'true';
+		
+		$('#btnConfirm').button({
+			label: 'Agregar',
+			icons: {'primary':'ui-icon-circle-check'}
+		})
+		.on('click', function(){
+			
+			if($('input[type="text"]').val() == '') {
+				alert('Complete todos los campos');
+				return;
+			}
+			if($('select').val() == '') {
+				alert('Complete todos los campos');
+				return;
+			}
+			
+			$.post('rest/equipo/new', $('#frmEquipo').serialize())
+			.done(function(){
+				alert('Se ha dado de alta un nuevo Equipo');
+				
+				$('input[type="text"]').val('');
+				$('input[type="number"]').val('0');
+				$('#cmbMods').val('');
+				$('#cmbMods').selectmenu('refresh');
+				
+			}).fail(function(){alert('Ocurrió un error al momento de crear el Equipo');});
+			
+		});
+		$('#btnCancel').button({
+			label: 'Cancelar',
+			icons: {'primary':'ui-icon-circle-close'}
+		})
+		.on('click', function(){
+			window.parent.$("#dynamicModalDialogIframe").attr('src', 'about:blank');
+			window.parent.$("#dynamicModalDialog").dialog("close");
+		});
+		
+	});
+	
+	$(document).ready(function(){
+		
+		var select = $("#cmbMods"); 
+    	select.find('option').remove().end();			    		
+		select.append('<option value="" selected="selected" >Seleccione...</option>');
+		
+		select.append('<option value="BI" >BI - Imagen Biomagnética</option>');
+		select.append('<option value="CR" >CR - Radiografía Computarizada</option>');
+		select.append('<option value="CT" >CT - Tomografía Computarizada</option>');
+		select.append('<option value="DX" >DX - Radiografía Digital</option>');
+		select.append('<option value="DXA" >DXA - Densitometría Ósea</option>');
+		select.append('<option value="ECG" >ECG - Electrocardiograma</option>');
+		select.append('<option value="ES" >ES - Endoscopía</option>');
+		select.append('<option value="IO" >IO - Radiografía Intraoral</option>');
+		select.append('<option value="MG" >MG - Mamografía</option>');
+		select.append('<option value="MR" >MR - Resonancia Magnética</option>');
+		select.append('<option value="NM" >NM - Medicina Nuclear</option>');
+		select.append('<option value="OT" >OT - Otra</option>');
+		select.append('<option value="PX" >PX - Radigrafía Panorámica</option>');
+		select.append('<option value="RF" >RF - Radio Fluoroscopia</option>');
+		select.append('<option value="RT" >RT - Radioterapia</option>');
+		select.append('<option value="US" >US - Ultrasonido</option>');
+		select.append('<option value="XA" >XA - Hemodinamia</option>');
+		
+		$('select').selectmenu();
+	});
+	
+</script>
+
+</head>
+
+<body>
+
+<div class="cuerpo" align="center">
+
+	<div class="panel1">
+	
+	<form id="frmEquipo">
+		
+		<label class="lblForText left">Modalidad:..........</label><select id="cmbMods" name="modalidad"></select> <br>
+		<label class="lblForText left">Marca:..............</label><input type="text" name="marca"> <br>
+		<label class="lblForText left">Modelo:.............</label><input type="text" name="modelo"> <br>
+		<label class="lblForText left">Tiempo de Práctica:</label><input type="number" name="horas" min="0" max="59" value="0">hs.
+		<input type="number" name="minutos" min="0" max="59" value="0">min. <input type="number" name="segundos" min="0" max="59" value="0">seg.
+	</form>
+	</div>
+	<div class="panel2">
+	
+		<button id="btnConfirm"></button>
+		<button id="btnCancel"></button>
+	</div>
+
+</div>
+
+</body>
+
+</html>

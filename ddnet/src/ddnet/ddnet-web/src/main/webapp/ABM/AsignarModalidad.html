@@ -1,0 +1,128 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+<style type="text/css">
+	body{background:#778899;color:#000;font-family:Arial,Helvetica,sans-serif;font-size:10pt;overflow-y:auto;}
+	.ui-button{font-size:.9em;margin:5px 0px;}
+	h5{text-align:left;}
+	label{display:inline-block;cursor:pointer;}
+	input{vertical-align:middle;}
+	label.selected{color:#dcdcdc;}
+	div#modalitiesList{padding-left:18px;}
+	div#modalitiesList label{text-align:left;width:68px;margin-bottom:8px;}
+</style>
+<script type="text/javascript">
+	var login= null,firstName= null,lastName= null,isNew= null,roleName= null,institutionNames= null; var dialog= window.parent.$('div#dynamicModalDialog');
+	function get_url_params(){
+		var h4= $('h4');
+		login= $.url().param('login');
+		firstName= $.url().param('firstName');
+		lastName= $.url().param('lastName');
+		roleName= $.url().param('roleName');
+		institutionNames= $.url().param('institutionNames');
+		isNew= $.url().param('new')=='true';
+		$(h4[0]).text('USUARIO : '+login+' ('+firstName+' '+lastName+')');
+		$(h4[1]).text('ROL : '+roleName);
+		$(h4[2]).text('INSTITUCIONES : '+institutionNames);
+	}
+	function modalities_list(){
+		$.getJSON('../restricted/rest/abm/allmodalities')
+		.done(function(data){
+			if(data && data.length>0){
+			$.each(data,function(i,mod){
+			var checkbox= '<input type="checkbox" id="'+mod.id+'" value="'+mod.name+'"/>&nbsp;' +
+						  '<label for="'+mod.id+'">'+mod.name+'</label>' ;
+			$('div#modalitiesList').append(checkbox);
+			i%3 == 2? $('div#modalitiesList').append('<br>'):$('div#modalitiesList').append('&nbsp;&nbsp;&nbsp;')});
+			$(':checkbox').on('change',function(){this.checked?$('label[for="'+$(this).attr('id')+'"]').addClass('selected'):$('label[for="'+$(this).attr('id')+'"]').removeClass('selected')});
+			$('label').on('mousedown',function(){return false});
+			if(!isNew){
+			var user= dialog.data('user');
+			$.each(user.modalities,function(i,mod){
+				$('input#'+mod.id).prop('checked',true);
+				$('label[for="'+mod.id+'"]').addClass('selected');
+			})}}
+		})
+		.fail(function(){
+			window.parent.toastr['error']('No se pudo cargar las Modalidades','ERROR');
+			if(isNew){
+			$.post('../restricted/rest/abm/deleteUser','login='+login);
+			dialog.unbind('dialogbeforeclose');
+			}
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		});
+	}
+	function assign_modalities(){
+		if($('input:checked').length==0){window.parent.$alert('Seleccione al menos una Modalidad');return null}
+		var modNames= []; var checkbox= $('div#modalitiesList').find(':checked');
+		$.each(checkbox, function(i,c){modNames.push(c.value)});
+		var dto= { loginName:login,names:modNames };
+		$.ajax({type:'POST', url:'../restricted/rest/abm/usermodality', data:dto})
+		.done(function(){
+			window.parent.toastr['success']('Se han asignado las Modalidades','HECHO');
+			dialog.unbind('dialogbeforeclose');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+			window.parent.charge_users();
+		})
+		.fail(function(){
+			window.parent.toastr['error']('Falló la asignación de Modalidades','ERROR');
+			$.post('../restricted/rest/abm/deleteUser','login='+login);
+			dialog.unbind('dialogbeforeclose');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		});
+	}
+	function cancel_new_user(){
+		var deleteUser= function(){
+			$.post('../restricted/rest/abm/deleteUser','login='+login);
+			dialog.unbind('dialogbeforeclose');
+			window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+			dialog.dialog('close');
+		}; window.parent.$confirm('Si no confirma las asignaciones,\nel nuevo usuario "'+login+'" se borrará',deleteUser);
+	}
+	function cancel_changes(){
+		window.parent.$('#dynamicModalDialogIframe').attr('src','about:blank');
+		dialog.dialog('close');
+	}
+	function preset_buttons(){
+		var buttons= $('button');
+		$(buttons[0]).button({label:'Confirmar',icons:{primary:'ui-icon-circle-check'}}).on('click',assign_modalities);
+		$(buttons[1]).button({label:'Cancelar',icons:{primary:'ui-icon-circle-close'}});
+		isNew? $(buttons[1]).on('click',cancel_new_user):$(buttons[1]).on('click',cancel_changes);
+	}
+
+	$(document).ready(function(){
+		get_url_params();
+		modalities_list();
+		preset_buttons();
+		$('input#selectAll').on('click',function(){$('input:checkbox').prop('checked',$(this).prop('checked'));$(this).prop('checked')?$('div#modalitiesList').find('label').addClass('selected'):$('div#modalitiesList').find('label').removeClass('selected')});
+		
+		if(!isNew){
+		dialog.unbind('dialogbeforeclose');
+		var h4= $('h4'); $(h4[1]).remove(); $(h4[2]).remove();
+		
+		} else{dialog.dialog('option','title','ASIGNAR MODALIDADES A USUARIO')}
+	});
+</script>
+</head>
+<body>
+<div align="center">
+	<button type="button"></button> &nbsp;&nbsp;
+	<button type="button"></button> <br>
+	<h4></h4> <h4></h4> <h4></h4>
+	<h5>Seleccione las modalidades con las que trabaja.</h5>
+	<label>
+	<input type="checkbox" id="selectAll">&nbsp;
+	<b>MARCAR TODAS</b>
+	</label> <br><br>
+	<div id="modalitiesList"></div> <br>
+</div>
+</body>
+</html>

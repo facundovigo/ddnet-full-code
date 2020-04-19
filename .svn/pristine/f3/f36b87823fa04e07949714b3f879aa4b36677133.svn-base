@@ -1,0 +1,71 @@
+/**
+ * Funciones javascript de la página
+ */
+
+var key = null;
+var validKey;
+var userID = null;
+var rDone = null;
+var rTimes = null;
+var rDate = null;
+
+$(document).ready(function(){	// Funciones al arranque
+	
+	$('body').children().hide();
+	key = $.url().param('key');
+	
+	/**	¿Ingresó una clave?	**/
+	//if(key && key != null){
+		
+		$.get('restore-servlet/new', 'key=8fd339df-c8cf-4f3f-8542-3a5dea25b23b')
+		.done(function(data){
+			if(data && data.length > 0){
+				$.each(data, function(i, pr){
+					key = pr.key;
+					alert(pr.userID);
+				});
+			}
+		})
+		.fail(function(){alert('falló');});
+		
+		/**	¿La clave ingresada es correcta?	**/
+		
+		//	if(validKey) alert('correcto');
+		//	else alert('incorrecto');
+		//alert(validKey);
+		
+		/**	¿Ya se utilizó esta clave?	**/
+		/**	¿Expiró la clave?	**/
+		/**	¿Superó el límite de ingresos?	**/
+		
+		$('img').on('click', function(){
+			window.location='login-form.html';
+		});
+		
+		$('#btnConfirm').button({label: "Confirmar",
+								 icons: {primary: "ui-icon-circle-check"}})
+						.on('click', function(){changeThePassword();});
+		
+		$('body').children().show();
+		
+		centrarObjetos();
+		window.addEventListener( "resize" , function() { centrarObjetos(); } );
+		
+		
+	//} else{
+		
+		//window.location='login-form.html';
+	//}
+	
+	
+});
+
+function centrarObjetos(){//función para centrar elementos
+	
+	var divAncho = $('.divPassword').width(),		//ancho del contenedor
+		a = $('.textBox').width(),					//ancho textBox
+		b = $('#btnConfirm').width();				//ancho botón
+	
+	$('label').css('margin-left', (divAncho - (150+a))/2 + 'px');		// aplicar margen al label
+	$('#btnConfirm').css('margin-left', (divAncho - b)/2 + 'px');		// aplicar margen al botón
+}

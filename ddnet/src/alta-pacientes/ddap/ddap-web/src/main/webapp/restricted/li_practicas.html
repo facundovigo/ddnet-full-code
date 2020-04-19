@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Diagn&oacute;stico Digital Alta Pacientes</title>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../js/dataTables.tableTools.js"></script>
+	<script type="text/javascript" src="../js/purl.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<script type="text/javascript" src="../js/practicas.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/dataTables.tableTools.css">
+	<link rel="stylesheet" type="text/css" href="../css/practicas.css">
+
+</head>
+
+<body>
+	
+	<div class="the-top" align="center"> SECCIÓN PR&Aacute;CTICAS </div>
+	
+	<div align="center">
+	<div class="practice-filter" align="center">
+		<br>
+		<form id="search-practice">
+			
+			<label> 
+				Modalidad : <select id="practice-modalities" name="modality"></select>
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label>
+				Nombre : <input type="text" name="name" class="name-filter" placeholder="completo, interno, abreviado">
+			</label>
+			<br><br>
+			<label>
+				Prestaci&oacute;n : <input type="text" name="capability" class="capability-filter">
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label>
+				Regi&oacute;n : <input type="text" name="region" class="region-filter" title="Solamente Números">
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<label>
+				Requiere Informe : 
+				<select id="need-report" name="need-report">
+					<option value="" selected="selected">Ambas</option>
+					<option value="si">Sí</option>
+					<option value="no">No</option>
+				</select>
+			</label>
+			&nbsp;<span class="only-for-linux">&nbsp;&nbsp;&nbsp;</span>
+			<button type="button" id="search-practice"></button>
+		</form>
+		<br>
+	</div>
+	</div>
+	<br>
+	<div class="practice-actions-buttons" align="center">
+		<br>
+		<button id="new-practice"></button>&nbsp;&nbsp;
+		<button id="modify-practice"></button>&nbsp;&nbsp;
+		<button id="delete-practice"></button>
+		<input type="hidden" id="flag-is-new" value="0">
+		<input type="hidden" name="practice-id" value="0">
+		<br>
+	</div>
+	<div class="practice-table" align="center">
+		<table id="practice-result"></table>
+	</div>
+	<br><br>
+	<div align="center" class="actions-parent">
+	<div class="practice-actions">
+		
+	</div>
+	</div>
+</body>
+
+</html>

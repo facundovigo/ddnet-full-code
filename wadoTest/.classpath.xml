@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-amd64">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 4.2 Runtime">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-audit-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-base64-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-core-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-filecache-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-hp-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-image-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-imageio-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-imageio-rle-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-iod-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-net-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-soundex-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcm2dcm-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcm2jpg-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcm2txt-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcm2xml-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmdir-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmecho-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmgpwl-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmhpqr-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmmv-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmmwl-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmof-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmqr-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmrcv-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmsnd-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmups-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-dcmwado-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-fixjpegls-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-jpg2dcm-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-logger-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-pdf2dcm-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-rgb2ybr-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-txt2dcmsr-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dcm4che-tool-xml2dcm-2.0.26.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-log4j12-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-9.3-1101.jdbc4.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

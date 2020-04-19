@@ -1,0 +1,6 @@
+- Te paso la conexion teamviewer que tengo con el servidor ( 190.210.189.236)    480 083 785 / pueyrredon
+- Conexion por remote desktop: 190.210.189.236 - administrator/river1975 :
+		rdesktop -g 90% -k es -u Administrator -d WORKGROUP 190.210.189.236
+
+
+

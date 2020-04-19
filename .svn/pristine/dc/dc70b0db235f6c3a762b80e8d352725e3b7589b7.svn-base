@@ -1,0 +1,47 @@
+package ddnet.web.api.rest;
+
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Collection;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import ddnet.ejb.ConfigurationManager;
+
+@Stateless
+@Path("/config")
+public class Configuration {
+
+	@EJB
+	private ConfigurationManager configurationManager;
+	
+	@Path("all")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<ddnet.ejb.entities.Configuration> getConfiguration() {
+		return configurationManager.getConfiguration();
+	}
+	
+	@Path("executable")
+	@POST
+	public void OpenExeFile(@FormParam("studyID") String studyID) throws Exception{
+		
+		String aEjecutar = configurationManager.getConfigurationItem("executable-file.path").getValue();
+		
+		//Runtime.getRuntime().exec(aEjecutar);
+		
+		//Desktop.getDesktop().browse(new URI("http://www.google.com.ar"));
+		
+		//System.out.println("es este:"+url);
+	}
+	
+}

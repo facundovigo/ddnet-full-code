@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="0dp"
+    tools:context="ddnet.mobile.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topImage"
+        android:src="@drawable/logo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="25dp"
+        android:text="TITLE"
+        android:textAlignment="center"
+        android:id="@+id/titleTextView"
+        android:layout_below="@+id/topImage" />
+
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/noStudySelected"
+        android:id="@+id/selectedStudyText"
+        android:layout_below="@+id/titleTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:textAlignment="center"
+        android:autoText="false"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:minLines="3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scanStudyQR"
+        android:id="@+id/scanStudyQRButton"
+        android:layout_below="@+id/selectedStudyText"
+        android:layout_alignParentLeft="true"
+        android:textSize="@dimen/button_text_size" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deselectStudy"
+        android:id="@+id/deselectStudyButton"
+        android:layout_below="@+id/selectedStudyText"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/button_text_size" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="@string/attachmentsContainerLabel"
+        android:id="@+id/attachmentsLabel"
+        android:layout_below="@+id/scanStudyQRButton"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/attachmentsActions"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scanStudyQRButton"
+        android:layout_toEndOf="@+id/attachmentsLabel"
+        android:layout_toRightOf="@+id/attachmentsLabel">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/attachmentsContainer"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/attachmentsLabel"></LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sendAttachmentsLabel"
+        android:id="@+id/sendAttachments"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="@dimen/button_text_size" />
+
+</RelativeLayout>

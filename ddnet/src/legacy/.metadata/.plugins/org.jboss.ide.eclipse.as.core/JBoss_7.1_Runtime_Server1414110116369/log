@@ -1,0 +1,2148 @@
+!SESSION 2014-10-23 21:15:12.935 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:23:06.613
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:23:08.374
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:23:08.389
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:23:08.398
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-10-23 21:23:09.865
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-10-23 21:23:20.892
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:25:20.763
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:25:21.702
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:25:21.902
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:25:21.909
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:26:11.341
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:26:11.393
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:26:11.420
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:26:58.831
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:27:02.741
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:27:02.750
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:27:15.649
+!MESSAGE 12 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:27:15.683
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:27:15.712
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:27:24.850
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:27:25.634
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:27:25.697
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-23 21:27:25.723
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842776 2014-10-23 21:31:58.095
+!MESSAGE Server shutting down
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2014-10-23 21:31:58.596
+!MESSAGE Server processes have been terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842785 2014-10-23 21:31:58.599
+!MESSAGE Server Shutdown Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-10-23 21:31:59.453
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-10-23 21:32:05.210
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2014-10-23 21:36:55.416
+!MESSAGE Server processes have been terminated.
+!SESSION 2014-10-25 16:48:17.366 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:04:08.717
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:04:10.511
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:04:10.540
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 1644298244 2014-10-25 17:04:10.545
+!MESSAGE Incremental publish failed for module ddnet-web
+!SUBENTRY 1 org.eclipse.wst.server.core 4 1644298251 2014-10-25 17:04:10.545
+!MESSAGE Could not delete /META-INF/maven/diagnosticodigital/ddnet-web. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 1644298251 2014-10-25 17:04:10.545
+!MESSAGE Could not delete /META-INF/maven/diagnosticodigital. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 1644298251 2014-10-25 17:04:10.545
+!MESSAGE Could not delete /META-INF/maven. May be locked by another process.
+!SUBENTRY 1 org.eclipse.wst.server.core 4 1644298251 2014-10-25 17:04:10.545
+!MESSAGE Could not delete /META-INF. May be locked by another process.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:04:10.559
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:04:10.564
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-10-25 17:04:12.551
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-10-25 17:04:23.713
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:04:43.925
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:04:44.037
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:04:44.740
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:04:44.753
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY unknown 0 0 2014-10-25 17:05:00.782
+!MESSAGE OK
+
+!ENTRY unknown 0 0 2014-10-25 17:05:00.811
+!MESSAGE OK
+
+!ENTRY unknown 0 0 2014-10-25 17:05:00.819
+!MESSAGE OK
+
+!ENTRY unknown 0 0 2014-10-25 17:05:00.828
+!MESSAGE OK
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:05:18.886
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:05:20.094
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:05:20.103
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:05:20.112
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:06:15.660
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:06:16.710
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:06:16.791
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:06:16.804
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:07:14.740
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:07:14.780
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:07:14.807
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:12.740
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:12.752
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:12.762
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:23.789
+!MESSAGE 12 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:23.813
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:23.827
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:30.490
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:31.363
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:31.538
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:08:31.562
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842776 2014-10-25 17:14:26.102
+!MESSAGE Server shutting down
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2014-10-25 17:14:26.346
+!MESSAGE Server processes have been terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-10-25 17:14:27.193
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-10-25 17:14:32.934
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:39:24.449
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:39:24.454
+!MESSAGE 4 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:39:33.842
+!MESSAGE 12 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:39:33.869
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:39:33.885
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:39:36.874
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:39:37.018
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:39:37.352
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:39:37.389
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:43:40.958
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:43:40.964
+!MESSAGE 3 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:44:30.107
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:44:30.111
+!MESSAGE 3 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:45:13.540
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:45:13.548
+!MESSAGE 3 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:45:30.583
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:45:30.758
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:45:31.337
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:45:31.362
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:56:40.426
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:56:40.434
+!MESSAGE 3 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2014-10-25 17:57:23.946
+!MESSAGE Server processes have been terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:59:22.795
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:59:22.997
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:59:23.580
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 17:59:23.600
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-10-25 17:59:38.256
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-10-25 17:59:43.764
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842776 2014-10-25 18:02:38.793
+!MESSAGE Server shutting down
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2014-10-25 18:02:39.043
+!MESSAGE Server processes have been terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-10-25 18:02:39.872
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-10-25 18:02:45.389
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:03:15.015
+!MESSAGE 12 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:03:15.047
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:03:15.082
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:03:19.261
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:03:19.482
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:03:19.667
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:03:19.683
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2014-10-25 18:10:16.633
+!MESSAGE Server processes have been terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:11:51.690
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:11:51.783
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:11:52.386
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:11:52.403
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-10-25 18:11:55.034
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-10-25 18:12:00.545
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:38:33.154
+!MESSAGE 12 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:38:33.177
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:38:33.208
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:38:37.787
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:38:38.678
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:38:38.708
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-10-25 18:38:38.729
+!MESSAGE Module ddnet-ejb published without error.
+!SESSION 2014-12-13 06:43:53.335 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:27:06.201
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:27:06.225
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:27:06.255
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:27:06.271
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-12-13 07:27:08.272
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-12-13 07:27:20.036
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:28:03.413
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:28:03.464
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:28:03.489
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:28:24.564
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:28:26.034
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:28:26.056
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:28:26.074
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-13 07:41:38.936
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2014-12-13 08:03:24.253
+!MESSAGE Server processes have been terminated.
+!SESSION 2014-12-14 08:56:57.423 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -data /mnt/500GB/all/projects/dev/diagnosticodigital/ddnet/src/legacy -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:33:53.799
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:33:53.827
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:33:53.848
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:33:53.864
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-12-14 14:33:56.067
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-12-14 14:34:07.130
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:38:32.287
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:38:32.322
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:38:32.345
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:38:38.801
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:38:38.916
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:38:39.790
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 14:38:39.822
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:22:36.276
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:23:55.978
+!MESSAGE 5 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:24:02.947
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:24:02.970
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:24:03.019
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:34:49.102
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:34:49.125
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:34:49.141
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:34:52.840
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:34:52.963
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:34:53.633
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:34:53.654
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:35:17.107
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:35:17.231
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:35:17.875
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:35:17.901
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:43:11.167
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:43:11.189
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:43:11.205
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:43:14.004
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:43:14.566
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:43:14.779
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:43:14.800
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:53:52.033
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:53:59.725
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:53:59.748
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:53:59.765
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:54:03.325
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:54:03.427
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:54:04.135
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:54:04.152
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:22.972
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:22.998
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:23.014
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:37.634
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:37.657
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:37.682
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:40.358
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:40.457
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:40.963
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:55:41.470
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:59:54.582
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:59:54.611
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:59:54.632
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:59:57.514
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:59:57.610
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:59:58.271
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 15:59:58.293
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 16:01:52.980
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 16:01:53.002
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 16:01:53.016
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 16:01:56.977
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 16:01:57.120
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 16:01:57.538
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 16:01:57.553
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 18:53:28.751
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 18:57:12.622
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:00:24.721
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:01:27.795
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:03:29.016
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:04:54.263
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:11:16.850
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:12:44.701
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:18:21.099
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:22:37.330
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:22:48.156
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:31:21.099
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:31:24.207
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:31:33.238
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:31:45.289
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:34:08.652
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:47:41.114
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:48:39.585
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:53:13.395
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:53:13.442
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-14 19:53:13.496
+!MESSAGE 40 files modified in module ddnet-ejb
+!SESSION 2014-12-21 10:19:56.442 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:55:18.140
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:55:18.172
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:55:18.194
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:55:18.211
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-12-21 10:55:20.651
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-12-21 10:55:31.799
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842776 2014-12-21 10:56:03.964
+!MESSAGE Server shutting down
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2014-12-21 10:56:04.146
+!MESSAGE Server processes have been terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-12-21 10:56:04.991
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-12-21 10:56:10.502
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:56:15.951
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:56:17.767
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:56:17.790
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:56:17.811
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:24.409
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:24.449
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:24.465
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:32.592
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:32.731
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:33.330
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:33.361
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:55.908
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:56.087
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:56.792
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 10:59:56.819
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 11:03:34.975
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 11:03:35.017
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 11:03:35.033
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 11:03:39.487
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 11:03:39.608
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 11:03:40.572
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 11:03:40.603
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:03:42.136
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:04:42.030
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:06:45.850
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:07:24.861
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:08:02.758
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:09:12.265
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:09:41.077
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:09:45.258
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:10:16.248
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:17:04.207
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:17:04.257
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:17:04.271
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:17:13.304
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:17:13.898
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:17:13.942
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:17:13.977
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:17:52.080
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:17:54.905
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:18:14.423
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:18:17.586
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:18:41.257
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:19:01.989
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:19:16.484
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:32:05.669
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:34:03.220
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:34:12.714
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:34:52.784
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:35:06.678
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:35:14.907
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:35:31.978
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:35:44.619
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:36:02.615
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:36:27.427
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:39:18.187
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:39:22.630
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:40:34.320
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 19:40:43.518
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:02:45.471
+!MESSAGE 2 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:03:12.150
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:03:32.419
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:03:38.874
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:07:34.230
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:07:56.161
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:08:06.106
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:08:06.153
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:08:06.171
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:08:50.402
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:08:50.504
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:08:51.347
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-21 20:08:51.366
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2014-12-21 20:18:09.881
+!MESSAGE Server processes have been terminated.
+!SESSION 2014-12-28 09:15:43.834 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:03:07.842
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:03:07.870
+!MESSAGE 14 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:03:07.894
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:03:07.909
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2014-12-28 10:03:09.977
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2014-12-28 10:03:21.129
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:04:27.274
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:04:28.637
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:04:28.670
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:04:28.698
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:31:16.117
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:34:20.396
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:35:23.529
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:51:05.641
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:55:48.602
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:55:54.338
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 10:56:49.512
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:01:42.615
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:03:26.200
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:14:43.601
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:16:55.553
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:17:19.184
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:18:39.145
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:18:43.748
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:18:53.178
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:23:03.348
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:26:06.790
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:27:43.694
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2014-12-28 11:28:22.648
+!MESSAGE 1 files modified in module ddnet-web
+!SESSION 2015-01-01 10:56:01.938 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:21:04.022
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:21:04.054
+!MESSAGE 14 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:21:04.076
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:21:04.186
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-01-01 12:21:06.185
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-01-01 12:21:17.240
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:21:26.697
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:21:28.306
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:21:28.328
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:21:28.391
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:23:05.070
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:23:24.225
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:23:48.140
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:23:53.506
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:23:59.292
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:23:59.344
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:23:59.366
+!MESSAGE 40 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:24:03.638
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:24:03.736
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:24:04.050
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:24:04.724
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:27:19.446
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:29:23.775
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:29:23.806
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:29:23.814
+!MESSAGE 5 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:31:51.914
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:31:51.927
+!MESSAGE 3 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:35:39.197
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:35:39.230
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:35:39.252
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:36:08.575
+!MESSAGE 5 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:36:20.338
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:36:20.382
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:36:20.400
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:36:26.856
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:36:26.963
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:36:27.525
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:36:27.548
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842776 2015-01-01 12:40:09.912
+!MESSAGE Server shutting down
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2015-01-01 12:40:10.114
+!MESSAGE Server processes have been terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842785 2015-01-01 12:40:10.116
+!MESSAGE Server Shutdown Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-01-01 12:40:10.950
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-01-01 12:40:16.786
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:40:35.855
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:40:35.968
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:40:36.290
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:40:36.306
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:49:20.782
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:49:49.131
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:53:11.334
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:54:09.899
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:54:34.197
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:58:41.514
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:59:22.626
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:59:25.871
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 12:59:46.540
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 13:08:39.341
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 13:08:55.879
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 13:10:23.685
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 13:11:22.605
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 13:12:05.448
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 13:13:01.314
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 13:13:09.649
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-01 13:14:04.996
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2015-01-01 13:14:23.682
+!MESSAGE Server processes have been terminated.
+!SESSION 2015-01-05 22:39:04.077 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -data /mnt/500GB/all/projects/dev/diagnosticodigital/ddnet/src/legacy -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:54:46.220
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:54:46.244
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:54:46.268
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:54:46.290
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-01-05 22:54:48.224
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-01-05 22:54:59.275
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:55:09.074
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:55:10.687
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:55:10.716
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:55:10.743
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:57:54.804
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:57:54.847
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 22:57:54.862
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 23:00:15.610
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 23:00:15.654
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 23:00:15.672
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 23:00:18.809
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 23:00:19.347
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 23:00:19.739
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-05 23:00:19.757
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2015-01-05 23:15:28.854
+!MESSAGE Server processes have been terminated.
+!SESSION 2015-01-06 20:10:10.593 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:18:53.512
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:18:53.540
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:18:53.565
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:18:53.586
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-01-06 20:18:55.599
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-01-06 20:19:06.635
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:19:16.569
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:19:18.099
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:19:18.122
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:19:18.141
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:23:20.965
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:23:21.017
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:23:21.041
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:23:21.144
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:23:22.359
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:23:22.390
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:23:22.415
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:39:59.792
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:42:19.445
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:42:26.736
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:42:26.837
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:42:27.184
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:42:27.236
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:45:56.477
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:46:17.973
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:46:19.048
+!MESSAGE 2 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:46:30.826
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:46:30.869
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:46:30.893
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:46:33.344
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:46:33.455
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:46:34.217
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:46:34.358
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:49:10.076
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:49:15.309
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:53:22.202
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-06 20:55:36.278
+!MESSAGE 1 files modified in module ddnet-web
+!SESSION 2015-01-10 16:34:49.186 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:39:30.551
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:39:30.578
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:39:30.599
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:39:30.615
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-01-10 16:39:32.744
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-01-10 16:39:43.905
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:40:09.885
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:40:11.037
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:40:11.060
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:40:11.078
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:47:32.475
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:47:41.361
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:47:41.468
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:47:41.483
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:47:56.221
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:47:57.027
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:47:57.609
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 16:47:57.641
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:03:26.640
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:03:52.366
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:04:40.070
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:06:16.077
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:06:16.119
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:06:16.133
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:06:24.023
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:06:24.147
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:06:24.607
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:06:24.635
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:11:04.398
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:11:08.093
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:11:14.492
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:11:15.331
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:11:15.394
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:11:15.411
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:12:05.823
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:12:41.551
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:13:21.281
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:26:49.153
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:26:57.051
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:26:57.097
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:26:57.119
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:27:01.508
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:27:02.009
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:27:02.203
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:27:02.224
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 17:28:00.280
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:12:24.855
+!MESSAGE 2 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:13:16.414
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:13:19.850
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:13:29.203
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:13:29.248
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:13:29.264
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:13:32.656
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:13:33.402
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:13:33.490
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:13:33.507
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:15:58.042
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:16:08.381
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:16:08.426
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:16:08.439
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:16:12.314
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:16:12.923
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:16:13.368
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:16:13.457
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:16:48.528
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:17:37.040
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:18:52.270
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:19:25.209
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:19:49.498
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:19:59.386
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:32:37.428
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:32:47.507
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:33:01.865
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:34:37.751
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:34:50.191
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:36:48.983
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-10 19:45:00.694
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2015-01-10 19:59:19.634
+!MESSAGE Server processes have been terminated.
+!SESSION 2015-01-11 08:09:45.660 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:11:35.235
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:11:38.117
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:11:38.363
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:11:38.379
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-01-11 08:11:40.681
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-01-11 08:11:51.933
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:12:09.113
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:12:09.224
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:12:09.994
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:12:10.020
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:17:47.663
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:17:54.866
+!MESSAGE 2 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:18:19.279
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:18:52.790
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:19:36.426
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:19:57.421
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:20:02.710
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:20:09.167
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:20:17.949
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:21:25.919
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:21:53.895
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:22:09.764
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:24:39.615
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:25:10.728
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:25:10.759
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:25:10.775
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2015-01-11 08:26:26.020
+!MESSAGE Server processes have been terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-01-11 08:36:20.132
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-01-11 08:36:25.645
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:36:35.253
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:36:35.374
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:36:35.969
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-01-11 08:36:36.619
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2015-01-11 08:38:22.134
+!MESSAGE Server processes have been terminated.
+!SESSION 2015-02-01 08:16:49.179 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -data /mnt/500GB/all/projects/dev/diagnosticodigital/ddnet/src/legacy -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:18:15.397
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:18:15.420
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:18:15.455
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:18:15.477
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-02-01 08:18:17.184
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-02-01 08:18:22.900
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:18:37.033
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:18:38.105
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:18:38.129
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:18:38.149
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:28:10.464
+!MESSAGE 5 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:33:41.812
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:34:53.394
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:36:16.973
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:39:16.714
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:39:57.009
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:40:44.560
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:40:44.607
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:40:44.638
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:40:51.149
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:40:51.264
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:40:51.617
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 08:40:51.858
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:13:33.063
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:13:33.109
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:13:33.125
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:15:26.517
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:17:01.576
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:17:39.096
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:18:26.468
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:19:16.641
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:19:48.902
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:20:15.877
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:29:08.731
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:29:08.781
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 09:29:08.809
+!MESSAGE 39 files modified in module ddnet-ejb
+!SESSION 2015-02-01 19:26:59.222 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -data /mnt/500GB/all/projects/dev/diagnosticodigital/ddnet/src/legacy -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:01:48.520
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:01:48.549
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:01:48.574
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:01:48.594
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-02-01 20:01:50.263
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-02-01 20:01:55.899
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:02:04.804
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:02:05.706
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:02:05.728
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:02:05.747
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:17.619
+!MESSAGE 5 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:17.652
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:17.658
+!MESSAGE 3 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:25.936
+!MESSAGE 13 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:25.961
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:25.978
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:32.698
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:32.804
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:33.226
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:04:33.256
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:22:41.401
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:28:56.644
+!MESSAGE 14 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:28:56.668
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:28:56.684
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:32:21.003
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:39:58.715
+!MESSAGE 4 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:40:06.986
+!MESSAGE 15 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:40:07.009
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:40:07.024
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:14.930
+!MESSAGE 4 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:30.251
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:39.890
+!MESSAGE 15 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:39.913
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:39.930
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:46.801
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:46.913
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:47.527
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:47.789
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:42:47.813
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:43:46.218
+!MESSAGE 15 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:43:46.265
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:43:46.282
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:43:50.844
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:43:52.015
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:43:52.038
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:43:52.057
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:44:47.553
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:48:30.968
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:49:02.400
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:49:29.531
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:49:51.560
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:50:59.521
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:53:36.363
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:54:00.359
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:54:34.261
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:55:36.840
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:56:49.414
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:57:34.343
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:59:04.391
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 20:59:40.615
+!MESSAGE 3 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842776 2015-02-01 21:02:41.849
+!MESSAGE Server shutting down
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2015-02-01 21:02:42.016
+!MESSAGE Server processes have been terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2015-02-01 21:02:42.854
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2015-02-01 21:02:48.767
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 21:03:02.404
+!MESSAGE 15 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 21:03:02.439
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 21:03:02.463
+!MESSAGE 39 files modified in module ddnet-ejb
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 21:03:05.216
+!MESSAGE Module ddnet published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 21:03:05.321
+!MESSAGE Module ddnet-web published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 21:03:05.786
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 21:03:05.808
+!MESSAGE Module ddnet-ejb published without error.
+
+!ENTRY org.jboss.ide.eclipse.as.core 0 33685505 2015-02-01 21:04:19.847
+!MESSAGE 1 files modified in module ddnet-web
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16973825 2015-02-01 21:05:40.902
+!MESSAGE Server processes have been terminated.

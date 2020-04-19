@@ -1,0 +1,162 @@
+.top-of-page-layout-west {
+	top: 0px							!important;
+}
+/* Study Manager main container */
+.ui-layout-pane-north {
+	text-align: right					!important;
+	font-family: Arial, sans-serif		!important;
+	font-size: 0.7em					!important;
+	padding-top: 2px 					!important;
+	padding-bottom: 2px 				!important;
+	padding-left: 1px 					!important;
+	padding-right: 1px 					!important;
+	border: none						!important;
+}
+
+.ui-layout-pane-south {
+	text-align: center					!important;
+	font-family: Arial, sans-serif		!important;
+	font-size: 0.7em					!important;
+	padding-top: 2px 					!important;
+	padding-bottom: 2px 				!important;
+	border: none						!important;
+}
+
+.ui-layout-pane-west {
+	text-align: left					!important;
+	font-family: Arial, sans-serif		!important;
+	font-size: 0.8em					!important;	
+	padding-top: 0px 					!important;
+	padding-bottom: 0px 				!important;
+	padding-left: 0px 					!important;
+	padding-right: 0px 					!important;
+}
+
+/* Main container's filter control */
+.study-layout-north {
+	text-align: left					!important;
+	font-family: Arial, sans-serif		!important;
+	font-size: 1em						!important;
+	font-weight: bold					!important;
+	padding-top: 2px 					!important;
+	padding-left: 10px 					!important;
+	padding-bottom: 2px 				!important;
+	border: none						!important;
+}
+
+.study-layout-south {
+	text-align: center					!important;
+	font-family: Arial, sans-serif		!important;
+	font-size: 0.75em					!important;
+	border: none						!important;
+}
+
+.study-search-button-container {
+	margin-top: 10px					!important;
+	text-align: center					!important;
+	font-family: Arial, sans-serif		!important;
+	font-size: 0.75em					!important;
+	border: none						!important;
+}
+
+.study-layout-center {
+	text-align: left					!important;
+	font-family: Arial, sans-serif		!important;
+	font-size: 1em						!important;
+	border: none						!important;
+}
+
+.study-search-field-group {
+	margin-top: 1em						!important;
+}
+
+.study-search-field-group-title {
+	font-weight: bold					!important;
+}
+
+.study-search-modality {
+	font-size: 7.5pt;
+	width: 55px;
+}
+
+.filter-field-label {
+	display: inline-block				!important;
+	width: 10em							!important;
+}
+
+#studies-found-actions-container {
+	margin-top: 5px;
+	text-align: center;
+}
+
+.study-action-button {
+	font-size: 0.6em;
+	width: 13.5em;
+	height: 3.5em;
+} 
+
+#studies-found {
+    width: 100% !Important;
+}
+
+#studies-found_wrapper {
+	font-size: 8.75pt;
+}
+
+#studies-found_wrapper th {
+	padding: 5px 18px 5px 5px;
+	border: solid 1px #6ea9ad;
+	background-color: #ced9cd;	
+}
+
+#studies-found_wrapper tr.odd {
+	background-color: #eee9dd;
+}
+
+#studies-found_wrapper tr.even {
+	background-color: #dee9dd;
+}
+
+#studies-found_wrapper tr.DTTT_selected {
+	background-color: #a6b3cd;
+}
+
+#studies-found_wrapper td {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.ui-menu-item {
+	font-size: 9pt;
+}
+
+#dynamicModalDialog {
+	overflow: hidden;
+}
+
+#dynamicModalDialogIframe {
+	width: 100%; 
+	height: 100%;
+}
+
+.datable-row-icon
+{
+	height: 1em;
+	width: 2em;
+}
+
+#result{
+	
+	width: auto;
+	height: 5px;
+	text-align: center;
+	font-size: 1.1em;
+	color: #333333;
+	padding-top: 7px;
+}
+
+
+
+

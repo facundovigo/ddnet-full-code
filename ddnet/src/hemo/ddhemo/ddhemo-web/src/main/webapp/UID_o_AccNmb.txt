@@ -1,0 +1,12 @@
+Archivos a modificar para pasar la versión a UID <--> Accession Number
+
+* ddnet.web.api.rest: Reporting.java
+
+	_ Línea 133
+	_ Línea 143
+	
+* ddnet.web.api.rest: Study.java
+
+	_ Línea 150
+	_ Línea 408
+	_ Línea 449

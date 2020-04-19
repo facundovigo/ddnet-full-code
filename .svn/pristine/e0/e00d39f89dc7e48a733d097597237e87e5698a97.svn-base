@@ -1,0 +1,23 @@
+package ddnet.ejb;
+
+import java.util.Collection;
+import java.util.List;
+
+import javax.ejb.Local;
+
+import ddnet.ejb.entities.Study;
+import ddnet.ejb.entities.StudyMedia;
+import ddnet.ejb.entities.User;
+
+@Local
+public interface StudyManagerLocal {
+	Collection<Study> findStudies(User user, StudySearchFilter filter);
+
+	Study getStudy(User user, String studyID);	
+	
+	StudyMedia getStudyMedia(User user, String studyID, int quality, List<String> seriesIDs, List<String> options);
+	
+	int assignStudies(User requestingUser, User physician, String[] studiesIDs);
+	
+	Study getIndividualStudy(String studyID);
+}

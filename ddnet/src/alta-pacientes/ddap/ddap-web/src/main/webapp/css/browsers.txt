@@ -1,0 +1,34 @@
+    ie - Internet Explorer (All versions)
+    ie8 - Internet Explorer 8.x
+    ie7 - Internet Explorer 7.x
+    ie6 - Internet Explorer 6.x
+    ie5 - Internet Explorer 5.x
+    gecko - Mozilla, Firefox (all versions), Camino
+    ff2 - Firefox 2
+    ff3 - Firefox 3
+    ff3_5 - Firefox 3.5
+    ff3_6 - Firefox 3.6 new
+    opera - Opera (All versions)
+    opera8 - Opera 8.x
+    opera9 - Opera 9.x
+    opera10 - Opera 10.x
+    konqueror - Konqueror
+    webkit or safari - Safari, NetNewsWire, OmniWeb, Shiira, Google Chrome
+    safari3 - Safari 3.x
+    chrome - Google Chrome
+    iron - SRWare Iron
+
+	
+    win - Microsoft Windows (all versions)
+    vista - Microsoft Windows Vista new
+    linux - Linux (x11 and linux)
+    mac - Mac OS
+    freebsd - FreeBSD
+    ipod - iPod Touch
+    iphone - iPhone
+    ipad - iPad new
+    webtv - WebTV
+    j2me - J2ME Devices (ex: Opera mini) changed from mobile to j2me
+    blackberry - BlackBerry new
+    android - Google Android new
+    mobile - All mobile devices new

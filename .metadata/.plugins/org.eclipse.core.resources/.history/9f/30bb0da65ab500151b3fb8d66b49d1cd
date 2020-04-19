@@ -1,0 +1,32 @@
+
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
+public class PDFtest {
+
+	public static void main(String[] args) throws DocumentException, IOException {
+		
+		String rutaArchivo = System.getProperty("user.home")+"/testPDF.pdf";
+		File archivoPDF = new File(rutaArchivo);
+		if(archivoPDF.exists()) archivoPDF.delete();
+		archivoPDF.createNewFile();
+		
+		FileOutputStream archivo = new FileOutputStream(archivoPDF);
+	    Document documento = new Document();
+	    PdfWriter.getInstance(documento, archivo);
+	    documento.open();
+	    documento.add(new Paragraph("Hola Mundo!"));
+	    documento.add(new Paragraph("SoloInformaticaYAlgoMas.blogspot.com"));
+	    documento.close();
+	    
+	    Desktop.getDesktop().open(archivoPDF);
+	}
+
+}

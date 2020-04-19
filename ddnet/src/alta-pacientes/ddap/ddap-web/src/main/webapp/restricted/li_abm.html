@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../js/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="../js/css_browser_selector.js"></script>
+	<script type="text/javascript" src="../js/abm.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/abm.css">
+</head>
+<body>
+<div class="the-top" align="center"> SECCIÓN ABM </div>
+<div align="center">
+	<br>
+	<div class="left-part" align="center">
+	<table id="userList"></table>
+	</div>
+	<div class="right-part" align="left">
+	<h3>Nuevo Usuario</h3>
+	<form id="new-user">
+		<label>Usuario :</label> &nbsp;
+		<input type="text" name="login" placeholder="Campo Obligatorio"><br><br>
+		<label>Contrase&ntilde;a :</label> &nbsp;
+		<input type="password" name="password" placeholder="Campo Obligatorio"> <br><br>
+		<label>Confirme Contrase&ntilde;a :</label> &nbsp;
+		<input type="password" placeholder="Campo Obligatorio"> <br>
+		<h4>Privilegios</h4>
+		<label>Alta Pacientes :</label> &nbsp;
+		<input type="checkbox" name="doPatient"> <br><br>
+		<label>Alta Pr&aacute;ctica por Paciente :</label> &nbsp;
+		<input type="checkbox" name="doPatientPractice"> <br><br>
+		<label>Alta Pr&aacute;cticas :</label> &nbsp;
+		<input type="checkbox" name="doPractice"> <br><br>
+		<label>Alta Equipos :</label> &nbsp;
+		<input type="checkbox" name="doEquipment"> <br><br>
+		<label>Logger :</label> &nbsp;
+		<input type="checkbox" name="doLogger"> <br><br>
+		<label>ABM :</label> &nbsp;
+		<input type="checkbox" name="doAbm"> <br><br>
+	</form>
+	<button type="button"></button>
+	</div>
+</div>
+</body>
+</html>
